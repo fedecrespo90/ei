@@ -42,7 +42,7 @@ Cronograma.get = function(req, res, next) {
 };
 
 Cronograma.queCumple = function(req, res, next) {
-  DB.Cronograma.findAll({ where: { auditado: false}}).on('success', function(e) {
+  DB.Cronograma.findAll({ where: { auditado: false}, order: "id DESC"}).on('success', function(e) {
       var msg=[];
 	    e.forEach(function(crono){
 		      var mes;
