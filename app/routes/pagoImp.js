@@ -138,4 +138,25 @@ PagoImp.post = function(req, res, next) {
   })
 };
 
+/* AGREGO DE recepImp.js 
+RecepImp.editMonto = function(req, res, next){
+  DB.Vencimiento.find({where: {id: req.params.id}, include:[{model: DB.Cliente}]}).on('success', function(vto){
+    var baseMontos = Number(vto.monto0)+Number(vto.monto1)+Number(vto.monto2)+Number(vto.monto3)
+    var bodyMontos = Number(req.body.monto0)+ Number(req.body.monto1)+ Number(req.body.monto2)+ Number(req.body.monto3);
+    DB.Recibo.max('f').on('success',function(maximo){
+      if(isNaN(maximo)){
+        maximo=1
+      }else{
+        maximo=maximo+1
+      }
+      vto.updateAttributes({monto0: req.body.monto0, monto1: req.body.monto1, monto2 : req.body.monto2, monto3: req.body.monto3});
+      //generarRecibo(maximo, vto, baseMontos, bodyMontos, req, res);
+      actualizarCuenta(maximo, vto, baseMontos, bodyMontos);
+      res.send(true);
+    })
+  })
+  setTimeout(limpiarDb(), 300)
+};
+/* FIN AGREGO DE recepImp.js */
+
 module.exports = PagoImp;
