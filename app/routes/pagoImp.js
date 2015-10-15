@@ -32,7 +32,7 @@ PagoImp.get = function(req, res, next) {
           }   
           if(ven.anticipo<12 && 0<ven.anticipo)
             ven.impuesto.nombre+=" - Anticipo "+ven.anticipo;
-          var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4)
+          var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4);
           if(impMonto != 0.00){
             msg.push({
               id: ven.id,
@@ -46,12 +46,13 @@ PagoImp.get = function(req, res, next) {
               cliente_id: ven.cliente_id,
               clienteNombre: ven.cliente.nombre,
             })
+
           }else{
             ven.updateAttributes({descargado: 1, archivado: 1})
           }
       })
     }
-    res.send(msg)
+    res.send(msg);
   })
 };
 
@@ -105,13 +106,20 @@ PagoImp.post = function(req, res, next) {
                 var importe= parseFloat(vi.monto0)+ parseFloat(vi.monto1)+parseFloat(vi.monto2)+parseFloat(vi.monto3)+parseFloat(vi.monto4)
                 total += importe;
                 //aca deberia poner lo del impuesto anticipo
-                console.log(vi)
+                //console.log(vi)
                 arrayImpuesto.push({
                   cliente: vi.cliente.nombre,
                   importe: importe.toMoney(),
                   impuesto: vi.impuesto.nombre,
                   periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                 })
+                /*AGREGO*/
+                DB.Vencimiento.create({
+                  monto0: param.total//importe.toMoney()
+                }).on('success', function(ss){
+                  console.log("Listo!");
+                })
+                /*FIN AGREGO*/
               })
               res.send({
                 pagoNumero: gi.id,
