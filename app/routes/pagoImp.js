@@ -138,6 +138,16 @@ PagoImp.post = function(req, res, next) {
   })
 };
 
+/*
+Project.find({ where: {title: 'aProject'} }).on('success', function(project) {
+  if (project) { // if the record exists in the db
+    project.updateAttributes({
+      title: 'a very different title now'
+    }).success(function() {});
+  }
+})
+*/
+
 /* AGREGO DE recepImp.js 
 RecepImp.editMonto = function(req, res, next){
   DB.Vencimiento.find({where: {id: req.params.id}, include:[{model: DB.Cliente}]}).on('success', function(vto){
