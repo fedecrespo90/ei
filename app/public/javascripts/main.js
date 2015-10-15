@@ -8453,7 +8453,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 label: "Total De Impuestos",
                 type: "text",
                 attrs: {
-                  disabled: "disabled"
+                  /*disabled: "disabled"*/
                 }
               },
               banco_id: {
