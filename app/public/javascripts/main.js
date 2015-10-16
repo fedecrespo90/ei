@@ -8671,7 +8671,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             data: null,
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null,  ],
-                aaSorting: [ [ 1, "asc" ] ],
+                aaSorting: [ [ 1, "desc" ] ],
                 iDisplayLength: 500
             },
             initialize: function() {
@@ -9056,7 +9056,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             data: null,
             datatableOptions: {
                 aoColumns: [null, null, null, null, null, null, null],
-                aaSorting: [ [ 1, "asc" ] ],
+                aaSorting: [ [ 1, "desc" ] ],
                 iDisplayLength: 500
             },
             initialize: function() {
