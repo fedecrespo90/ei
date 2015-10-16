@@ -8449,13 +8449,31 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 type:"hidden",
                 name: "arreglo",
               },
-              montoImp: {
+              /*montoImp: {
                 label: "Total De Impuestos",
                 type: "text",
                 attrs: {
-                  /*disabled: "disabled"*/
-                }
+                  disabled: "disabled"
+                },
+              },*/
+            /* AGREGO */
+              monto0: {
+                label: "Total",
+                type: "text",
               },
+              monto1: {
+                label: "Total",
+                type: "text",
+              },
+              monto2: {
+                label: "Total",
+                type: "text",
+              },
+              monto3: {
+                label: "Total",
+                type: "text",
+              },
+            /* FIN AGREGO */
               banco_id: {
                 label:"Banco",
                 type: "select"
