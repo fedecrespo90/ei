@@ -44,7 +44,7 @@ PagoImp.get = function(req, res, next) {
               cronograma_id: ven.cronograma_id,
               cronogramaFecha: ven.cronograma.año+"/"+ven.cronograma.mes,
               cliente_id: ven.cliente_id,
-              clienteNombre: ven.cliente.nombre,
+              clienteNombre: ven.cliente.nombre
             })
 
           }else{
@@ -148,8 +148,8 @@ Project.find({ where: {title: 'aProject'} }).on('success', function(project) {
 })
 */
 
-/* AGREGO DE recepImp.js 
-RecepImp.editMonto = function(req, res, next){
+/* AGREGO DE recepImp.js */
+PagoImp.editMonto = function(req, res, next){
   DB.Vencimiento.find({where: {id: req.params.id}, include:[{model: DB.Cliente}]}).on('success', function(vto){
     var baseMontos = Number(vto.monto0)+Number(vto.monto1)+Number(vto.monto2)+Number(vto.monto3)
     var bodyMontos = Number(req.body.monto0)+ Number(req.body.monto1)+ Number(req.body.monto2)+ Number(req.body.monto3);
