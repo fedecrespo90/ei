@@ -39,16 +39,26 @@ PagoImp.get = function(req, res, next) {
               check: '-',
               impuesto_id: ven.impuesto_id,
               impuestoNombre: ven.impuesto.nombre,
-              impuestoMonto: impMonto.toFixed(2),
+              impuestoMonto: impMonto.toFixed(2), //ES ESTE
               impuestoBanco: impuestoBanco,
               cronograma_id: ven.cronograma_id,
               cronogramaFecha: ven.cronograma.año+"/"+ven.cronograma.mes,
               cliente_id: ven.cliente_id,
-              clienteNombre: ven.cliente.nombre
+              clienteNombre: ven.cliente.nombre,
+              /* AGREGO */
+              monto0: ven.monto0,
+              monto1: ven.monto1,
+              monto2: ven.monto2,
+              monto3: ven.monto3,
+              monto4: ven.monto4,
+              /* FIN AGREGO */
             })
 
           }else{
-            ven.updateAttributes({descargado: 1, archivado: 1})
+            ven.updateAttributes({
+              descargado: 1,
+              archivado: 1
+            })
           }
       })
     }
@@ -113,7 +123,7 @@ PagoImp.post = function(req, res, next) {
                   impuesto: vi.impuesto.nombre,
                   periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                 })
-                /*AGREGO*/
+                /*AGREGO
                 DB.Vencimiento.create({
                   monto0: param.total//importe.toMoney()
                 }).on('success', function(ss){
@@ -128,7 +138,14 @@ PagoImp.post = function(req, res, next) {
                 impuestos: arrayImpuesto,
                 creador: u.empleado.nombre+" "+u.empleado.apellido,
                 receptor: empleado.nombre+" "+empleado.apellido,
-                reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm")
+                reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm"),
+              /* AGREGO: NO FUNCA*/
+              monto0: req.body.monto0,
+              monto1: req.body.monto1,
+              monto2: req.body.monto2,
+              monto3: req.body.monto3,
+              //monto4: req.body.monto4,
+              /* FIN AGREGO: NO FUNCA */
               })
             })
           })
@@ -137,36 +154,5 @@ PagoImp.post = function(req, res, next) {
     })
   })
 };
-
-/*
-Project.find({ where: {title: 'aProject'} }).on('success', function(project) {
-  if (project) { // if the record exists in the db
-    project.updateAttributes({
-      title: 'a very different title now'
-    }).success(function() {});
-  }
-})
-*/
-
-/* AGREGO DE recepImp.js */
-PagoImp.editMonto = function(req, res, next){
-  DB.Vencimiento.find({where: {id: req.params.id}, include:[{model: DB.Cliente}]}).on('success', function(vto){
-    var baseMontos = Number(vto.monto0)+Number(vto.monto1)+Number(vto.monto2)+Number(vto.monto3)
-    var bodyMontos = Number(req.body.monto0)+ Number(req.body.monto1)+ Number(req.body.monto2)+ Number(req.body.monto3);
-    DB.Recibo.max('f').on('success',function(maximo){
-      if(isNaN(maximo)){
-        maximo=1
-      }else{
-        maximo=maximo+1
-      }
-      vto.updateAttributes({monto0: req.body.monto0, monto1: req.body.monto1, monto2 : req.body.monto2, monto3: req.body.monto3});
-      //generarRecibo(maximo, vto, baseMontos, bodyMontos, req, res);
-      actualizarCuenta(maximo, vto, baseMontos, bodyMontos);
-      res.send(true);
-    })
-  })
-  setTimeout(limpiarDb(), 300)
-};
-/* FIN AGREGO DE recepImp.js */
 
 module.exports = PagoImp;

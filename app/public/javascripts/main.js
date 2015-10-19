@@ -1506,7 +1506,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   cronograma_id: null,
                   cronogramaFecha: null,
                   cliente_id: null,
-                  clienteNombre: null
+                  clienteNombre: null,
+                  /* AGREGO */
+                  monto0: null,
+                  monto1: null,
+                  monto2: null,
+                  monto3: null,
+                  monto4: null,
+                  /* FIN AGREGO */
                 };
             },
             initialize: function() {
@@ -1532,6 +1539,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   empleadoNombre: null,
                   total: null,
                   diaDePago: null,
+                  /* AGREGO */
+                  monto0: null,
+                  monto1: null,
+                  monto2: null,
+                  monto3: null,
+                  monto4: null,
+                  /* FIN AGREGO */
                 };
             },
             initialize: function() {
@@ -8405,28 +8419,66 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var me = this;
                 var arreglo=null;
                 arreglo=[];
-                var total=0;   
+                //var total=0;
+
+                /* AGREGO */
+                var m0 = 0;
+                var m1 = 0;
+                var m2 = 0;
+                var m3 = 0;
+                var m4 = 0;
+                /* FIN AGREGO */
+
                 this.collection.models.forEach(function(e){
                   e.attributes.check=($('<input>', { type: 'checkbox', id: e.attributes.id}).on('click', function(u) {                   
-                     total=0;
+                     //total=0;
+                     /* AGREGO */
+                     m0 = 0;
+                     m1 = 0;
+                     m2 = 0;
+                     m3 = 0;
+                     m4 = 0;
+                     /* FIN AGREGO */
+                     
                     if(this.checked){
                       arreglo.push(e);
                       $('.pagoImp_form [name="arreglo"]')[0].value=null
                       arreglo.forEach(function(a){
                         console.log(a.attributes)
-                        total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
+                        //total=parseFloat(a.attributes./*impuestoMonto*/monto3)+parseFloat(total) //ES ESTE TMB!
+                        /* AGREGO */
+                        m0=parseFloat(a.attributes.monto0)+parseFloat(m0) //ES ESTE TMB!
+                        m1=parseFloat(a.attributes.monto1)+parseFloat(m1) //ES ESTE TMB!
+                        m2=parseFloat(a.attributes.monto2)+parseFloat(m2) //ES ESTE TMB!
+                        m3=parseFloat(a.attributes.monto3)+parseFloat(m3) //ES ESTE TMB!
+                        //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) //ES ESTE TMB!
+                        /* FIN AGREGO */
                         $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
                       })
-                      $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
+                      //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ES ESTE
+                      /* AGREGO */
+                      $(".pagoImp_form input:text[name:monto0]")[0].value=m0.toFixed(2)//ES ESTE
+                      $(".pagoImp_form input:text[name:monto1]")[1].value=m1.toFixed(2)//ES ESTE
+                      $(".pagoImp_form input:text[name:monto2]")[2].value=m2.toFixed(2)//ES ESTE
+                      $(".pagoImp_form input:text[name:monto3]")[3].value=m3.toFixed(2)//ES ESTE
+                      //$(".pagoImp_form input:text[name:monto4]")[4].value=m4.toFixed(2)//ES ESTE
+                      /* FIN AGREGO */
                     }else{
                       var indice= arreglo.indexOf(e)
                       arreglo.splice(indice,1)
                       $('.pagoImp_form [name="arreglo"]')[0].value=null
                       arreglo.forEach(function(a){
-                        total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
+                        //total=parseFloat(a.attributes.monto3)+parseFloat(total) // ESTE 0
+                        /* AGREGO */
+                        m0=parseFloat(a.attributes.monto0)+parseFloat(m0) // ESTE 0
+                        m1=parseFloat(a.attributes.monto1)+parseFloat(m1) // ESTE 0
+                        m2=parseFloat(a.attributes.monto2)+parseFloat(m2) // ESTE 0
+                        m3=parseFloat(a.attributes.monto3)+parseFloat(m3) // ESTE 0
+                        //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) // ESTE 0
+                        /* FIN AGREGO */
                         $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id                        
                       })
-                      $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
+                      $(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ESTE NOSE
                     }
                   }))
                 })
@@ -8458,19 +8510,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               },*/
             /* AGREGO */
               monto0: {
-                label: "Total",
+                label: "Monto 1",
                 type: "text",
               },
               monto1: {
-                label: "Total",
+                label: "Monto 2",
                 type: "text",
               },
               monto2: {
-                label: "Total",
+                label: "Monto 3",
                 type: "text",
               },
               monto3: {
-                label: "Total",
+                label: "Monto 4",
                 type: "text",
               },
             /* FIN AGREGO */
@@ -8539,8 +8591,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 if(id!="")
                   arreglo.push(id)
               })                  
-              //if(($(".pagoImp_form input:text[name:totalImp]")[0].value!=0)
-              if(($(".pagoImp_form input:text[name:monto0]")[0].value!=0)
+              if(($(".pagoImp_form input:text[name:totalImp]")[0].value!=0)
               && ($('.pagoImp_form').serializeObject().empleado_id !='')
               && ($('.pagoImp_form').serializeObject().banco_id !='')
               && ($('.pagoImp_form').serializeObject().diaDePago !='')              
