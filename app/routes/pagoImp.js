@@ -139,8 +139,8 @@ PagoImp.post = function(req, res, next) {
                 creador: u.empleado.nombre+" "+u.empleado.apellido,
                 receptor: empleado.nombre+" "+empleado.apellido,
                 reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm"),
-              /* AGREGO: NO FUNCA*/
-              monto0: req.body.monto0,
+              /* AGREGO: NO FUNCA
+              monto0: req.body.monto0,//req.body.monto0,
               monto1: req.body.monto1,
               monto2: req.body.monto2,
               monto3: req.body.monto3,
