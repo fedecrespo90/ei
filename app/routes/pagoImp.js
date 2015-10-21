@@ -32,26 +32,37 @@ PagoImp.get = function(req, res, next) {
           }   
           if(ven.anticipo<12 && 0<ven.anticipo)
             ven.impuesto.nombre+=" - Anticipo "+ven.anticipo;
-          var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4)
+          var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4);
           if(impMonto != 0.00){
             msg.push({
               id: ven.id,
               check: '-',
               impuesto_id: ven.impuesto_id,
               impuestoNombre: ven.impuesto.nombre,
-              impuestoMonto: impMonto.toFixed(2),
+              impuestoMonto: impMonto.toFixed(2), //ES ESTE
               impuestoBanco: impuestoBanco,
               cronograma_id: ven.cronograma_id,
               cronogramaFecha: ven.cronograma.año+"/"+ven.cronograma.mes,
               cliente_id: ven.cliente_id,
               clienteNombre: ven.cliente.nombre,
+              /* AGREGO */
+              monto0: ven.monto0,
+              monto1: ven.monto1,
+              monto2: ven.monto2,
+              monto3: ven.monto3,
+              monto4: ven.monto4,
+              /* FIN AGREGO */
             })
+
           }else{
-            ven.updateAttributes({descargado: 1, archivado: 1})
+            ven.updateAttributes({
+              descargado: 1,
+              archivado: 1
+            })
           }
       })
     }
-    res.send(msg)
+    res.send(msg);
   })
 };
 
@@ -105,13 +116,20 @@ PagoImp.post = function(req, res, next) {
                 var importe= parseFloat(vi.monto0)+ parseFloat(vi.monto1)+parseFloat(vi.monto2)+parseFloat(vi.monto3)+parseFloat(vi.monto4)
                 total += importe;
                 //aca deberia poner lo del impuesto anticipo
-                console.log(vi)
+                //console.log(vi)
                 arrayImpuesto.push({
                   cliente: vi.cliente.nombre,
                   importe: importe.toMoney(),
                   impuesto: vi.impuesto.nombre,
                   periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                 })
+                /*AGREGO
+                DB.Vencimiento.create({
+                  monto0: param.total//importe.toMoney()
+                }).on('success', function(ss){
+                  console.log("Listo!");
+                })
+                /*FIN AGREGO*/
               })
               res.send({
                 pagoNumero: gi.id,
@@ -120,7 +138,14 @@ PagoImp.post = function(req, res, next) {
                 impuestos: arrayImpuesto,
                 creador: u.empleado.nombre+" "+u.empleado.apellido,
                 receptor: empleado.nombre+" "+empleado.apellido,
-                reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm")
+                reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm"),
+              /* AGREGO: NO FUNCA
+              monto0: req.body.monto0,//req.body.monto0,
+              monto1: req.body.monto1,
+              monto2: req.body.monto2,
+              monto3: req.body.monto3,
+              //monto4: req.body.monto4,
+              /* FIN AGREGO: NO FUNCA */
               })
             })
           })
