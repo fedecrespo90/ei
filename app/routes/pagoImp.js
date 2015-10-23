@@ -34,12 +34,12 @@ PagoImp.get = function(req, res, next) {
             ven.impuesto.nombre+=" - Anticipo "+ven.anticipo;
           var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4);
           if(impMonto != 0.00){
-            msg.push({
+            msg.push({//le manda la data en un array para que lo imprima en los value de los inputs
               id: ven.id,
               check: '-',
               impuesto_id: ven.impuesto_id,
               impuestoNombre: ven.impuesto.nombre,
-              impuestoMonto: impMonto.toFixed(2), //ES ESTE
+              impuestoMonto: impMonto.toFixed(2), //ESTE ENVIA EL MONTO A LA VISTA
               impuestoBanco: impuestoBanco,
               cronograma_id: ven.cronograma_id,
               cronogramaFecha: ven.cronograma.año+"/"+ven.cronograma.mes,
@@ -100,7 +100,14 @@ PagoImp.post = function(req, res, next) {
           DB.GrupoImpuesto.create({banco_id: param.banco_id, diaDePago: dia ,empleado_id: param.empleado_id, recibo_id: recibo.id, enviado:1, total: param.total}).on('success',function(gi){
             param.vi.forEach(function(v){
               DB.Vencimiento.find({where:{id:v.id}, include:[{model: DB.Cliente},{model: DB.Impuesto}, {model: DB.Cronograma}]}).on('success', function(vi){
-                vi.updateAttributes({grupo_impuesto_id: gi.id})
+                  /* AGREGO */
+                  if(vi.monto0 != 0 || vi.monto0 != 0.00){
+                    vi.updateAttributes({
+                      grupo_impuesto_id: gi.id,
+                      monto0: param.total
+                    })
+                  }
+                  /* FIN AGREGO */
               })
             })
             //vencimiento.cliente.nombre ASC, 'vencimiento.cronograma.año ASC', 'vencimiento.cronograma.mes ASC
@@ -123,13 +130,6 @@ PagoImp.post = function(req, res, next) {
                   impuesto: vi.impuesto.nombre,
                   periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                 })
-                /*AGREGO
-                DB.Vencimiento.create({
-                  monto0: param.total//importe.toMoney()
-                }).on('success', function(ss){
-                  console.log("Listo!");
-                })
-                /*FIN AGREGO*/
               })
               res.send({
                 pagoNumero: gi.id,
@@ -139,13 +139,6 @@ PagoImp.post = function(req, res, next) {
                 creador: u.empleado.nombre+" "+u.empleado.apellido,
                 receptor: empleado.nombre+" "+empleado.apellido,
                 reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm"),
-              /* AGREGO: NO FUNCA
-              monto0: req.body.monto0,//req.body.monto0,
-              monto1: req.body.monto1,
-              monto2: req.body.monto2,
-              monto3: req.body.monto3,
-              //monto4: req.body.monto4,
-              /* FIN AGREGO: NO FUNCA */
               })
             })
           })
