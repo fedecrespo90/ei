@@ -133,7 +133,7 @@ PagoImp.post = function(req, res, next) {
               })
               res.send({
                 pagoNumero: gi.id,
-                total: total.toMoney(),
+                total: param.total,//total.toMoney(), //CAMBIE PARA QUE IMPRIMA BIEN EL TOTAL EN EL RECIBO
                 recibo: recibo,
                 impuestos: arrayImpuesto,
                 creador: u.empleado.nombre+" "+u.empleado.apellido,
