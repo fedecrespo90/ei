@@ -5,12 +5,6 @@
 	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
 	<META NAME="CREATED" CONTENT="0;0">
 	<META NAME="CHANGED" CONTENT="0;0">
-	<STYLE TYPE="text/css">
-	<!--
-		@page { size: 8.5in 11in; margin: 1in }
-		P { margin-bottom: 0.08in }
-	-->
-	</STYLE>
 </HEAD>
 <BODY LANG="en-US" BGCOLOR="#ffffff" DIR="LTR">
 <P ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu, serif"><FONT SIZE=4><B>Estudio
