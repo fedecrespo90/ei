@@ -8575,13 +8575,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return this.getTable().selected_row;
             },
             selectBanco: function() {
-              $.ajax({
-                type: "GET",
-                url: '/banco/byIdNombre/'+$('.pagoImp_form').serializeObject().banco_id,
-                success: function(e){
-                  $('.dataTables_filter input').val(e).keyup(); 
+            var bancId = $('.pagoImp_form').serializeObject().banco_id
+                if(bancId != 0){
+                  $.ajax({
+                    type: "GET",
+                    url: '/banco/byIdNombre/'+bancId,
+                    success: function(e){
+                      $('.dataTables_filter input').val(e).keyup(); 
+                    }
+                  })
                 }
-              })
             },
             addPagoImp: function() {
               var sup = this
