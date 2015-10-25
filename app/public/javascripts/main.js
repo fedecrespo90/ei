@@ -8616,10 +8616,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             F.getOneFromModel("empleado/byId", $('.pagoImp_form').serializeObject().empleado_id, function(empleado){
 
 
-                              var mm0 = parseInt($(".pagoImp_form input:text[name:totalImp]")[0].value);
-                              var mm1 = parseInt($(".pagoImp_form input:text[name:totalImp]")[1].value);
-                              var mm2 = parseInt($(".pagoImp_form input:text[name:totalImp]")[2].value);
-                              var mm3 = parseInt($(".pagoImp_form input:text[name:totalImp]")[3].value);
+                              var mm0 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[0].value);
+                              var mm1 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[1].value);
+                              var mm2 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[2].value);
+                              var mm3 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[3].value);
 
                               var tott = mm0+mm1+mm2+mm3; 
                               var query = {
