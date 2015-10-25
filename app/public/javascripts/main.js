@@ -8478,7 +8478,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         /* FIN AGREGO */
                         $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id                        
                       })
-                      $(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ESTE NOSE
+                      //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ESTE NOSE
                     }
                   }))
                 })
@@ -8590,8 +8590,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               ids.forEach(function(id){
                 if(id!="")
                   arreglo.push(id)
-              })                  
-              if(($(".pagoImp_form input:text[name:totalImp]")[0].value!=0)
+              })
+              //Saqué esto: $(".pagoImp_form input:text[name:totalImp]")[0].value!=0                  
+              if(($(".pagoImp_form input:text[name:monto0]")[0].value!= 0.00 || $(".pagoImp_form input:text[name:monto1]")[1].value!= 0.00
+              || $(".pagoImp_form input:text[name:monto2]")[2].value!= 0.00 || $(".pagoImp_form input:text[name:monto3]")[3].value!= 0.00 ) 
               && ($('.pagoImp_form').serializeObject().empleado_id !='')
               && ($('.pagoImp_form').serializeObject().banco_id !='')
               && ($('.pagoImp_form').serializeObject().diaDePago !='')              
@@ -8609,13 +8611,27 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         F.getReciboMaxf("recibo", function(t){         
                           F.getOneFromModel("banco/byId", $('.pagoImp_form').serializeObject().banco_id , function(b) { 
                             F.getOneFromModel("empleado/byId", $('.pagoImp_form').serializeObject().empleado_id, function(empleado){
+
+
+                              var mm0 = parseInt($(".pagoImp_form input:text[name:totalImp]")[0].value);
+                              var mm1 = parseInt($(".pagoImp_form input:text[name:totalImp]")[1].value);
+                              var mm2 = parseInt($(".pagoImp_form input:text[name:totalImp]")[2].value);
+                              var mm3 = parseInt($(".pagoImp_form input:text[name:totalImp]")[3].value);
+
+                              var tott = mm0+mm1+mm2+mm3; 
                               var query = {
                                 vi: vi,
                                 diaDePago: $('.pagoImp_form').serializeObject().diaDePago,
                                 banco_id: $('.pagoImp_form').serializeObject().banco_id,
                                 empleado_id: $('.pagoImp_form').serializeObject().empleado_id,
-                                total: $(".pagoImp_form input:text[name:totalImp]")[0].value
+                                total: tott,// CONSULTA totalImp 
+                                mm0: mm0,
+                                mm1: mm1,
+                                mm2: mm2,
+                                mm3: mm3
+
                               };
+
                               $.ajax({
                                 type: "POST",
                                 url: "/pagoImp",
@@ -8702,7 +8718,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     )               
                 })
               }else{
-                F.msgError('Todos los campos son OBLIGATORIOS');
+                F.msgError('Todos los campos son OBLIGATORIOS'); //campos obligatorios de pagoImp
               }        
             }            
       })  

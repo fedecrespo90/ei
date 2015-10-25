@@ -101,10 +101,13 @@ PagoImp.post = function(req, res, next) {
             param.vi.forEach(function(v){
               DB.Vencimiento.find({where:{id:v.id}, include:[{model: DB.Cliente},{model: DB.Impuesto}, {model: DB.Cronograma}]}).on('success', function(vi){
                   /* AGREGO */
-                  if(vi.monto0 != 0 || vi.monto0 != 0.00){
+                  if((vi.monto0 != 0 || vi.monto0 != 0.00) || (vi.monto1 != 0 || vi.monto1 != 0.00) || (vi.monto2 != 0 || vi.monto2 != 0.00) || (vi.monto3 != 0 || vi.monto3 != 0.00)){
                     vi.updateAttributes({
                       grupo_impuesto_id: gi.id,
-                      monto0: param.total
+                      monto0: param.mm0,//param.total
+                      monto1: param.mm1,
+                      monto2: param.mm2,
+                      monto3: param.mm3
                     })
                   }
                   /* FIN AGREGO */
