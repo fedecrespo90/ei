@@ -91,7 +91,7 @@ Pago.put = function(req, res, next) {
                       }
                       base.vtoImpuesto=edit.join("/")
                     }
-                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Parcial $"+Number(btotal).toMoney()+" de un total de $"+Number(imp.monto).toMoney()+")")                                     
+                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Parcial $"+Number(imp.monto).toMoney()/*Number(btotal).toMoney()*/+" de un total de $"+Number(btotal).toMoney()/*Number(imp.monto).toMoney()*/+")")                                     
                     var arreglo=[]
                     arreglo.push(base.monto4,base.monto3,base.monto2,base.monto1,base.monto0)
                     arreglo.forEach(function(monto, indice){
