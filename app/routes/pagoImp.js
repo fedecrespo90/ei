@@ -129,7 +129,7 @@ PagoImp.post = function(req, res, next) {
                 //console.log(vi)
                 arrayImpuesto.push({
                   cliente: vi.cliente.nombre,
-                  importe: param.total, //importe.toMoney(), //CAMBIE PARA QUE IMPRIMA BIEN EL IMPORTE EN EL RECIBO
+                  importe: importe.toMoney(), //param.total, //CAMBIE PARA QUE IMPRIMA BIEN EL IMPORTE EN EL RECIBO
                   impuesto: vi.impuesto.nombre,
                   periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                 })
