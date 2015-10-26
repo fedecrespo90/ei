@@ -210,7 +210,7 @@ Pago.post = function(req, res, next) {
                     }
                     base.vtoImpuesto=edit.join("/")
                   }
-                arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Total $"+Number(btotal).toMoney()+")")
+                arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Total $"+Number(imp.monto).toMoney()/*1616 1717 aca esta el Pago Total del recibo en I/E /*Number(btotal).toMoney()*/+")")
                 if(base.impuesto.id == 34 || base.impuesto.id == 63 || base.impuesto.id == 66){
                   base.updateAttributes({pagado: 1, adeudado: 0, grupo_impuesto_id: 1})
                 }else{
