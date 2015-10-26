@@ -1539,7 +1539,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   empleadoNombre: null,
                   total: null,
                   diaDePago: null,
-                  /* AGREGO */
+                  /* AGREGO 
                   monto0: null,
                   monto1: null,
                   monto2: null,
@@ -8779,9 +8779,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return this.getRecepImp(i, function(e) {
                     var t, r, s;
                     e.length ? (n.appendRowDetailsHeaders(i), _.each(e, function(e) {
+                        /* AGREGO */
+                        if(e.impuesto.monto0 != 0){
                         var monto = e.monto0+e.monto1+e.monto2+e.monto3
-                        t = $("<p>"), s = e.cliente.nombre + " - <span>" + e.impuesto.nombre + '</span><span class="movimiento_valor">$'+monto.toMoney()+'</span>', $(t).append(s),
+                        t = $("<p>"), s = e.cliente.nombre + " - <span>" + e.impuesto.nombre + '</span><span class="movimiento_valor">$'+ e.impuesto.monto0 /*monto.toMoney()*/+'</span>', $(t).append(s),
                         $(".grupo_id_" + i).append(t).fadeIn(), n.bindRenderRecepImpForm(t, e, !1)
+
+                        }else{
+
+                        var monto = e.monto0+e.monto1+e.monto2+e.monto3
+                        t = $("<p>"), s = e.cliente.nombre + " - <span>" + e.impuesto.nombre + '</span><span class="movimiento_valor">$'+ monto.toMoney()+'</span>', $(t).append(s),
+                        $(".grupo_id_" + i).append(t).fadeIn(), n.bindRenderRecepImpForm(t, e, !1)
+
+                        }
+                        /* FIN AGREGO */
+
                     })) : $(".grupo_id_" + i).append("<p>Este Grupo de impuestos No Tiene Impuestos</p>").fadeIn();
                 }), s += "</div>", s;
             },
