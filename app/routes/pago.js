@@ -75,7 +75,7 @@ Pago.put = function(req, res, next) {
                       }
                       base.vtoImpuesto=edit.join("/")
                     }
-                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Total $"+Number(btotal).toMoney()+")")
+                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Total $"+Number(imp.monto).toMoney()/*1616/*Number(btotal).toMoney()*/+")")
                     base.updateAttributes({pagado: 1, adeudado:0})
                     if(base.impuesto.deleted_at)//EMC
                       base.updateAttributes({monto0: 0})
