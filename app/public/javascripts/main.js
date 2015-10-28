@@ -4222,9 +4222,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                       diccionario[e.id]=$('.pago_infocard input:text[name='+e.id+']').val()
                     }else{
-                      diccionario.splice(e.id,1)
+                      diccionario.splice(e.id,1);
                     }
-                  })
+
+                  });
                   p = $('<p>');
                   $(p).append('<span class="hidden" data-id="' + e.id + '"></span>');
                   $(p).append(checkbox);
@@ -4246,7 +4247,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       var sumImp=0;
                       diccionario.forEach(function(d){
                         if(d!='')
-                          sumImp+=parseFloat(d)
+                          sumImp+=parseFloat(d);
                       })
                       $('body').append(
                         '<div id="pago_window" style="display:none; background-color: #A7ECA9">' +
@@ -11101,6 +11102,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             performConcludeOt: function() {
                 if($("#conclude_ot_form").serializeObject().observation != ''){
+                  //ACA LIMITA A 2000 CARACTERES
                   if($("#conclude_ot_form").serializeObject().observation.length <= 2000){
                     $.ajax({
                       type: "POST",
@@ -11368,31 +11370,62 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10]
                 if(C.Session.getUser().rol_id >= 3){
                   if(C.Session.getUser().rol_id == 4){
-                    F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                    /* AGREGO */
+                    /* SACO CARTEL
+                   /* F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº  "+i+"?", function(){
                       new C.View.OtAdminConcludeForm({
                           el: $("body"),
                           ot_number: i,
                       });
-                    });                     
+                    }); */   
+                    function sasa(){
+                      new C.View.OtAdminConcludeForm({
+                          el: $("body"),
+                          ot_number: i,
+                      });
+                    }
+                    sasa();
+                    /* FIN AGREGO */                 
                   }else{
                     if(coordinador == 1){
                       if(C.Session.getUser().area_id == 4){
+                        /* AGREGO */
+
+                        /* SACO ESTE OTRO CARTEL DE CONFIRMACION POR LAS DUDAS
                         F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?",function(){
                           new C.View.OtAdminConcludeForm({
                               el: $("body"),
                               ot_number: i,
                           });
-                        });                    
+                        });*/
+                        function sasa(){
+                          new C.View.OtAdminConcludeForm({
+                              el: $("body"),
+                              ot_number: i,
+                          });
+                        }
+                        sasa();
+                        /* FIN AGREGO */                    
                       }else{
                         F.msgError("No tiene los permisos necesarios")
                       }
                     }else{
-                      F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                        /* AGREGO */
+                        /* SACO CARTEL */
+                      /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
                         new C.View.OtAdminConcludeForm({
                             el: $("body"),
                             ot_number: i,
                         });
-                      });                   
+                      });*/ 
+                    function sasa(){
+                        new C.View.OtAdminConcludeForm({
+                            el: $("body"),
+                            ot_number: i,
+                        });
+                      }
+                      sasa();
+                      /* FIN AGREGO */                 
                     }
                   }
                 }else{
@@ -11896,35 +11929,68 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             concludeOt: function() {
                 var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
-                var coordinador = $(".ot_table").dataTable().fnGetData(n)[10]
+                var coordinador = $(".ot_table").dataTable().fnGetData(n)[10];
                 if($(".ot_table").dataTable().fnGetData(n)[9]!= " "){
                     if(C.Session.getUser().rol_id >= 3){
-                      if(C.Session.getUser().rol_id == 4){
-                        F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                      if(C.Session.getUser().rol_id == 4 ){
+                        /* AGREGO */
+
+                        //SACO EL CARTEL DE CONFIRMACION
+                        //ESTE ES EL MENSAJE DE CONFIRMACION PARA CONCLUIR EN OT->SEGUIMIENTO
+                        /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº esste"+i+"?", function(){
                           new C.View.OtAdminConcludeForm({
-                              el: $("body"),
+                              el:$("body"),
                               ot_number: i,
                           });
-                        });                     
+                        });*/
+                        function sasa(){
+                          new C.View.OtAdminConcludeForm({
+                              el:$("body"),
+                              ot_number: i,
+                          });
+                        }
+                        sasa();
+
+                        /* FIN AGREGO */          
                       }else{
                         if(coordinador == 1){
                           if(C.Session.getUser().area_id == 4){
+                            /* AGREGO */
+                            /* SACO CARTEL
                             F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?",function(){
                               new C.View.OtAdminConcludeForm({
                                   el: $("body"),
                                   ot_number: i,
                               });
-                            });                    
+                            });*/
+                            function sasa(){
+                              new C.View.OtAdminConcludeForm({
+                                  el: $("body"),
+                                  ot_number: i,
+                              });
+                            }
+                            sasa();
+                            /* FIN AGREGO */                    
                           }else{
                             F.msgError("No tiene los permisos necesarios")
                           }
                         }else{
-                          F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                            /* AGREGO */
+                            /* SACO CARTEL
+                          /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
                             new C.View.OtAdminConcludeForm({
                                 el: $("body"),
                                 ot_number: i,
                             });
-                          });                   
+                          }); */   
+                        function sasa(){
+                            new C.View.OtAdminConcludeForm({
+                                el: $("body"),
+                                ot_number: i,
+                            });
+                          }
+                          sasa();
+                          /* FIN AGREGO */               
                         }
                       }
                     }else{
@@ -14424,7 +14490,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         document.title = C.TITLE + "Órdenes de Trabajo", this.ot_widget = C.Widget.OT.initialize("ot"); this.ot_view = new C.View.OtAudit({
                             model: new C.Model.Ot,
                             open_ot_number_on_start: y
-                        }), F.R.highlightCurrentModule("ots/audit");
+                        }), F.R.highlightCurrentModule("ots/audit"); 
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
                 },                             
