@@ -11877,10 +11877,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/views/ot/OtAuditOptions.js", function(e, t, n, r, i, s) {
         C.View.OtAuditOptions = Backbone.View.extend({
             initialize: function() {
+                //location.reload();
                 this.render();
+
             },
             render: function() {
                 return $(this.el).append(this.template()), this;
+
             },
             template: function() {
                 var e = $("<div>", {
@@ -12016,6 +12019,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
                 });
             },
+            // OT-> Seguimiento -> Reprogramar VTO
             reprogramarOt: function(){
               var e = this, t = $(".ot_table"), 
               n = F.getDataTableSelection(t)[0], 
@@ -12025,7 +12029,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                  $("#ot_reprogramar_window .BUTTON_cancel").on("click", function() {
                     location.reload()
                 }), $("#ot_reprogramar_window .BUTTON_proceed").on("click", function() {
-                    if(($("#reprogramar_ot_form").serializeObject().fechaVto!='')
+                    var sacomani = true;
+                    if((/*sacomani*/$("#reprogramar_ot_form").serializeObject().fechaVto!='')
                     && ($("#reprogramar_ot_form").serializeObject().observation!='')){
                       F.msgConfirm("Está seguro de Reprogramar la OT?", function() {
                         $.ajax({
@@ -12044,13 +12049,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         })
                       });
                     }else{
-                      F.msgError("Todos los campos son obligatorios")
+                      F.msgError("Todos los campos son obligatorios") // OT->SEGUIMIENTO REPGROGRAMAR VTO
                     }
                 })) 
             },
             templatet: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
-              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form">' + "<br /><br />" +'<input name="fechaVto" type=date placeholder="Fecha Vto nueva"><br /><br />'+'Observaciones: <br /><textarea name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"), 
+              /* FORM REPROGRAMAR VTO */
+              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form" enctype="multipart/form-data">' + "<br /><br />" +'<input name="fechaVto" type="date" placeholder="Fecha Vto nueva" value='+i+'><br /><br />'+'Observaciones: <br /><textarea name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"), 
+              /* FIN FORM REPGROGRAMAR VTO */
               $.blockUI({
                 message: $("#ot_reprogramar_window"),
                 css: {
