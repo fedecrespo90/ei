@@ -574,10 +574,13 @@ Ot.reprogramar = function(req, res, next){
   	DB.OtTarea.max('fechaVencimiento', {where: {ot_id: req.params.id}}).on('success', function(otMax){
   	 if(moment(otMax.fechaVencimiento).format("YYYYMMDD")<moment(req.body.fechaVto).format("YYYYMMDD")){
       var vto = moment(ot.fechaVencimiento).format("YYYY/MM/DD")? moment(ot.fechaVencimiento).format("YYYY/MM/DD") : "Sin Vencimiento anterior";
+
+      /* ACA ACTUALIZA LA BASE DE DATOS */
 			ot.updateAttributes({
 			  fechaVencimiento: req.body.fechaVto,
-			  descripcion: ot.descripcion + " Reprogramada "+moment().format("YYYY/MM/DD")+ " vto anterior: "+vto + req.body.observation
+			  descripcion: ot.descripcion + " Reprogramada "+moment().format("YYYY/MM/DD")+ " vto anterior: "+vto +". "+req.body.observation
 			}).on('success', function(ot){
+
 			  res.send(true);
 			  //preparo todo para enviar un mail
 			  var transport = nodemailer.createTransport("SMTP", {
