@@ -11371,62 +11371,31 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10]
                 if(C.Session.getUser().rol_id >= 3){
                   if(C.Session.getUser().rol_id == 4){
-                    /* AGREGO */
-                    /* SACO CARTEL
-                   /* F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº  "+i+"?", function(){
+                   F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº  "+i+"?", function(){
                       new C.View.OtAdminConcludeForm({
                           el: $("body"),
                           ot_number: i,
                       });
-                    }); */   
-                    function sasa(){
-                      new C.View.OtAdminConcludeForm({
-                          el: $("body"),
-                          ot_number: i,
-                      });
-                    }
-                    sasa();
-                    /* FIN AGREGO */                 
+                    });               
                   }else{
                     if(coordinador == 1){
                       if(C.Session.getUser().area_id == 4){
-                        /* AGREGO */
-
-                        /* SACO ESTE OTRO CARTEL DE CONFIRMACION POR LAS DUDAS
                         F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?",function(){
                           new C.View.OtAdminConcludeForm({
                               el: $("body"),
                               ot_number: i,
                           });
-                        });*/
-                        function sasa(){
-                          new C.View.OtAdminConcludeForm({
-                              el: $("body"),
-                              ot_number: i,
-                          });
-                        }
-                        sasa();
-                        /* FIN AGREGO */                    
+                        });                   
                       }else{
                         F.msgError("No tiene los permisos necesarios")
                       }
                     }else{
-                        /* AGREGO */
-                        /* SACO CARTEL */
-                      /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                      F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
                         new C.View.OtAdminConcludeForm({
                             el: $("body"),
                             ot_number: i,
                         });
-                      });*/ 
-                    function sasa(){
-                        new C.View.OtAdminConcludeForm({
-                            el: $("body"),
-                            ot_number: i,
-                        });
-                      }
-                      sasa();
-                      /* FIN AGREGO */                 
+                      });             
                     }
                   }
                 }else{
@@ -11939,64 +11908,32 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 if($(".ot_table").dataTable().fnGetData(n)[9]!= " "){
                     if(C.Session.getUser().rol_id >= 3){
                       if(C.Session.getUser().rol_id == 4 ){
-                        /* AGREGO */
-
-                        //SACO EL CARTEL DE CONFIRMACION
                         //ESTE ES EL MENSAJE DE CONFIRMACION PARA CONCLUIR EN OT->SEGUIMIENTO
-                        /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº esste"+i+"?", function(){
+                        F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
                           new C.View.OtAdminConcludeForm({
                               el:$("body"),
                               ot_number: i,
                           });
-                        });*/
-                        function sasa(){
-                          new C.View.OtAdminConcludeForm({
-                              el:$("body"),
-                              ot_number: i,
-                          });
-                        }
-                        sasa();
-
-                        /* FIN AGREGO */          
+                        });         
                       }else{
                         if(coordinador == 1){
                           if(C.Session.getUser().area_id == 4){
-                            /* AGREGO */
-                            /* SACO CARTEL
                             F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?",function(){
                               new C.View.OtAdminConcludeForm({
                                   el: $("body"),
                                   ot_number: i,
                               });
-                            });*/
-                            function sasa(){
-                              new C.View.OtAdminConcludeForm({
-                                  el: $("body"),
-                                  ot_number: i,
-                              });
-                            }
-                            sasa();
-                            /* FIN AGREGO */                    
+                            });                   
                           }else{
                             F.msgError("No tiene los permisos necesarios")
                           }
                         }else{
-                            /* AGREGO */
-                            /* SACO CARTEL
-                          /*F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
+                          F.msgConfirm("¿Realmente desea concluir la Orden de Trabajo Nº "+i+"?", function(){
                             new C.View.OtAdminConcludeForm({
                                 el: $("body"),
                                 ot_number: i,
                             });
-                          }); */   
-                        function sasa(){
-                            new C.View.OtAdminConcludeForm({
-                                el: $("body"),
-                                ot_number: i,
-                            });
-                          }
-                          sasa();
-                          /* FIN AGREGO */               
+                          });       
                         }
                       }
                     }else{
