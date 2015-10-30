@@ -11055,7 +11055,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 ot_table: e.ot_table,
                                 ot_form: n
                             });
-                        }), */e.ot_form = new C.View.OtAdminForm({
+                        }), */
+                e.ot_form = new C.View.OtAdminForm({
                             el: $("#ot_right"),
                             model: e.model,
                             collection: t,
@@ -11879,6 +11880,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function() {
                 //location.reload();
                 this.render();
+                $("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val(""); //LIMPIO LOS FORMULARIOS
 
             },
             render: function() {
@@ -11919,6 +11921,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             getInfoCard: function() {
                 return this.options.ot_infocard;
+
             },
             getSelectedRow: function() {
                 return this.options.ot_table.selected_row;
@@ -12029,20 +12032,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                  $("#ot_reprogramar_window .BUTTON_cancel").on("click", function() {
                     location.reload()
                 }), $("#ot_reprogramar_window .BUTTON_proceed").on("click", function() {
-                    var sacomani = true;
-                    if((/*sacomani*/$("#reprogramar_ot_form").serializeObject().fechaVto!='')
-                    && ($("#reprogramar_ot_form").serializeObject().observation!='')){
+                    //var sacomani = true;
+                    repForm = $("#reprogramar_ot_form").serializeObject();
+                    if((repForm.fechaVto!='')
+                    && (repForm.observation!='')){
                       F.msgConfirm("Está seguro de Reprogramar la OT?", function() {
                         $.ajax({
                           type: "PUT",
                           url: "/ot/reprogramar/"+i,
-                          data: $("#reprogramar_ot_form").serialize(),
+                          data: repForm,//$("#reprogramar_ot_form").serialize(),
                           success: function(nia) {
                           	if(nia){
 		                        	F.msgOK("O/T reprogramada exitosamente");
 		                          setTimeout(function(){location.reload()},1e3)
                           	}else{
-		                        	F.msgError("La O/T tiene tareas posteariores al vencimiento seleccionado");
+		                        	F.msgError("La O/T tiene tareas posteriores al vencimiento seleccionado");
 		                          setTimeout(function(){location.reload()},1e3)
                           	}
                           }
@@ -12056,7 +12060,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             templatet: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               /* FORM REPROGRAMAR VTO */
-              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form" enctype="multipart/form-data">' + "<br /><br />" +'<input name="fechaVto" type="date" placeholder="Fecha Vto nueva" value='+i+'><br /><br />'+'Observaciones: <br /><textarea name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"), 
+              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form" >' + "<br /><br />" +'<input id="tess" name="fechaVto" type="date" placeholder="Fecha Vto nueva"><br /><br />'+'Observaciones: <br /><textarea id="tesss" name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"), 
               /* FIN FORM REPGROGRAMAR VTO */
               $.blockUI({
                 message: $("#ot_reprogramar_window"),
@@ -14500,7 +14504,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ots/audit"); 
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                             
+                },
+                /* OT-> Seguimiento */                             
                 getOtAudit: function() {
                     var e = function() {
                         document.title = C.TITLE + "Órdenes de Trabajo",  this.ot_widget = C.Widget.OT.initialize("ot"); this.ot_view = new C.View.OtAudit({
@@ -14509,6 +14514,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
                 },
+                /*FIN OT-> Seguimiento */
                 getOtHistory: function() {
                     var e = function() {
                         document.title = C.TITLE + "Historial",  this.ot_widget = C.Widget.OT.initialize(), this.ot_view = new C.View.OtHistory({
