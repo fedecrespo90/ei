@@ -578,7 +578,7 @@ Ot.reprogramar = function(req, res, next){
       /* ACA ACTUALIZA LA BASE DE DATOS */
 			ot.updateAttributes({
 			  fechaVencimiento: req.body.fechaVto,
-			  descripcion: ot.descripcion + " Reprogramada "+moment().format("YYYY/MM/DD")+ " vto anterior: "+vto +". "+req.body.observation
+			  descripcion: ot.descripcion + ". Reprogramada el día:"+moment().format("YYYY/MM/DD")+ ". Vto anterior: "+vto +". "+req.body.observation
 			}).on('success', function(ot){
 
 			  res.send(true);
