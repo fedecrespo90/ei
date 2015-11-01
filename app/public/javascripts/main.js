@@ -1,13 +1,13 @@
-/*       
+/*
 _____________________________________________________________________________________________________________________
 ____________________________________BARRA__&_&_&_&__SEPARADORA_______________________________________________________
 TODO
 ✓  Boton Ver mas en Ot/Seguimiento
-✓  Ot-> modificar esquemas de colores (hoy ROSA, ayer ROJO, mañana BLANCO) 
-✓  Servicios mensuales, tiene que ir a descargar 
-✓  Hacer Historial de tareas 
-✓  Cuando Reprogramo vto de la ot en vencimiento aparece null 
-✓  fijate la ot 170 qe el vto sale invalid tarea | ver | Alejandro 
+✓  Ot-> modificar esquemas de colores (hoy ROSA, ayer ROJO, mañana BLANCO)
+✓  Servicios mensuales, tiene que ir a descargar
+✓  Hacer Historial de tareas
+✓  Cuando Reprogramo vto de la ot en vencimiento aparece null
+✓  fijate la ot 170 qe el vto sale invalid tarea | ver | Alejandro
 ✓  Que en el historial muestre al lado del cliente, el título de la OT, para poder consultas rápidas sin tener que entrar en cada una. | 2hs  | Noel
 ✓  OT-> Poder identificar si son para el abogado (juridicas) | 3hs | Noel
 ✓  IMP. Otros. tiene que ir desagrupados al momento de pagar | 4hs  | Noel
@@ -28,7 +28,7 @@ TODO
 ✓	Las oc deben tener el mismo formato que la ot pero con fondo verdecito en lugar de gris algo similar a #A9F5A9
 ✓  Planes de Tareas y Tareas solo puedan ser administrador por "Administradores"
 ✓  Mostrar en la tabla de caja REVISION, el nombre del cliente
-✓  MAIL-Cuando se reprograma una OT, debe decir REPROGRAMADO POR 
+✓  MAIL-Cuando se reprograma una OT, debe decir REPROGRAMADO POR
 ✓  MAIL-Cuando se concluye debe decir quien la creo la tarea, no quien la concluyó
 ✓	MAIL-Cuando se concluye a veces aparece "Invalid date"
 ✓  reprogramar OT, que la observacion sea Obligatoria
@@ -57,7 +57,7 @@ TODO
 ✓  plan mis facilidades AFIP y ARBA (igual a monotributo)(VALERIA)
 ✓  Monotributo en la seccion gest de pagos se mostraba sin incrementar el cronograma
 ✓  Plan mis facilidades AFIP se vea igual al monotributo
-✓  Plan de pagos ARBA se vea igual al monotributo  
+✓  Plan de pagos ARBA se vea igual al monotributo
 ✓  Las claves solo se guardan en minusculas (hay qe diferenciar mayusc de minusc)
 ✓  Clientes: agregar un campo que diga activo/inactivo para poder sacar del listado vigente los clientes que se dan de baja y a su vez que cuando está inactivo el sistema le desasigne los impuestos. Estos clientes inactivos irían a un listado de historial clientes.
 ✓    //  ALTER TABLE  `cliente` ADD  `baja` INT( 1 ) NOT NULL DEFAULT  '0' AFTER  `observaciones`
@@ -75,7 +75,7 @@ TODO
 ✓  Reportes tareas OT que muestre el sector.
 ✓  A descargar: que quede en archivados todos los servicios mensuales y en a archivar los impuestos.
   buscar anularRecibo: function() { y revision.js
-  Recibos: que Jorge tenga la posibilidad de anular un recibo y por tanto se "deshagan" los movimientos de dinero. 
+  Recibos: que Jorge tenga la posibilidad de anular un recibo y por tanto se "deshagan" los movimientos de dinero.
   Caja, hacer eso raro de jorge
 _____________________________________________________________________________________________________________________
 ____________________________________BARRA__&_&_&_&__SEPARADORA_______________________________________________________
@@ -620,7 +620,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 create: !0,
                 save: !0,
                 cancel: !0,
-                delete: !0 
+                delete: !0
             });
             var r = e.isCRUD ? " hidden" : "";
             e.buttons.create && $(t).append($("<input>", {
@@ -654,7 +654,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 create: !0,
                 save: !0,
                 cancel: !0,
-                delete: !0 
+                delete: !0
             });
             var r = e.isCRUD ? " hidden" : "";
             e.buttons.create && $(t).append($("<input>", {
@@ -704,7 +704,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     f = $('<select data-placeholder="Seleccione ' + c + '..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">'), $(f).append("<option value></option>"), _.each(e.relations[F.withoutId(n) + "s"], function(e) {
                         $(f).append('<option value="' +(e.name || e.nombre)+ '">' + (e.name || e.nombre) + "</option>");
                     });
-                    break;                    
+                    break;
                   case "selectmultiple":
                     f = $('<select data-placeholder="Seleccione ' + c + '..."' + ' multiple name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:91%;">'), $(f).append("<option value></option>"), _.each(e.relations[F.withoutId(n) + "s"], function(e) {
                         $(f).append('<option value="' + e.id + '">' + (e.name || e.nombre) + "</option>");
@@ -714,7 +714,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                    var h, p;
                     t.default_value == "1" ? (h = ' selected="selected"', p = null) : (h = null, p = ' selected="selected"'), $(f).append("<option value></option>"), $(f).append('<option value="1"' + h + ">Ingreso</option>" + '<option value="0"' + p + ">Egreso</option>");
-                    break;                    
+                    break;
                   case "select_yn":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
@@ -724,41 +724,41 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">1</option>" +'<option value="2"' + p + ">2</option>" +'<option value="3"' + p + ">3</option>" +'<option value="4"' + p + ">4</option>" +'<option value="5"' + p + ">5</option>" +'<option value="6"' + p + ">6</option>" +  '<option value="7"' + p + ">7</option>" +'<option value="8"' + p + ">8</option>" +'<option value="9"' + p + ">9</option>" +'<option value="10"' + p + ">10</option>");
-                    break;  
+                    break;
                   case "select_14":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">Urgente(1)</option>" +'<option value="2"' + p + ">Prioritario(2)</option>" +'<option value="3"' + p + ">Normal(3)</option>" +'<option value="4"' + p + ">Retrasable(4)</option>");
-                    break;  
+                    break;
                   case "select_pc":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">Profesional</option>" +'<option value="2"' + p + ">Colaborador</option>");
-                    break;  
+                    break;
                   case "select_conNombre":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="0"' + p + ">Concepto</option>" +'<option value="1"' + p + ">SubConcepto</option>");
-                    break;                                                              
+                    break;
                   case "select_b11":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">1</option>" +'<option value="2"' + p + ">2</option>" +'<option value="3"' + p + ">3</option>" +'<option value="4"' + p + ">4</option>" +'<option value="5"' + p + ">5</option>" +'<option value="6"' + p + ">6</option>" +  '<option value="7"' + p + ">7</option>" +'<option value="8"' + p + ">8</option>" +'<option value="9"' + p + ">9</option>" +'<option value="10"' + p + ">10</option>"+'<option value="11"' + p + ">11</option>");
-                    break;                      
+                    break;
                   case "select_month":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',
-                    $(f).append("<option value></option>"), 
+                    $(f).append("<option value></option>"),
                     $(f).append('<option value="1"' + p + ">Enero</option>" +'<option value="2"' + p + ">Febrero</option>" +'<option value="3"' + p + ">Marzo</option>" +'<option value="4"' + p + ">Abril</option>" +'<option value="5"' + p + ">Mayo</option>" +'<option value="6"' + p + ">Junio</option>" +  '<option value="7"' + p + ">Julio</option>" +'<option value="8"' + p + ">Agosto</option>" +'<option value="9"' + p + ">Septiembre</option>" +'<option value="10"' + p + ">Octubre</option>"+'<option value="11"' + p + ">Noviembre</option>"+'<option value="12"' + p + ">Diciembre</option>");
-                    break; 
+                    break;
                   case "select_year":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',
-                    $(f).append("<option value></option>"), 
+                    $(f).append("<option value></option>"),
                     $(f).append('<option value="2014"' + p + ">2014</option>" +'<option value="2015"' + p + ">2015</option>" +'<option value="2016"' + p + ">2016</option>" +'<option value="2017"' + p + ">2017</option>" +'<option value="2018"' + p + ">2018</option>" +'<option value="2019"' + p + ">2019</option>" +  '<option value="2020"' + p + ">2020</option>");
-                    break;                                                               
+                    break;
                   case "textarea":
                     f = $('<textarea name="' + n + '"' + a + ">" + u + "</textarea>");
                     break;
@@ -837,12 +837,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     f = $('<select data-placeholder="Seleccione ' + c + '..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">'), $(f).append("<option value></option>"), _.each(e.relations[F.withoutId(n) + "s"], function(e) {
                         $(f).append('<option value="' +(e.name || e.nombre)+ '">' + (e.name || e.nombre) + "</option>");
                     });
-                    break;                       
+                    break;
                   case "select_ie":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     t.default_value == "1" ? (h = ' selected="selected"', p = null) : (h = null, p = ' selected="selected"'), $(f).append("<option value></option>"), $(f).append('<option value="1"' + h + ">Ingreso</option>" + '<option value="0"' + p + ">Egreso</option>");
-                    break;                     
+                    break;
                   case "select_yn":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
@@ -857,36 +857,36 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">1</option>" +'<option value="2"' + p + ">2</option>" +'<option value="3"' + p + ">3</option>" +'<option value="4"' + p + ">4</option>" +'<option value="5"' + p + ">5</option>" +'<option value="6"' + p + ">6</option>" +  '<option value="7"' + p + ">7</option>" +'<option value="8"' + p + ">8</option>" +'<option value="9"' + p + ">9</option>" +'<option value="10"' + p + ">10</option>");
-                    break;  
+                    break;
                   case "select_14":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">Urgente(1)</option>" +'<option value="2"' + p + ">Prioritario(2)</option>" +'<option value="3"' + p + ">Normal(3)</option>" +'<option value="4"' + p + ">Retrasable(4)</option>");
-                    break;        
+                    break;
                   case "select_pc":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="1"' + p + ">Profesional</option>" +'<option value="2"' + p + ">Colaborador</option>");
-                    break; 
+                    break;
                   case "select_conNombre":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',$(f).append("<option value></option>"), $(f).append('<option value="0"' + p + ">Concepto</option>" +'<option value="1"' + p + ">SubConcepto</option>");
-                    break;                                                       
+                    break;
                   case "select_month":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',
-                    $(f).append("<option value></option>"), 
+                    $(f).append("<option value></option>"),
                     $(f).append('<option value="1"' + p + ">Enero</option>" +'<option value="2"' + p + ">Febrero</option>" +'<option value="3"' + p + ">Marzo</option>" +'<option value="4"' + p + ">Abril</option>" +'<option value="5"' + p + ">Mayo</option>" +'<option value="6"' + p + ">Junio</option>" +  '<option value="7"' + p + ">Julio</option>" +'<option value="8"' + p + ">Agosto</option>" +'<option value="9"' + p + ">Septiembre</option>" +'<option value="10"' + p + ">Octubre</option>"+'<option value="11"' + p + ">Noviembre</option>"+'<option value="12"' + p + ">Diciembre</option>");
-                    break; 
+                    break;
                   case "select_year":
                     f = $('<select data-placeholder="¿' + c + '?..." name="' + n + '"' + a + ' class="chzn-select" style="display:none; position:relative; width:89%;">');
                     var h, p;
                     p = null, h = ' selected="selected"',
-                    $(f).append("<option value></option>"), 
+                    $(f).append("<option value></option>"),
                     $(f).append('<option value="2014"' + p + ">2014</option>" +'<option value="2015"' + p + ">2015</option>" +'<option value="2016"' + p + ">2016</option>" +'<option value="2017"' + p + ">2017</option>" +'<option value="2018"' + p + ">2018</option>" +'<option value="2019"' + p + ">2019</option>" +  '<option value="2020"' + p + ">2020</option>");
-                    break;                                                               
+                    break;
                   case "textarea":
                     f = $('<textarea name="' + n + '"' + a + ">" + u + "</textarea>");
                     break;
@@ -977,7 +977,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 r();
             }, 5e3), n && n(e);
         };
-    }), 
+    }),
 //CODE WIDGETS
     e.define("/widgets/Novedades.js", function(e, t, n, r, i, s) {
         C.Widget.Novedades = {
@@ -985,7 +985,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 $("#head #tabs").empty().append('<a href="/#/inicio/novedades">Novedades</a><a href="/#/inicio/novTarea">Tareas</a>'), $("#left .inner").empty().append('<div id="novedades_left"></div>'), $("#right .inner").empty().append('<div id="novedades_right"></div>');
             }
         };
-    }), 
+    }),
     e.define("/widgets/Cliente.js", function(e, t, n, r, i, s) {
         C.Widget.Cliente = {
             initialize: function(e) {
@@ -996,8 +996,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/Perfil.js", function(e, t, n, r, i, s) {
         C.Widget.Perfil = {
             initialize: function() {
-                $("#head #tabs").empty().append('<a href="/#/opciones/perfil">Perfil</a>'), 
-                $("#left .inner").empty().append('<div id="perfil_left"></div>'), 
+                $("#head #tabs").empty().append('<a href="/#/opciones/perfil">Perfil</a>'),
+                $("#left .inner").empty().append('<div id="perfil_left"></div>'),
                 $("#right .inner").empty().append('<div id="perfil_right"></div>');
             }
         };
@@ -1005,35 +1005,35 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/CRUD.js", function(e, t, n, r, i, s) {
         C.Widget.CRUD = {
             initialize: function(e) {
-                $("#head #tabs").empty().append('<a href="/#/crud/empleado">Empleados</a><a href="/#/crud/usuario">Usuarios</a><a href="/#/crud/clasificacion">Clasificaciones</a><a href="/#/crud/banco">Bancos</a><a href="/#/crud/actividad">Actividades</a><a href="/#/crud/area">Areas</a><a href="/#/crud/rubro">Rubros</a><a href="/#/crud/impuesto">Impuestos</a><a href="/#/crud/clave">Claves</a><a href="/#/crud/concepto">Conceptos</a>'), 
-                $("#left .inner").empty().append('<div id="'+ (e || "crud" ) +'_left"></div>'), 
+                $("#head #tabs").empty().append('<a href="/#/crud/empleado">Empleados</a><a href="/#/crud/usuario">Usuarios</a><a href="/#/crud/clasificacion">Clasificaciones</a><a href="/#/crud/banco">Bancos</a><a href="/#/crud/actividad">Actividades</a><a href="/#/crud/area">Areas</a><a href="/#/crud/rubro">Rubros</a><a href="/#/crud/impuesto">Impuestos</a><a href="/#/crud/clave">Claves</a><a href="/#/crud/concepto">Conceptos</a>'),
+                $("#left .inner").empty().append('<div id="'+ (e || "crud" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "crud") +'_right"></div>');
             }
         };
     }),
     e.define("/widgets/OT.js", function(e, t, n, r, i, s) {
         C.Widget.OT = {
-            initialize: function(e) { 
+            initialize: function(e) {
                 $("#head #tabs").empty().append('<a href="/#/ot/audit">Seguimiento</a><a href="/#/ot/admin">Administrar</a><a href="/#/ot/oc">Consultas</a><a href="/#/ot/plan">Planes</a><a href="/#/ot/tarea">Tareas</a><a href="/#/ot/history">Historial</a><a href="/#/ot/otTareaAll">Historial Tareas</a>'),
-                $("#left .inner").empty().append('<div id="'+ (e || "ot" ) +'_left"></div>'), 
+                $("#left .inner").empty().append('<div id="'+ (e || "ot" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "ot") +'_right"></div>');
             }
         };
-    }),  
+    }),
     e.define("/widgets/Caja.js", function(e, t, n, r, i, s) {
         C.Widget.Caja = {
             initialize: function(e) {
-                $("#head #tabs").empty().append('<a href="/#/caja/revision">Revision</a><a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a><a href="/#/caja/ajusteCaja">Ajustes</a>'), 
-                $("#left .inner").empty().append('<div id="'+ (e || "caja" ) +'_left"></div>'), 
+                $("#head #tabs").empty().append('<a href="/#/caja/revision">Revision</a><a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a><a href="/#/caja/ajusteCaja">Ajustes</a>'),
+                $("#left .inner").empty().append('<div id="'+ (e || "caja" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "caja") +'_right"></div>');
             }
         };
-    }),  
+    }),
     e.define("/widgets/IE.js", function(e, t, n, r, i, s) {
         C.Widget.IE = {
             initialize: function(e) {
-                $("#head #tabs").empty().append('<a href="/#/ie/clienteDocumentacion">Documentación</a><a href="/#/ie/clientePago">Pagos</a><a href="/#/ie/ieOt">OT</a><a href="/#/ie/ieOc">OC</a><a href="/#/ie/clienteHistorial">Historial de Pagos</a>'), 
-                $("#left .inner").empty().append('<div id="'+ (e || "ie" ) +'_left"></div>'), 
+                $("#head #tabs").empty().append('<a href="/#/ie/clienteDocumentacion">Documentación</a><a href="/#/ie/clientePago">Pagos</a><a href="/#/ie/ieOt">OT</a><a href="/#/ie/ieOc">OC</a><a href="/#/ie/clienteHistorial">Historial de Pagos</a>'),
+                $("#left .inner").empty().append('<div id="'+ (e || "ie" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "ie") +'_right"></div>');
             }
         };
@@ -1072,7 +1072,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }else{
                     carga="cargaFijo",console.log("cargaFijo")
                   }
-                  $("#left .inner").empty().append('<div id="'+carga+'_left"></div>'), 
+                  $("#left .inner").empty().append('<div id="'+carga+'_left"></div>'),
                   $("#right .inner").empty().append('<div id="'+carga+'_right"></div>');
 
             }
@@ -1081,8 +1081,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/Cronograma.js", function(e, t, n, r, i, s) {
         C.Widget.Cronograma = {
             initialize: function(e) {
-                  $("#head #tabs").empty().append('<a href="/#/cronograma/asignacion">Asignación</a><a href="/#/cronograma/aviso">Aviso</a><a href="/#/cronograma/recepcion">Recepción</a><a href="/#/cronograma/vencimiento">Vencimiento</a>'), 
-                  $("#left .inner").empty().append('<div id="'+ (e || "cronograma" ) +'_left"></div>'), 
+                  $("#head #tabs").empty().append('<a href="/#/cronograma/asignacion">Asignación</a><a href="/#/cronograma/aviso">Aviso</a><a href="/#/cronograma/recepcion">Recepción</a><a href="/#/cronograma/vencimiento">Vencimiento</a>'),
+                  $("#left .inner").empty().append('<div id="'+ (e || "cronograma" ) +'_left"></div>'),
                   $("#right .inner").empty().append('<div id="'+ (e || "cronograma" ) +'_right"></div>');
 
             }
@@ -1091,8 +1091,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/PagarImp.js", function(e, t, n, r, i, s) {
         C.Widget.PagarImp = {
             initialize: function(e) {
-                  $("#head #tabs").empty().append('<a href="/#/pagarImp/pagoImp">A Pagar</a><a href="/#/pagarImp/recepImp">En Tránsito</a><a href="/#/pagarImp/descImp">A Descargar</a><a href="/#/pagarImp/archImp">A Archivar</a><a href="/#/pagarImp/archivado">Archivados</a>'), 
-                  $("#left .inner").empty().append('<div id="'+(e||"pagarImp")+'_left"></div>'), 
+                  $("#head #tabs").empty().append('<a href="/#/pagarImp/pagoImp">A Pagar</a><a href="/#/pagarImp/recepImp">En Tránsito</a><a href="/#/pagarImp/descImp">A Descargar</a><a href="/#/pagarImp/archImp">A Archivar</a><a href="/#/pagarImp/archivado">Archivados</a>'),
+                  $("#left .inner").empty().append('<div id="'+(e||"pagarImp")+'_left"></div>'),
                   $("#right .inner").empty().append('<div id="'+(e||"pagarImp")+'_right"></div>');
 
             }
@@ -1101,13 +1101,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/GestCrono.js", function(e, t, n, r, i, s) {
         C.Widget.GestCrono = {
             initialize: function(e) {
-                  $("#head #tabs").empty().append('<a href="/#/gestCrono/asignacion">Asignación</a> <a href="/#/gestCrono/aviso">Aviso</a><a href="/#/gestCrono/avisoPersonal">Aviso Personal</a><a href="/#/gestCrono/avisoTest">Test Mail</a><a href="/#/gestCrono/asigPie">Pie E-Mail</a>'), 
-                  $("#left .inner").empty().append('<div id="'+ (e||"gestCrono" ) +'_left"></div>'), 
+                  $("#head #tabs").empty().append('<a href="/#/gestCrono/asignacion">Asignación</a> <a href="/#/gestCrono/aviso">Aviso</a><a href="/#/gestCrono/avisoPersonal">Aviso Personal</a><a href="/#/gestCrono/avisoTest">Test Mail</a><a href="/#/gestCrono/asigPie">Pie E-Mail</a>'),
+                  $("#left .inner").empty().append('<div id="'+ (e||"gestCrono" ) +'_left"></div>'),
                   $("#right .inner").empty().append('<div id="'+ (e||"gestCrono" ) +'_right"></div>');
 
             }
         };
-    }),        
+    }),
 //CODE MODELS
    e.define("/models/Novedades.js", function(e, t, n, r, i, s) {
         C.Model.Novedades = Backbone.Model.extend({
@@ -1158,7 +1158,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/novTarea",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Cliente.js", function(e, t, n, r, i, s) {
         C.Model.Cliente = Backbone.Model.extend({
             urlRoot: "/cliente",
@@ -1189,7 +1189,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Clientes = Backbone.Collection.extend({
@@ -1207,7 +1207,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.ListDeudas = Backbone.Collection.extend({
@@ -1215,7 +1215,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/listDeuda",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Listado.js", function(e, t, n, r, i, s) {
         C.Model.Listado = Backbone.Model.extend({
             urlRoot: "/listado",
@@ -1225,7 +1225,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Listados = Backbone.Collection.extend({
@@ -1233,7 +1233,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/listado",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/CuentaCorriente.js", function(e, t, n, r, i, s) {
         C.Model.CuentaCorriente = Backbone.Model.extend({
             urlRoot: "/cuentaCorriente",
@@ -1251,7 +1251,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.CuentaCorrientes = Backbone.Collection.extend({
@@ -1264,8 +1264,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
         C.Model.CuentaCorrienteMovimientos = Backbone.Model.extend({
             defaults: function() {
                 return {
-		/*DATOS DEL CUENTACORRIENTEMOVIMIENTO*/                
-                    id: null, 
+		/*DATOS DEL CUENTACORRIENTEMOVIMIENTO*/
+                    id: null,
                     tramite: null,
                     clienteNombre: null
                 };
@@ -1294,7 +1294,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Deudas = Backbone.Collection.extend({
@@ -1307,8 +1307,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
         C.Model.DeudaImpuesto = Backbone.Model.extend({
             defaults: function() {
                 return {
-		/*DATOS DE DeudaImpuesto*/                
-                    id: null, 
+		/*DATOS DE DeudaImpuesto*/
+                    id: null,
                     tramite: null,
                     clienteNombre: null
                 };
@@ -1319,19 +1319,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),     
+    }),
     e.define("/models/ClienteClave.js", function(e, t, n, r, i, s) {
         C.Model.ClienteClave = Backbone.Model.extend({
             urlRoot: "/clienteClave",
             defaults: function() {
                 return {
 		/*DATOS DEL CLIENTECLAVE*/
-                  pass: null,          
+                  pass: null,
                 };
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.ClienteClaves = Backbone.Collection.extend({
@@ -1339,7 +1339,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/clienteClave",
             initialize: function(e, t) {}
         });
-    }),        
+    }),
     e.define("/models/ClienteImpuesto.js", function(e, t, n, r, i, s) {
         C.Model.ClienteImpuesto = Backbone.Model.extend({
             urlRoot: "/clienteImpuesto",
@@ -1349,12 +1349,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   idClienteImpuesto: null,
                   idCliente: null,
                   idImpuesto: null,
-                  nombre: null,          
+                  nombre: null,
                 };
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.ClienteImpuestos = Backbone.Collection.extend({
@@ -1362,7 +1362,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/clienteImpuesto",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Impuesto.js", function(e, t, n, r, i, s) {
         C.Model.Impuesto = Backbone.Model.extend({
             urlRoot: "/impuesto",
@@ -1382,7 +1382,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Impuestos = Backbone.Collection.extend({
@@ -1407,7 +1407,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.AjusteCtas = Backbone.Collection.extend({
@@ -1415,7 +1415,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/ajusteCta",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/ClienteDocumentacion.js", function(e, t, n, r, i, s) {
         C.Model.ClienteDocumentacion = Backbone.Model.extend({
             urlRoot: "/clienteDocumentacion",
@@ -1445,7 +1445,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.ClienteDocumentacions = Backbone.Collection.extend({
@@ -1453,7 +1453,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/clienteDocumentacion",
             initialize: function(e, t) {}
         });
-    }),   
+    }),
     e.define("/models/ClientePago.js", function(e, t, n, r, i, s) {
         C.Model.ClientePago = Backbone.Model.extend({
             urlRoot: "/cliente/all",
@@ -1483,7 +1483,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.ClientePagos = Backbone.Collection.extend({
@@ -1491,7 +1491,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/cliente/all",
             initialize: function(e, t) {}
         });
-    }), 
+    }),
     e.define("/models/PagoImp.js", function(e, t, n, r, i, s) {
         C.Model.PagoImp = Backbone.Model.extend({
             urlRoot: "/pagoImp",
@@ -1526,7 +1526,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/pagoImp",
             initialize: function(e, t) {}
         });
-    }), 
+    }),
     e.define("/models/RecepImp.js", function(e, t, n, r, i, s) {
         C.Model.RecepImp = Backbone.Model.extend({
             urlRoot: "/recepImp",
@@ -1539,7 +1539,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   empleadoNombre: null,
                   total: null,
                   diaDePago: null,
-                  /* AGREGO 
+                  /* AGREGO
                   monto0: null,
                   monto1: null,
                   monto2: null,
@@ -1558,7 +1558,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/recepImp",
             initialize: function(e, t) {}
         });
-    }),  
+    }),
     e.define("/models/DescImp.js", function(e, t, n, r, i, s) {
         C.Model.DescImp = Backbone.Model.extend({
             urlRoot: "/descImp",
@@ -1579,7 +1579,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/descImp",
             initialize: function(e, t) {}
         });
-    }),     
+    }),
     e.define("/models/ArchImp.js", function(e, t, n, r, i, s) {
         C.Model.ArchImp = Backbone.Model.extend({
             urlRoot: "/archImp",
@@ -1600,7 +1600,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/archImp",
             initialize: function(e, t) {}
         });
-    }),  
+    }),
     e.define("/models/Archivado.js", function(e, t, n, r, i, s) {
         C.Model.Archivado = Backbone.Model.extend({
             urlRoot: "/archivado",
@@ -1620,13 +1620,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/archivado",
             initialize: function(e, t) {}
         });
-    }),            
+    }),
     e.define("/models/Perfil.js", function(e, t, n, r, i, s) {
         C.Model.Perfil = Backbone.Model.extend({
             urlRoot: "/perfil",
             defaults: function() {
                 return {
-		/*DATOS DEL PERFIL*/                
+		/*DATOS DEL PERFIL*/
                     usuario_id: null,
                     usuario: null,
                     pass1: null,
@@ -1661,7 +1661,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/empleado",
             defaults: function() {
                 return {
-		/*DATOS DEL EMPLEADO*/                
+		/*DATOS DEL EMPLEADO*/
                     nombre: null,
                     apellido: null,
                     telefono: null,
@@ -1685,7 +1685,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/usuario",
             defaults: function() {
                 return {
-		/*DATOS DEL USUARIO*/                
+		/*DATOS DEL USUARIO*/
                     usuario: null,
                     empledo: null,
                     empleado_id: null,
@@ -1711,7 +1711,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/clasificacion",
             defaults: function() {
                 return {
-		/*DATOS DEL CLASIFICACION*/                
+		/*DATOS DEL CLASIFICACION*/
                     nombre: null,
                     observacion: null,
                 };
@@ -1732,7 +1732,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/concepto",
             defaults: function() {
                 return {
-		/*DATOS DEL Concepto*/                
+		/*DATOS DEL Concepto*/
                     nombre: null,
                     sub: null,
                 };
@@ -1747,7 +1747,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/concepto",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Banco.js", function(e, t, n, r, i, s) {
         C.Model.Banco = Backbone.Model.extend({
             urlRoot: "/banco",
@@ -1773,7 +1773,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/area",
             defaults: function() {
                 return {
-		/*DATOS DEL Area*/                
+		/*DATOS DEL Area*/
                     nombre: null,
                 };
             },
@@ -1793,7 +1793,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             urlRoot: "/actividad",
             defaults: function() {
                 return {
-		/*DATOS DEL ACTIVIDAD*/                
+		/*DATOS DEL ACTIVIDAD*/
                     idFormularioAfip: null,
                     nombre: null,
                     observacion: null
@@ -1809,13 +1809,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/actividad",
             initialize: function(e, t) {}
         });
-    }),   
+    }),
     e.define("/models/Clave.js", function(e, t, n, r, i, s) {
         C.Model.Clave = Backbone.Model.extend({
             urlRoot: "/clave",
             defaults: function() {
                 return {
-		/*DATOS DE LA CLAVE*/                
+		/*DATOS DE LA CLAVE*/
                     nombre: null,
                     descripcion: null,
                     pagina: null
@@ -1831,13 +1831,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/clave",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Tarea.js", function(e, t, n, r, i, s) {
         C.Model.Tarea = Backbone.Model.extend({
             urlRoot: "/tarea",
             defaults: function() {
                 return {
-		    /*DATOS DE LA TAREA*/    
+		    /*DATOS DE LA TAREA*/
 	                id: null,
 	                otNumero: null,
 	                titulo: null,
@@ -1859,17 +1859,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/tarea",
             initialize: function(e, t) {}
         });
-    }), 
+    }),
     e.define("/models/Plan.js", function(e, t, n, r, i, s) {
         C.Model.Plan = Backbone.Model.extend({
             urlRoot: "/plan",
             defaults: function() {
                 return {
-		            /*DATOS DEL PLAN*/  
+		            /*DATOS DEL PLAN*/
 		              id: null,
 		              nombre: null,
 		              descripcion: null,
-		              tarea_id: null,              
+		              tarea_id: null,
                 };
             },
             initialize: function() {
@@ -1882,7 +1882,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/plan",
             initialize: function(e, t) {}
         });
-    }),     
+    }),
     e.define("/models/Ot.js", function(e, t, n, r, i, s) {
         C.Model.Ot = Backbone.Model.extend({
             urlRoot: "/ot",
@@ -1899,7 +1899,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   notificarCliente: null,
                   honorarios: null,
                   prioridad: null,
-                  coordinador:null,    
+                  coordinador:null,
                   descripcion: null,
                   conclusion: null,
                   consulta: null,
@@ -1917,7 +1917,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/ot",
             initialize: function(e, t) {}
         });
-    }),  
+    }),
     e.define("/models/IeOt.js", function(e, t, n, r, i, s) {
         C.Model.IeOt = Backbone.Model.extend({
             urlRoot: "/ieot",
@@ -1933,7 +1933,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   notificarCliente: null,
                   honorarios: null,
                   prioridad: null,
-                  coordinador:null,    
+                  coordinador:null,
                   descripcion: null,
                   conclusion: null,
                 };
@@ -1948,7 +1948,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/ieot",
             initialize: function(e, t) {}
         });
-    }),  
+    }),
     e.define("/models/IeOc.js", function(e, t, n, r, i, s) {
         C.Model.IeOc = Backbone.Model.extend({
             urlRoot: "/ieoc",
@@ -1973,7 +1973,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/ieoc",
             initialize: function(e, t) {}
         });
-    }),   
+    }),
     e.define("/models/Oc.js", function(e, t, n, r, i, s) {
         C.Model.Oc = Backbone.Model.extend({
             urlRoot: "/oc",
@@ -1998,13 +1998,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/oc",
             initialize: function(e, t) {}
         });
-    }),            
+    }),
     e.define("/models/Rubro.js", function(e, t, n, r, i, s) {
         C.Model.Rubro = Backbone.Model.extend({
             urlRoot: "/rubro",
             defaults: function() {
                 return {
-		/*DATOS DEL RUBRO*/                
+		/*DATOS DEL RUBRO*/
                   nombre: null,
                   observacion: null
                 };
@@ -2083,7 +2083,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function(e, t) {
             }
         });
-    }), 
+    }),
    e.define("/models/Otro.js", function(e, t, n, r, i, s) {
         C.Model.Otro = Backbone.Model.extend({
             urlRoot: "/otro",
@@ -2107,7 +2107,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function(e, t) {
             }
         });
-    }),    
+    }),
    e.define("/models/CargaFijo.js", function(e, t, n, r, i, s) {
         C.Model.CargaFijo = Backbone.Model.extend({
             urlRoot: "/cargaFijo",
@@ -2120,19 +2120,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   monto0: null,
                   monto1: null,
                   monto2: null,
-                  monto3: null,                  
+                  monto3: null,
                 };
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.CargaFijos = Backbone.Collection.extend({
             model: C.Model.CargaFijo,
             url: "/cargaFijo",
             initialize: function(e, t) {}
-        });        
+        });
    }),
    e.define("/models/NoCargado.js", function(e, t, n, r, i, s) {
         C.Model.NoCargado = Backbone.Model.extend({
@@ -2146,15 +2146,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.NoCargados = Backbone.Collection.extend({
             model: C.Model.NoCargado,
             url: "/noCargado",
             initialize: function(e, t) {}
-        });        
-   }),    
+        });
+   }),
    e.define("/models/Cargado.js", function(e, t, n, r, i, s) {
         C.Model.Cargado = Backbone.Model.extend({
             urlRoot: "/cargado",
@@ -2169,34 +2169,34 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Cargados = Backbone.Collection.extend({
             model: C.Model.Cargado,
             url: "/cargado",
             initialize: function(e, t) {}
-        });        
-   }),   
+        });
+   }),
    e.define("/models/Cronograma.js", function(e, t, n, r, i, s) {
         C.Model.Cronograma = Backbone.Model.extend({
             urlRoot: "/cronograma",
             defaults: function() {
                 return {
-                   mes: null,     
-                   año: null,  
+                   mes: null,
+                   año: null,
                 };
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Cronogramas = Backbone.Collection.extend({
             model: C.Model.Cronograma,
             url: "/cronograma",
             initialize: function(e, t) {}
-        });        
+        });
    }),
    e.define("/models/Recepcion.js", function(e, t, n, r, i, s) {
         C.Model.Recepcion = Backbone.Model.extend({
@@ -2209,14 +2209,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Recepcions = Backbone.Collection.extend({
             model: C.Model.Recepcion,
             url: "/recepcion",
             initialize: function(e, t) {}
-        });        
+        });
     }),
     e.define("/models/Aviso.js", function(e, t, n, r, i, s) {
         C.Model.Aviso = Backbone.Model.extend({
@@ -2229,15 +2229,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Avisos = Backbone.Collection.extend({
             model: C.Model.Aviso,
             url: "/aviso",
             initialize: function(e, t) {}
-        });        
-    }),  
+        });
+    }),
     e.define("/models/Asignacion.js", function(e, t, n, r, i, s) {
         C.Model.Asignacion = Backbone.Model.extend({
             urlRoot: "/asignacion",
@@ -2249,15 +2249,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.Asignacions = Backbone.Collection.extend({
             model: C.Model.Asignacion,
             url: "/asignacion",
             initialize: function(e, t) {}
-        });        
-    }),       
+        });
+    }),
     e.define("/models/AuditarImpuesto.js", function(e, t, n, r, i, s) {
         C.Model.AuditarImpuesto = Backbone.Model.extend({
             urlRoot: "/auditarImpuesto",
@@ -2270,21 +2270,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.AuditarImpuestos = Backbone.Collection.extend({
             model: C.Model.AuditarImpuesto,
             url: "/auditarImpuesto",
             initialize: function(e, t) {}
-        });        
-    }), 
+        });
+    }),
     e.define("/models/GestAsignacion.js", function(e, t, n, r, i, s) {
         C.Model.GestAsignacion = Backbone.Model.extend({
             urlRoot: "/gestAsignacion",
             defaults: function() {
                 return {
-                   id: null, 
+                   id: null,
                    mes: null,
                    año: null,
                    nombreMes: null,
@@ -2292,21 +2292,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.GestAsignacions = Backbone.Collection.extend({
             model: C.Model.GestAsignacion,
             url: "/gestAsignacion",
             initialize: function(e, t) {}
-        });        
-    }), 
+        });
+    }),
     e.define("/models/AsigPie.js", function(e, t, n, r, i, s) {
         C.Model.AsigPie = Backbone.Model.extend({
             urlRoot: "/asigPie",
             defaults: function() {
                 return {
-		/*DATOS DEL AsigPie*/                
+		/*DATOS DEL AsigPie*/
                     observacion: null
                 };
             },
@@ -2320,13 +2320,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/asigPie",
             initialize: function(e, t) {}
         });
-    }),      
+    }),
     e.define("/models/GestAviso.js", function(e, t, n, r, i, s) {
         C.Model.GestAviso = Backbone.Model.extend({
             urlRoot: "/gestAviso",
             defaults: function() {
                 return {
-                   id: null, 
+                   id: null,
                    mes: null,
                    año: null,
                    nombreMes: null,
@@ -2334,21 +2334,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.GestAvisos = Backbone.Collection.extend({
             model: C.Model.GestAviso,
             url: "/gestAviso",
             initialize: function(e, t) {}
-        });        
-    }),       
+        });
+    }),
     e.define("/models/GestAvisoTest.js", function(e, t, n, r, i, s) {
         C.Model.GestAvisoTest = Backbone.Model.extend({
             urlRoot: "/gestAvisoTest",
             defaults: function() {
                 return {
-                   id: null, 
+                   id: null,
                    mes: null,
                    año: null,
                    nombreMes: null,
@@ -2356,15 +2356,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.GestAvisoTests = Backbone.Collection.extend({
             model: C.Model.GestAvisoTest,
             url: "/gestAvisoTest",
             initialize: function(e, t) {}
-        });        
-    }),   
+        });
+    }),
     e.define("/models/GestAvisoPersonal.js", function(e, t, n, r, i, s) {
         C.Model.GestAvisoPersonal = Backbone.Model.extend({
             urlRoot: "/cliente",
@@ -2395,15 +2395,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.GestAvisoPersonals = Backbone.Collection.extend({
             model: C.Model.GestAvisoPersonal,
             url: "/cliente",
             initialize: function(e, t) {}
-        });        
-    }),  
+        });
+    }),
     e.define("/models/OtTarea.js", function(e, t, n, r, i, s) {
         C.Model.OtTarea = Backbone.Model.extend({
             defaults: function() {
@@ -2422,7 +2422,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/models/OtHistory.js", function(e, t, n, r, i, s) {
         C.Model.OtHistory = Backbone.Model.extend({
             urlRoot: "/othistory",
@@ -2446,7 +2446,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   titulo: null,
                   descripcion: null,
                   conclusion: null,
-                  consulta: null,          
+                  consulta: null,
                 };
             },
             initialize: function() {
@@ -2489,7 +2489,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/otTarea/all",
             initialize: function(e, t) {}
         });
-    }),    
+    }),
     e.define("/models/Revision.js", function(e, t, n, r, i, s) {
         C.Model.Revision = Backbone.Model.extend({
             urlRoot: "/revision",
@@ -2514,7 +2514,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/revision",
             initialize: function(e, t) {}
         });
-    }),     
+    }),
     e.define("/models/Caja.js", function(e, t, n, r, i, s) {
         C.Model.Caja = Backbone.Model.extend({
             urlRoot: "/caja",
@@ -2540,7 +2540,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/caja",
             initialize: function(e, t) {}
         });
-    }), 
+    }),
     e.define("/models/CBanco.js", function(e, t, n, r, i, s) {
         C.Model.CBanco = Backbone.Model.extend({
             urlRoot: "/cBanco",
@@ -2610,7 +2610,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.bind("error", function(e, t) {
-                    F.log(t); 
+                    F.log(t);
                 });
             }
         }), C.Collection.AjusteCajas = Backbone.Collection.extend({
@@ -2618,7 +2618,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             url: "/ajusteCaja",
             initialize: function(e, t) {}
         });
-    }),      
+    }),
 //CODE VIEWS
 //NOVEDADES
     e.define("/views/novedades/Novedades.js", function(e, t, n, r, i, s) {
@@ -2665,7 +2665,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 <span class="bold">Novedad:</span> '+e.novedad+'<br />\
                 <span class="bold">Descripción:</span> '+e.descripcion+'<br />\
                 <input type="button" class="BUTTON_proceed righty button" value="Descartar"/><br /><br />')
-                $(".novedades_infocard .BUTTON_proceed").on("click", function() { 
+                $(".novedades_infocard .BUTTON_proceed").on("click", function() {
                   $.ajax({
                     type: "POST",
                     url: "/novedades/"+e.id,
@@ -2674,7 +2674,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       window.setTimeout(function(){location.reload()},1e3)
                     }
                   })
-                })                    
+                })
               });
             },
             events: {
@@ -2747,7 +2747,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(e) {
-                F.assignValuesToInfoCard($(".novedades_infocard"), e)                 
+                F.assignValuesToInfoCard($(".novedades_infocard"), e)
               });
             },
             events: {
@@ -2871,7 +2871,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 direccion: {
                     label: "Dirección",
                     type: "textarea"
-                },                
+                },
                 telefono: {
                     label: "Teléfono (ej.:(0221) 455-5555)"
                 },
@@ -2885,7 +2885,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "E-mail",
                     placeholder: "E-mail (ej.: usuario@epressacco.com.ar)",
                     check: "email"
-                },                
+                },
                 empleado: {
                     label: "Empleados",
                     type: "select_yn",
@@ -2895,7 +2895,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Local a la Calle",
                     type: "select_yn",
                     default_value: "n"
-                },                
+                },
                 monto: {
                     label: "Monto de la Cuenta Corriente"
                 },
@@ -2913,7 +2913,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 cliente_id: {
                     label: "Principal de la Cuenta Corriente",
                     type: "select"
-                },                
+                },
                 actividad_id: {
                     label: "Actividad",
                     type: "select"
@@ -2948,7 +2948,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 save: !0,
                 cancel: !0,
                 "delete": !0
-            },            
+            },
             initialize: function() {
               var e = this;
               F.getAllFromModel("actividad", function(t) {
@@ -2989,13 +2989,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             addCliente: function() {
               var e = this;
               if(($(".cliente_form").serializeObject().nombre.replace(/\s/g, "") != '')
-              && ($(".cliente_form").serializeObject().email != '') 
+              && ($(".cliente_form").serializeObject().email != '')
               && ($(".cliente_form").serializeObject().actividad_id != '')
               && ($(".cliente_form").serializeObject().comunicacion_id != '')
               && ($(".cliente_form").serializeObject().clasificacion_id != '')
               ){
               var error=!1
-              switch (($(".cliente_form").serializeObject().comunicacion_id)) { 
+              switch (($(".cliente_form").serializeObject().comunicacion_id)) {
                 case "1": error= $(".cliente_form").serializeObject().telefono != '';
                         break;
                 case "2": error= $(".cliente_form").serializeObject().celular != '';
@@ -3004,7 +3004,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         break;
                 case "4": error= $(".cliente_form").serializeObject().email != '';
                         break;
-              }                
+              }
               if(error){
                 $.ajax({
                       type: "POST",
@@ -3026,21 +3026,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                })
               }else{
-                F.msgError("El método de Comunicación Preferido debe estar Cargado");                  
-              } 
-             }else{ 
+                F.msgError("El método de Comunicación Preferido debe estar Cargado");
+              }
+             }else{
                 F.msgError("El campo 'Nombre', 'E-Mail', 'Comunicacion', 'Clasificacion' y 'Actividad' SON OBLIGATORIOS");
-             }                
+             }
             },
             editCliente: function() {
                 if(($(".cliente_form").serializeObject().nombre.replace(/\s/g, "") != '')
-                && ($(".cliente_form").serializeObject().email != '') 
+                && ($(".cliente_form").serializeObject().email != '')
                 && ($(".cliente_form").serializeObject().actividad_id != '')
                 && ($(".cliente_form").serializeObject().comunicacion_id != '')
                 && ($(".cliente_form").serializeObject().clasificacion_id != '')
                 ){
                 var cumple= (1==2);
-                switch ($(".cliente_form").serializeObject().comunicacion_id) { 
+                switch ($(".cliente_form").serializeObject().comunicacion_id) {
                   case "1": cumple= $(".cliente_form").serializeObject().telefono != '';
                           break;
                   case "2": cumple= $(".cliente_form").serializeObject().celular != '';
@@ -3049,7 +3049,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           break;
                   case "4": cumple= $(".cliente_form").serializeObject().email != '';
                           break;
-                }                
+                }
                 if(cumple){
                     $.ajax({
                           type: "PUT",
@@ -3071,11 +3071,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           }
                      })
                 }else{
-                  F.msgError("El método de Comunicación Preferido debe estar Cargado");                  
-                } 
-               }else{ 
+                  F.msgError("El método de Comunicación Preferido debe estar Cargado");
+                }
+               }else{
                   F.msgError("El campo 'Nombre', 'E-Mail', 'Comunicacion', 'Clasificacion' y 'Actividad' SON OBLIGATORIOS");
-               }                                 
+               }
             },
             delCliente: function() {
                 var e = this;
@@ -3136,7 +3136,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             },
         });
-    }),    
+    }),
   //LISTADO
     e.define("/views/cliente/Listado.js", function(e, t, n, r, i, s) {
         C.View.Listado = Backbone.View.extend({
@@ -3179,7 +3179,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             },
         });
-    }),  
+    }),
   //Cuentas Corrientes
   e.define("/views/cliente/CuentaCorriente.js", function(e, t, n, r, i, s) {
         C.View.CuentaCorriente = Backbone.View.extend({
@@ -3257,9 +3257,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             bindRenderCuentaCorrienteMovimientoForm: function(e, t, n) {
                 var r = this;
                 $(e).on("click", function() {
-                    $(".row_detail p").removeClass("selected_cuentaCorrienteMovimientos"), 
+                    $(".row_detail p").removeClass("selected_cuentaCorrienteMovimientos"),
                     $(this).addClass("selected_cuentaCorrienteMovimientos"),
-                    $(".movimiento_form").remove(), 
+                    $(".movimiento_form").remove(),
                     new C.View.CuentaCorrienteMovimientosForm({
                         el: $("#cliente_right"),
                         model: new C.Model.CuentaCorrienteMovimientos,
@@ -3275,8 +3275,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "cliente_infocard",
             title: "Datos de la Cuenta Corriente",
             fieldnames: {
-                 clienteNombre: "Nombre", 
-                 monto: "Monto", 
+                 clienteNombre: "Nombre",
+                 monto: "Monto",
                  montoTramite: "Monto para Trámites",
                  clienteActividad: "Actividad",
                  clienteComunicacion: "Comunicacion"
@@ -3292,7 +3292,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "movimiento_form",
             title: "Detalle del Movimiento",
             fields: {
-              id: "ID", 
+              id: "ID",
               tramite: "Tramite",
               clienteNombre: "Cliente"
             },
@@ -3305,17 +3305,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 F.createForm(e);
                 var n = e.getMovimiento(),
-                r = $(".movimiento_form"), 
+                r = $(".movimiento_form"),
                 i = $(r).getFields(), s;
                 $(r).append($('<input>', {
                   type: 'hidden',
                   value: n.id,
                   class: 'selection_movimiento_id'
-                })),                
+                })),
                 $(i).each(function() {
                   s = $(this).attr("name");
                   $(this).val(n[s])
-                });                
+                });
             },
             getMovimiento: function() {
                 return this.options.movimiento;
@@ -3391,7 +3391,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     e.length ? (n.appendRowDetailsHeaders(i), _.each(e, function(e) {
                         t = $("<p>"), s = e.vencimiento + "-" + e.cronograma + " - <span>" + e.impuestoNombre + '</span><span class="movimiento_valor" style="color:#622";>$'+e.montoTotal+ '</span>', $(t).append(s),
                         $(".cliente_id_" + i).append(t).fadeIn(), n.bindRenderDeudaImpuestoForm(t, e, !1);
-                    })) 
+                    }))
                       : $(".cliente_id_" + i).append("<p>Este Cliente no tiene Impuestos por pagar</p>").fadeIn();
                 }), s += "</div>", s;
             },
@@ -3409,9 +3409,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             bindRenderDeudaImpuestoForm: function(e, t, n) {
                 var r = this;
                 $(e).on("click", function() {
-                    $(".row_detail p").removeClass("selected_deudaImpuesto"), 
+                    $(".row_detail p").removeClass("selected_deudaImpuesto"),
                     $(this).addClass("selected_deudaImpuesto"),
-                    $(".deudaImpuesto_form").remove(), 
+                    $(".deudaImpuesto_form").remove(),
                     new C.View.DeudaImpuestoForm({
                         el: $("#cliente_right"),
                         model: new C.Model.DeudaImpuesto,
@@ -3427,7 +3427,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "cliente_infocard",
             title: "Datos del Cliente",
             fieldnames: {
-                 clienteNombre: "Nombre", 
+                 clienteNombre: "Nombre",
                  clienteActividad: "Actividad",
                  clienteComunicacion: "Comunicacion"
             },
@@ -3452,30 +3452,30 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 label: "Impuesto",
                 attrs: {
                   disabled: "disabled"
-                }                
+                }
               },
               liquida: {
                   label: "Liquidable?",
                   type: "select_yn",
                   default_value: "y"
-              },                
+              },
               anticipo: {
                   label: "Anticipo",
                   type: "select_b11",
-              },              
-              monto0: "Monto0",              
+              },
+              monto0: "Monto0",
               monto1: "Monto1",
               monto2: "Monto2",
               monto3: "Monto3",
               monto4: "Monto Propio(4)",
-              
+
             },
             isCRUD: !1,
             buttons: {
                 create: !1,
                 cancel: !0,
                 save: !0,
-                "delete": !1                       
+                "delete": !1
             },
             relations: {
             },
@@ -3483,7 +3483,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 F.createForm(e);
                 var n = e.getDeudaImpuesto(),
-                r = $(".deudaImpuesto_form"); 
+                r = $(".deudaImpuesto_form");
                 $(".deudaImpuesto_form input:hidden.selection_id").remove();
                 var n = e.getDeudaImpuesto(), r = $(".deudaImpuesto_form"), i = $(r).getFields(), s;
                 $(r).append($("<input>", {
@@ -3504,19 +3504,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             },
             events:{
-                "click .deudaImpuesto_form .BUTTON_save": "editDeudaImpuesto",              
+                "click .deudaImpuesto_form .BUTTON_save": "editDeudaImpuesto",
             },
-            editDeudaImpuesto: function() { 
+            editDeudaImpuesto: function() {
               f=this;
               $.ajax({
-                  type: "PUT",                  
+                  type: "PUT",
                   url: "/vencimiento/"+f.getSelectionID(),
                   data: $(".deudaImpuesto_form").serialize(),
                   success: function() {
                     F.msgOK("Impuesto Editado");
-                    window.setTimeout(function() { location.reload() }, 1e3)                    
+                    window.setTimeout(function() { location.reload() }, 1e3)
                  }
-              });      
+              });
             },
             getDeudaImpuesto: function() {
                 return this.options.deudaImpuesto;
@@ -3531,8 +3531,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".deudaImpuesto_form .selection_deudaImpuesto_id").val());
             }
         });
-    }),    
-//CLIENTECLAVE    
+    }),
+//CLIENTECLAVE
   e.define("/views/cliente/ClienteClave.js", function(e, t, n, r, i, s) {
         C.View.ClienteClave = Backbone.View.extend({
             el: $("body"),
@@ -3555,7 +3555,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cliente/ClienteClaveTable.js", function(e, t, n, r, i, s) {
         C.View.ClienteClaveTable = Backbone.View.extend({
             name: "cliente",
@@ -3601,13 +3601,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               $('.clienteClave_form').append('<span class="hidden" id="id" value='+e.idClienteClave+'::'+e.idClave+' data-id="' + e.id + '"></span><span class="element_name">'+ e.nombre + '</span><br /><input type="text" name="'+e.idClienteClave+'::'+e.idClave+'" value="'+ e.pass +'"></input><br />');
             });
             $('.clienteClave_form').append('<input type="button" id="cancelarClave" class="BUTTON_cancel lefty button" value="Cancelar" />'+'<input type="button" id="cargarClave" class="BUTTON_create righty button" value="Guardar" /><br /><br />');
-            
+
             $('.clienteClave_form .BUTTON_cancel').on('click', function() {
               location.reload()
             })
             $('.clienteClave_form .BUTTON_create').on('click', function() {
               $.ajax({
-                  type: "POST",                  
+                  type: "POST",
                   url: "/clienteClave/"+cliente_id,
                   data: $('.clienteClave_form ').serializeObject(),
                   success: function(e) {
@@ -3615,8 +3615,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     setTimeout(function(){location.reload()},1e3)
                   }
               });
-            })            
-          }           
+            })
+          }
         });
     }),
     e.define("/views/cliente/ClienteClaveForm.js", function(e, t, n, r, i, s) {
@@ -3632,10 +3632,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 save: !1,
                 cancel: !1,
                 "delete": !1
-            },             
+            },
         });
-    }),     
-//CLIENTE IMPUESTO    
+    }),
+//CLIENTE IMPUESTO
   e.define("/views/cliente/ClienteImpuesto.js", function(e, t, n, r, i, s) {
         C.View.ClienteImpuesto = Backbone.View.extend({
             el: $("body"),
@@ -3658,7 +3658,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cliente/ClienteImpuestoTable.js", function(e, t, n, r, i, s) {
         C.View.ClienteImpuestoTable = Backbone.View.extend({
             name: "cliente",
@@ -3716,26 +3716,26 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   })
                   $('#clienteImpuesto_window .BUTTON_create').on('click', function() {
                     if(/Monotributo/.test(e.nombre)){
-                      var detalle="";             
-                      var checkbox;       
+                      var detalle="";
+                      var checkbox;
                       var ar= e.nombre.split(" ");
                       if(ar[1]<= "I"){
                         detalle+='<input name="checkLoc" id="checkLoc" type="checkbox">'
                         detalle+='Locaciones y/o prestaciones de servicios<br />'
                       }
                       if(ar[1]>= "C"){
-                        detalle+='<input name="checkVent" id="checkVent" type="checkbox">'                    
+                        detalle+='<input name="checkVent" id="checkVent" type="checkbox">'
                         detalle+='Venta de Cosas Mueble<br />'
                       }
-                      detalle+='<input name="checkSip" id="checkSip" type="checkbox">'                    
+                      detalle+='<input name="checkSip" id="checkSip" type="checkbox">'
                       detalle+='Aportes al Sipa<br />'
-                      detalle+='<input name="checkOs" id="checkOs" type="checkbox">'                                        
+                      detalle+='<input name="checkOs" id="checkOs" type="checkbox">'
                       detalle+='Aportes Obra Social<br />Adherentes:<input type=text label="Cant"  value="0" id= "cantidad" class="cantidad" size="4"><br /><br /><br />'
 
                       $('body').append(
                         '<div id="monotributo_window" style="display:none;">' +
                         '<h1 class="bold" style="font-size:20px;color:#FF6666;">Detalles del Monotributo</h1><br /><br />'+
-                        detalle+  
+                        detalle+
                         '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+
                         '<input type="button" class="BUTTON_create righty button" value="Aceptar" />' +
                         '</div>'
@@ -3774,7 +3774,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             if(test.checkOs){
                               if((adherentes)&&(adherentes >= 0)){
                                 $.ajax({
-                                    type: "POST",                  
+                                    type: "POST",
                                     url: "/clienteImpuesto/"+e.idCliente+":"+e.idImpuesto+":"+paga+":"+(parseInt(adherentes)+parseInt(1)),
                                     data: {detalle: $('#clienteImpuesto_window select[name=metodo_de_pago]').val()},
                                     success: function(e) {
@@ -3785,17 +3785,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               }else{
                                 F.msgError('Si carga "Aportes Obra Social" debe seleccionar la cantidad de adherentes')
                               }
-                              
+
                             }else{
                                 $.ajax({
-                                    type: "POST",                  
+                                    type: "POST",
                                     url: "/clienteImpuesto/"+e.idCliente+":"+e.idImpuesto+":"+paga+":"+1,
                                     data: {detalle: $('#clienteImpuesto_window select[name=metodo_de_pago]').val()},
                                     success: function(e) {
                                       F.msgOK("Impuesto Agregado")
                                       setTimeout(function(){location.reload()},1000)
                                     }
-                                });                              
+                                });
                             }
                           }else{
                             F.msgError("No puede seleccionar 'Locaciones y/o prestaciones de servicios' y 'Venta de Cosas Mueble' para un mismo cliente")
@@ -3815,9 +3815,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           cursor: 'default'
                         }
                       });
-                    }else{                   
+                    }else{
                       $.ajax({
-                          type: "POST",                  
+                          type: "POST",
                           url: "/clienteImpuesto/"+e.idCliente+":"+e.idImpuesto+":"+0+":"+1,
                           data: {detalle: $('#clienteImpuesto_window select[name=metodo_de_pago]').val()},
                           success: function(e) {
@@ -3840,7 +3840,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   });
                 })
                 }else{
-                F.msgConfirm("¿Está seguro de DESasignar este Impuesto al Cliente seleccionado?", function(){                  
+                F.msgConfirm("¿Está seguro de DESasignar este Impuesto al Cliente seleccionado?", function(){
                   $.ajax({
                     type: "POST",
                     url: "/clienteImpuesto/delete/"+e.idClienteImpuesto,
@@ -3851,7 +3851,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   })
                 })
                 }
-                
+
               });
               p = $('<p>');
               $(p).append('<span class="hidden" data-id="' + e.id + '"></span>');
@@ -3859,7 +3859,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               $(p).append('<span class="element_name">' + e.nombre + '</span><br />');
               $('.clienteImpuesto_infocard').append(p);
             });
-          }           
+          }
         });
     }),
     e.define("/views/cliente/ClienteImpuestoInfoCard.js", function(e, t, n, r, i, s) {
@@ -3870,7 +3870,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createInfoCard(this, $("#cliente_right"));
             },
         });
-    }),   
+    }),
 //IE
   //DOCUMENTACION
     e.define("/views/ie/ClienteDocumentacion.js", function(e, t, n, r, i, s) {
@@ -3911,7 +3911,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,  ],
                 aaSorting: [ [ 4, "asc" ] ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
@@ -3923,7 +3923,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(".clienteDocumentacion_table tbody tr").on("click", function() {
                         t.fnIsOpen(this) ? t.fnClose(this) : t.fnOpen(this, e.generateRowDetails(t, this), "details");
                     });
-                });                
+                });
             },
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail documentacion_id_' + i + '" style="display:none;">';
@@ -3949,12 +3949,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             bindRenderDocumentacionForm: function(e, t, n) {
                 var r = this;
                 $(e).on("click", function() {
-                    $(".row_detail p").removeClass("selected_documentacion"), 
+                    $(".row_detail p").removeClass("selected_documentacion"),
                     $(this).addClass("selected_documentacion"),
                     $(".row_subdetail").remove(),
                    F.assignValuesToForm($(".documentacion_form"),t);
                 });
-            },            
+            },
             events: {
                 "click .clienteDocumentacion_table tr": "selectRow"
             },
@@ -3968,7 +3968,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "clienteDocumentacion_infocard",
             title: "Datos del Cliente",
             fieldnames: {
-                 nombre: "Nombre", 
+                 nombre: "Nombre",
                  actividad: "Actividad",
                  comunicacion: "Comunicacion"
             },
@@ -3990,7 +3990,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 iedoc_id: {
                     label: "Ingreso-Egreso",
                     type: "select"
-                },                
+                },
                 documentacionNombre: {
                   label: "Documentación Ingresada",
                   type: "textarea"
@@ -4003,7 +4003,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             events: {
                 "click .documentacion_form .BUTTON_create": "addEditDocumentacion",
-                "click .documentacion_form .BUTTON_save": "addEditDocumentacion",                
+                "click .documentacion_form .BUTTON_save": "addEditDocumentacion",
             },
             relations: {
                 clientes: null,
@@ -4014,22 +4014,22 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               F.getAllFromModel("cliente", function(t) {
               var c = [{id: "Ingreso", nombre: "Ingreso"},{id:"Egreso", nombre: "Egreso"}];
                 e.relations.clientes = t;
-                e.relations.iedocs = c, 
+                e.relations.iedocs = c,
                 F.createForm(e);
-              })                
+              })
             },
             addEditDocumentacion: function(){
                 var e = this;
                 if(($(".documentacion_form").serializeObject().iedoc_id != '')
                 && ($(".documentacion_form").serializeObject().cliente_id != '')
                 && ($(".documentacion_form").serializeObject().documentacionNombre != '')
-                ){  
+                ){
                   $.ajax({
                         type: "POST",
                         url: "/documentacion",
                         data: $(".documentacion_form").serialize(),
                         success: function(e) {
-                              var recibod=                           
+                              var recibod=
                                 '<div id="imprimir" style="display:none; text-align: left;">' +
                                     '<div style="width: 600px; padding: 6px">'+
                                         '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -4061,7 +4061,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                             '<br  />'+
                                             '<p><span style="font-weight:bold;">'+e.receptor+'</span></p><br  />'+
                                         '</div>'+
-                                    '</div>'+ 
+                                    '</div>'+
                                     '<br /><br /><br /><br /><br /><br /><br /><br /><H1 style="font-weight:bold;"> RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1><br />-----------✂---------------------✂------------✂---------------------✂------------'+
                                     '<div style="width: 600px; padding: 6px">'+
                                         '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -4115,10 +4115,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("Todos los Campos son OBLIGATORIOS");
                }
-            },            
+            },
             getDocumentacion: function() {
                 return this.options.documentacion;
             },
@@ -4126,7 +4126,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return $(this.table).dataTable();
             },
         });
-    }),    
+    }),
   //PAGO
     e.define("/views/ie/ClientePago.js", function(e, t, n, r, i, s) {
         C.View.ClientePago = Backbone.View.extend({
@@ -4149,7 +4149,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             el: $("#clientePago_right"),
                             model:e.model,
                             collection: t,
-                            clientePago_table: e.clientePago_table                            
+                            clientePago_table: e.clientePago_table
                         });
                     }
                 });
@@ -4161,7 +4161,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 	symbol = symbol !== undefined ? symbol : "";
 	thousand = thousand || ".";
 	decimal = decimal || ",";
-	var number = this, 
+	var number = this,
 	    negative = number < 0 ? "-" : "",
 	    i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
 	    j = (j = i.length) > 3 ? j % 3 : 0;
@@ -4181,7 +4181,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 var e = this;
-                this.data = this.options.collection, F.createDataTable(this, function(t) {            
+                this.data = this.options.collection, F.createDataTable(this, function(t) {
                   F.assignValuesToInfoCard($(".clientePago_infocard"), t);
                   e.showDetails(t);
                 });
@@ -4202,7 +4202,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         /*$(".pago_infocard").empty(),*/ t.renderDetails(e, id);
                     }
                 });
-            },                        
+            },
             renderDetails: function(el, superId) {
               var sup= this;
               var el_id, checkbox, p;
@@ -4257,7 +4257,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         '<span style="float:right"><input align=right type="text" disabled value=$'+
                         sumImp.toMoney()+'> </span><br /><br />'+
                         '<span ><input name="checkefectivo" type="checkbox">Efectivo:<input name="efectivo" type=text> <br /><br /></span>'+
-                        '<span ><input name="checkcheque" type="checkbox">Cheque:<input name="cheque" type=text> <br /><br /></span>'+                    
+                        '<span ><input name="checkcheque" type="checkbox">Cheque:<input name="cheque" type=text> <br /><br /></span>'+
                         '<input name="ncheque" type=text placeholder="nº Cheque"> <input name="banco" type=text placeholder="Banco"> <input name="titular" type=text placeholder="Titular"><br /><br />'+
                         '<input name="fechaemision" type=date placeholder="Fecha de Emisión"><input name="fechacobro" type=date placeholder="Fecha de Cobro"><br /><br />'+
                        // '<a class="BUTTON_cancel lefty">Cancelar</a>' +
@@ -4296,7 +4296,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             montoCC: montoCC,
                             sumImp: sumImp,
                             totalPago: tPago
-                        }; 
+                        };
                         if(parseFloat(tPago) + parseFloat(montoCC) >=sumImp){
                           $.unblockUI(), window.setTimeout(function() {$("#pago_window").remove()},1e3);
                           if(query.impuestos.length == 0){//sumImp==0
@@ -4311,7 +4311,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 e.impuestos.forEach(function(i){
                                   imp+=i+'<br />'
                                 })
-                                var reciboe = 
+                                var reciboe =
                                   '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
                                       '<div style="width: 600px; padding: 6px">'+
                                           '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -4337,7 +4337,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                   '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                   imp+
                                                   '<span style="float:right; font-weight:bold; text"> Total Ingresado:$'+e.total+'<br />Saldo en Cuenta Corriente:$'+e.saldo+'</span><br /><br />'+
-                                              '</div>'+                                                
+                                              '</div>'+
                                           '</div>'+
                                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4368,11 +4368,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                               '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 60px;">'+
                                                   e.recibo.concepto+
                                               '</div>'+
-                                              '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+ 
+                                              '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
                                                   '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                   imp+
                                                   '<span style="float:right; font-weight:bold; text"> Total Ingresado:$'+e.total+'<br />Saldo en Cuenta Corriente:$'+e.saldo+'</span><br /><br />'+
-                                              '</div>'+                                                
+                                              '</div>'+
                                           '</div>'+
                                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4384,13 +4384,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                         '</div>'+
                                       '</div>'+
                                   '</div>'
-  ;                                                                    
+  ;
                                 $('body').append(reciboe)
                                 $.ajax({
                                     type:  "POST",
                                     url: "/imprimir/E-"+e.recibo.e,
                                     data: {recibo: reciboe}
-                                });                                  
+                                });
                                 $.blockUI({
                                   message: $('#imprimirRecibo'),
                                   css: {
@@ -4404,7 +4404,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   }
                                 });
 
-                              sup.showDetails({id: superId})                                
+                              sup.showDetails({id: superId})
                               }
                             })
                           }
@@ -4445,7 +4445,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                   '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                   imp+
                                                   '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
-                                              '</div>'+                                                
+                                              '</div>'+
                                           '</div>'+
                                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4481,7 +4481,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                   '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                   imp+
                                                   '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
-                                              '</div>'+                                                
+                                              '</div>'+
                                           '</div>'+
                                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4495,13 +4495,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                      '</div>'+
                                   '</div>'
                                   ;
-                                  
+
                                 $('body').append(reciboee)
                                 $.ajax({
                                     type:  "POST",
                                     url: "/imprimir/E-"+e.recibo.e,
                                     data: {recibo: reciboee}
-                                });                                    
+                                });
                                 $.blockUI({
                                   message: $('#imprimirRecibo'),
                                   css: {
@@ -4518,7 +4518,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               }
                             })
                           })
-                        }                   
+                        }
 
                       })
                       $.blockUI({
@@ -4531,10 +4531,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           padding: '1%',
                           cursor: 'default'
                         }
-                      }); 
-                    })     
-                  })   
-              })), 
+                      });
+                    })
+                  })
+              })),
               $('.pago_infocard').append($("<input>", {
                   type: "button",
                   style: "background-color: Orange; background-image: none; color: White;",
@@ -4550,7 +4550,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         '<span style="float:left">Recibo:<input  type="text" disabled value=C-'+t.maxi+'></span>'+
                         '<span style="float:right"><input align=right type="text" disabled value=$'+sumImp+'> </span><br /><br />'+
                         '<span>Compensación:<input name="compensacion" type=text> <br /><br /></span>'+
-                        '<span>Pago el Cliente:<input name="pCliente" type=text><br /><br /></span>'+                    
+                        '<span>Pago el Cliente:<input name="pCliente" type=text><br /><br /></span>'+
                         '<input name="comprobante" type=text placeholder="Nº Comprobante">'+
                         '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+
                         '<input type="button" class="BUTTON_create righty button" value="Aceptar" />' +
@@ -4570,17 +4570,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             monto: impuesto
                           })
                         });
-                        $.unblockUI(),window.setTimeout(function(){$("#pago_window").remove()}, 1e3);                           
-                        console.log($("#pago_window input:text[name=comprobante]").val())                 
+                        $.unblockUI(),window.setTimeout(function(){$("#pago_window").remove()}, 1e3);
+                        console.log($("#pago_window input:text[name=comprobante]").val())
                         var query= {
-                            clienteComprobante: $("#pago_window input:text[name=comprobante]").val(),                         
+                            clienteComprobante: $("#pago_window input:text[name=comprobante]").val(),
                             cliente_id: cliente,
                             compensacionMonto: compensacion,
                             clienteMonto: pCliente,
                             impuestos:diccion,
                             reciboNumero: t.maxi,
                             totalPago: tPago
-                        }; 
+                        };
                         if(query.impuestos.length == 0){
                           F.msgError("No hay Impuestos por Pagar")
                         }else{
@@ -4593,7 +4593,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               e.impuestos.forEach(function(i){
                                 imp+=i+'<br />'
                               })
-                              var reciboc= 
+                              var reciboc=
                                 '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
                                     '<div style="width: 600px; padding: 6px">'+
                                         '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -4618,7 +4618,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                             '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 120px;">'+
                                                 '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                 imp+
-                                            '</div>'+                                                
+                                            '</div>'+
                                         '</div>'+
                                         '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                         '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4652,7 +4652,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                             '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 120px;">'+
                                                 '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
                                                 imp+
-                                            '</div>'+                                                
+                                            '</div>'+
                                         '</div>'+
                                         '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                         '<span style="font-weight:bold">Operador: </span>'+ e.operador+
@@ -4664,14 +4664,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                             '<p><span style="font-weight:bold;">Estudio Integral Pressacco & Asoc.</span></p><br  />'+
                                         '</div>'+
                                     '</div><H1 style="font-weight:bold;">RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1>'+
-                                '</div>'                                  
-  ;                                    
+                                '</div>'
+  ;
                               $('body').append(reciboc)
                               $.ajax({
                                   type:  "POST",
                                   url: "/imprimir/C-"+e.recibo.c,
                                   data: {recibo: reciboc}
-                              });                                  
+                              });
                               $.blockUI({
                                 message: $('#imprimirRecibo'),
                                 css: {
@@ -4684,12 +4684,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   cursor: 'default'
                                 }
                               });
-                              sup.showDetails({id: superId})                                
+                              sup.showDetails({id: superId})
                             }
                          })
                           }
-                       })                   
-                                            
+                       })
+
                       $.blockUI({
                         message: $('#pago_window'),
                         css: {
@@ -4701,7 +4701,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           cursor: 'default'
                         }
                      })
-                  }); 
+                  });
               }));
               $('.pago_infocard').append($("<input>", {
                   type: "button",
@@ -4709,12 +4709,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   value: "Cancelar"
               }).on("click", function() {
                   $(".clientePago_table tr").removeClass("selected_row");
-                  $(".pago_infocard ").empty().append('<h3 class="formtitle"> Pagos del Cliente</h3>');                  
+                  $(".pago_infocard ").empty().append('<h3 class="formtitle"> Pagos del Cliente</h3>');
               }));
              }else{
               $('.pago_infocard').append('<span style="text-align:center;color:#CC4444;font-size:16px;">El cliente No posee Deudas</span>')
              }
-            }           
+            }
         });
     }),
     e.define("/views/ie/PagoInfoCard.js", function(e, t, n, r, i, s) {
@@ -4725,17 +4725,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createInfoCard(this, $("#clientePago_right"));
             },
         });
-    }),    
+    }),
     e.define("/views/ie/ClientePagoInfoCard.js", function(e, t, n, r, i, s) {
         C.View.ClientePagoInfoCard = Backbone.View.extend({
             name: "clientePago_infocard",
             title: "Datos del Cliente",
             fieldnames: {
-                 nombre: "Nombre", 
+                 nombre: "Nombre",
                  actividad: "Actividad",
                  comunicacion: "Comunicacion",
                  monto: "Saldo en Cuenta"
-                 
+
             },
             initialize: function() {
                 var e = this;
@@ -4790,7 +4790,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function() {
                 this.data = this.options.collection, F.createDataTable(this, function(e) {
                     F.assignValuesToForm($(".cliente_form"), e);
-                });            
+                });
             },
             events: {
                 "click .cliente_table tr": "selectRow"
@@ -4799,7 +4799,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             }
         });
-   }),         
+   }),
    e.define("/views/cliente/AjusteCtaForm.js", function(e, t, n, r, i, s) {
         C.View.AjusteCtaForm = Backbone.View.extend({
             name: "cliente_form",
@@ -4821,14 +4821,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Comunicación",
                     attrs: {
                       disabled: "disabled"
-                    }               
+                    }
                 },
                 monto: {
                     label: "Saldo CtaCte",
                     attrs: {
                       disabled: "disabled",
                     },
-                    force_label: !0                    
+                    force_label: !0
                 },/*
                 montoTramite: {
                     label: "Monto Trámites",
@@ -4840,7 +4840,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 iedoc_id: {
                     label: "Ingreso-Egreso",
                     type: "select"
-                }, 
+                },
                 montoNuevo: {
                     label: "Monto Cuenta Corriente",
                 },
@@ -4855,16 +4855,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             relations: {
                 iedocs: null
             },
             initialize: function() {
               var e = this;
               var c = [{id: "Ingreso", nombre: "Ingreso"},{id:"Egreso", nombre: "Egreso"}];
-                e.relations.iedocs = c, 
+                e.relations.iedocs = c,
                 F.createForm(e);
-            },            
+            },
             events: {
                 "click .cliente_form .BUTTON_save": "editAjusteCta",
             },
@@ -4891,7 +4891,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   url: "/ajusteCta/"+this.getSelectionID(),
                   data: $(".cliente_form").serialize(),
                   success: function(e) {
-                    var recibog= 
+                    var recibog=
                     '<div id="imprimirPago" style="display:none; text-align: left;">' +
                         '<div style="width: 600px; height: padding: 6px">'+
                             '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -4910,7 +4910,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 '</div>'+
                                 '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+//130px
                                     '<span style="float:right; font-weight:bold; text"> TOTAL EN CUENTA:'+e.total+'<br /></span><br />'+
-                                '</div>'+                                                
+                                '</div>'+
                             '</div>'+
                             '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                 '<span style="font-weight:bold;"> Operador: </span>'+ e.operador+
@@ -4930,14 +4930,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 '<p><span style="font-weight:bold;">'+e.receptor+'</span></p><br  />'+
                             '</div>'+
                         '</div><H1 style="font-weight:bold;"><br /><br /><br /><br /><br /><br /><br /><br />'+// RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1>
-                    '</div>' 
-                  ;                                                 
+                    '</div>'
+                  ;
                   $('body').append(recibog)
                   $.ajax({
                       type:  "POST",
                       url: "/imprimir/G-"+e.recibo.g,
                       data: {recibo: recibog}
-                  });                                   
+                  });
                   $.blockUI({
                     message: $('#imprimirPago'),
                     css: {
@@ -4948,7 +4948,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       border: '50px',
                       cursor: 'default'
                     }
-                  }) 
+                  })
                   }
                 })
               }else{
@@ -4991,7 +4991,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
                 aaSorting: [ [ 4, "asc" ] ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
@@ -5002,7 +5002,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(".clienteHistorial_table tbody tr").on("click", function() {
                         t.fnIsOpen(this) ? t.fnClose(this) : t.fnOpen(this, e.generateRowDetails(t, this), "details");
                     });
-                });                
+                });
             },
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail historial_id_' + i + '" style="display:none;">';
@@ -5038,7 +5038,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "clienteHistorial_infocard",
             title: "Datos del Cliente",
             fieldnames: {
-                 nombre: "Nombre", 
+                 nombre: "Nombre",
                  actividad: "Actividad",
                  comunicacion: "Comunicacion"
             },
@@ -5048,7 +5048,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
-//PERFIL    
+//PERFIL
     e.define("/views/perfil/Perfil.js", function(e, t, n, r, i, s) {
         C.View.Perfil = Backbone.View.extend({
             el: $("body"),
@@ -5067,7 +5067,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             textAlign: "left"
                         }),
                         e.perfil_empleado_data = new C.View.PerfilEmpleadoInfoCard(i),
-                        e.perfil_form = new C.View.PerfilForm(i), 
+                        e.perfil_form = new C.View.PerfilForm(i),
                         e.perfil_password_form = new C.View.PerfilPasswordForm(i);
                     }
                 });
@@ -5087,7 +5087,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
           F.createInfoCard(this, $("#perfil_right"));
         }
       });
-    }), 
+    }),
     e.define("/views/perfil/PerfilForm.js", function(e, t, n, r, i, s){
         C.View.PerfilForm = Backbone.View.extend({
             name: "perfil_form",
@@ -5216,14 +5216,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
                 aaSorting: [ [ 1, "desc" ] ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
                 this.data = this.options.collection, F.createDataTable(this, function(e) {
                     F.assignValuesToForm($(".ieOt_form"), e);
                     $(".ieOt_form .BUTTON_delete").val("Ver Tareas")
-                });                
+                });
             },
             events: {
                 "click .clienteHistorial_table tr": "selectRow"
@@ -5253,36 +5253,36 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 titulo: {
                   label: "Título estimativo del trabajo a realizar",
-                },                
+                },
                 descripcion: {
                   label: "Descripción (explicación de que se debe hacer para que lo pueda revisar el cliente)",
                   type: "textarea",
                   attrs: {
                         style: "height:150px;"
-                    }                   
+                    }
                 },
-                comunicacion_id: { 
+                comunicacion_id: {
                     label: "Comunicacion",
                     type: "select"
-                },  
+                },
                 oc_id: {
                     label: "OC(s)",
                     force_label: !0,
                     type: "selectmultiple",
                 },
                 ocs: {
-                  force_label: !0,                
+                  force_label: !0,
                   label: "Titulos de las OC(s) seleccionadas",
                   type: "textarea",
                   attrs: {
                         disabled: "disabled",
-                    }                   
-                },                                 
+                    }
+                },
                 notificarCliente: {
                     label: "Notificar eventos al cliente",
                     type: "select_yn",
                     default_value: "n"
-                },                
+                },
                 reservado: {
                     label: "Reservado",
                     type: "select_yn",
@@ -5334,9 +5334,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editTableRow: function(e) {},
             ver_mas: function() {
-              var e = this, i= e.getSelectionID();            
+              var e = this, i= e.getSelectionID();
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"), 
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -5362,32 +5362,32 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       success: function(t) {
                         if(ot){
                             if($.isArray(t)){
-                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')  
+                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')
                               t.forEach(function(q){
-                                 var nombre = q.nombre || "Sin Nombre", 
-                                 descripcion = q.descripcion || "Sin Descripción" , 
+                                 var nombre = q.nombre || "Sin Nombre",
+                                 descripcion = q.descripcion || "Sin Descripción" ,
                                  observacion = q.observacion || "Sin Observación" ;
                                  $("#ver_mas_form").append(
                                   '<p><h3>Titulo: '+nombre+'</h3></p>'+
                                   '<p><span style= "font-weight: bold">Descripcion: </span>'+ descripcion +'</p>'+
                                   '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p><hr style="color: #0056b2;" />');
                               })
-                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')  
+                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')
                             }
                         }
                       }
                     })
-                  }     
+                  }
                 })
               }
-            },            
+            },
             addOt: function() {
               if((C.Session.getUser().area_id == 8)||(C.Session.getUser().rol_id > 3)){
                 var e = this;
-                if(($(".ieOt_form").serializeObject().cliente_id != '') 
-                && ($(".ieOt_form").serializeObject().notificarCliente != '') 
-                && ($(".ieOt_form").serializeObject().titulo != '')               
-                && ($(".ieOt_form").serializeObject().comunicacion_id != '')                 
+                if(($(".ieOt_form").serializeObject().cliente_id != '')
+                && ($(".ieOt_form").serializeObject().notificarCliente != '')
+                && ($(".ieOt_form").serializeObject().titulo != '')
+                && ($(".ieOt_form").serializeObject().comunicacion_id != '')
                 ){
                   $.ajax({
                     type: "POST",
@@ -5403,14 +5403,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }
               }else{
                 F.msgError("No tiene los permisos necesarios")
-              }              
+              }
             },
             editOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '') 
-              && ($(".ieOt_form").serializeObject().notificarCliente != '') 
-              && ($(".ieOt_form").serializeObject().titulo != '')               
-              && ($(".ieOt_form").serializeObject().comunicacion_id != '')                               
+              if(($(".ot_form").serializeObject().cliente_id != '')
+              && ($(".ieOt_form").serializeObject().notificarCliente != '')
+              && ($(".ieOt_form").serializeObject().titulo != '')
+              && ($(".ieOt_form").serializeObject().comunicacion_id != '')
               ){
                 $.ajax({
                   type: "PUT",
@@ -5421,9 +5421,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     setTimeout(function(){location.reload()},1e3)
                   }
                })
-             }else{ 
+             }else{
                 F.msgError('Los campos cliente, título, comunicación y Notificar Eventos son obligatorios');
-             } 
+             }
             }
         });
     }),
@@ -5460,13 +5460,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             data: null,
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
                 this.data = this.options.collection, F.createDataTable(this, function(e) {
                     F.assignValuesToForm($(".ieOc_form"), e);
-                });                
+                });
             },
             events: {
                 "click .clienteHistorial_table tr": "selectRow"
@@ -5497,45 +5497,45 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 fechaVencimiento: {
                     label: "Fecha de Vencimiento",
                     type: "datepicker"
-                },                
+                },
                 titulo: {
                   label: "Título estimativo del trabajo a realizar",
-                },                
+                },
                 consulta: {
                   label: "Consulta",
                   type: "textarea",
                   attrs: {
                         style: "height:150px;"
-                    }                   
+                    }
                 },
                 solucion: {
                   label: "Solución",
                   type: "textarea",
                   attrs: {
                         style: "height:150px;"
-                    }                   
-                },                
-                comunicacion_id: { 
+                    }
+                },
+                comunicacion_id: {
                     label: "Comunicación",
                     type: "select"
-                },  
-                activa: { 
+                },
+                activa: {
                     label: "Activa",
                     type: "select_yn",
                     default_value: "y"
-                },                  
+                },
                 ot_id: {
                   label: "Orden de trabajo asociada",
-                },                 
-                empleado_id: { 
+                },
+                empleado_id: {
                     label: "Empleado",
                     type: "select"
-                },   
+                },
                 notificarCliente: {
                     label: "Notificar al cliente",
                     type: "select_yn",
                     default_value: "n"
-                },                                                  
+                },
             },
             buttons: {
                 create: !0,
@@ -5585,10 +5585,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             addOc: function() {
               var e = this;
 
-              if(($(".ieOc_form").serializeObject().cliente_id != '') 
-              && ($(".ieOc_form").serializeObject().notificarCliente != '') 
-              && ($(".ieOc_form").serializeObject().titulo != '')               
-              && ($(".ieOc_form").serializeObject().comunicacion_id != '')                 
+              if(($(".ieOc_form").serializeObject().cliente_id != '')
+              && ($(".ieOc_form").serializeObject().notificarCliente != '')
+              && ($(".ieOc_form").serializeObject().titulo != '')
+              && ($(".ieOc_form").serializeObject().comunicacion_id != '')
               ){
                 $.ajax({
                   type: "POST",
@@ -5599,17 +5599,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     setTimeout(function(){location.reload()},1e3)
                   }
                })
-             }else{ 
+             }else{
                 F.msgError('Los campos cliente, título, comunicación y Notificar al Cliente son obligatorios');
-             }                 
+             }
             },
             editOc: function(){
               var e = this;
-              if(C.Session.getUser().rol_id > 1){ //operadores no             
-                if(($(".ieOc_form").serializeObject().cliente_id != '') 
-                && ($(".ieOc_form").serializeObject().notificarCliente != '') 
-                && ($(".ieOc_form").serializeObject().titulo != '')               
-                && ($(".ieOc_form").serializeObject().comunicacion_id != '')                               
+              if(C.Session.getUser().rol_id > 1){ //operadores no
+                if(($(".ieOc_form").serializeObject().cliente_id != '')
+                && ($(".ieOc_form").serializeObject().notificarCliente != '')
+                && ($(".ieOc_form").serializeObject().titulo != '')
+                && ($(".ieOc_form").serializeObject().comunicacion_id != '')
                 ){
                   $.ajax({
                     type: "PUT",
@@ -5620,16 +5620,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       setTimeout(function(){location.reload()},1e3)
                     }
                  })
-               }else{ 
+               }else{
                   F.msgError('Los campos cliente, título, comunicación y Notificar Eventos son obligatorios');
                }
              }else{
                 F.msgError("No tiene los permisos necesarios")
-             } 
+             }
             }
         });
-    }),    
-//PERFIL    
+    }),
+//PERFIL
     e.define("/views/perfil/Perfil.js", function(e, t, n, r, i, s) {
         C.View.Perfil = Backbone.View.extend({
             el: $("body"),
@@ -5648,7 +5648,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             textAlign: "left"
                         }),
                         e.perfil_empleado_data = new C.View.PerfilEmpleadoInfoCard(i),
-                        e.perfil_form = new C.View.PerfilForm(i), 
+                        e.perfil_form = new C.View.PerfilForm(i),
                         e.perfil_password_form = new C.View.PerfilPasswordForm(i);
                     }
                 });
@@ -5668,7 +5668,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createInfoCard(this, $("#perfil_right"));
             }
         });
-    }), 
+    }),
     e.define("/views/perfil/PerfilForm.js", function(e, t, n, r, i, s) {
         C.View.PerfilForm = Backbone.View.extend({
             name: "perfil_form",
@@ -5762,8 +5762,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),    
-//EMPLEADO    
+    }),
+//EMPLEADO
     e.define("/views/crud/Empleado.js", function(e, t, n, r, i, s) {
         C.View.Empleado = Backbone.View.extend({
             el: $("body"),
@@ -5844,7 +5844,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 pc: {
                     label: "Profesional/Colaborador",
-                    type: "select_pc"                  
+                    type: "select_pc"
                 }
             },
             isCRUD: !0,
@@ -5873,7 +5873,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 if(($(".empleado_form").serializeObject().nombre != '')
 	            	&& ($(".empleado_form").serializeObject().apellido != '')
 	            	&& ($(".empleado_form").serializeObject().legajo != '')
-                ){                
+                ){
                   $.ajax({
                     type: "POST",
                     url: "/empleado/",
@@ -5889,10 +5889,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editEmpleado: function() {
                 var e = this;
-                if(($(".empleado_form").serializeObject().nombre != '') 
-	            	&& ($(".empleado_form").serializeObject().apellido != '')                 
-	            	&& ($(".empleado_form").serializeObject().legajo != '')	            	
-                ){                
+                if(($(".empleado_form").serializeObject().nombre != '')
+	            	&& ($(".empleado_form").serializeObject().apellido != '')
+	            	&& ($(".empleado_form").serializeObject().legajo != '')
+                ){
                   $.ajax({
                     type: "PUT",
                     url: "/empleado/"+this.getSelectionID(),
@@ -5915,7 +5915,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   data: $(".empleado_form").serialize(),
                   success: function() {
                     F.msgOK("El Empleado ha sido eliminado");
-                    window.setTimeout(function() { location.reload() }, 1e3);                    
+                    window.setTimeout(function() { location.reload() }, 1e3);
                   }
                 });
               });
@@ -5988,7 +5988,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function() {
                 F.createForm(this);
             },
@@ -6026,7 +6026,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editConcepto: function() {
                 var e = this;
-                if($(".empleado_form").serializeObject().nombre != ''){                
+                if($(".empleado_form").serializeObject().nombre != ''){
                   $.ajax({
                     type: "PUT",
                     url: "/concepto/"+this.getSelectionID(),
@@ -6041,8 +6041,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                }
             },
         });
-    }),    
-//USUARIO    
+    }),
+//USUARIO
     e.define("/views/crud/Usuario.js", function(e, t, n, r, i, s) {
         C.View.Usuario = Backbone.View.extend({
             el: $("body"),
@@ -6161,8 +6161,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             addUsuario: function() {
              var e = this;
-             if(($(".usuario_form").serializeObject().usuario != '') 
-	            &&($(".usuario_form").serializeObject().rol_id != '') 
+             if(($(".usuario_form").serializeObject().usuario != '')
+	            &&($(".usuario_form").serializeObject().rol_id != '')
             	&&($(".usuario_form").serializeObject().area_id != '')
 	            &&($(".usuario_form").serializeObject().empleado_id != '')
 	           ){
@@ -6182,17 +6182,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  collection: t
                                })
                              }
-                           });               
+                           });
                         }
                 })
-             }else{ 
+             }else{
                F.msgError("Todos los campos son OBLIGATORIOS");
              }
             },
             editUsuario: function() {
              var e = this;
-             if(  ($(".usuario_form").serializeObject().usuario != '') 
-             		&&($(".usuario_form").serializeObject().rol_id != '') 
+             if(  ($(".usuario_form").serializeObject().usuario != '')
+             		&&($(".usuario_form").serializeObject().rol_id != '')
 	        	    &&($(".usuario_form").serializeObject().area_id != '')
             		&&($(".usuario_form").serializeObject().empleado_id != '')
       	     ){
@@ -6212,10 +6212,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            collection: t
                          })
                        }
-                     });                        
+                     });
                   }
                 })
-             }else{ 
+             }else{
                F.msgError("Todos los campos son OBLIGATORIOS");
              }
             },
@@ -6249,7 +6249,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
-//CLASIFICACION     
+//CLASIFICACION
     e.define("/views/crud/Clasificacion.js", function(e, t, n, r, i, s) {
         C.View.Clasificacion = Backbone.View.extend({
             el: $("body"),
@@ -6356,7 +6356,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                      });
                     }
                 })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -6382,7 +6382,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -6416,7 +6416,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
-//BANCO    
+//BANCO
     e.define("/views/crud/Banco.js", function(e, t, n, r, i, s) {
         C.View.Banco = Backbone.View.extend({
             el: $("body"),
@@ -6481,7 +6481,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 direccion: {
                     label: "Dirección",
                     check: "alpha"
-                },                
+                },
                 puntaje: {
                     label: "Prioridad 1-10",
                     type: "select_110"
@@ -6510,9 +6510,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             addBanco: function() {
                 var e = this;
-                if(  $(".banco_form").serializeObject().nombre.replace(/\s/g, "") != '' 
+                if(  $(".banco_form").serializeObject().nombre.replace(/\s/g, "") != ''
                   && $(".banco_form").serializeObject().direccion.replace(/\s/g, "") != ''
-                  && $(".banco_form").serializeObject().puntaje != '' 
+                  && $(".banco_form").serializeObject().puntaje != ''
                 ){
                   $.ajax({
                         type: "POST",
@@ -6533,15 +6533,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                 })
-               }else{ 
+               }else{
                   F.msgError("Los campos 'Nombre', 'Direccion' y 'Prioridad' son OBLIGATORIOS");
                }
             },
             editBanco: function() {
                 var e = this;
-                if(  $(".banco_form").serializeObject().nombre.replace(/\s/g, "") != '' 
+                if(  $(".banco_form").serializeObject().nombre.replace(/\s/g, "") != ''
                   && $(".banco_form").serializeObject().direccion.replace(/\s/g, "") != ''
-                  && $(".banco_form").serializeObject().puntaje != '' 
+                  && $(".banco_form").serializeObject().puntaje != ''
                 ){
                   $.ajax({
                         type: "PUT",
@@ -6562,7 +6562,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("Los campos 'Nombre', 'Direccion' y 'Prioridad' son OBLIGATORIOS");
                }
             },
@@ -6596,7 +6596,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
-//ACTIVIDAD    
+//ACTIVIDAD
     e.define("/views/crud/Actividad.js", function(e, t, n, r, i, s) {
         C.View.Actividad = Backbone.View.extend({
             el: $("body"),
@@ -6664,7 +6664,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "textarea",
                     attrs: {
                         style: "height:100px;"
-                    }                
+                    }
                 },
             },
             isCRUD: !0,
@@ -6672,7 +6672,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createForm(this);
             },
             events: {
-                "click .actividad_form .BUTTON_create": "addActividad",            
+                "click .actividad_form .BUTTON_create": "addActividad",
                 "click .actividad_form .BUTTON_save": "editActividad",
                 "click .actividad_form .BUTTON_delete": "delActividad"
             },
@@ -6710,10 +6710,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editActividad: function() {
                 var e = this;
                 if(($(".actividad_form").serializeObject().nombre.replace(/\s/g, "") != '')){
@@ -6736,7 +6736,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -6770,7 +6770,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
-//CLAVE    
+//CLAVE
     e.define("/views/crud/Clave.js", function(e, t, n, r, i, s) {
         C.View.Clave = Backbone.View.extend({
             el: $("body"),
@@ -6831,14 +6831,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 pagina: {
                     label: "Página",
                     check: "alpha"
-                },                
+                },
                 descripcion: {
                     label: "Descripción",
                     check: "alpha",
                     type: "textarea",
                     attrs: {
                         style: "height:100px;"
-                    }                
+                    }
                 },
             },
             isCRUD: !0,
@@ -6846,7 +6846,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createForm(this);
             },
             events: {
-                "click .clave_form .BUTTON_create": "addClave",            
+                "click .clave_form .BUTTON_create": "addClave",
                 "click .clave_form .BUTTON_save": "editClave",
                 "click .clave_form .BUTTON_delete": "delClave"
             },
@@ -6884,10 +6884,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editClave: function() {
                 var e = this;
                 if(($(".clave_form").serializeObject().nombre.replace(/\s/g, "") != '')){
@@ -6910,7 +6910,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -6943,8 +6943,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),    
-//AREA    
+    }),
+//AREA
     e.define("/views/crud/Area.js", function(e, t, n, r, i, s) {
         C.View.Area = Backbone.View.extend({
             el: $("body"),
@@ -7008,7 +7008,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "textarea",
                     attrs: {
                         style: "height:100px;"
-                    }                
+                    }
                 },
             },
             isCRUD: !0,
@@ -7016,7 +7016,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createForm(this);
             },
             events: {
-                "click .area_form .BUTTON_create": "addArea",            
+                "click .area_form .BUTTON_create": "addArea",
                 "click .area_form .BUTTON_save": "editArea",
                 "click .area_form .BUTTON_delete": "delArea"
             },
@@ -7054,10 +7054,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editArea: function() {
                 var e = this;
                 if(($(".area_form").serializeObject().nombre.replace(/\s/g, "") != '')){
@@ -7080,7 +7080,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -7113,7 +7113,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),    
+    }),
 //RUBRO
     e.define("/views/crud/Rubro.js", function(e, t, n, r, i, s) {
         C.View.Rubro = Backbone.View.extend({
@@ -7175,14 +7175,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 observacion: {
                     label: "Observación",
                     type: "textarea"
-                }                
+                }
             },
             isCRUD: !0,
             initialize: function() {
                 F.createForm(this);
             },
             events: {
-                "click .rubro_form .BUTTON_create": "addRubro",            
+                "click .rubro_form .BUTTON_create": "addRubro",
                 "click .rubro_form .BUTTON_save": "editRubro",
                 "click .rubro_form .BUTTON_delete": "delRubro"
             },
@@ -7220,10 +7220,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editRubro: function() {
                 var e = this;
                 if(($(".rubro_form").serializeObject().nombre.replace(/\s/g, "") != '')){
@@ -7246,7 +7246,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -7349,7 +7349,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 monto0: {
                     label: "Monto0",
                     check: "numeric"
-                },                
+                },
                 monto1: {
                     label: "Monto1",
                     check: "numeric"
@@ -7361,8 +7361,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 monto3: {
                     label: "Monto3",
                     check: "numeric"
-                },                                
-                fijo: { 
+                },
+                fijo: {
                     label: "Monto Fijo",
                     type: "select_yn",
                     default_value: "n"
@@ -7370,14 +7370,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 banco_id: {
                     label: "Banco(s)",
                     type: "selectmultiple"
-                }                          
+                }
             },
             isCRUD: !0,
 
             relations: {
                 bancos: null
-            },            
-          
+            },
+
             initialize: function() {
                 var e = this, t = [];
                 F.getAllFromModel("banco", function(t) {
@@ -7385,7 +7385,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             },
             events: {
-                "click .impuesto_form .BUTTON_create": "addImpuesto",            
+                "click .impuesto_form .BUTTON_create": "addImpuesto",
                 "click .impuesto_form .BUTTON_save": "editImpuesto",
                 "click .impuesto_form .BUTTON_delete": "delImpuesto"
             },
@@ -7406,7 +7406,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 if(($(".impuesto_form").serializeObject().nombre.replace(/\s/g, "") != '')){
                   if( !isNaN($(".impuesto_form").serializeObject().monto1.replace(",","."))
                    && !isNaN($(".impuesto_form").serializeObject().monto2.replace(",","."))
-                   && !isNaN($(".impuesto_form").serializeObject().monto0.replace(",","."))                   
+                   && !isNaN($(".impuesto_form").serializeObject().monto0.replace(",","."))
                    && !isNaN($(".impuesto_form").serializeObject().monto3.replace(",","."))
                   ){
                     $.ajax({
@@ -7432,16 +7432,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                  }else{
                     F.msgError('Los Montos deben ser Números separando los decimales por "."(punto), además debe seleccionar un Cronograma');
                  }
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }              
-            },            
+               }
+            },
             editImpuesto: function() {
                 var e = this;
                 if(($(".impuesto_form").serializeObject().nombre.replace(/\s/g, "") != '')){
                   if( !isNaN($(".impuesto_form").serializeObject().monto1.replace(",","."))
                    && !isNaN($(".impuesto_form").serializeObject().monto2.replace(",","."))
-                   && !isNaN($(".impuesto_form").serializeObject().monto0.replace(",","."))                   
+                   && !isNaN($(".impuesto_form").serializeObject().monto0.replace(",","."))
                    && !isNaN($(".impuesto_form").serializeObject().monto3.replace(",","."))
                   ){
                     $.ajax({
@@ -7467,7 +7467,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                  }else{
                     F.msgError( 'Los Montos deben ser Números separando los decimales por "."(punto), además debe seleccionar un Cronograma' );
                  }
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -7500,8 +7500,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),        
-//CARGA   
+    }),
+//CARGA
     e.define("/views/carga/Carga.js", function(e, t, n, r, i, s) {
         C.View.Carga = Backbone.View.extend({
             el: $("body"),
@@ -7511,7 +7511,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     view: this
                 }), this.cargas.fetch({
                     success: function(t, n) {
-                        var vector = []; 
+                        var vector = [];
                         t.models.forEach(function(valor, indice){
                           if(valor.attributes.impNombre == Backbone.history.fragment.substring(7))
                             vector.push(valor);
@@ -7533,7 +7533,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
                 });
             }
-        });                 
+        });
     }),
     e.define("/views/caja/CargaOptions.js", function(e, t, n, r, i, s) {
         C.View.CargaOptions = Backbone.View.extend({
@@ -7570,7 +7570,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               var t = this;
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
-              }else{  
+              }else{
                 F.msgConfirm("¿Esta seguro de realizar cargar todos los impuestos con los mismos montos que el mes anterior?", function(){
                   console.log(Backbone.history.fragment);
                    $.ajax({
@@ -7584,7 +7584,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               }
             }
         });
-    }),              
+    }),
     e.define("/views/carga/CargaTable.js", function(e, t, n, r, i, s) {
         C.View.CargaTable = Backbone.View.extend({
             name: "carga",
@@ -7599,7 +7599,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.data = this.options.collection; F.createDataTable(this, function(e) {
-                    F.assignValuesToForm($(".carga_form"), e); 
+                    F.assignValuesToForm($(".carga_form"), e);
                 });
             },
             events: {
@@ -7608,7 +7608,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
                 this.selected_row = $(e.currentTarget);
             }
-        });        
+        });
     }),
     e.define("/views/carga/CargaForm.js", function(e, t, n, r, i, s) {
         C.View.CargaForm = Backbone.View.extend({
@@ -7629,7 +7629,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         style: "margin-top:-1em 0 1em;"
                     }
                 },
-                impObservacion: { 
+                impObservacion: {
                     label: "Observacion(Impuesto)",
                     attrs: {
                         disabled: "disabled",
@@ -7640,13 +7640,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Liquidable?",
                     type: "select_yn",
                     default_value: "y"
-                },                 
+                },
                 impMonto0: {
                     label: "Monto0",
                 },
                 impMonto1: {
                     label: "Monto1",
-                },                
+                },
                 impMonto2: {
                     label: "Monto2",
                 },
@@ -7706,11 +7706,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if( !isNaN($(".carga_form").serializeObject().impMonto1.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto2.replace(",","."))
-                 && !isNaN($(".carga_form").serializeObject().impMonto0.replace(",","."))                 
+                 && !isNaN($(".carga_form").serializeObject().impMonto0.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto3.replace(",","."))
-                 && !isNaN($(".carga_form").serializeObject().impMonto4.replace(",","."))                 
+                 && !isNaN($(".carga_form").serializeObject().impMonto4.replace(",","."))
                  && ($(".carga_form").serializeObject().cronograma_id != '')
-                ){ 
+                ){
                   if($(".carga_form").serializeObject().anticipo != '')
                     $(".carga_form").serializeObject().anticipo = " ";
                   $.ajax({
@@ -7728,13 +7728,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       setTimeout(function(){location.reload()},1000)
                    }
                   })
-               }else{ 
+               }else{
                   F.msgError('Los Montos deben ser Números separando los decimales por "."(punto), además debe seleccionar un Cronograma');
                }
             }
-        });        
-    })    
-//SINDICATO    
+        });
+    })
+//SINDICATO
     e.define("/views/carga/Sindicato.js", function(e, t, n, r, i, s) {
         C.View.Sindicato = Backbone.View.extend({
             el: $("body"),
@@ -7756,7 +7756,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
                 });
             }
-        });                 
+        });
     }),
     e.define("/views/carga/SindicatoTable.js", function(e, t, n, r, i, s) {
         C.View.SindicatoTable = Backbone.View.extend({
@@ -7772,7 +7772,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 this.data = this.options.collection; F.createDataTable(this, function(e) {
-                    F.assignValuesToForm($(".sindicato_form"), e); 
+                    F.assignValuesToForm($(".sindicato_form"), e);
                 });
             },
             events: {
@@ -7781,7 +7781,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
                 this.selected_row = $(e.currentTarget);
             }
-        });        
+        });
     }),
     e.define("/views/carga/SindicatoForm.js", function(e, t, n, r, i, s) {
         C.View.SindicatoForm = Backbone.View.extend({
@@ -7803,7 +7803,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
 
                 },
-                impObservacion: { 
+                impObservacion: {
                     label: "Observacion(Impuesto)",
                     attrs: {
                         disabled: "disabled",
@@ -7814,13 +7814,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Liquidable?",
                     type: "select_yn",
                     default_value: "y"
-                },                 
+                },
                 impMonto0: {
                     label: "Monto0",
                 },
                 impMonto1: {
                     label: "Monto1",
-                },                
+                },
                 impMonto2: {
                     label: "Monto2",
                 },
@@ -7833,7 +7833,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 anticipo: {
                     label: "Anticipo",//Marcelito
                     type: "select_b11",
-                },                
+                },
                 cronograma_id: {
                     label: "Cronograma",
                     type: "select"
@@ -7880,13 +7880,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if( !isNaN($(".sindicato_form").serializeObject().impMonto1.replace(",","."))
                  && !isNaN($(".sindicato_form").serializeObject().impMonto2.replace(",","."))
-                 && !isNaN($(".sindicato_form").serializeObject().impMonto0.replace(",","."))                 
+                 && !isNaN($(".sindicato_form").serializeObject().impMonto0.replace(",","."))
                  && !isNaN($(".sindicato_form").serializeObject().impMonto3.replace(",","."))
-                 && !isNaN($(".sindicato_form").serializeObject().impMonto4.replace(",","."))                 
+                 && !isNaN($(".sindicato_form").serializeObject().impMonto4.replace(",","."))
                  && ($(".sindicato_form").serializeObject().cronograma_id != '')
-                ){ 
+                ){
                   if($(".sindicato_form").serializeObject().anticipo != '')
-                    $(".sindicato_form").serializeObject().anticipo = " ";                
+                    $(".sindicato_form").serializeObject().anticipo = " ";
                   $.ajax({
                     type: "PUT",
                     url: "/sindicato/" + e.getSelectionID(),
@@ -7902,16 +7902,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       setTimeout(function(){location.reload()},1000)
                     }
                   })
-               }else{ 
+               }else{
                   if($(".sindicato_form").serializeObject().cronograma_id != '')
                     F.msgError('El campo "CRONOGRAMA" se encuentra en blanco')
                   else
                     F.msgError('Los Montos deben ser Números separando los decimales por "."(punto)');
                }
             }
-        });        
-    })        
-//OTRO    
+        });
+    })
+//OTRO
     e.define("/views/carga/Otro.js", function(e, t, n, r, i, s) {
         C.View.Otro = Backbone.View.extend({
             el: $("body"),
@@ -7930,7 +7930,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
                 });
             }
-        });                 
+        });
     }),
     e.define("/views/carga/OtroForm.js", function(e, t, n, r, i, s) {
         C.View.OtroForm = Backbone.View.extend({
@@ -7957,7 +7957,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               },
               monto1: {
                   label: "Honorarios",
-              },              
+              },
               anticipo: {
                   label: "Anticipo",
                   type: "select_b11",
@@ -7980,7 +7980,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   e.relations.clientes = t, F.getAllCronogramasFromModel("cronograma", function(t) {
                     e.relations.cronogramas = t,  F.createForm(e);
                   });
-                })  
+                })
             },
             events: {
                 "click .otro_form .BUTTON_create": "createOtro",
@@ -8006,24 +8006,24 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                  && ( ( $('.otro_form').serializeObject().monto0 !='')
                       ||( $('.otro_form').serializeObject().monto0 !='')
                     )
-                ){   
+                ){
                   if($(".otro_form").serializeObject().anticipo != '')
-                    $(".otro_form").serializeObject().anticipo = ' ';                                               
+                    $(".otro_form").serializeObject().anticipo = ' ';
                   $.ajax({
                     type: "POST",
                     url: "/otro",
                     data: $(".otro_form").serializeObject(),
                     success: function(e) {
                       F.msgOK("Vencimiento creado con éxito")
-                      window.setTimeout(function() { location.reload() }, 1e3);                    
+                      window.setTimeout(function() { location.reload() }, 1e3);
                     }
                   })
                 }else{
                   F.msgError('Todos los campos deben estar completos');
                 }
             }
-        });        
-    })         
+        });
+    })
 //CARGA FIJO
     e.define("/views/carga/CargaFijo.js", function(e, t, n, r, i, s) {
         C.View.CargaFijo = Backbone.View.extend({
@@ -8047,7 +8047,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),   
+    }),
     e.define("/views/carga/CargaFijoTable.js", function(e, t, n, r, i, s) {
         C.View.CargaFijoTable = Backbone.View.extend({
             name: "cargaFijo",
@@ -8078,25 +8078,25 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "cargaFijo_form",
             title: "Carga de Imp. Fijos",
             fields: {
-                impFijo: { 
+                impFijo: {
                     label: "Imp. Fijo",
                     attrs: {
                         disabled: "disabled",
                     },
-                },              
+                },
                 nombre: {
                     label: "Nombre",
                     check: "alpha",
                     attrs: {
                         disabled: "disabled"
-                    }                    
+                    }
                 },
                 observacion: {
                     label: "Observación",
                     type: "textarea",
                     attrs: {
                         disabled: "disabled"
-                    }                    
+                    }
                 },
                 monto0: {
                     label: "Monto0",
@@ -8113,7 +8113,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 monto3: {
                     label: "Monto3",
                     check: "numeric",
-                }               
+                }
             },
             isCRUD: !0,
             buttons: {
@@ -8129,10 +8129,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e= this;
                 F.getAllCronogramasFromModel("cronograma", function(t) {
                   e.relations.cronogramas = t, F.createForm(e);
-                });            
+                });
             },
             events: {
-                "click .cargaFijo_form .BUTTON_save": "editCargaFijo",            
+                "click .cargaFijo_form .BUTTON_save": "editCargaFijo",
             },
             getTable: function() {
                 return this.options.cargaFijo_table;
@@ -8150,7 +8150,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if( !isNaN($(".cargaFijo_form").serializeObject().monto1.replace(",","."))
                  && !isNaN($(".cargaFijo_form").serializeObject().monto2.replace(",","."))
-                 && !isNaN($(".cargaFijo_form").serializeObject().monto0.replace(",","."))                 
+                 && !isNaN($(".cargaFijo_form").serializeObject().monto0.replace(",","."))
                  && !isNaN($(".cargaFijo_form").serializeObject().monto3.replace(",","."))
                 ){
                     $.ajax({
@@ -8196,7 +8196,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),   
+    }),
     e.define("/views/carga/NoCargadoTable.js", function(e, t, n, r, i, s) {
         C.View.NoCargadoTable = Backbone.View.extend({
             name: "noCargado",
@@ -8220,7 +8220,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             }
         });
-    }),    
+    }),
 //CARGADO
     e.define("/views/carga/Cargado.js", function(e, t, n, r, i, s) {
         C.View.Cargado = Backbone.View.extend({
@@ -8244,7 +8244,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),   
+    }),
     e.define("/views/carga/CargadoTable.js", function(e, t, n, r, i, s) {
         C.View.CargadoTable = Backbone.View.extend({
             name: "cargado",
@@ -8275,29 +8275,29 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "cargado_form",
             title: "Edición de Vencimiento",
             fields: {
-                cliente: { 
+                cliente: {
                     label: "Cliente",
                     attrs: {
                         disabled: "disabled",
                     },
-                },              
+                },
                 impuesto: {
                     label: "Impuesto",
                     attrs: {
                         disabled: "disabled"
-                    }                    
+                    }
                 },
                 cronograma: {
                     label: "Cronograma",
                     attrs: {
                         disabled: "disabled"
-                    }                    
+                    }
                 },
                 liquida: {
                     label: "Liquidable?",
                     type: "select_yn",
                     default_value: "y"
-                },                 
+                },
                 monto0: {
                     label: "Monto0",
                     check: "numeric",
@@ -8317,17 +8317,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 monto4: {
                     label: "Monto4",
                     check: "numeric",
-                },          
+                },
                 anticipo: {
                     label: "Anticipo",
                     type: "select_b11",
-                },                      
+                },
                 monto: {
                     label: "total",
                     attrs: {
                         disabled: "disabled"
-                    }                    
-                },                               
+                    }
+                },
             },
             isCRUD: !0,
             buttons: {
@@ -8341,7 +8341,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createForm(e);
             },
             events: {
-                "click .cargado_form .BUTTON_save": "editCargado",            
+                "click .cargado_form .BUTTON_save": "editCargado",
             },
             getTable: function() {
                 return this.options.cargaFijo_table;
@@ -8366,367 +8366,292 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       view: this
                   }), this.cargados.fetch({
                       success: function(t, n) {
-                          $("#cargado_left").empty()                      
+                          $("#cargado_left").empty()
                           e.cargado_table = new C.View.CargadoTable({
                               el: $("#cargado_left"),
                               collection: t
                           });
                       }
-                  });                  
-                  
-                  
+                  });
+
+
                 }
               })
             },
         });
-    }), 
-//PAGARIMP
-    e.define("/views/pagarImp/PagoImp.js", function(e, t, n, r, i, s) {
-        C.View.PagoImp = Backbone.View.extend({
-            el: $("body"),
-            initialize: function() {
-                var e = this;
-                this.pagoImps = new C.Collection.PagoImps(null, {
-                    view: this
-                }), this.pagoImps.fetch({
-                    success: function(t, n) {
-                        e.pagoImp_form = new C.View.PagoImpForm({
-                            el: $("#pagoImp_right"),
-                            model: e.model,
-                            collection: t,
-                            pagoImp_table: e.pagoImp_table
-                        }), e.pagoImp_table = new C.View.PagoImpTable({
-                            el: $("#pagoImp_left"),
-                            collection: t
-                        });
-                    }
-                });
-            }
-        });
     }),
-    e.define("/views/pagarImp/PagoImpTable.js", function(e, t, n, r, i, s) {
-        C.View.PagoImpTable = Backbone.View.extend({
-            name: "pagoImp",
-            headers: ["ID", "Pagar", "cronograma_id", "Cronograma",  "cliente_id", "Cliente", "Banco", "impuesto_id", "Impuesto", "Monto" ],
-            attrs: ["id", "check", "cronograma_id" , "cronogramaFecha", "cliente_id", "clienteNombre", "impuestoBanco", "impuesto_id", "impuestoNombre", "impuestoMonto"],
-            hidden_columns: [ "cronograma_id", "cliente_id", "impuesto_id" ],
-            data: null,
-            datatableOptions: {
-                aoColumns: [ null, null, null, null, null, null, null, null, null, null ],
-                aaSorting: [ [ 3, "asc" ] ],
-                iDisplayLength: 500
-            },
-            initialize: function() {
-                var me = this;
-                var arreglo=null;
-                arreglo=[];
-                //var total=0;
-
-                /* AGREGO */
-                var m0 = 0;
-                var m1 = 0;
-                var m2 = 0;
-                var m3 = 0;
-                var m4 = 0;
-                /* FIN AGREGO */
-
-                this.collection.models.forEach(function(e){
-                  e.attributes.check=($('<input>', { type: 'checkbox', id: e.attributes.id}).on('click', function(u) {                   
-                     //total=0;
-                     /* AGREGO */
-                     m0 = 0;
-                     m1 = 0;
-                     m2 = 0;
-                     m3 = 0;
-                     m4 = 0;
-                     /* FIN AGREGO */
-                     
-                    if(this.checked){
-                      arreglo.push(e);
-                      $('.pagoImp_form [name="arreglo"]')[0].value=null
-                      arreglo.forEach(function(a){
-                        console.log(a.attributes)
-                        //total=parseFloat(a.attributes./*impuestoMonto*/monto3)+parseFloat(total) //ES ESTE TMB!
-                        /* AGREGO */
-                        m0=parseFloat(a.attributes.monto0)+parseFloat(m0) //ES ESTE TMB!
-                        m1=parseFloat(a.attributes.monto1)+parseFloat(m1) //ES ESTE TMB!
-                        m2=parseFloat(a.attributes.monto2)+parseFloat(m2) //ES ESTE TMB!
-                        m3=parseFloat(a.attributes.monto3)+parseFloat(m3) //ES ESTE TMB!
-                        //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) //ES ESTE TMB!
-                        /* FIN AGREGO */
-                        $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
-                      })
-                      //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ES ESTE
-                      /* AGREGO */
-                      $(".pagoImp_form input:text[name:monto0]")[0].value=m0.toFixed(2)//ES ESTE
-                      $(".pagoImp_form input:text[name:monto1]")[1].value=m1.toFixed(2)//ES ESTE
-                      $(".pagoImp_form input:text[name:monto2]")[2].value=m2.toFixed(2)//ES ESTE
-                      $(".pagoImp_form input:text[name:monto3]")[3].value=m3.toFixed(2)//ES ESTE
-                      //$(".pagoImp_form input:text[name:monto4]")[4].value=m4.toFixed(2)//ES ESTE
-                      /* FIN AGREGO */
-                    }else{
-                      var indice= arreglo.indexOf(e)
-                      arreglo.splice(indice,1)
-                      $('.pagoImp_form [name="arreglo"]')[0].value=null
-                      arreglo.forEach(function(a){
-                        //total=parseFloat(a.attributes.monto3)+parseFloat(total) // ESTE 0
-                        /* AGREGO */
-                        m0=parseFloat(a.attributes.monto0)+parseFloat(m0) // ESTE 0
-                        m1=parseFloat(a.attributes.monto1)+parseFloat(m1) // ESTE 0
-                        m2=parseFloat(a.attributes.monto2)+parseFloat(m2) // ESTE 0
-                        m3=parseFloat(a.attributes.monto3)+parseFloat(m3) // ESTE 0
-                        //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) // ESTE 0
-                        /* FIN AGREGO */
-                        $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id                        
-                      })
-                      //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ESTE NOSE
-                    }
-                  }))
-                })
-                this.data = this.options.collection, F.createDataTable(this)
-            },
-            events: {
-                "click .pagoImp_table tr": "selectRow"
-            },
-            selectRow: function(e) {
-                this.selected_row = $(e.currentTarget);
-            }
-        });
-    }),
-    e.define("/views/pagarImp/PagoImpForm.js", function(e, t, n, r, i, s) {
-        C.View.PagoImpForm = Backbone.View.extend({
-            name: "pagoImp_form",
-            title: "Pago de Impuestos",
-            fields: {
-              arreglo: { 
-                type:"hidden",
-                name: "arreglo",
-              },
-              /*montoImp: {
-                label: "Total De Impuestos",
-                type: "text",
-                attrs: {
-                  disabled: "disabled"
+    //PAGARIMP
+        e.define("/views/pagarImp/PagoImp.js", function(e, t, n, r, i, s) {
+            C.View.PagoImp = Backbone.View.extend({
+                el: $("body"),
+                initialize: function() {
+                    var e = this;
+                    this.pagoImps = new C.Collection.PagoImps(null, {
+                        view: this
+                    }), this.pagoImps.fetch({
+                        success: function(t, n) {
+                            e.pagoImp_form = new C.View.PagoImpForm({
+                                el: $("#pagoImp_right"),
+                                model: e.model,
+                                collection: t,
+                                pagoImp_table: e.pagoImp_table
+                            }), e.pagoImp_table = new C.View.PagoImpTable({
+                                el: $("#pagoImp_left"),
+                                collection: t
+                            });
+                        }
+                    });
+                }
+            });
+        }),
+        e.define("/views/pagarImp/PagoImpTable.js", function(e, t, n, r, i, s) {
+            C.View.PagoImpTable = Backbone.View.extend({
+                name: "pagoImp",
+                headers: ["ID", "Pagar", "cronograma_id", "Cronograma",  "cliente_id", "Cliente", "Banco", "impuesto_id", "Impuesto", "Monto" ],
+                attrs: ["id", "check", "cronograma_id" , "cronogramaFecha", "cliente_id", "clienteNombre", "impuestoBanco", "impuesto_id", "impuestoNombre", "impuestoMonto"],
+                hidden_columns: [ "cronograma_id", "cliente_id", "impuesto_id" ],
+                data: null,
+                datatableOptions: {
+                    aoColumns: [ null, null, null, null, null, null, null, null, null, null ],
+                    aaSorting: [ [ 3, "asc" ] ],
+                    iDisplayLength: 500
                 },
-              },*/
-            /* AGREGO */
-              monto0: {
-                label: "Monto 1",
-                type: "text",
-              },
-              monto1: {
-                label: "Monto 2",
-                type: "text",
-              },
-              monto2: {
-                label: "Monto 3",
-                type: "text",
-              },
-              monto3: {
-                label: "Monto 4",
-                type: "text",
-              },
-            /* FIN AGREGO */
-              banco_id: {
-                label:"Banco",
-                type: "select"
-              },
-              diaDePago: {
-                label: "Dia De Pago",
-                type: "datepicker",
-              },
-              empleado_id: {
-                label: "Empleado",
-                type: "select"
-              }
-            },
-            isCRUD: !0,
-            buttons: {
-                create: !1,
-                save: !0,
-                cancel: !0,
-                "delete": !1
-            },
-            relations: {
-                banco_id: null,
-                empleado_id: null
-            },
-            initialize: function() {
-                var e= this;
-                F.getAllFromModel("empleado", function(t) {
-                    e.relations.empleados = t, F.getAllFromModel("banco", function(t) {
-                        e.relations.bancos = t, F.createForm(e);
+                initialize: function() {
+                    var me = this;
+                    var arreglo=null;
+                    arreglo=[];
+                    var total=0;
+                    this.collection.models.forEach(function(e){
+                      e.attributes.check=($('<input>', { type: 'checkbox', id: e.attributes.id}).on('click', function(u) {
+                         total=0;
+                        if(this.checked){
+                          arreglo.push(e);
+                          $('.pagoImp_form [name="arreglo"]')[0].value=null
+                          arreglo.forEach(function(a){
+                            console.log(a.attributes)
+                            total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
+                            $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
+                          })
+                          $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
+                        }else{
+                          var indice= arreglo.indexOf(e)
+                          arreglo.splice(indice,1)
+                          $('.pagoImp_form [name="arreglo"]')[0].value=null
+                          arreglo.forEach(function(a){
+                            total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
+                            $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
+                          })
+                          $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
+                        }
+                      }))
                     })
-                })
-            },
-            events: {
-                "click .pagoImp_form .BUTTON_save": "addPagoImp",
-                "change .pagoImp_form_banco_id": "selectBanco",
-            },
-            getTable: function() {
-                return this.options.pagoImp_table;
-            },
-            getDataTable: function() {
-                return this.getTable().datatable;
-            },
-            getSelectionID: function() {
-                return parseInt($(".selection_id").val());
-            },
-            getSelectionRow: function() {
-                return this.getTable().selected_row;
-            },
-            selectBanco: function() {
-            var bancId = $('.pagoImp_form').serializeObject().banco_id
-                if(bancId != 0){
+                    this.data = this.options.collection, F.createDataTable(this)
+                },
+                events: {
+                    "click .pagoImp_table tr": "selectRow"
+                },
+                selectRow: function(e) {
+                    this.selected_row = $(e.currentTarget);
+                }
+            });
+        }),
+        e.define("/views/pagarImp/PagoImpForm.js", function(e, t, n, r, i, s) {
+            C.View.PagoImpForm = Backbone.View.extend({
+                name: "pagoImp_form",
+                title: "Pago de Impuestos",
+                fields: {
+                  arreglo: {
+                    type:"hidden",
+                    name: "arreglo",
+                  },
+                  montoImp: {
+                    label: "Total De Impuestos",
+                    type: "text",
+                    attrs: {
+                      disabled: "disabled"
+                    }
+                  },
+                  banco_id: {
+                    label:"Banco",
+                    type: "select"
+                  },
+                  diaDePago: {
+                    label: "Dia De Pago",
+                    type: "datepicker",
+                  },
+                  empleado_id: {
+                    label: "Empleado",
+                    type: "select"
+                  }
+                },
+                isCRUD: !0,
+                buttons: {
+                    create: !1,
+                    save: !0,
+                    cancel: !0,
+                    "delete": !1
+                },
+                relations: {
+                    banco_id: null,
+                    empleado_id: null
+                },
+                initialize: function() {
+                    var e= this;
+                    F.getAllFromModel("empleado", function(t) {
+                        e.relations.empleados = t, F.getAllFromModel("banco", function(t) {
+                            e.relations.bancos = t, F.createForm(e);
+                        })
+                    })
+                },
+                events: {
+                    "click .pagoImp_form .BUTTON_save": "addPagoImp",
+                    "change .pagoImp_form_banco_id": "selectBanco",
+                },
+                getTable: function() {
+                    return this.options.pagoImp_table;
+                },
+                getDataTable: function() {
+                    return this.getTable().datatable;
+                },
+                getSelectionID: function() {
+                    return parseInt($(".selection_id").val());
+                },
+                getSelectionRow: function() {
+                    return this.getTable().selected_row;
+                },
+                selectBanco: function() {
                   $.ajax({
                     type: "GET",
-                    url: '/banco/byIdNombre/'+bancId,
+                    url: '/banco/byIdNombre/'+$('.pagoImp_form').serializeObject().banco_id,
                     success: function(e){
-                      $('.dataTables_filter input').val(e).keyup(); 
+                      $('.dataTables_filter input').val(e).keyup();
                     }
                   })
-                }
-            },
-            addPagoImp: function() {
-              var sup = this
-              var ids = $('.pagoImp_form [name="arreglo"]')[0].value.split("id:")  
-              var arreglo=[]
-              ids.forEach(function(id){
-                if(id!="")
-                  arreglo.push(id)
-              })
-              //Saqué esto: $(".pagoImp_form input:text[name:totalImp]")[0].value!=0                  
-              if(($(".pagoImp_form input:text[name:monto0]")[0].value!= 0.00 || $(".pagoImp_form input:text[name:monto1]")[1].value!= 0.00
-              || $(".pagoImp_form input:text[name:monto2]")[2].value!= 0.00 || $(".pagoImp_form input:text[name:monto3]")[3].value!= 0.00 ) 
-              && ($('.pagoImp_form').serializeObject().empleado_id !='')
-              && ($('.pagoImp_form').serializeObject().banco_id !='')
-              && ($('.pagoImp_form').serializeObject().diaDePago !='')              
-              ){
-                F.getOneFromModel("pagoImp/multiple", arreglo, function(vi){
-                    var vencimientosImp=''
-                    var vencimientosConfirm=''
-                    vi.forEach(function(vto){
-                      var suma= parseFloat(vto.monto1)+ parseFloat(vto.monto2)+  parseFloat(vto.monto3)+  parseFloat(vto.monto4)+ parseFloat(vto.monto0)
-                      vencimientosConfirm+='Cliente: "'+vto.cliente.nombre+'" Impuesto: "'+vto.impuesto.nombre+'"-"'+vto.cronograma.mes+'/'+vto.cronograma.año+'"<br />'
-                      vencimientosImp+='Cliente: "'+vto.cliente.nombre+'" Impuesto: "'+vto.impuesto.nombre+'<br />'
-                    })
-                    vencimientosConfirm+="Por un total de: $"+ $(".pagoImp_form input:text[name:totalImp]")[0].value;
-                    F.msgConfirm("¿Está seguro de Enviar a Pagar los Impuestos seleccionados?", function(){
-                        F.getReciboMaxf("recibo", function(t){         
-                          F.getOneFromModel("banco/byId", $('.pagoImp_form').serializeObject().banco_id , function(b) { 
-                            F.getOneFromModel("empleado/byId", $('.pagoImp_form').serializeObject().empleado_id, function(empleado){
-
-
-                              var mm0 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[0].value);
-                              var mm1 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[1].value);
-                              var mm2 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[2].value);
-                              var mm3 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[3].value);
-
-                              var tott = mm0+mm1+mm2+mm3; 
-                              var query = {
-                                vi: vi,
-                                diaDePago: $('.pagoImp_form').serializeObject().diaDePago,
-                                banco_id: $('.pagoImp_form').serializeObject().banco_id,
-                                empleado_id: $('.pagoImp_form').serializeObject().empleado_id,
-                                total: tott,// CONSULTA totalImp 
-                                mm0: mm0,
-                                mm1: mm1,
-                                mm2: mm2,
-                                mm3: mm3
-
-                              };
-
-                              $.ajax({
-                                type: "POST",
-                                url: "/pagoImp",
-                                data: query,
-                                success: function(e){
-                                  var tabla='<table class="dataTable"><tr><th>Cliente</th><th>Impuesto</th><th>Periodo</th><th>Importe</th></tr>';
-                                  var contador= 0;
-                                  e.impuestos.forEach(function(v){
-                                    contador ++;
-                                    tabla+='<tr><td>'
-                                    tabla+=v.cliente+"</td><td>"
-                                    tabla+=v.impuesto+"</td><td>"
-                                    tabla+=v.periodo+"</td><td>"
-                                    tabla+=v.importe+"</td></tr>"
-                                  })
-                                  tabla+="</table>"
-                                  var recibof= 
-                                    '<div id="imprimirPago" style="display:none; text-align: left;">' +
-                                        '<div style="width: 600px; height: padding: 6px">'+
-                                            '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
-                                                '<span style="font-size:20px; "><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span><span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221)452-2523<br /></center></span>'+
-                                            '</div>'+
-                                            '<div style="border:solid thin; border-radius: 7px; width:36%; float:right; height:85px; padding: 6px">'+
-                                                '<br /><span style="font-weight:bold;"> Recibo Nº F-'+e.recibo.f+'</span><br />'+
-                                                'Movimiento: Pago (G.I.Nº:'+e.pagoNumero+')<br  />'+
-                                                'Fecha: '+e.reciboFecha+
-                                            '</div> <br /><br /><br  /><br  /><br  /><br  /><br  />'+
-                                            '<div style="border:solid thin; border-radius: 7px; width:100%">'+
-                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
-                                                    'Empleado Asignado: '+e.receptor+'<br  />'+
-                                                    'Banco: '+b+ "<br />"+
-                                                    'Dia de Pago: '+$('.pagoImp_form').serializeObject().diaDePago+"<br />"+
-                                                '</div>'+
-                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
-                                                    '<span style="font-weight:bold;"> Descripción del movimiento: </span>Pago de impuestos por parte del Estudio'+
-                                                '</div>'+
-                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+//30px
-                                                    e.recibo.concepto+
-                                                '</div>'+
-                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+//130px
-                                                    tabla+
-                                                    '<span style="float:right; font-weight:bold; text"> TOTAL:'+e.total+'<br /></span><br />'+
-                                                '</div>'+                                                
-                                            '</div>'+
-                                            '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
-                                                '<span style="font-weight:bold;"> Operador: </span>'+ e.creador+
-                                            '</div>'+
-                                            '<div style="text-align:left; width:50%; float:left; padding: 6px;">'+
-                                            'Fecha: <br /> Hora: <br /> Monto: <br />  <span style="font-weight:bold;">Comprobante y dinero entregado a Jorge</span> <br />  Fecha: <br />  Hora: <br /> Monto:<br /> '+
-                                            '</div>'+
-                                            '<div style="text-align:center; border:solid thin; border-radius: 7px; width:36%; float:right; padding: 6px;">'+
-                                                '<br  />'+
-                                                '-------------------------------------------<br />'+
-                                                'Firma del responsable por el mismo'+
-                                                '<br  /><br  />'+
-                                                '<p><span style="font-weight:bold;">'+e.receptor+'</span></p><br  />'+
-                                            '</div>'+
-                                        '</div><H1 style="font-weight:bold;"><br /><br /><br /><br /><br /><br /><br /><br /> RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1>'+
-                                    '</div>' 
-;                                                 
-                                  $('body').append(recibof)
+                },
+                addPagoImp: function() {
+                  var sup = this
+                  var ids = $('.pagoImp_form [name="arreglo"]')[0].value.split("id:")
+                  var arreglo=[]
+                  ids.forEach(function(id){
+                    if(id!="")
+                      arreglo.push(id)
+                  })
+                  if(($(".pagoImp_form input:text[name:totalImp]")[0].value!=0)
+                  && ($('.pagoImp_form').serializeObject().empleado_id !='')
+                  && ($('.pagoImp_form').serializeObject().banco_id !='')
+                  && ($('.pagoImp_form').serializeObject().diaDePago !='')
+                  ){
+                    F.getOneFromModel("pagoImp/multiple", arreglo, function(vi){
+                        var vencimientosImp=''
+                        var vencimientosConfirm=''
+                        vi.forEach(function(vto){
+                          var suma= parseFloat(vto.monto1)+ parseFloat(vto.monto2)+  parseFloat(vto.monto3)+  parseFloat(vto.monto4)+ parseFloat(vto.monto0)
+                          vencimientosConfirm+='Cliente: "'+vto.cliente.nombre+'" Impuesto: "'+vto.impuesto.nombre+'"-"'+vto.cronograma.mes+'/'+vto.cronograma.año+'"<br />'
+                          vencimientosImp+='Cliente: "'+vto.cliente.nombre+'" Impuesto: "'+vto.impuesto.nombre+'<br />'
+                        })
+                        vencimientosConfirm+="Por un total de: $"+ $(".pagoImp_form input:text[name:totalImp]")[0].value;
+                        F.msgConfirm("¿Está seguro de Enviar a Pagar los Impuestos seleccionados?", function(){
+                            F.getReciboMaxf("recibo", function(t){
+                              F.getOneFromModel("banco/byId", $('.pagoImp_form').serializeObject().banco_id , function(b) {
+                                F.getOneFromModel("empleado/byId", $('.pagoImp_form').serializeObject().empleado_id, function(empleado){
+                                  var query = {
+                                    vi: vi,
+                                    diaDePago: $('.pagoImp_form').serializeObject().diaDePago,
+                                    banco_id: $('.pagoImp_form').serializeObject().banco_id,
+                                    empleado_id: $('.pagoImp_form').serializeObject().empleado_id,
+                                    total: $(".pagoImp_form input:text[name:totalImp]")[0].value
+                                  };
                                   $.ajax({
-                                      type:  "POST",
-                                      url: "/imprimir/F-"+e.recibo.f,
-                                      data: {recibo: recibof}
-                                  });                                   
-                                  $.blockUI({
-                                    message: $('#imprimirPago'),
-                                    css: {
-                                      top: '0%',
-                                      left: '0%',
-                                      width: '100%',
-                                      height: '100%',
-                                      border: '50px',
-                                      cursor: 'default'
+                                    type: "POST",
+                                    url: "/pagoImp",
+                                    data: query,
+                                    success: function(e){
+                                      var tabla='<table class="dataTable"><tr><th>Cliente</th><th>Impuesto</th><th>Periodo</th><th>Importe</th></tr>';
+                                      var contador= 0;
+                                      e.impuestos.forEach(function(v){
+                                        contador ++;
+                                        tabla+='<tr><td>'
+                                        tabla+=v.cliente+"</td><td>"
+                                        tabla+=v.impuesto+"</td><td>"
+                                        tabla+=v.periodo+"</td><td>"
+                                        tabla+=v.importe+"</td></tr>"
+                                      })
+                                      tabla+="</table>"
+                                      var recibof=
+                                        '<div id="imprimirPago" style="display:none; text-align: left;">' +
+                                            '<div style="width: 600px; height: padding: 6px">'+
+                                                '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
+                                                    '<span style="font-size:20px; "><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span><span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221)452-2523<br /></center></span>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:36%; float:right; height:85px; padding: 6px">'+
+                                                    '<br /><span style="font-weight:bold;"> Recibo Nº F-'+e.recibo.f+'</span><br />'+
+                                                    'Movimiento: Pago (G.I.Nº:'+e.pagoNumero+')<br  />'+
+                                                    'Fecha: '+e.reciboFecha+
+                                                '</div> <br /><br /><br  /><br  /><br  /><br  /><br  />'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:100%">'+
+                                                    '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                        'Empleado Asignado: '+e.receptor+'<br  />'+
+                                                        'Banco: '+b+ "<br />"+
+                                                        'Dia de Pago: '+$('.pagoImp_form').serializeObject().diaDePago+"<br />"+
+                                                    '</div>'+
+                                                    '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                        '<span style="font-weight:bold;"> Descripción del movimiento: </span>Pago de impuestos por parte del Estudio'+
+                                                    '</div>'+
+                                                    '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+//30px
+                                                        e.recibo.concepto+
+                                                    '</div>'+
+                                                    '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+//130px
+                                                        tabla+
+                                                        '<span style="float:right; font-weight:bold; text"> TOTAL:'+e.total+'<br /></span><br />'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold;"> Operador: </span>'+ e.creador+
+                                                '</div>'+
+                                                '<div style="text-align:left; width:50%; float:left; padding: 6px;">'+
+                                                'Fecha: <br /> Hora: <br /> Monto: <br />  <span style="font-weight:bold;">Comprobante y dinero entregado a Jorge</span> <br />  Fecha: <br />  Hora: <br /> Monto:<br /> '+
+                                                '</div>'+
+                                                '<div style="text-align:center; border:solid thin; border-radius: 7px; width:36%; float:right; padding: 6px;">'+
+                                                    '<br  />'+
+                                                    '-------------------------------------------<br />'+
+                                                    'Firma del responsable por el mismo'+
+                                                    '<br  /><br  />'+
+                                                    '<p><span style="font-weight:bold;">'+e.receptor+'</span></p><br  />'+
+                                                '</div>'+
+                                            '</div><H1 style="font-weight:bold;"><br /><br /><br /><br /><br /><br /><br /><br /> RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1>'+
+                                        '</div>'
+    ;
+                                      $('body').append(recibof)
+                                      $.ajax({
+                                          type:  "POST",
+                                          url: "/imprimir/F-"+e.recibo.f,
+                                          data: {recibo: recibof}
+                                      });
+                                      $.blockUI({
+                                        message: $('#imprimirPago'),
+                                        css: {
+                                          top: '0%',
+                                          left: '0%',
+                                          width: '100%',
+                                          height: '100%',
+                                          border: '50px',
+                                          cursor: 'default'
+                                        }
+                                      })
                                     }
-                                  }) 
-                                }
+                                  })
+                                })
                               })
                             })
-                          })
-                        })
-                      }
-                    )               
-                })
-              }else{
-                F.msgError('Todos los campos son OBLIGATORIOS'); //campos obligatorios de pagoImp
-              }        
-            }            
-      })  
-    }),  
+                          }
+                        )
+                    })
+                  }else{
+                    F.msgError('Todos los campos son OBLIGATORIOS');
+                  }
+                }
+          })
+        }),
 //RECEPIMP
     e.define("/views/pagarImp/RecepImp.js", function(e, t, n, r, i, s) {
         C.View.RecepImp = Backbone.View.extend({
@@ -8773,7 +8698,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(".recepImp_table tbody tr").on("click", function() {
                         t.fnIsOpen(this) ? t.fnClose(this) : t.fnOpen(this, e.generateRowDetails(t, this), "details");
                     });
-                });   
+                });
             },
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail grupo_id_' + i + '" style="display:none;">';
@@ -8803,7 +8728,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var r = this;
                 $(e).on("click", function() {
                     $(".row_detail p").removeClass("selected_recepImp"),
-                    $(this).addClass("selected_recepImp"), 
+                    $(this).addClass("selected_recepImp"),
                     ($(".vto_form .BUTTON_cancel").remove(),
                      $(".vto_form .BUTTON_proceed").remove(),
                      $(".vto_form").remove(),
@@ -8816,11 +8741,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         vto: t
                     }), $(".row_subdetail").remove())
                 });
-            },            
-            
+            },
+
             appendRowDetailsHeaders: function(e) {
                 $(".grupo_id_" + e).append('<p class="row_details_headers">Cliente - Impuesto <span>Monto</span></p>');
-            },       
+            },
             getRecepImp: function(e, t) {
                 $.ajax({
                     url: "/recepImp/byGroup/" + e,
@@ -8828,7 +8753,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         t(e);
                     }
                 });
-            },                             
+            },
             events: {
                 "click .recepImp_table tr": "selectRow"
             },
@@ -8847,7 +8772,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 type: "text",
                 attrs: {
                   disabled: "disabled"
-                }              
+                }
               },
               diaDePago: {
                 label: "Dia De Pago",
@@ -8869,7 +8794,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 attrs: {
                   disabled: "disabled"
                 }
-              },              
+              },
               total: {
                 label: "Total",
                 type: "text",
@@ -8892,7 +8817,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createFormS(e);
             },
             events: {
-                "click .recepImp_form .BUTTON_save": "addRecepImp",            
+                "click .recepImp_form .BUTTON_save": "addRecepImp",
             },
             getTable: function() {
                 return this.options.recepImp_table;
@@ -8924,11 +8849,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       })
                     }
                   });
-                }                
+                }
               })
             }
-        })  
-    }),  
+        })
+    }),
     e.define("/views/pagarImp/VtoForm.js", function(e, t, n, r, i, s) {
       C.View.VtoForm = Backbone.View.extend({
         name: "vto_form",
@@ -8969,24 +8894,24 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             var e = this;
             F.createForm(e);
             var n = e.getVto(),
-            r = $(".vto_form"), 
+            r = $(".vto_form"),
             i = $(r).getFields(), s;
             $(r).append('<input type="button" id="noRepite" class="BUTTON_cancel lefty button" value="Repagar"  /><input type="button" id="imprimirRecibo" class="BUTTON_proceed_print center button" value="Imprimir" /><input type="button" id="tampoco" class="BUTTON_proceed righty button" value="Editar" /><br /> <br />');
             $(r).append($('<input>', {
               type: 'hidden',
               value: n.id,
               class: 'selection_recepImp_id'
-            })),                
+            })),
             $(i).each(function() {
               s = $(this).attr("name");
               $(this).val(n[s])
             });
-            
+
         },
         getVto: function() {
             return this.options.vto;
-        },            
-        
+        },
+
         events: {
             "click .vto_form .BUTTON_proceed": "addVto",
             "click .vto_form .BUTTON_proceed_print": "imprimirRecibo",
@@ -9018,7 +8943,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   F.msgError('Hubo un Error')
                   setTimeout(function(){location.reload()}, 1e3 );
                 }
-              }                
+              }
             })
           }
         },
@@ -9059,7 +8984,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   tabla+=v.importe+"</td></tr>"
                 })
                 tabla+="</table>"
-                var recibof= 
+                var recibof=
                   '<div id="imprimirPago" style="display:none; text-align: left;">' +
                       '<div style="width: 600px; height: padding: 6px">'+
                           '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -9083,7 +9008,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
                                   tabla+
                                   '<span style="float:right; font-weight:bold; text"> TOTAL:'+e.total+'<br /></span><br />'+
-                              '</div>'+                                                
+                              '</div>'+
                           '</div>'+
                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                               '<span style="font-weight:bold;"> Operador: </span>'+ e.creador+
@@ -9100,14 +9025,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               '<p><span style="font-weight:bold;">'+e.receptor+'</span></p><br  />'+
                           '</div>'+
                       '</div><H1 style="font-weight:bold;"><br /><br /><br /><br /><br /><br /><br /><br /> RECIBO NO VÁLIDO COMO CONSTANCIA DE ENTREGA DE DINERO</H1>'+
-                  '</div>' 
-  ;                                                 
+                  '</div>'
+  ;
                 $('body').append(recibof)
                 $.ajax({
                     type:  "POST",
                     url: "/imprimir/F-"+e.recibo.f,
                     data: {recibo: recibof}
-                });                                   
+                });
                 $.blockUI({
                   message: $('#imprimirPago'),
                   css: {
@@ -9118,13 +9043,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     border: '50px',
                     cursor: 'default'
                   }
-                }) 
+                })
               }
             })
           }
         }
-      })  
-    }),     
+      })
+    }),
 //descIMP
     e.define("/views/pagarImp/DescImp.js", function(e, t, n, r, i, s) {
         C.View.DescImp = Backbone.View.extend({
@@ -9213,14 +9138,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 attrs: {
                   disabled: "disabled"
                 }
-              },              
+              },
               bancoNombre: {
                 label: "Banco",
                 type: "text",
                 attrs: {
                   disabled: "disabled"
                 }
-              },   
+              },
               total: {
                 label: "Total",
                 type: "text",
@@ -9243,8 +9168,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createFormS(e);
             },
             events: {
-                "click .descImp_form .BUTTON_save": "addDescImp",            
-               // "click .descImp_form .BUTTON_delete": "delDescImp",                                
+                "click .descImp_form .BUTTON_save": "addDescImp",
+               // "click .descImp_form .BUTTON_delete": "delDescImp",
             },
             getTable: function() {
                 return this.options.descImp_table;
@@ -9276,7 +9201,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       })
                     }
                   });
-                }                
+                }
               })
             },
             addDescImp: function() {
@@ -9297,11 +9222,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       })
                     }
                   });
-                }                
+                }
               })
             }
-        })  
-    }),   
+        })
+    }),
 //ARCHIMP
     e.define("/views/pagarImp/ArchImp.js", function(e, t, n, r, i, s) {
         C.View.ArchImp = Backbone.View.extend({
@@ -9390,14 +9315,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 attrs: {
                   disabled: "disabled"
                 }
-              },              
+              },
               bancoNombre: {
                 label: "Banco",
                 type: "text",
                 attrs: {
                   disabled: "disabled"
                 }
-              },   
+              },
               total: {
                 label: "Total",
                 type: "text",
@@ -9420,8 +9345,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createFormS(e);
             },
             events: {
-                "click .archImp_form .BUTTON_save": "addArchImp",            
-                "click .archImp_form .BUTTON_delete": "delArchImp",                                
+                "click .archImp_form .BUTTON_save": "addArchImp",
+                "click .archImp_form .BUTTON_delete": "delArchImp",
             },
             getTable: function() {
                 return this.options.archImp_table;
@@ -9453,7 +9378,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       })
                     }
                   });
-                }                
+                }
               })
             },
             addArchImp: function() {
@@ -9474,11 +9399,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       })
                     }
                   });
-                }                
+                }
               })
             }
-        })  
-    }),   
+        })
+    }),
 //ARCHIVADO
     e.define("/views/pagarImp/Archivado.js", function(e, t, n, r, i, s) {
         C.View.Archivado = Backbone.View.extend({
@@ -9545,9 +9470,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createInfoCard(e, $("#archivado_right"));
             }
         })
-    }),    
-//CRONOGRAMA 
-  //CRONOGRAMA VENCIMIENTOS   
+    }),
+//CRONOGRAMA
+  //CRONOGRAMA VENCIMIENTOS
     e.define("/views/cronograma/Cronograma.js", function(e, t, n, r, i, s) {
         C.View.Cronograma = Backbone.View.extend({
             el: $("body"),
@@ -9570,7 +9495,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cronograma/CronogramaTable.js", function(e, t, n, r, i, s) {
         C.View.CronogramaTable = Backbone.View.extend({
             name: "cronograma",
@@ -9585,15 +9510,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(t) {
-                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) { 
+                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) {
                 var msg={}
                 i.forEach(function(ci){
                   msg[ci.impuesto.nombre+"_id"]=ci.id;
                   if(ci.vtoImpuesto){
                     msg[ci.impuesto.nombre]=moment(ci.vtoImpuesto).format('DD/MM/YYYY');
                   }
-                    
-                })                    
+
+                })
                 $.extend(t, msg);
                 F.assignValuesToForm($(".cronograma_form"), t);
                 })
@@ -9614,13 +9539,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             relations: {
                 impuestos: null,
             },
-            isCRUD: !0,            
+            isCRUD: !0,
             buttons: {
                 create: !0,
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function(e) {
               var e = this;
               F.getAllFromModel("impuesto", function(t) {
@@ -9629,7 +9554,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 objeto={mes:{type:'select_month', label:'Mes Del Vencimiento'}};
                 $.extend(base, objeto);
                 objeto={año:{type:'select_year', label:'Año Del Vencimiento'}};
-                $.extend(base, objeto);                
+                $.extend(base, objeto);
                 t.forEach(function(impuesto){
                   var nombre = impuesto.nombre;
                   objeto[nombre+"_id"]={type:'hidden'};
@@ -9638,16 +9563,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
                 e.fields=base;
                 F.createForm(e, $("#cronograma_right"));
-              })   
+              })
             },
             getSelectionID: function() {
                 return parseInt($(".selection_id").val());
-            },                 
+            },
             events: {
-                "click .cronograma_form .BUTTON_cancel": "cancelCronograma",  
-                "click .cronograma_form .BUTTON_create": "addCronograma",  
+                "click .cronograma_form .BUTTON_cancel": "cancelCronograma",
+                "click .cronograma_form .BUTTON_create": "addCronograma",
                 "click .cronograma_form .BUTTON_save": "editCronograma",
-            },  
+            },
             cancelCronograma: function(){
               location.reload();
             },
@@ -9674,10 +9599,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                    });
                   }
                })
-              }else{ 
+              }else{
                  F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-              }              
-            }, 
+              }
+            },
             editCronograma: function(){
               var e = this;
               if(($(".cronograma_form").serializeObject().mes != '')&&($(".cronograma_form").serializeObject().año != '')){
@@ -9699,15 +9624,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                        })
                      }
                    });
-                  }                      
+                  }
                 })
-              }else{ 
+              }else{
                  F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-              }                     
-            }    
+              }
+            }
         })
-    }),   
-//CRONOGRAMA RECEPCION    
+    }),
+//CRONOGRAMA RECEPCION
     e.define("/views/cronograma/Recepcion.js", function(e, t, n, r, i, s) {
         C.View.Recepcion = Backbone.View.extend({
             el: $("body"),
@@ -9721,7 +9646,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           el: $("#recepcion_left"),
                           collection: t
                       }), e.recepcion_form = new C.View.RecepcionForm({
-                          el: $("#recepcion_right"),  
+                          el: $("#recepcion_right"),
                           model: e.model,
                           collection: t,
                           recepcion_table: e.recepcion_table
@@ -9730,7 +9655,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cronograma/RecepcionTable.js", function(e, t, n, r, i, s) {
         C.View.RecepcionTable = Backbone.View.extend({
             name: "recepcion",
@@ -9745,14 +9670,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(t) {
-                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) { 
+                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) {
                 var msg={}
                 i.forEach(function(ci){
                   msg[ci.impuesto.nombre+"_id"]=ci.id;
                   if(ci.vtoRecepcion){
                     msg[ci.impuesto.nombre]=moment(ci.vtoRecepcion).format('DD/MM/YYYY');
                   }
-                })                    
+                })
                 $.extend(t, msg);
                 F.assignValuesToForm($(".recepcion_form"), t);
                 })
@@ -9773,13 +9698,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             relations: {
                 impuestos: null,
             },
-            isCRUD: !0,            
+            isCRUD: !0,
             buttons: {
                 create: !0,
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function(e) {
               var e = this;
               F.getAllFromModel("impuesto", function(t) {
@@ -9788,7 +9713,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 objeto={mes:{type:'select_month', label:'Mes Del Vencimiento'}};
                 $.extend(base, objeto);
                 objeto={año:{type:'select_year', label:'Año Del Vencimiento'}};
-                $.extend(base, objeto);                
+                $.extend(base, objeto);
                 t.forEach(function(impuesto){
                   var nombre = impuesto.nombre;
                   objeto[nombre+"_id"]={type:'hidden'};
@@ -9797,16 +9722,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
                 e.fields=base;
                 F.createForm(e, $("#recepcion_right"));
-              })   
+              })
             },
             getSelectionID: function() {
                 return parseInt($(".selection_id").val());
-            },                 
+            },
             events: {
-                "click .recepcion_form .BUTTON_cancel": "cancelRecepcion",  
-                "click .recepcion_form .BUTTON_create": "addRecepcion",  
+                "click .recepcion_form .BUTTON_cancel": "cancelRecepcion",
+                "click .recepcion_form .BUTTON_create": "addRecepcion",
                 "click .recepcion_form .BUTTON_save": "editRecepcion",
-            },  
+            },
             cancelRecepcion: function(){
               location.reload();
             },
@@ -9833,10 +9758,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                              });
                           }
                    })
-               }else{ 
+               }else{
                   F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-               }              
-            }, 
+               }
+            },
             editRecepcion: function(){
                 var e = this;
                 if(($(".recepcion_form").serializeObject().mes != '')&&($(".recepcion_form").serializeObject().año != '')){
@@ -9858,15 +9783,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  })
                                }
                              });
-                          }                      
+                          }
                     })
-                }else{ 
+                }else{
                    F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-                }                     
-            }    
+                }
+            }
         })
-    }),    
-// CRONOGRAMA VTOAviso    
+    }),
+// CRONOGRAMA VTOAviso
     e.define("/views/cronograma/Aviso.js", function(e, t, n, r, i, s) {
         C.View.Aviso = Backbone.View.extend({
             el: $("body"),
@@ -9889,7 +9814,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cronograma/AvisoTable.js", function(e, t, n, r, i, s) {
         C.View.AvisoTable = Backbone.View.extend({
             name: "aviso",
@@ -9904,14 +9829,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(t) {
-                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) { 
+                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) {
                 var msg={}
                 i.forEach(function(ci){
                   msg[ci.impuesto.nombre+"_id"]=ci.id;
                   if(ci.vtoAviso){
                     msg[ci.impuesto.nombre]=moment(ci.vtoAviso).format('DD/MM/YYYY');
                   }
-                })                    
+                })
                 $.extend(t, msg);
                 F.assignValuesToForm($(".aviso_form"), t);
                 })
@@ -9932,13 +9857,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             relations: {
                 impuestos: null,
             },
-            isCRUD: !0,            
+            isCRUD: !0,
             buttons: {
                 create: !0,
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function(e) {
               var e = this;
               F.getAllFromModel("impuesto", function(t) {
@@ -9947,7 +9872,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 objeto={mes:{type:'select_month', label:'Mes Del Vencimiento'}};
                 $.extend(base, objeto);
                 objeto={año:{type:'select_year', label:'Año Del Vencimiento'}};
-                $.extend(base, objeto);                
+                $.extend(base, objeto);
                 t.forEach(function(impuesto){
                   var nombre = impuesto.nombre;
                   objeto[nombre+"_id"]={type:'hidden'};
@@ -9956,16 +9881,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
                 e.fields=base;
                 F.createForm(e, $("#aviso_right"));
-              })   
+              })
             },
             getSelectionID: function() {
                 return parseInt($(".selection_id").val());
-            },                 
+            },
             events: {
-                "click .aviso_form .BUTTON_cancel": "cancelAviso",  
-                "click .aviso_form .BUTTON_create": "addAviso",  
+                "click .aviso_form .BUTTON_cancel": "cancelAviso",
+                "click .aviso_form .BUTTON_create": "addAviso",
                 "click .aviso_form .BUTTON_save": "editAviso",
-            },  
+            },
             cancelAviso: function(){
               location.reload();
             },
@@ -9992,10 +9917,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                              });
                           }
                    })
-               }else{ 
+               }else{
                   F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-               }              
-            }, 
+               }
+            },
             editAviso: function(){
                 var e = this;
                 if(($(".aviso_form").serializeObject().mes != '')&&($(".aviso_form").serializeObject().año != '')){
@@ -10017,14 +9942,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  })
                                }
                              });
-                          }                      
+                          }
                     })
-                }else{ 
+                }else{
                    F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-                }                     
-            }    
+                }
+            }
         })
-    }),       
+    }),
 // CRONOGRAMA VTOAsignacion
     e.define("/views/cronograma/Asignacion.js", function(e, t, n, r, i, s) {
         C.View.Asignacion = Backbone.View.extend({
@@ -10048,7 +9973,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cronograma/AsignacionTable.js", function(e, t, n, r, i, s) {
         C.View.AsignacionTable = Backbone.View.extend({
             name: "asignacion",
@@ -10063,14 +9988,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(t) {
-                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) { 
+                F.getOneFromModel("cronogramaImpuesto", t.id , function(i) {
                 var msg={}
                 i.forEach(function(ci){
                   msg[ci.impuesto.nombre+"_id"]=ci.id;
                   if(ci.vtoAsignacion){
                     msg[ci.impuesto.nombre]=moment(ci.vtoAsignacion).format('DD/MM/YYYY');
                   }
-                })                    
+                })
                 $.extend(t, msg);
                 F.assignValuesToForm($(".asignacion_form"), t);
                 })
@@ -10091,13 +10016,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             relations: {
                 impuestos: null,
             },
-            isCRUD: !0,            
+            isCRUD: !0,
             buttons: {
                 create: !0,
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function(e) {
               var e = this;
               F.getAllFromModel("impuesto", function(t) {
@@ -10106,7 +10031,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 objeto={mes:{type:'select_month', label:'Mes Del Vencimiento'}};
                 $.extend(base, objeto);
                 objeto={año:{type:'select_year', label:'Año Del Vencimiento'}};
-                $.extend(base, objeto);                
+                $.extend(base, objeto);
                 t.forEach(function(impuesto){
                   var nombre = impuesto.nombre;
                   objeto[nombre+"_id"]={type:'hidden'};
@@ -10115,16 +10040,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
                 e.fields=base;
                 F.createForm(e, $("#asignacion_right"));
-              })   
+              })
             },
             getSelectionID: function() {
                 return parseInt($(".selection_id").val());
-            },                 
+            },
             events: {
-                "click .asignacion_form .BUTTON_cancel": "cancelAsignacion",  
-                "click .asignacion_form .BUTTON_create": "addAsignacion",  
+                "click .asignacion_form .BUTTON_cancel": "cancelAsignacion",
+                "click .asignacion_form .BUTTON_create": "addAsignacion",
                 "click .asignacion_form .BUTTON_save": "editAsignacion",
-            },  
+            },
             cancelAsignacion: function(){
               location.reload();
             },
@@ -10151,10 +10076,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                              });
                           }
                    })
-               }else{ 
+               }else{
                   F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-               }              
-            }, 
+               }
+            },
             editAsignacion: function(){
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
@@ -10176,15 +10101,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  })
                                }
                              });
-                          }                      
+                          }
                     })
-                }else{ 
+                }else{
                    F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
-                }                     
-            }    
+                }
+            }
         })
-    }),  
-//CRONOGRAMA AuditarImpuesto    
+    }),
+//CRONOGRAMA AuditarImpuesto
     e.define("/views/cronograma/AuditarImpuesto.js", function(e, t, n, r, i, s) {
         C.View.AuditarImpuesto = Backbone.View.extend({
             el: $("body"),
@@ -10207,7 +10132,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/cronograma/AuditarImpuestoTable.js", function(e, t, n, r, i, s) {
         C.View.AuditarImpuestoTable = Backbone.View.extend({
             name: "auditarImpuesto",
@@ -10226,9 +10151,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 $(".auditarImpuesto_infocard").empty().append('<h3 class="formtitle"> Auditar Impuestos</h3>');
                 $(".auditarImpuesto_infocard").append('<h3 align="right">'+t.nombreMes+"-"+t.año+"</h3><br />");
                 if(t.auditado == 'Sin Auditar')
-                  $(".auditarImpuesto_infocard ").append('<input type="button" class="BUTTON_proceed righty button" value="Auditar"/><br /><br />'), 
+                  $(".auditarImpuesto_infocard ").append('<input type="button" class="BUTTON_proceed righty button" value="Auditar"/><br /><br />'),
                   $(".auditarImpuesto_infocard .BUTTON_proceed").on("click", function() {
-                    F.msgConfirm("¿Está seguro de AUDITAR "+t.nombreMes+"-"+t.año+"?", 
+                    F.msgConfirm("¿Está seguro de AUDITAR "+t.nombreMes+"-"+t.año+"?",
                     function(){
                       $.ajax({
                         type: "POST",
@@ -10272,7 +10197,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".selection_id").val());
             }
         })
-    }), 
+    }),
 //AsigPie
     e.define("/views/crud/AsigPie.js", function(e, t, n, r, i, s) {
         C.View.AsigPie = Backbone.View.extend({
@@ -10332,7 +10257,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "textarea",
                     attrs: {
                         style: "height:300px;"
-                    }                
+                    }
                 },
             },
             isCRUD: !0,
@@ -10341,7 +10266,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 save: !0,
                 cancel: !0,
                 "delete": !1
-            },            
+            },
             initialize: function() {
                 F.createForm(this);
             },
@@ -10382,10 +10307,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editAsigPie: function() {
                 var e = this;
                 if(($(".asigPie_form").serializeObject().observacion.replace(/\s/g, "") != '')){
@@ -10408,7 +10333,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                 $.ajax({
                         type: "PUT",
                         url: "/asigPie/"+this.getSelectionID(),
@@ -10459,7 +10384,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),       
+    }),
 //gestAsignacion
     e.define("/views/gestCrono/GestAsignacion.js", function(e, t, n, r, i, s) {
         C.View.GestAsignacion = Backbone.View.extend({
@@ -10483,7 +10408,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/gestCrono/GestAsignacionTable.js", function(e, t, n, r, i, s) {
         C.View.GestAsignacionTable = Backbone.View.extend({
             name: "gestAsignacion",
@@ -10503,7 +10428,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 $(".gestAsignacion_infocard").append('<h3 align="right">'+t.nombreMes+"-"+t.año+"</h3>");
                 $(".gestAsignacion_infocard").append('<input type="button" style="border-style: solid; background-color: #FDC9A2" class="BUTTON_concluir righty button" value="Concluir " /><br />');
                 $('.gestAsignacion_infocard .BUTTON_concluir').on('click', function() {
-                  F.msgConfirm("¿Está seguro de Concluir "+t.nombreMes+"-"+t.año+"?", 
+                  F.msgConfirm("¿Está seguro de Concluir "+t.nombreMes+"-"+t.año+"?",
                     function(){
                       $.ajax({
                         type: "POST",
@@ -10514,7 +10439,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           e.gestAsignacion_table = new C.View.GestAsignacionTable({
                               el: $("#gestAsignacion_left"),
                               collection: t
-                          })                    
+                          })
                         }
                       })
                   })
@@ -10522,7 +10447,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var p;
                 F.getAllFromModel("impuesto/filtrando/"+t.id, function(te) {
                   te.forEach(function(impuesto){
-                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });                 
+                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });
                     $(checkbox).on('click', function() {
 
                       if(this.checked){
@@ -10556,7 +10481,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(p).append('<span class="element_name">' + impuesto.nombre + '</span><br />');
                     $(".gestAsignacion_infocard").append(p)
                   })
-                })   
+                })
               });
             },
             events: {
@@ -10566,8 +10491,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             }
         });
-        
-        
+
+
     }),
     e.define("/views/gestCrono/GestAsignacionInfoCard.js", function(e, t, n, r, i, s) {
         C.View.GestAsignacionInfoCard = Backbone.View.extend({
@@ -10581,7 +10506,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".selection_id").val());
             }
         })
-    }), 
+    }),
 //gestAviso
     e.define("/views/gestCrono/GestAviso.js", function(e, t, n, r, i, s) {
         C.View.GestAviso = Backbone.View.extend({
@@ -10605,7 +10530,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/gestCrono/GestAvisoTable.js", function(e, t, n, r, i, s) {
         C.View.GestAvisoTable = Backbone.View.extend({
             name: "gestAviso",
@@ -10626,7 +10551,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var p;
                 F.getAllFromModel("rubro", function(te) {
                   te.forEach(function(impuesto){
-                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });                 
+                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });
                     $(checkbox).on('click', function() {
                       if(this.checked){
                         F.msgConfirm("¿Está seguro de enviar el aviso a todos los Clientes?",function(){
@@ -10653,7 +10578,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(p).append('<span class="element_name">' + impuesto.nombre + '</span><br />');
                     $(".gestAviso_infocard").append(p)
                   })
-                })   
+                })
               });
             },
             events: {
@@ -10676,7 +10601,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".selection_id").val());
             }
         })
-    }),   
+    }),
 //gestAvisoPersonal
     e.define("/views/gestCrono/GestAvisoPersonal.js", function(e, t, n, r, i, s) {
         C.View.GestAvisoPersonal = Backbone.View.extend({
@@ -10700,10 +10625,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/gestCrono/GestAvisoPersonalTable.js", function(e, t, n, r, i, s) {
         C.View.GestAvisoPersonalTable = Backbone.View.extend({
-            name: "gestAvisoPersonal", 
+            name: "gestAvisoPersonal",
            headers: [ "id", "cliente_id", "IdCatedral", "Cuit", "Nombre","Comunicacion", "Contacto", "Clasificacion_id", "Clasificacion", "Comunicacion_id",  "Actividad_id", "Actividad",  "Telefono", "Celular", "Radio", "Email", "Empleados", "Observaciones", "cierre_id" ],
             attrs: [ "id", "cliente_id", "catedral", "cuit", "nombre", "comunicacion", "contacto",  "clasificacion_id", "clasificacion", "comunicacion_id","actividad_id", "actividad", "telefono", "celular", "radio", "email", "empleado", "observaciones", "cierre_id"],
             hidden_columns: [ "cliente_id", "cuit", "clasificacion_id", "comunicacion_id", "actividad_id", "telefono", "celular", "radio", "email", "clasificacion", "actividad", "empleado", "observaciones", "cierre_id"],
@@ -10711,7 +10636,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
                 aaSorting: [ [ 4, "asc" ] ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(t) {
@@ -10731,7 +10656,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         if(res)
                           F.msgOK("Se ha enviado el mail al cliente:"+t.nombre)
                       }
-                    })              
+                    })
                   });
                 })
               });
@@ -10756,7 +10681,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".selection_id").val());
             }
         })
-    }),     
+    }),
 //gestAvisoTest
     e.define("/views/gestCrono/GestAvisoTest.js", function(e, t, n, r, i, s) {
         C.View.GestAvisoTest = Backbone.View.extend({
@@ -10780,7 +10705,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/gestCrono/GestAvisoTestTable.js", function(e, t, n, r, i, s) {
         C.View.GestAvisoTestTable = Backbone.View.extend({
             name: "gestAvisoTest",
@@ -10801,7 +10726,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var p;
                 F.getAllFromModel("rubro", function(te) {
                   te.forEach(function(impuesto){
-                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });                 
+                    var checkbox = $('<input>', { type: 'checkbox', checked: e.matchea });
                     $(checkbox).on('click', function() {
                       if(this.checked){
                           $.ajax({
@@ -10824,7 +10749,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $(p).append('<span class="element_name">' + impuesto.nombre + '</span><br />');
                     $(".gestAvisoTest_infocard").append(p)
                   })
-                })   
+                })
               });
             },
             events: {
@@ -10847,7 +10772,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 return parseInt($(".selection_id").val());
             }
         })
-    }),                  
+    }),
 //OT
   //OTTAREAALL
     e.define("/views/ot/OtTareaAll.js", function(e, t, n, r, i, s) {
@@ -10872,7 +10797,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),  
+    }),
     e.define("/views/ot/OtTareaAllTable.js", function(e, t, n, r, i, s) {
         C.View.OtTareaAllTable = Backbone.View.extend({
             name: "otTareaAll",
@@ -10896,7 +10821,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
               this.selected_row = $(e.currentTarget);
             }
-        }); 
+        });
     }),
     e.define("/views/ot/OtTareaAllForm.js", function(e, t, n, r, i, s) {
       C.View.OtTareaAllForm = Backbone.View.extend({
@@ -10924,7 +10849,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 nombre: {
                   label: "Título",
-                },   
+                },
                 descripcion: {
                   label: "Descripción",
                   type: "textarea",
@@ -10944,7 +10869,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 tiempoInsumido: {
                   label: "T/Insumido",
                   force_label: !0,
-                },                
+                },
             },
             buttons: {
                 create: !1,
@@ -11022,15 +10947,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       F.msgError('Respete el formato de HH:SS en el tiempo estimado')
                     }
                   }
-               }else{ 
+               }else{
                   F.msgError('Los campos Nombre, Fecha de Vencimiento, Fecha de Culminación y Tiempo Estimado son obligatorios');
-               } 
+               }
               }else{
                 F.msgError('No tiene los permisos Necesarios')
               }
             }
-        });      
-    }), 
+        });
+    }),
   //ADMIN
     e.define("/views/ot/OtAdmin.js", function(e, t, n, r, i, s) {
         C.View.OtAdmin = Backbone.View.extend({
@@ -11092,7 +11017,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             },
             template: function() {
-                $("body").append('<div id="ot_conclude_window" style="display:none;"><h1>¿Está seguro de querer concluir la O/T Nº '+this.options.ot_number+"?</h1>" + "<br /><br />" + '<p class="rednote">Esta operación es IRREVERSIBLE (OT Nº'+this.options.ot_number+')</p>' + "<br /><br />" + "<p>En caso afirmativo redacte una observación final que recibirá el Cliente:</p>" + "<br /><br />" + '<form id="conclude_ot_form">' + "<br /><br />" +'Observaciones<br /><textarea name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + "<br /><br />" + 
+                $("body").append('<div id="ot_conclude_window" style="display:none;"><h1>¿Está seguro de querer concluir la O/T Nº '+this.options.ot_number+"?</h1>" + "<br /><br />" + '<p class="rednote">Esta operación es IRREVERSIBLE (OT Nº'+this.options.ot_number+')</p>' + "<br /><br />" + "<p>En caso afirmativo redacte una observación final que recibirá el Cliente:</p>" + "<br /><br />" + '<form id="conclude_ot_form">' + "<br /><br />" +'Observaciones<br /><textarea name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + "<br /><br />" +
                 '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+
                 '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>");
             },
@@ -11129,7 +11054,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             cancelConcludeOt: function() {
                 this.cleanModals();
             }
-        }); 
+        });
     }), e.define("/views/ot/OtAdminTable.js", function(e, t, n, r, i, s) {
         C.View.OtAdminTable = Backbone.View.extend({
             name: "ot",
@@ -11152,7 +11077,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
               this.selected_row = $(e.currentTarget), $("#ot_left .ot_conclude").attr("disabled", !1);
             }
-        }); 
+        });
     }), e.define("/views/ot/OtAdminForm.js", function(e, t, n, r, i, s) {
         C.View.OtAdminForm = Backbone.View.extend({
             name: "ot_form",
@@ -11180,7 +11105,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 oc_id: {
                     label: "OC(s)",
                     type: "selectmultiple",
-                    force_label: !0,                    
+                    force_label: !0,
                 },
                 ocs: {
                     force_label: !0,
@@ -11188,21 +11113,21 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "textarea",
                   attrs: {
                         disabled: "disabled",
-                    }                   
-                }, 
+                    }
+                },
                 fechaVencimiento: {
                     label: "Fecha de Vencimiento",
                     type: "datepicker",
                     force_label: !0,
                 },
-                plan_id: { 
+                plan_id: {
                     label: "Plan de Tareas (inicial/tentativo)",
                     type: "select"
                 },
-                comunicacion_id: { 
+                comunicacion_id: {
                     label: "Comunicacion",
                     type: "select"
-                },                
+                },
                 notificarCliente: {
                     label: "Notificar eventos al cliente",
                     type: "select_yn",
@@ -11212,18 +11137,18 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Generará honorarios?",
                     type: "select_yn",
                     default_value: "n"
-                }, 
+                },
                 prioridad: {
                     label: "Prioridad",
                     type: "select_14",
 //                    default_value: "3"
                 },
-                juridica: { 
+                juridica: {
                     label: "OT Jurídica",
                     type: "select_yn",
                     default_value: "n"
                 },
-                coordinador: { 
+                coordinador: {
                     label: "SÓLO la puede concluir el Coordinador?",
                     type: "select_yn",
                     default_value: "n"
@@ -11232,16 +11157,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Reservado",
                     type: "select_yn",
                     default_value: "n"
-                },                
+                },
                 titulo: {
                   label: "Título estimativo del trabajo a realizar",
-                },                
+                },
                 descripcion: {
                   label: "Descripción (explicación de que se debe hacer para que lo pueda revisar el cliente)",
                   type: "textarea",
                   attrs: {
                         style: "height:150px;"
-                    }                   
+                    }
                 },
             },
             buttons: {
@@ -11294,7 +11219,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             editTableRow: function(e) {},
             addOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '') 
+              if(($(".ot_form").serializeObject().cliente_id != '')
               && ($(".ot_form").serializeObject().fechaVencimiento != '')
               //&& ($(".ot_form").serializeObject().plan_id != '')
               && ($(".ot_form").serializeObject().prioridad != '')
@@ -11309,16 +11234,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     setTimeout(function(){location.reload()},1e3)
                   }
                })
-             }else{ 
+             }else{
                 F.msgError('Los campos cliente, fecha de Vencimiento , prioridad y comunicación son obligatorios');
-             }                 
+             }
             },
             editOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '') 
+              if(($(".ot_form").serializeObject().cliente_id != '')
               && ($(".ot_form").serializeObject().fechaVencimiento != '')
               && ($(".ot_form").serializeObject().prioridad != '')
-              && ($(".ot_form").serializeObject().comunicacion != '')              
+              && ($(".ot_form").serializeObject().comunicacion != '')
               ){
                 $.ajax({
                   type: "PUT",
@@ -11329,9 +11254,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     setTimeout(function(){location.reload()},1e3)
                   }
                 })
-             }else{ 
+             }else{
                 F.msgError('Los campos cliente, fecha de Vencimiento, prioridad y comunicación son obligatorios');
-             } 
+             }
             }
         });
     }), e.define("/views/ot/OtAdminOptions.js", function(e, t, n, r, i, s) {
@@ -11376,7 +11301,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           el: $("body"),
                           ot_number: i,
                       });
-                    });               
+                    });
                   }else{
                     if(coordinador == 1){
                       if(C.Session.getUser().area_id == 4){
@@ -11385,7 +11310,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               el: $("body"),
                               ot_number: i,
                           });
-                        });                   
+                        });
                       }else{
                         F.msgError("No tiene los permisos necesarios")
                       }
@@ -11395,7 +11320,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             el: $("body"),
                             ot_number: i,
                         });
-                      });             
+                      });
                     }
                   }
                 }else{
@@ -11448,13 +11373,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       setTimeout(function(){location.reload()}, 1e3);
                     }
                   })
-                });                     
+                });
               }else
                 F.msgError("No tiene los permisos necesarios")
             }
         });
-    }),    
-  //AUDIT    
+    }),
+  //AUDIT
     e.define("/views/ot/OtAudit.js", function(e, t, n, r, i, s) {
         C.View.OtAudit = Backbone.View.extend({
             el: $("body"),
@@ -11497,15 +11422,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     }), e.define("/views/ot/OtAuditAddTarea.js", function(e, t, n, r, i, s) {
         C.View.OtAuditAddTarea = Backbone.View.extend({
             name: "ot_add_tarea_window",
-            empleados: null,            
-            areas: null,                        
+            empleados: null,
+            areas: null,
             initialize: function() {
               var e = this
               $(document).bind("empleados_loaded", function(t) {
-                $(document).bind("areas_loaded", function() {              
+                $(document).bind("areas_loaded", function() {
                   e.render();
-                }), e.getAreas();            
-              }), e.getEmpleados();            
+                }), e.getAreas();
+              }), e.getEmpleados();
             },
             getAreas: function() {
                 var e = this;
@@ -11516,7 +11441,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         e.areas = t, $(document).trigger("areas_loaded");
                     }
                 });
-            },            
+            },
             getEmpleados: function() {
                 var e = this;
                 $.ajax({
@@ -11526,7 +11451,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         e.empleados = t, $(document).trigger("empleados_loaded");
                     }
                 });
-            },            
+            },
             render: function() {
                 var e = this;
                 $("#ot_add_tarea_window").length || (this.template(), $("#ot_add_tarea_window .BUTTON_cancel").on("click", function() {
@@ -11549,7 +11474,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 $("body").append('<div id="ot_add_tarea_window" style="display:none; overflow: auto; height: 500px"><h1 class="bold">Ingrese los datos de la nueva Tarea:</h1><br /><br /><div style="overflow: auto"><form id="add_tarea_ot_form1" ><label for="nombre">Nombre</label><input type="text" name="nombre" /><label for="descripcion">Descripción</label><textarea name="descripcion" style="height:100px;"></textarea><label for="pos">Posición:</label><input type="text" name="posicion"/><label for="tie">Tiempo Estimado:</label><input type="tie" name="tiempoEstimado" placeholder="HH:MM" size="5" /><br /><form></div><br /><br />'+'<input type="button" class="BUTTON_cancel lefty button"  value="Cancelar" />'+
                 	'<a href= "'+'http://'+window.location.hostname+":3001"+'" class="BUTTON_scheduler center button" target="_blank">Calendario</a>'+
                 	'<input type="button" class="BUTTON_proceed righty button" value="Agregar Tarea" /></div><br /><br /><br /><br />'),
-                          $("#add_tarea_ot_form1").append('Vencimiento:<br /><input type="date" name="vto">'),  
+                          $("#add_tarea_ot_form1").append('Vencimiento:<br /><input type="date" name="vto">'),
                           $("#add_tarea_ot_form1").append(this.buildEmpleadosList("empleado_id")[0], this.buildAreasList("area_id")[0], this.buildHeader()),
                           $(".button").button();
             },
@@ -11564,11 +11489,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         value: e.id
                     }).text(e.name));
                 }), t;
-            }, 
+            },
             buildHeader: function(e) {
              var ot_numero = F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[0];
              if(ot_numero.indexOf("Ot_") > -1){//ot_numero[0]=='O'
-                ot_numero = ot_numero.replace(/Ot_*/,'') 
+                ot_numero = ot_numero.replace(/Ot_*/,'')
              }
              $.ajax({
                 type: "GET",
@@ -11589,7 +11514,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }
                 }
               })
-            },            
+            },
             buildAreasList: function(e) {
                 var t = $("<select>", {
                     name: e
@@ -11601,7 +11526,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         value: e.id
                     }).text(e.nombre));
                 }), t;
-            },                           
+            },
             cleanModals: function(e) {
                 $.unblockUI(), window.setTimeout(function() {
                     $("#ot_add_tarea_window").remove(), e && e();
@@ -11665,8 +11590,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 
             },
             render: function(m) {
-                var e = this;    
-                F.getOtCliente(m, function(a){ 
+                var e = this;
+                F.getOtCliente(m, function(a){
                   $("#ot_toggle_tarea_state_windowq").length || e.template(a)
                   , $("#ot_toggle_tarea_state_windowq .BUTTON_cancel").on("click", function() {
                       e.cancelToggleState();
@@ -11687,7 +11612,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                   });
                 })
-            },            
+            },
             cleanModals: function(e) {
                 $.unblockUI(), window.setTimeout(function() {
                     $("#toggle_tarea_state_window").remove(), e && e();
@@ -11764,7 +11689,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
             }
         });
-    }), 
+    }),
     e.define("/views/ot/OtAuditInfoCard.js", function(e, t, n, r, i, s) {
         C.View.OtAuditInfoCard = Backbone.View.extend({
             name: "ot_infocard",
@@ -11787,7 +11712,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "button",
                     "class": "ot_ver_mas",
                     value: "Ver Más",
-                    style: "background-color: #F8E4FF;",                    
+                    style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
                 }))
             },
@@ -11797,7 +11722,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"), 
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -11823,27 +11748,27 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       success: function(t) {
                         if(ot){
                             if($.isArray(t)){
-                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')  
+                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')
                               t.forEach(function(q){
-                                 var nombre = q.nombre || "Sin Nombre", 
-                                 descripcion = q.descripcion || "Sin Descripción" , 
+                                 var nombre = q.nombre || "Sin Nombre",
+                                 descripcion = q.descripcion || "Sin Descripción" ,
                                  observacion = q.observacion || "Sin Observación" ;
                                  $("#ver_mas_form").append(
                                   '<p><h3>Titulo: '+nombre+'</h3></p>'+
                                   '<p><span style= "font-weight: bold">Descripcion: </span>'+ descripcion +'</p>'+
                                   '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p><hr style="color: #0056b2;" />');
                               })
-                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')  
+                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')
                             }
                         }
                       }
                     })
-                  }     
+                  }
                 })
               }
             },
         });
-    }), 
+    }),
     e.define("/views/ot/OtAuditOptions.js", function(e, t, n, r, i, s) {
         C.View.OtAuditOptions = Backbone.View.extend({
             initialize: function() {
@@ -11865,13 +11790,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     "class": "ot_add_tarea",
                     value: "Agregar Tarea",
                     disabled: "disabled",
-                    style: "background-color: #CCFCC7",                    
+                    style: "background-color: #CCFCC7",
                     title: "Agrega una Tarea al final ó debajo de la seleccionada actualmente."
                 }),$("<input>", {
                     type: "button",
                     "class": "ot_conclude",
                     value: "Concluir O/T",
-                    style: "background-color: #F3F5A6",                    
+                    style: "background-color: #F3F5A6",
                     disabled: "disabled"
                 }),$("<input>", {
                     type: "button",
@@ -11914,7 +11839,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                               el:$("body"),
                               ot_number: i,
                           });
-                        });         
+                        });
                       }else{
                         if(coordinador == 1){
                           if(C.Session.getUser().area_id == 4){
@@ -11923,7 +11848,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   el: $("body"),
                                   ot_number: i,
                               });
-                            });                   
+                            });
                           }else{
                             F.msgError("No tiene los permisos necesarios")
                           }
@@ -11933,7 +11858,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 el: $("body"),
                                 ot_number: i,
                             });
-                          });       
+                          });
                         }
                       }
                     }else{
@@ -11942,7 +11867,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }else{
                     F.msgError("La OT no tiene fecha de vencimiento, Cárguela y luego la podrá concluir")
                 }
-            },            
+            },
             addTarea: function() {
                 var e = this;
                 new C.View.OtAuditAddTarea({
@@ -11961,9 +11886,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             // OT-> Seguimiento -> Reprogramar VTO
             reprogramarOt: function(){
-              var e = this, t = $(".ot_table"), 
-              n = F.getDataTableSelection(t)[0], 
-              r = $(t).dataTable().fnGetData(n)[0], 
+              var e = this, t = $(".ot_table"),
+              n = F.getDataTableSelection(t)[0],
+              r = $(t).dataTable().fnGetData(n)[0],
               i = $(".ot_table").dataTable().fnGetData(n)[1];
                 (this.templatet(),
                  $("#ot_reprogramar_window .BUTTON_cancel").on("click", function() {
@@ -11992,12 +11917,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }else{
                       F.msgError("Todos los campos son obligatorios") // OT->SEGUIMIENTO REPGROGRAMAR VTO
                     }
-                })) 
+                }))
             },
             templatet: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               /* FORM REPROGRAMAR VTO */
-              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form" >' + "<br /><br />" +'<input id="tess" name="fechaVto" type="date" placeholder="Fecha Vto nueva"><br /><br />'+'Observaciones: <br /><textarea id="tesss" name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"), 
+              $("body").append('<div id="ot_reprogramar_window" style="display:none;"><h1 class="bold">¿Está seguro de querer Reprogramar la O/T Nº '+i+"?</h1>" + '<form id="reprogramar_ot_form" >' + "<br /><br />" +'<input id="tess" name="fechaVto" type="date" placeholder="Fecha Vto nueva"><br /><br />'+'Observaciones: <br /><textarea id="tesss" name="observation" style="width:100%; height:50px;"></textarea>'+ "</form>" + '<input type="button" class="BUTTON_cancel lefty button" value="Cancelar" />'+ '<input type="button" class="BUTTON_proceed righty button" value="Proceder" />' + "</div>"),
               /* FIN FORM REPGROGRAMAR VTO */
               $.blockUI({
                 message: $("#ot_reprogramar_window"),
@@ -12009,7 +11934,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   padding: "1%",
                   cursor: "default"
                 }
-              });                  
+              });
             },
             reworkTarea: function() {
                 var e = this, t = $(".selection_otTarea_id").val();
@@ -12024,7 +11949,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }), 
+    }),
     e.define("/views/ot/OtAuditTable.js", function(e, t, n, r, i, s) {
         C.View.OtAuditTable = Backbone.View.extend({
             name: "ot",
@@ -12053,8 +11978,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }
                 }
                 var t = this;
-                this.data = this.options.collection, 
-                this.area_id = this.options.area_id, 
+                this.data = this.options.collection,
+                this.area_id = this.options.area_id,
                 F.createDataTable(this, function(e) {
                     F.assignValuesToInfoCard($(".ot_infocard"), e);
                 }, e);
@@ -12081,10 +12006,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 "class": "complete_task_" + e.id
                             }), u = "<span>" + e.posicion +"-"+e.nombre +" - </span>"+e.descripcion+" <span>"+ e.empleado.nombre+" "+e.empleado.apellido+"</span> "+insumido+" de "+e.tiempoEstimado, u += '<span class="task_completed_date" style="color:#A33;">' + F.toHumanDate(e.fechaVencimiento, !1) + "</span>",
                              e.completa ?
-                              u += '<span class="task_completed_date">' + F.toHumanDate(e.fechaCompleta, !1) + "</span>" : 
+                              u += '<span class="task_completed_date">' + F.toHumanDate(e.fechaCompleta, !1) + "</span>" :
                                u += '<span class="task_completed_date" style="color:#555;">Incompleta</span>', C.Session.roleID() >= 1 && $(r).append(s), $(r).append(u);
                              var t = C.Session.getUser().rol_id, h = t == 4, p = t == 3 && i.area_id == e.area_id, d = i.area_id != e.area_id || t != 1 || t != 2 || t != 5;
-                            e.completa == 1 && ($(s).attr("checked", !0), $(s).parent().addClass("crossed"), a = e.id, f += 1), $(".ot_id_" + o).append(r).fadeIn(), i.bindRenderOtTareaForm(r, e, d), i.bindEnableTareaActions(r, e, d), $('input:checkbox[class="complete_task_' + e.id + '"]').on("click", function() {                      
+                            e.completa == 1 && ($(s).attr("checked", !0), $(s).parent().addClass("crossed"), a = e.id, f += 1), $(".ot_id_" + o).append(r).fadeIn(), i.bindRenderOtTareaForm(r, e, d), i.bindEnableTareaActions(r, e, d), $('input:checkbox[class="complete_task_' + e.id + '"]').on("click", function() {
                                 var t = this, n = null, r = F.doNothing, s = null, a=!0;
                                 C.Session.getUser().rol_id != 4 && e.empleado_id != C.Session.getUser().empleado_id ? (r = "Solo el usuario Responsable puede completar la tarea", i = function() {
                                     $(t).attr("checked", !1);
@@ -12093,7 +12018,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 })) : ($(t).is(":checked") ? (n = "Esta operación COMPLETARÁ la Tarea.", r = function() {
                                     $(t).attr("checked", !1);
                                 }, s = !1) : ($(t).attr("checked", !0),a=false, n = "Esta operación convertirá en INCOMPLETA la Tarea.", r = function() {
-                                    
+
                                     $(t).attr("checked", !1);
                                 }, s = !0), console.log(a),a?F.msgConfirm(n, function() {
                                     i.toggleTareaState(t, e.id, s, function(e) {
@@ -12109,7 +12034,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             }), l = !1,(!e.completa && n == -1 || e.posicion == n) ? n = e.posicion : e.completa || ($(s).attr("disabled", !0), $(r).css({
                                 opacity: .5
                             }));
-                        });    
+                        });
                   } else $(".ot_infocard .ot_percentage").remove(), $(".ot_id_" + o).append("<p>Esta O/T no posee un Plan de Tareas asociado</p>").fadeIn();
                   var h = i.calculateCompletitionPercentage(e), p = "peity_pie_" + o;
                   $("span." + p).remove(), $($(t).children()[0]).append('<span class="' + p + '">' + h.toString() + "/100</span>"), $("span." + p).css({
@@ -12224,7 +12149,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }else
                           F.msgError("El tiempo Insumido debe ir en formato HH:MM EJ: 00:15")
                     },
-                    idsat:t,                    
+                    idsat:t,
                 });
             }
         });
@@ -12350,7 +12275,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 descripcion: "Descripción",
                 notificarCliente: "Notificar Cliente",
                 conclusion: "Conclusión",
-                consulta: "Consulta",                
+                consulta: "Consulta",
             },
             initialize: function() {
                 var e = this;
@@ -12359,7 +12284,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "button",
                     "class": "ot_ver_mas",
                     value: "Ver Más",
-                    style: "background-color: #F8E4FF;",                    
+                    style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
                 }))
             },
@@ -12369,7 +12294,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"), 
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -12395,27 +12320,27 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       success: function(t) {
                         if(ot){
                             if($.isArray(t)){
-                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')  
+                              $("#ver_mas_form").append('<span  style= "font-weight: bold">'+ot.clienteNombre+'</span><br /><span  style= "font-weight: bold">Ingreso:</span>'+ot.ingreso+'<br /><hr style="color: #0056b2;" /><p><span  style= "font-weight: bold">Titulo OT:</span>'+ot.titulo+'<br /><span  style= "font-weight: bold">Descripción OT:</span>'+ot.descripcion+'<hr style="color: #0056b2;" /></p>')
                               t.forEach(function(q){
-                                 var nombre = q.nombre || "Sin Nombre", 
-                                 descripcion = q.descripcion || "Sin Descripción" , 
+                                 var nombre = q.nombre || "Sin Nombre",
+                                 descripcion = q.descripcion || "Sin Descripción" ,
                                  observacion = q.observacion || "Sin Observación" ;
                                  $("#ver_mas_form").append(
                                   '<p><h3>Titulo: '+nombre+'</h3></p>'+
                                   '<p><span style= "font-weight: bold">Descripcion: </span>'+ descripcion +'</p>'+
                                   '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p><hr style="color: #0056b2;" />');
                               })
-                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')  
+                              $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')
                             }
                         }
                       }
                     })
-                  }     
+                  }
                 })
               }
             },
         });
-    }),    
+    }),
     e.define("/views/otTarea/OtTareaResources.js", function(e, t, n, r, i, s) {
         C.View.OtTareaResources = Backbone.View.extend({
             name: "ottarea_resource",
@@ -12475,13 +12400,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             data: null,
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null ],
-                iDisplayLength: 500                
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
                 this.data = this.options.collection, F.createDataTable(this, function(e) {
                     F.assignValuesToForm($(".oc_form"), e);
-                });                
+                });
             },
             events: {
                 "click .oc_table tr": "selectRow"
@@ -12490,7 +12415,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 this.selected_row = $(e.currentTarget);
             }
         });
-    }),    
+    }),
    e.define("/views/ot/OcForm.js", function(e, t, n, r, i, s) {
       C.View.OcForm  = Backbone.View.extend({
           name: "oc_form",
@@ -12509,40 +12434,40 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "select",
                   attrs: {
                       disabled: "disabled"
-                  }                   
+                  }
               },
               titulo: {
                 label: "Título de la consulta",
                 attrs: {
                       disabled: "disabled"
-                  }                   
+                  }
               },
               empleadoNombre: {
                 label: "EmpleadoDesignado",
                 attrs: {
                       disabled: "disabled"
-                  }                   
-              },                
+                  }
+              },
               consulta: {
                 label: "Consulta",
                 type: "textarea",
                 attrs: {
                       style: "height:150px;",
                       disabled: "disabled"
-                  }                   
+                  }
               },
               solucion: {
                 label: "Solución/Respuesta",
                 type: "textarea",
                 attrs: {
                       style: "height:150px;"
-                  }                   
-              },  
+                  }
+              },
               notificarCliente: {
                   label: "Notificar eventos al cliente",
                   type: "select_yn",
                   default_value: "n"
-              },                                 
+              },
           },
           buttons: {
               create: !1,
@@ -12581,9 +12506,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
            $.ajax({
               url: "/oc/byId/"+e.getSelectionID(),
               success: function(t) {
-                if(C.Session.roleID()>=3 
+                if(C.Session.roleID()>=3
                   || t.empleado_id == C.Session.empleadoID()){
-                  if(($(".ieOc_form").serializeObject().cliente_id != '') 
+                  if(($(".ieOc_form").serializeObject().cliente_id != '')
                   && ($(".ieOc_form").serializeObject().solucion != '')
                   ){
                     $.ajax({
@@ -12595,16 +12520,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         setTimeout(function(){location.reload()},1e3)
                       }
                    })
-                 }else{ 
+                 }else{
                     F.msgError('El campo Solución/Respuesta es obligatorio');
-                 } 
+                 }
               }else
                 F.msgError("No tiene los permisos necesarios (La respuesta solo la puede dar el Empleado Designado o un Supervisor)")
               }
             })
           }
        })
-    }),        
+    }),
     //OTTAREA
     e.define("/views/ottarea/OtTareaForm.js", function(e, t, n, r, i, s) {
         C.View.OtTareaForm = Backbone.View.extend({
@@ -12636,7 +12561,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 empleado_id: {
                     label: "Empleado",
-                    type: "select"                
+                    type: "select"
                 },
                 observacion: {
                     label: "Observación",
@@ -12658,10 +12583,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 var e = this;
-                var n = 
+                var n =
                 F.getAllFromModel("area", function(t) {
-                 e.relations.areas = t, F.getAllFromModel("empleado", function(t) {                
-                    e.relations.empleados = t, F.createForm(e), 
+                 e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
+                    e.relations.empleados = t, F.createForm(e),
                     $(".tarea_form input:hidden.selection_id").remove();
                     var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
                     $(r).append($("<input>", {
@@ -12709,9 +12634,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editTarea: function() {
                 var e = this;
-                if( $(".tarea_form").serializeObject().area_id != '' 
-                &&  $(".tarea_form").serializeObject().empleado_id != '' 
-                &&  $(".tarea_form").serializeObject().nombre != '' 
+                if( $(".tarea_form").serializeObject().area_id != ''
+                &&  $(".tarea_form").serializeObject().empleado_id != ''
+                &&  $(".tarea_form").serializeObject().nombre != ''
                 ){
                   if(C.Session.roleID()<3){
                     F.msgError("No tiene los permisos necesarios")
@@ -12727,7 +12652,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 					                  F.msgError("Fecha invalida, debe ser anterior al vencimiento de la OT")
                           }
                         }
-                    }) 
+                    })
                   }
                 }else{
                   F.msgError('Los Campos Area, Empleado y Nombre son Obligatorios')
@@ -12737,7 +12662,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if(C.Session.roleID()<3){
                   F.msgError("No tiene los permisos necesarios")
-                }else{                
+                }else{
                  F.msgConfirm("¿Desea eliminar esta Tarea?", function() {
                     $.ajax({
                         type: "POST",
@@ -12749,7 +12674,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }
                     });
                 })
-               } 
+               }
             },
             cancelEditTarea: function() {
                 $(".tarea_form").fadeOut("slow", function() {
@@ -12819,28 +12744,28 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 posicion: {
                     label: "Posición",
                     check: "alpha",
-                },   
+                },
                 tiempoEstimado:{
                     label: "Tiempo Estimado",
                     type: "text",
                     placeholder: "HH:MM",
                     force_label: !0
-                },           
+                },
                 descripcion: {
                     label: "Descripción",
                     check: "alpha",
                     type: "textarea",
                     attrs: {
                         style: "height:100px;"
-                    }                
+                    }
                 },
                 area_id: {
                     label: "Área Responsable",
-                    type: "select",                    
+                    type: "select",
                 },
                 empleado_id:{
                     label: "Empleado Responsable",
-                    type: "select",                    
+                    type: "select",
                 },
             },
             isCRUD: !0,
@@ -12855,9 +12780,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     e.relations.areas = t, F.createForm(e);
                   })
                 })
-            },            
+            },
             events: {
-                "click .tarea_form .BUTTON_create": "addTarea",            
+                "click .tarea_form .BUTTON_create": "addTarea",
                 "click .tarea_form .BUTTON_save": "editTarea",
                 "click .tarea_form .BUTTON_delete": "delTarea"
             },
@@ -12901,7 +12826,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             }
                      })
                     }
-                  }else{   
+                  }else{
                     $.ajax({
                           type: "POST",
                           url: "/tarea/",
@@ -12922,10 +12847,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           }
                    })
                  }
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }                
-            },            
+               }
+            },
             editTarea: function() {
                 var e = this;
                 if(($(".tarea_form").serializeObject().nombre.replace(/\s/g, "") != '')){
@@ -12973,8 +12898,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                          });
                       }
                    })
-                 }                 
-               }else{ 
+                 }
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
             },
@@ -12993,7 +12918,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 });
             }
         });
-    }),   
+    }),
   //PLAN
     e.define("/views/ot/Plan.js", function(e, t, n, r, i, s) {
         C.View.Plan = Backbone.View.extend({
@@ -13058,7 +12983,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "textarea",
                     attrs: {
                         style: "height:100px;"
-                    }                
+                    }
                 },
                 tarea_id: {
                     label: "Tarea(s)",
@@ -13077,7 +13002,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
             },
             events: {
-                "click .plan_form .BUTTON_create": "addPlan",            
+                "click .plan_form .BUTTON_create": "addPlan",
                 "click .plan_form .BUTTON_save": "editPlan",
                 "click .plan_form .BUTTON_delete": "delPlan"
             },
@@ -13097,7 +13022,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               var e = this;
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
-              }else{  
+              }else{
                 if(($(".plan_form").serializeObject().nombre.replace(/\s/g, "") != '')){
                   $.ajax({
                         type: "POST",
@@ -13118,16 +13043,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
-               }   
-              }             
-            },            
+               }
+              }
+            },
             editPlan: function() {
               var e = this;
  			        if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
-              }else{  
+              }else{
                 if(($(".plan_form").serializeObject().nombre.replace(/\s/g, "") != '')){
                   $.ajax({
                         type: "PUT",
@@ -13148,7 +13073,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                            });
                         }
                  })
-               }else{ 
+               }else{
                   F.msgError("El campo 'Nombre' es OBLIGATORIO");
                }
              }
@@ -13157,7 +13082,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               var e = this;
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
-              }else{    
+              }else{
                 F.msgConfirm("¿Desea eliminar a este Plan?", function() {
                     $.ajax({
                         type: "POST",
@@ -13218,7 +13143,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     }),
     e.define("/views/caja/RevisionTable.js", function(e, t, n, r, i, s) {
         C.View.RevisionTable = Backbone.View.extend({
-            name: "revision",          
+            name: "revision",
             headers: [ "ID(BD)", "Recibo", "Total", "Movimiento", "Monto", "Caja", "Concepto", "SubConcepto", "R-SubConcepto", "I/E", "Fecha"],
             attrs: [ "id", "recibo", "montoTotal", "observacion", "monto", "caja", "concepto", "subConcepto", "rSubConcepto", "ie", "creado"],
             data: null,
@@ -13292,7 +13217,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }).text(e.name));
                 }), t;
 
-            }, 
+            },
             listaRecibos: function(h) {
               var t = $("<select name= recibo_id>", {
                   name: e
@@ -13317,10 +13242,10 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $("body").append(
                       '<div id="caja_anular_window" style="display:none;">'+
                       '<h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Seleccione el recibo a Anular</h1>'+
-                      '<form id="anular_form" align="center">' + 
+                      '<form id="anular_form" align="center">' +
                       '</form>' +
                       "</div>"
-                    ),   
+                    ),
                     $("#anular_form").append(suthis.listaRecibos(recibos)),
                     $("#anular_form").append('<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" /><input type="button" class="BUTTON_proceed_mov righty button" value="Anular Recibo" />');
                     $("#caja_anular_window .BUTTON_proceed_mov").on("click", function() {
@@ -13378,13 +13303,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 $("body").append(
                                   '<div id="caja_rango_window" style="display:none;">'+
                                   '<h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Seleccione el rango a Guardar</h1>'+
-                                  '<form id="ver_mas_form" align="center">' + 
+                                  '<form id="ver_mas_form" align="center">' +
                                   '<br /><br /><br /></form>' +
                                   '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+
                                   '<input type="button" style="background-color:green"class="BUTTON_proceed_mov center button" value="Realizar Movimientos" />'+
                                   '<input type="button" style="background-color:red" class="BUTTON_proceed_impr righty button" value="imprimir" />'+
                                   "</div>"
-                                ), 
+                                ),
                                 $("#ver_mas_form").empty().append(tabla),
                                 $("#ver_mas_form").append(suthis.listaEmpleados(h)),
                                 $("#caja_rango_window .BUTTON_proceed_mov").on("click", function() {
@@ -13415,15 +13340,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                 '<tr><td></td><td></td><td></td><td></td><td>Total</td><td align="right">'+e.total+'</td><td></td></tr>'+
                                                 '<tr><td></td><td></td><td></td><td></td><td>Caja</td><td align="right">'+e.caja+'</td><td></td></tr>'+
                                                 '<tr><td></td><td></td><td></td><td></td><td>Banco</td><td align="right">'+e.banco+'</td><td></td></tr>'+
-                                                '<tr><td></td><td></td><td></td><td></td><td>CtaCte</td><td align="right">'+e.ctaCte+'</td><td></td></tr>'; 
-                                            var tabla= 
+                                                '<tr><td></td><td></td><td></td><td></td><td>CtaCte</td><td align="right">'+e.ctaCte+'</td><td></td></tr>';
+                                            var tabla=
                                                 '<table  style="border:1px solid font-size:10px;>'+
                                                 '<tr align="center"><td>Recibo</td><td>Fecha</td><td>Detalle</td>'+
                                                 '<td>Concepto</td><td>Ing/Egr</td><td>Caja</td><td>Monto</td><td>Monto Total</td></tr>'+
                                                 row+
                                                 finalRows+
                                                 '</table>'
-                                            var reciboh= 
+                                            var reciboh=
                                                 '<div id="imprimirCaja" style="display:none; text-align: left;">' +
                                                     '<div style="width: 670px; height: padding: 6px">'+
                                                         '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -13438,7 +13363,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                               '</div>'+
                                                               '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                                                   '<span style="font-weight:bold;"> Descripción del movimiento: </span>Arqueo de Caja'+
-                                                              '</div>'+                                            
+                                                              '</div>'+
                                                         '</div>'+
                                                         '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                                               '<span style="font-weight:bold;"> Operador: </span>'+ "Jorge Pressacco"+
@@ -13450,7 +13375,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                               '<br  /><br  /><br  />'+
                                                               '-------------------------------------------<br />'+
                                                               '<br  /><br  />'+
-                                                              '<p><span style="font-weight:bold;">Jorge Pressacco</span></p><br  />'+ 
+                                                              '<p><span style="font-weight:bold;">Jorge Pressacco</span></p><br  />'+
                                                         '</div>'+
                                                         '<div style="text-align:center; border:solid thin; border-radius: 7px; width:36%; float:right; padding: 6px;">'+
                                                               '<br  /><br  /><br  />'+
@@ -13459,8 +13384,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                               '<p><span style="font-weight:bold;">'+e.empleado+'</span></p><br  />'+
                                                         '</div>'+
                                                     '</div>'+
-                                                '</div>' 
-                                              ;                                                 
+                                                '</div>'
+                                              ;
                                             $('body').append(reciboh)
                                             $.blockUI({
                                             message: $('#imprimirCaja'),
@@ -13477,7 +13402,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                         }
                                      })
                                     }else{
-                                      F.msgError("El campo empleado es obligatorio");  
+                                      F.msgError("El campo empleado es obligatorio");
                                     }
                                   }else{
                                     F.msgError("Tilde un criterio de búsqueda al menos");
@@ -13511,15 +13436,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                 '<tr><td></td><td></td><td></td><td></td><td>Total</td><td align="right">'+e.total+'</td><td></td></tr>'+
                                                 '<tr><td></td><td></td><td></td><td></td><td>Caja</td><td align="right">'+e.caja+'</td><td></td></tr>'+
                                                 '<tr><td></td><td></td><td></td><td></td><td>Banco</td><td align="right">'+e.banco+'</td><td></td></tr>'+
-                                                '<tr><td></td><td></td><td></td><td></td><td>CtaCte</td><td align="right">'+e.ctaCte+'</td><td></td></tr>'; 
-                                            var tabla= 
+                                                '<tr><td></td><td></td><td></td><td></td><td>CtaCte</td><td align="right">'+e.ctaCte+'</td><td></td></tr>';
+                                            var tabla=
                                                 '<table  style="border:1px solid font-size:10px;>'+
                                                 '<tr align="center"><td>Recibo</td><td>Fecha</td><td>Detalle</td>'+
                                                 '<td>Concepto</td><td>Caja</td><td>Ing/Egr</td><td>Monto</td><td>Monto Total</td></tr>'+
                                                 row+
                                                 finalRows+
                                                 '</table>'
-                                            var reciboh= 
+                                            var reciboh=
                                                 '<div id="imprimirCaja" style="display:none; text-align: left;">' +
                                                     '<div style="width: 670px; height: padding: 6px">'+
                                                         '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
@@ -13535,7 +13460,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                               '</div>'+
                                                               '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                                                   '<span style="font-weight:bold;"> Descripción del movimiento: </span>Arqueo de Caja'+
-                                                              '</div>'+                                            
+                                                              '</div>'+
                                                         '</div>'+
                                                         '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                                               '<span style="font-weight:bold;"> Operador: </span>'+ "Jorge Pressacco"+
@@ -13547,7 +13472,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                               '<br  /><br  /><br  />'+
                                                               '-------------------------------------------<br />'+
                                                               '<br  /><br  />'+
-                                                              '<p><span style="font-weight:bold;">Jorge Pressacco</span></p><br  />'+ 
+                                                              '<p><span style="font-weight:bold;">Jorge Pressacco</span></p><br  />'+
                                                         '</div>'+
                                                         '<div style="text-align:center; border:solid thin; border-radius: 7px; width:36%; float:right; padding: 6px;">'+
                                                               '<br  /><br  /><br  />'+
@@ -13557,8 +13482,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                         '</div>'+
                                                     '</div>'+
                                                     '<H1 style="font-weight:bold;">NO VÁLIDO COMO RECIBO (Recibo Temporal)</H1><br />'+
-                                                '</div>' 
-                                              ;                                                 
+                                                '</div>'
+                                              ;
                                             $('body').append(reciboh)
                                             $.blockUI({
                                             message: $('#imprimirCaja'),
@@ -13575,7 +13500,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                         }
                                      })
                                     }else{
-                                      F.msgError("El campo empleado es obligatorio");  
+                                      F.msgError("El campo empleado es obligatorio");
                                     }
                                   }else{
                                     F.msgError("Tilde un criterio de búsqueda al menos");
@@ -13601,11 +13526,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
                 })
               }
-            },            
+            },
             aceptarTodo: function() {
               if(C.Session.roleID() < 4){
                 F.msgError("No tiene los permisos necesarios")
-              }else{                
+              }else{
                 F.msgConfirm("¿Esta seguro de realizar Enviar Todos los Movimientos a las Cajas?", function(){
                    $.ajax({
                       url: "/revision/aceptarTodo",
@@ -13629,37 +13554,37 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     attrs: {
                       disabled: "disabled"
                     }
-                },            
+                },
                 concepto: {
                     label: "Concepto",
                     attrs: {
                       disabled: "disabled"
                     }
-                }, 
+                },
                 subConcepto: {
                     label: "SubConcepto",
                     attrs: {
                       disabled: "disabled"
                     }
-                }, 
+                },
                 rSubConcepto: {
                     label: "R-SubConcepto",
                     attrs: {
                       disabled: "disabled"
                     }
-                }, 
+                },
                 ie: {
                     label: "I/E",
                     attrs: {
                       disabled: "disabled"
                     }
-                }, 
+                },
                 monto: {
                     label: "Monto",
                     attrs: {
                       disabled: "disabled"
                     }
-                }, 
+                },
             },
 
             isCRUD: !0,
@@ -13700,9 +13625,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         setTimeout(function(){location.reload()},1e3)
                     }
                  })
-            },  
+            },
         });
-    }),   
+    }),
 //Caja
     e.define("/views/caja/Caja.js", function(e, t, n, r, i, s) {
         C.View.Caja = Backbone.View.extend({
@@ -13729,7 +13654,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     }),
     e.define("/views/caja/CajaTable.js", function(e, t, n, r, i, s) {
         C.View.CajaTable = Backbone.View.extend({
-            name: "caja",          
+            name: "caja",
             headers: [ "ID", "MontoTotal", "Movimiento", "Concepto", "SubConcepto", "R-SubConcepto", "Monto", "I/E", "Creado", "Guardado"],
             attrs: [ "id", "montoTotal", "observacion", "concepto", "subConcepto", "rSubConcepto", "monto", "ie", "creado", "recibido" ],
             data: null,
@@ -13772,7 +13697,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createInfoCard(e, $("#caja_right"));
             }
         });
-    }),   
+    }),
 //CBanco
     e.define("/views/caja/CBanco.js", function(e, t, n, r, i, s) {
         C.View.CBanco = Backbone.View.extend({
@@ -13799,7 +13724,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     }),
     e.define("/views/caja/CBancoTable.js", function(e, t, n, r, i, s) {
         C.View.CBancoTable = Backbone.View.extend({
-            name: "cBanco",          
+            name: "cBanco",
             headers: [ "ID", "MontoTotal", "Movimiento", "Concepto", "SubConcepto", "R-SubConcepto", "Monto", "I/E", "Creado", "Guardado"],
             attrs: [ "id", "montoTotal", "observacion", "concepto", "subConcepto", "rSubConcepto", "monto", "ie", "creado", "recibido" ],
             data: null,
@@ -13869,7 +13794,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     }),
     e.define("/views/caja/CtaClienteTable.js", function(e, t, n, r, i, s) {
         C.View.CtaClienteTable = Backbone.View.extend({
-            name: "ctaCliente",          
+            name: "ctaCliente",
             headers: [ "ID", "MontoTotal", "Movimiento", "Concepto", "SubConcepto", "R-SubConcepto", "Monto", "I/E", "Creado", "Guardado"],
             attrs: [ "id", "montoTotal", "observacion", "concepto", "subConcepto", "rSubConcepto", "monto", "ie", "creado", "recibido" ],
             data: null,
@@ -13947,7 +13872,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             mostrar_arqueo: function() {
               if(C.Session.roleID() < 4){
                 F.msgError("No tiene los permisos necesarios")
-              }else{                
+              }else{
                 $.ajax({
                     type: "GET",
                     url: "/caja/getAll",
@@ -13984,7 +13909,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                             '<br  />'+
                                             '<p><span style="font-weight:bold;">Jorge Pressacco</span></p><br  />'+
                                         '</div>'+
-                                    '</div>'+ 
+                                    '</div>'+
                                 '</div>';
                         $('body').append(arqueo)
                         $.blockUI({
@@ -14075,7 +14000,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "textarea",
                   attrs: {
                       style: "height:100px;"
-                  }                
+                  }
               },
               caja_id: {
                   label: "Caja",
@@ -14092,7 +14017,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               rSubConcepto_id: {
                   label: "R-SubConcepto",
                   type: "select_conNombre"
-              },                                
+              },
             },
             isCRUD: !1,
             buttons: {
@@ -14104,7 +14029,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             relations: {
                 concepto_id: null,
                 subConcepto_id: null,
-                rSubConcepto_id: null,                                
+                rSubConcepto_id: null,
             },
             initialize: function() {
                 var e= this;
@@ -14116,7 +14041,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 })
             },
             events: {
-                "click .ajusteCaja_form .BUTTON_save": "addAjusteCaja",            
+                "click .ajusteCaja_form .BUTTON_save": "addAjusteCaja",
             },
             getTable: function() {
                 return this.options.ajusteCaja_table;
@@ -14149,9 +14074,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                }else{
                  F.msgError('Los Campos I/E, Monto, Detalle y Caja son Obligatorios')
                }
-            },            
+            },
         });
-    }),    
+    }),
 //FIN!!
      e.define("/Router.js", function(e, t, n, r, i, s) {
         $(function() {
@@ -14161,42 +14086,42 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     "": "getNov",
                     "/": "getNov",
                     "/inicio/novedades": "getNov",
-                    "/inicio/novTarea": "getNovTarea",                    
+                    "/inicio/novTarea": "getNovTarea",
                     "/cliente": "getCliente",
                     "/cliente/nomina": "getCliente",
 		                "/cliente/cuentaCorriente": "getClienteCuentaCorriente",
-		                "/cliente/deuda": "getClienteDeuda",		 
-		                "/cliente/impuesto": "getClienteImpuesto",	
-		                "/cliente/clave": "getClienteClave",			                
-		                "/cliente/listado": "getClienteListado",	                
-		                "/cliente/listDeuda": "getClienteListDeuda",			                
-		                "/cliente/ajusteCta": "getAjusteCta",			                		                
+		                "/cliente/deuda": "getClienteDeuda",
+		                "/cliente/impuesto": "getClienteImpuesto",
+		                "/cliente/clave": "getClienteClave",
+		                "/cliente/listado": "getClienteListado",
+		                "/cliente/listDeuda": "getClienteListDeuda",
+		                "/cliente/ajusteCta": "getAjusteCta",
                     "/opciones/perfil": "getPerfil",
                     "/crud": "getEmpleado",
                     "/crud/empleado": "getEmpleado",
                     "/crud/usuario": "getUsuario",
                     "/crud/clasificacion": "getClasificacion",
-                    "/crud/concepto": "getConcepto",                    
+                    "/crud/concepto": "getConcepto",
                     "/crud/banco": "getBanco",
                     "/crud/actividad": "getActividad",
-                    "/crud/clave": "getClave",                    
-                    "/crud/area": "getArea",                    
-                    "/crud/rubro": "getRubro", 
-                    "/crud/impuesto": "getImpuesto",       
-                    "/ot": "getOtAudit",    
-                    "/ot/tarea": "getTarea",                     
+                    "/crud/clave": "getClave",
+                    "/crud/area": "getArea",
+                    "/crud/rubro": "getRubro",
+                    "/crud/impuesto": "getImpuesto",
+                    "/ot": "getOtAudit",
+                    "/ot/tarea": "getTarea",
                     "/ot/plan": "getPlan",
-                    "/ot/admin": "getOtAdmin", 
+                    "/ot/admin": "getOtAdmin",
                     "/ot/otTareaAll": "getOtTareaAll",
                     "/ot/audit": "getOtAudit",
                     "/ot/oc": "getOc",
-                    "/ot/audit/:ot_number": "getOtAuditAt",                    
-                    "/ot/history": "getOtHistory",                     
+                    "/ot/audit/:ot_number": "getOtAuditAt",
+                    "/ot/history": "getOtHistory",
                     "/ie": "getClientePago",
-                    "/ie/clienteDocumentacion": "getClienteDocumentacion",                    
-                    "/ie/clienteHistorial": "getClienteHistorial",                    
+                    "/ie/clienteDocumentacion": "getClienteDocumentacion",
+                    "/ie/clienteHistorial": "getClienteHistorial",
                     "/ie/ieOt": "getIeOt",
-                    "/ie/ieOc": "getIeOc",                    
+                    "/ie/ieOc": "getIeOc",
                     "/ie/clientePago": "getClientePago",
                     "/caja": "getRevision",
                     "/caja/revision": "getRevision",
@@ -14205,17 +14130,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     "/caja/ctaCliente": "getCtaCliente",
                     "/caja/ajusteCaja": "getAjusteCaja",
                     "/pagarImp": "getPagarImp",
-                    "/pagarImp/pagoImp": "getPagarImp",                    
-                    "/pagarImp/recepImp": "getRecepImp",                    
-                    "/pagarImp/descImp": "getDescImp",                    
+                    "/pagarImp/pagoImp": "getPagarImp",
+                    "/pagarImp/recepImp": "getRecepImp",
+                    "/pagarImp/descImp": "getDescImp",
                     "/pagarImp/archImp": "getArchImp",
-                    "/pagarImp/archivado": "getArchivado", 
+                    "/pagarImp/archivado": "getArchivado",
                     "/gestCrono": "getGestAsignacion",
-                    "/gestCrono/asignacion": "getGestAsignacion",                    
-                    "/gestCrono/aviso": "getGestAviso",                    
-                    "/gestCrono/avisoTest": "getGestAvisoTest",                                          
+                    "/gestCrono/asignacion": "getGestAsignacion",
+                    "/gestCrono/aviso": "getGestAviso",
+                    "/gestCrono/avisoTest": "getGestAvisoTest",
                     "/gestCrono/avisoPersonal": "getGestAvisoPersonal",
-                    "/gestCrono/asigPie": "getGestAsigPie",                    
+                    "/gestCrono/asigPie": "getGestAsigPie",
                     "/cronograma": "getAsignacion",
                     "/cronograma/vencimiento": "getCronograma",
                     "/cronograma/recepcion": "getRecepcion",
@@ -14248,7 +14173,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("inicio/novTarea");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                
+                },
                 getCliente: function() {
                     var e = function() {
                         document.title = C.TITLE + "Clientes", this.cliente_widget = C.Widget.Cliente.initialize(), this.cliente_view = new C.View.Cliente({
@@ -14272,7 +14197,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cliente/clave");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-	     	        },	     	        
+	     	        },
 	     	        getClienteImpuesto: function(){
                     var e = function() {
                         document.title = C.TITLE + "Impuestos", this.cliente_widget = C.Widget.Cliente.initialize(), this.clienteImpuesto_view = new C.View.ClienteImpuesto({
@@ -14296,7 +14221,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cliente/listado");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-	     	        },	     	
+	     	        },
 	     	        getClienteListDeuda: function(){
                     var e = function() {
                         document.title = C.TITLE + "ListDeuda", this.cliente_widget = C.Widget.Cliente.initialize(), this.listDeuda_view = new C.View.ListDeuda({
@@ -14304,7 +14229,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cliente/listDeuda");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-	     	        },	  
+	     	        },
 	     	        getAjusteCta: function(){
                     var e = function() {
                         document.title = C.TITLE + "AjusteCta", this.cliente_widget = C.Widget.Cliente.initialize(), this.ajusteCta_view = new C.View.AjusteCta({
@@ -14312,7 +14237,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cliente/ajusteCta");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-	     	        },		     	        	     	                
+	     	        },
 	              getPerfil: function() {
                     var e = function() {
                         document.title = C.TITLE + "Perfil", this.perfil_widget = C.Widget.Perfil.initialize(), this.perfil_view = new C.View.Perfil({
@@ -14327,7 +14252,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             model: new C.Model.Empleado
                         }), F.R.highlightCurrentModule("crud/empleado");
                     }.bind(this);
-                    C.Session.doIfInRolesList([ 0 ], e);                
+                    C.Session.doIfInRolesList([ 0 ], e);
                 },
                 getUsuario: function() {
                     var e = function() {
@@ -14352,7 +14277,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("crud/concepto");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                
+                },
                 getBanco: function() {
                     var e = function() {
                         document.title = C.TITLE + "Bancos", this.banco_widget = C.Widget.CRUD.initialize("banco"), this.banco_view = new C.View.Banco({
@@ -14368,7 +14293,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("crud/actividad");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },  
+                },
                 getClave: function() {
                     var e = function() {
                         document.title = C.TITLE + "Claves", this.clave_widget = C.Widget.CRUD.initialize("clave"), this.clave_view = new C.View.Clave({
@@ -14376,7 +14301,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("crud/clave");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                  
+                },
                 getArea: function() {
                     var e = function() {
                         document.title = C.TITLE + "Areas", this.area_widget = C.Widget.CRUD.initialize("area"), this.area_view = new C.View.Area({
@@ -14384,7 +14309,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("crud/area");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getRubro: function() {
                     var e = function() {
                         document.title = C.TITLE + "Rubros", this.rubro_widget = C.Widget.CRUD.initialize("rubro"), this.rubro_view = new C.View.Rubro({
@@ -14392,7 +14317,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("crud/rubro");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                    
+                },
                 getImpuesto: function() {
                     var e = function() {
                         document.title = C.TITLE + "Impuestos", this.impuesto_widget = C.Widget.CRUD.initialize("impuesto"), this.impuesto_view = new C.View.Impuesto({
@@ -14408,7 +14333,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ot/tarea");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                
+                },
                 getPlan: function() {
                     var e = function() {
                         document.title = C.TITLE + "Plan de Tareas", this.plan_widget = C.Widget.OT.initialize("plan"), this.plan_view = new C.View.Plan({
@@ -14416,7 +14341,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ot/plan");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getOtTareaAll: function() {
                     var e = function() {
                         document.title = C.TITLE + "Listado de Tareas", this.otTareaAll_widget = C.Widget.OT.initialize("otTareaAll"), this.otTareaAll_view = new C.View.OtTareaAll({
@@ -14432,17 +14357,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ot/admin");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },   
+                },
                 getOtAuditAt: function(y) {
                     var e = function() {
                         document.title = C.TITLE + "Órdenes de Trabajo", this.ot_widget = C.Widget.OT.initialize("ot"); this.ot_view = new C.View.OtAudit({
                             model: new C.Model.Ot,
                             open_ot_number_on_start: y
-                        }), F.R.highlightCurrentModule("ots/audit"); 
+                        }), F.R.highlightCurrentModule("ots/audit");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
                 },
-                /* OT-> Seguimiento */                             
+                /* OT-> Seguimiento */
                 getOtAudit: function() {
                     var e = function() {
                         document.title = C.TITLE + "Órdenes de Trabajo",  this.ot_widget = C.Widget.OT.initialize("ot"); this.ot_view = new C.View.OtAudit({
@@ -14467,7 +14392,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ot/oc");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },    
+                },
                 getRevision: function(){
                   var e = function(){
                     document.title = C.TITLE + "Revision", this.revision_widget = C.Widget.Caja.initialize("revision"), this.revision_view = new C.View.Revision({
@@ -14507,7 +14432,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }), F.R.highlightCurrentModule("caja/ajusteCaja");
                   }.bind(this);
                   C.Session.doIfInRolesList([ 4 ], e);
-                },                                
+                },
                 getClienteDocumentacion: function() {
                     var e = function() {
                         document.title = C.TITLE + "Documentación", this.clienteDocumentacion_widget = C.Widget.IE.initialize("clienteDocumentacion"), this.clienteDocumentacion_view = new C.View.ClienteDocumentacion({
@@ -14523,7 +14448,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ie/clienteHistorial");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getIeOt: function() {
                     var e = function() {
                         document.title = C.TITLE + "OT", this.ieOt_widget = C.Widget.IE.initialize("ieOt"), this.ieOt_view = new C.View.IeOt({
@@ -14539,7 +14464,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ie/ieOc");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                                               
+                },
                 getClientePago: function() {
                     var e = function() {
                         document.title = C.TITLE + "Pagos", this.clientePago_widget = C.Widget.IE.initialize("clientePago"), this.clientePago_view = new C.View.ClientePago({
@@ -14547,7 +14472,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("ie/clientePago");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },       
+                },
                 getPagarImp: function() {
                     var e = function() {
                         document.title = C.TITLE + "A Pagar", this.pagoImp_widget = C.Widget.PagarImp.initialize("pagoImp"), this.pagoImp_view = new C.View.PagoImp({
@@ -14555,7 +14480,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("pagarImp/pagoImp");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                           
+                },
                 getRecepImp: function() {
                     var e = function() {
                         document.title = C.TITLE + "Recepción", this.recepImp_widget = C.Widget.PagarImp.initialize("recepImp"), this.recepImp_view = new C.View.RecepImp({
@@ -14571,7 +14496,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("pagarImp/descImp");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                  
+                },
                 getArchImp: function() {
                     var e = function() {
                         document.title = C.TITLE + "A Archivar", this.archImp_widget = C.Widget.PagarImp.initialize("archImp"), this.archImp_view = new C.View.ArchImp({
@@ -14579,7 +14504,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("pagarImp/archImp");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },  
+                },
                 getArchivado: function() {
                     var e = function() {
                         document.title = C.TITLE + "Archivados", this.archivado_widget = C.Widget.PagarImp.initialize("archivado"), this.archivado_view = new C.View.Archivado({
@@ -14587,7 +14512,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("pagarImp/archivado");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                               
+                },
                 getCronograma: function() {
                     var e = function() {
                         document.title = C.TITLE + "Cronograma", this.cronograma_widget = C.Widget.Cronograma.initialize("cronograma"), this.cronograma_view = new C.View.Cronograma({
@@ -14595,7 +14520,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cronograma/vencimiento");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getRecepcion: function() {
                     var e = function() {
                         document.title = C.TITLE + "Recepcion", this.recepcion_widget = C.Widget.Cronograma.initialize("recepcion"), this.recepcion_view = new C.View.Recepcion({
@@ -14603,7 +14528,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cronograma/recepcion");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                   
+                },
                 getAviso: function() {
                     var e = function() {
                         document.title = C.TITLE + "Aviso", this.aviso_widget = C.Widget.Cronograma.initialize("aviso"), this.aviso_view = new C.View.Aviso({
@@ -14611,7 +14536,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cronograma/aviso");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getAsignacion: function() {
                     var e = function() {
                         document.title = C.TITLE + "Asignacion", this.asignacion_widget = C.Widget.Cronograma.initialize("asignacion"), this.asignacion_view = new C.View.Asignacion({
@@ -14619,7 +14544,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cronograma/asignacion");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                   
+                },
                 getAuditarImpuesto: function() {
                     var e = function() {
                         document.title = C.TITLE + "Auditar Impuestos", this.auditarImpuesto_widget = C.Widget.Cronograma.initialize("auditarImpuesto"), this.auditarImpuesto_view = new C.View.AuditarImpuesto({
@@ -14627,7 +14552,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("cronograma/auditarImpuesto");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getNoCargado: function() {
                     var e = function() {
                         document.title = C.TITLE + "No Cargados", this.carga_widget = C.Widget.Carga.initialize("noCargado"), this.noCargado_view = new C.View.NoCargado({
@@ -14635,7 +14560,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/noCargado");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                  
+                },
                 getCargado: function() {
                     var e = function() {
                         document.title = C.TITLE + "Imp. Sin Asignar", this.carga_widget = C.Widget.Carga.initialize("cargado"), this.cargado_view = new C.View.Cargado({
@@ -14643,7 +14568,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/cargado");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                                  
+                },
                 getCargaFijo: function() {
                     var e = function() {
                         document.title = C.TITLE + "Imp. Fijos", this.carga_widget = C.Widget.Carga.initialize(), this.cargaFijo_view = new C.View.CargaFijo({
@@ -14651,7 +14576,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/cargaFijo");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                
+                },
                 getCarga: function() {
                     var e = function() {
                         var actualUrl= Backbone.history.fragment.substring(7)
@@ -14660,7 +14585,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/"+actualUrl);
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                }, 
+                },
                 getSindicato: function() {
                     var e = function() {
                         document.title = C.TITLE + "Sindicatos", this.carga_widget = C.Widget.Carga.initialize("sindicato"), this.carga_view = new C.View.Sindicato({
@@ -14668,7 +14593,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/sindicato");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },  
+                },
                 getOtro: function() {
                     var e = function() {
                         document.title = C.TITLE + "Otros", this.carga_widget = C.Widget.Carga.initialize("otro"), this.carga_view = new C.View.Otro({
@@ -14676,7 +14601,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("carga/otro");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                  
+                },
                 getGestAsignacion: function() {
                     var e = function() {
                         document.title = C.TITLE + "Gestión de Asignaciones", this.gestAsignacion_widget = C.Widget.GestCrono.initialize("gestAsignacion"), this.gestAsignacion_view = new C.View.GestAsignacion({
@@ -14684,7 +14609,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("gestCrono/asignacion");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },    
+                },
                 getGestAviso: function() {
                     var e = function() {
                         document.title = C.TITLE + "Gestión de Avisos", this.gestAviso_widget = C.Widget.GestCrono.initialize("gestAviso"), this.gestAviso_view = new C.View.GestAviso({
@@ -14692,7 +14617,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("gestCrono/aviso");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },   
+                },
                 getGestAsigPie: function() {
                     var e = function() {
                         document.title = C.TITLE + "Asig. Pie", this.asigPie_widget = C.Widget.GestCrono.initialize("asigPie"), this.asigPie_view = new C.View.AsigPie({
@@ -14700,7 +14625,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("gestCrono/asigPie");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                
+                },
                 getGestAvisoTest: function() {
                     var e = function() {
                         document.title = C.TITLE + "Test Avisos", this.gestAvisoTest_widget = C.Widget.GestCrono.initialize("gestAvisoTest"), this.gestAvisoTest_view = new C.View.GestAvisoTest({
@@ -14708,7 +14633,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("gestCrono/avisoTest");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },  
+                },
                 getGestAvisoPersonal: function() {
                     var e = function() {
                         document.title = C.TITLE + "Aviso Personal", this.gestAvisoPersonal_widget = C.Widget.GestCrono.initialize("gestAvisoPersonal"), this.gestAvisoPersonal_view = new C.View.GestAvisoPersonal({
@@ -14716,7 +14641,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }), F.R.highlightCurrentModule("gestCrono/avisoPersonal");
                     }.bind(this);
                     C.Session.doIfInRolesList([ 0 ], e);
-                },                                                                         
+                },
 //DEMAS
                 notFound: function() {
                     $("body").append('<div id="not_found_modal_window" style="display:none;"><h1 class="title">Ruta Inexistente</h1><br /><p class="margined">La ruta a la que está tratando de acceder es inválida.</p><p class="margined">Si ingresó manualmente la ruta, revísela detenidamente.</p><p class="margined">En caso de haber recibido esta notificación por otra razón, intente recargar el módulo en el que estaba trabajando ó volver al Inicio.</p><br /><a href="/" class="BUTTON_proceed lefty">Inicio</a><input type="button" class="BUTTON_cancel righty button" value="Cerrar" /></div>'), $(".button").button(), $("#not_found_modal_window .BUTTON_cancel").on("click", function() {
@@ -14735,7 +14660,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             $("#not_found_modal_window").remove();
                         }
                     });
-                }, 
+                },
                 notAllowed: function() {
                     var e = "";
                     C.Session.roleID() != 1 && (e = '<a href="/" class="BUTTON_proceed lefty">Inicio</a>'), $("body").append('<div id="not_allowed_modal_window" style="display:none;"><h1 class="title">No posee permisos</h1><br /><p class="margined">Su usuario no está habilitado para visualizar la ruta a la que está tratando de acceder.</p><br />' + e + '<input type="button" class="BUTTON_cancel righty button" value="Cerrar" /></div>'), $(".button").button(), $("#not_allowed_modal_window .BUTTON_cancel").on("click", function() {
@@ -14773,7 +14698,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               clearTimeout( cierre )
               cierre = window.setInterval(function() {
                  window.location = "/logout";
-              }, 8*60*60*1000) //eso es igual a 8hs 
+              }, 8*60*60*1000) //eso es igual a 8hs
             }), $(document).on("keyup", function(e){
               if(e.which == 27)
                 location.reload()//$.unblockUI();//
@@ -14836,7 +14761,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 empleadoID: function() {
                     return parseInt($("#session_empleado_id").html());
-                },                
+                },
                 getUser: function() {
                     return {
                         id: C.Session.userID(),
