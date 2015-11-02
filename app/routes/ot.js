@@ -1,8 +1,8 @@
 var DB, Everyone
   , moment= require('moment')
-  , nodemailer = require('nodemailer')    
+  , nodemailer = require('nodemailer')
   , util = require('util');
-  
+
 var Ot = function(db, everyone) {
   DB = db;
   Everyone = everyone;
@@ -10,7 +10,7 @@ var Ot = function(db, everyone) {
   return Ot;
 };
 
-Ot.byNumero = function(req, res, next) { 
+Ot.byNumero = function(req, res, next) {
   DB.Ot.find({where: {numero : req.params.numero}}).on('success',function(b){
     res.send({
         vto: moment(b.fechaVencimiento).format("DD/MM/YYYY")=='Invalid date'?" ":moment(b.fechaVencimiento).format("DD/MM/YYYY"),
@@ -20,7 +20,7 @@ Ot.byNumero = function(req, res, next) {
   });
 };
 
-Ot.byOt = function(req, res, next) { 
+Ot.byOt = function(req, res, next) {
   DB.Ot.find({where: {id : req.params.numero}}).on('success',function(b){
     var conclusion = b.conclusion? b.conclusion : "Sin Conclusión";
     DB.Cliente.find({where:{id: b.cliente_id}}).on('success', function(cli){
@@ -37,7 +37,7 @@ Ot.byOt = function(req, res, next) {
 };
 
 Ot.get = function(req, res, next) {
-  DB.Ot.findAll({order:'fechaVencimiento ASC , prioridad ASC  ' , include:[{model: DB.Usuario, include: [{model: DB.Empleado}]},{model: DB.OtTarea, include:[{model:DB.Empleado}]}, {model: DB.Cliente}, {model: DB.Oc}], where:{estado: 1}}).on('success', function(a) {  
+  DB.Ot.findAll({order:'fechaVencimiento ASC , prioridad ASC  ' , include:[{model: DB.Usuario, include: [{model: DB.Empleado}]},{model: DB.OtTarea, include:[{model:DB.Empleado}]}, {model: DB.Cliente}, {model: DB.Oc}], where:{estado: 1}}).on('success', function(a) {
     var msg = []
     var com
     a.forEach(function(b){
@@ -45,9 +45,9 @@ Ot.get = function(req, res, next) {
 		  switch(b.prioridad) {
            case 1:	com="URGENTE"; break;
            case 2:	com="Prioritario"; break;
-           case 3:	com="Normal"; break; 
-           case 4:	com="Retrasable"; break; 
-           default:	com=" "; 
+           case 3:	com="Normal"; break;
+           case 4:	com="Retrasable"; break;
+           default:	com=" ";
       }
       var c='';
       var n='';
@@ -74,7 +74,7 @@ Ot.get = function(req, res, next) {
               objeto.nombre=otTarea.empleado.nombre+" "+otTarea.empleado.apellido;
               objeto.posicion=otTarea.posicion;
             }
-          }        
+          }
         }
         total+=1
       })
@@ -97,7 +97,7 @@ Ot.get = function(req, res, next) {
         honorarios: b.honorarios,
         prioridad: b.prioridad,
         coordinador: b.coordinador? 1 : 0,
-        juridica: b.juridica? 1 : 0,        
+        juridica: b.juridica? 1 : 0,
         reservado: b.reservado,
         titulo: b.titulo,
         descripcion: b.descripcion,
@@ -136,7 +136,7 @@ Ot.post = function(req, res, next) {
           req.body.reservado = false;
         }else{
           req.body.reservado = true;
-        }    */    
+        }    */
         req.body['numero']=numero;
 	req.body['usuario_id']=req.session.usuario_id;
         var x = req.body.fechaVencimiento;
@@ -149,16 +149,16 @@ Ot.post = function(req, res, next) {
                   DB.Oc.find({where:{id: oc}}).on('success', function(dbOc){
                     dbOc.updateAttributes({activa: 0, ot_id: ot.id})
                   })
-                }                  
+                }
               })
             }else{
               if(req.body.oc_id != '' && req.body.oc_id !=' '){
                 DB.Oc.find({where:{id: req.body.oc_id}}).on('success',function(dbOc){
                   dbOc.updateAttributes({activa: 0, ot_id: ot.id})
                 })
-              }                
-            }     
-          }        
+              }
+            }
+          }
           DB.PlanTarea.findAll({where:{plan_id: req.body.plan_id}, include:[{model: DB.Tarea}]}).on('success',function(planT){
             if(planT){
               if(util.isArray(planT)){
@@ -170,12 +170,12 @@ Ot.post = function(req, res, next) {
                       descripcion: t.tarea.descripcion,
                       tiempoEstimado: t.tarea.tiempoEstimado,
                       area_id: t.tarea.area_id,
-                      empleado_id: t.tarea.empleado_id,                  
+                      empleado_id: t.tarea.empleado_id,
                       ot_id: ot.id,
-                      fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),                       
+                      fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),
                     })
                   }
-                })        
+                })
               }else{
                 if(t.tarea){
                   DB.OtTarea.create({
@@ -184,13 +184,13 @@ Ot.post = function(req, res, next) {
                     descripcion: planT.tarea.descripcion,
                     tiempoEstimado: planT.tarea.tiempoEstimado,
                     area_id: planT.tarea.area_id,
-                    empleado_id: planT.tarea.empleado_id,                
+                    empleado_id: planT.tarea.empleado_id,
                     ot_id: ot.id,
-                    fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'), 
+                    fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),
                   })
                 }
-              } 
-            }         
+              }
+            }
           })
         })
         DB.Cliente.find({where:{id: req.body.cliente_id}}).on('success',function(client){
@@ -199,27 +199,27 @@ Ot.post = function(req, res, next) {
               novedad: "Se creó la Ot:"+numero,
               descripcion: "Creada por "+user.nombre+" "+user.apellido+" para el cliente "+client.nombre+" Fecha: "+moment().format("ll")+" - "+moment().format("HH:mm"),
               area_id: 4
-            })        
+            })
           //ACA ENVIABA EL MAIL AHORA LO HACE CUANDO SETEAN LA TAREA "Coordinación"
             /*
-            
-            if(req.body.reservado == 0){      
-              console.log("ACA ENVIARÍA EL MAIL")                  
-              moment.lang("es");          
+
+            if(req.body.reservado == 0){
+              console.log("ACA ENVIARÍA EL MAIL")
+              moment.lang("es");
               var transport = nodemailer.createTransport("SMTP", {
                 auth: {
                   user: "edu0221@hotmail.com",
                   pass: "Edu#1766Outlook"
                 }
-              }); 
+              });
               var com;
-	            switch(req.body.comunicacion_id) { 
-               case 1:	com="Teléfono"; break; 
+	            switch(req.body.comunicacion_id) {
+               case 1:	com="Teléfono"; break;
                case 2:	com="Celular"; break;
-               case 3:	com="Radio"; break; 
-               case 4:	com="E-Mail"; break; 
-               case 5:	com="Personal"; break;                
-               default:		com="Indefinido"; 
+               case 3:	com="Radio"; break;
+               case 4:	com="E-Mail"; break;
+               case 5:	com="Personal"; break;
+               default:		com="Indefinido";
 	            }
               var htmlText= '\
               <H1>Se ha creado una orden de trabajo con el Nº: '+numero+"<br /><H2> \
@@ -228,7 +228,7 @@ Ot.post = function(req, res, next) {
               Atendido por: "+user.nombre+" "+user.apellido+"<br /> \
               Comunicación: Por "+com+"<br />\
               Título: "+req.body.titulo+"<br /> \
-              Observaciones: "+req.body.descripcion+"</H2>";            
+              Observaciones: "+req.body.descripcion+"</H2>";
                 var mailOptions = {
                   from: "edu0221@hotmail.com",
                   to: "2014estudiocontable@gmail.com",//"edu0221@hotmail.com",
@@ -237,18 +237,18 @@ Ot.post = function(req, res, next) {
                   replyTo:  "edu0221@hotmail.com",
                   html: htmlText,
       //            attachments: attached_file
-                };  
+                };
               transport.sendMail(mailOptions, function(error, response) {
                 console.log("MAIL ENVIADO A:"+mailOptions.to)
-                transport.close();  
+                transport.close();
               });
             }*/
-          })          
+          })
         })
       })
     }
   })
-};   
+};
 
 Ot.postie = function(req, res, next) {
   res.send(true);
@@ -271,7 +271,7 @@ Ot.postie = function(req, res, next) {
         req.body.reservado = false;
       }else{
         req.body.reservado = true;
-      } */     
+      } */
       req.body['numero']=numero;
       req.body['usuario_id']=req.session.usuario_id;
       DB.Ot.create(req.body).on('success', function(ot){
@@ -286,8 +286,8 @@ Ot.postie = function(req, res, next) {
             DB.Oc.find({where:{id: req.body.oc_id}}).on('success',function(dbOc){
               dbOc.updateAttributes({activa: 0, ot_id: ot.id})
             })
-          }     
-        }         
+          }
+        }
       })
       DB.Cliente.find({where:{id: req.body.cliente_id}}).on('success',function(client){
         DB.Empleado.find({where: {id: req.session.empleado_id}}).on('success', function(user){
@@ -296,8 +296,8 @@ Ot.postie = function(req, res, next) {
             novedad: "Se creó la Ot:"+numero,
             descripcion: "Creada por "+user.nombre+" "+user.apellido+" para el cliente "+client.nombre+" Fecha: "+moment().format("ll")+" - "+moment().format("HH:mm"),
             area_id: 4
-          })        
-        })          
+          })
+        })
       })
     })
   })
@@ -348,7 +348,7 @@ Ot.conclude = function(req, res, next) {
 								novs.updateAttributes({activa: 0});
 							}
 						}
-					})    
+					})
 				  ot.updateAttributes({
 				    estado:10,
 				    conclusion: req.body.observation,
@@ -361,7 +361,7 @@ Ot.conclude = function(req, res, next) {
 				        novedad: "Se concluyó la Ot Nro "+req.params.id,
 				        descripcion: "Concluida por "+user.nombre+" "+user.apellido+" para el cliente "+client.nombre,
 				        area_id: 4
-				      })        
+				      })
 				    //ACA ENVIARÍA EL MAIL
 				      var transport = nodemailer.createTransport("SMTP", {
 				        auth: {
@@ -373,19 +373,19 @@ Ot.conclude = function(req, res, next) {
 				        moment.lang("es");
 				        DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){
 				          var com;
-				          switch(ot.comunicacion_id) { 
-				           case 1:	com="Teléfono"; break; 
+				          switch(ot.comunicacion_id) {
+				           case 1:	com="Teléfono"; break;
 				           case 2:	com="Celular"; break;
-				           case 3:	com="Radio"; break; 
-				           case 4:	com="E-Mail"; break; 
-				           case 5:	com="Personal"; break;    
-				           default:		com="Indefinido"; 
-				          }                  
+				           case 3:	com="Radio"; break;
+				           case 4:	com="E-Mail"; break;
+				           case 5:	com="Personal"; break;
+				           default:		com="Indefinido";
+				          }
 				          var honorarios
 				          if(ot.honorarios==1)
 				            honorarios="NO"
 				          else
-				            honorarios="SI" 
+				            honorarios="SI"
 				          var htmlText= '\
 				        <style>body{background-color:gray; color: white;}</style><body><table style="background-color:gray; color: white; width: 750 px; height: 1px; margin: 0px; padding: 0px; border-collapse: collapse;" cellpadding="0"><tr><td rowspan="2"><img src="/srv/pressacco/public/images/logo_estudio.png" height="90" width="90" /><td><td colspan="5"><h4 style= "color: #8A2908">Estudio Integral Pressacco & Asoc.</h4><td></tr><tr><td colspan="5"><h2>CONCLUSIÓN ORDEN DE TRABAJO N&ordm;:</h2></td><td colspan="2" bgcolor="#343434"><h2 align="center">'+req.params.id+'</h2></td></tr><tr style="margin: 0px; border: 1px solid #000000; padding: 0px;"></tr><tr><td>&nbsp;</td><td>Cliente:</td><td colspan= "2">'+cliente.nombre+'</td></tr><tr><td>&nbsp;</td><td>Fecha:</td><td colspan= "2">'+moment().format("ll")+'</td><td> &nbsp; </td><td  align="right" > Concluida por: </td><td>'+user.nombre+" "+user.apellido+'</td></tr><tr><td> &nbsp; </td><td> Hora: </td><td colspan= "2">'+moment().format("HH:mm")+'</td><td> &nbsp; </td><td  align="right"> Canal de comunicaci&oacute;n: </td><td>'+com+'</td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "2"><h5><ins> TÍTULO:</ins> <h5></td><td colspan= "5"><h5>'+ot.titulo+'<h5></td></tr><tr><td colspan= "2"><h6><ins> OBSERVACIONES:</ins><h6></td><td colspan= "5"><h6>'+req.body.observation+'<h6></td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "4"><h6><ins>*FECHA ESTIMADA DE CONCLUSIÓN:</ins></h6></td><td colspan= "3"><h6>'+moment(ot.fechaVencimiento).format("ll")+'</h6></td></tr><tr><td colspan= "4"><h6><ins>¿Tarea incluida en abono mensual?:</ins></h6></td><td colspan= "3"><h6>'+honorarios+'</h6></td></tr><tr><td colspan= "7"><font size=1>(*) condicionada a situaciones ajenas al Estudio </font></td>\
 	</tr>\
@@ -437,10 +437,10 @@ Ot.conclude = function(req, res, next) {
 		<tr style="margin: 2px; border: 5px solid #fff; padding: 0px;"></tr>\
 </table>\
 </body>';
-				          DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){    
+				          DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){
 				            var mailOptions = {
 				              from: "edu0221@hotmail.com",
-				              to: "edu0221@hotmail.com",
+				              to: "fedecrespo90@gmail.com",//"edu0221@hotmail.com",
 				              bcc: "edu0221@hotmail.com",
 				              subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
 				              replyTo:  "edu0221@hotmail.com",
@@ -454,13 +454,17 @@ Ot.conclude = function(req, res, next) {
         								}] */
 				            	};
 				            transport.sendMail(mailOptions, function(error, response) {
-										console.log("MAIL ENVIADO A:"+mailOptions.to+" CON COPIA A: "+mailOptions.bcc)
-				              transport.close();  
+                      if(error){
+                        console.log("ERROR ERROR ERROR : "+error);
+                      }else{
+                        console.log("MAIL ENVIADO A:"+mailOptions.to+" CON COPIA A: "+mailOptions.bcc);
+                        transport.close();
+                      }
 				            });
 				          })
 				        })
 				      }
-				    })         
+				    })
 				  })
 				}
   		}else{
@@ -481,16 +485,16 @@ Ot.put = function(req, res, next) {
                   DB.Oc.find({where:{id: oc}}).on('success', function(dbOc){
                     dbOc.updateAttributes({activa: 0, ot_id: ot.id})
                   })
-                }                  
+                }
               })
             }else{
               if(req.body.oc_id != '' && req.body.oc_id !=' '){
                 DB.Oc.find({where:{id: req.body.oc_id}}).on('success',function(dbOc){
                   dbOc.updateAttributes({activa: 0, ot_id: ot.id})
                 })
-              }                
-            }     
-          }      
+              }
+            }
+          }
       if(e.plan_id != req.body.plan_id){
         var q = "DELETE FROM otTarea WHERE ot_id = " + req.params.id;
         DB._.query(q, function(err, data) {
@@ -505,12 +509,12 @@ Ot.put = function(req, res, next) {
                       descripcion: t.tarea.descripcion,
                       tiempoEstimado: t.tarea.tiempoEstimado,
                       area_id: t.tarea.area_id,
-                      empleado_id: t.tarea.empleado_id,                  
+                      empleado_id: t.tarea.empleado_id,
                       ot_id: req.params.id,
-                      fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),                       
+                      fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),
                     })
                   }
-                })        
+                })
               }else{
                 if(t.tarea){
                   DB.OtTarea.create({
@@ -519,21 +523,21 @@ Ot.put = function(req, res, next) {
                     descripcion: planT.tarea.descripcion,
                     tiempoEstimado: planT.tarea.tiempoEstimado,
                     area_id: planT.tarea.area_id,
-                    empleado_id: planT.tarea.empleado_id,                
+                    empleado_id: planT.tarea.empleado_id,
                     ot_id: req.params.id,
-                    fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'), 
+                    fechaVencimiento: req.body.fechaVencimiento || moment().format('YYYY-MM-DD 15:00:00'),
                   })
                 }
-              } 
-            }         
+              }
+            }
           })
         })
       }
       var x = req.body.fechaVencimiento;
-      req.body.fechaVencimiento=x[6]+x[7]+x[8]+x[9]+"-"+x[3]+x[4]+"-"+x[0]+x[1]+" 15:00:00";      
+      req.body.fechaVencimiento=x[6]+x[7]+x[8]+x[9]+"-"+x[3]+x[4]+"-"+x[0]+x[1]+" 15:00:00";
       req.body.notificarCliente == 0? req.body.notificarCliente = !1:req.body.notificarCliente = !0
-      req.body.juridica == 0? req.body.juridica = !1:req.body.juridica = !0      
-     // req.body.reservado == 0? req.body.reservado = !1:req.body.reservado = !0      
+      req.body.juridica == 0? req.body.juridica = !1:req.body.juridica = !0
+     // req.body.reservado == 0? req.body.reservado = !1:req.body.reservado = !0
       e.updateAttributes(req.body).success(function(e) {
         res.send(true);
       });
@@ -555,8 +559,8 @@ Ot.putie = function(req, res, next) {
           DB.Oc.find({where:{id: req.body.oc_id}}).on('success',function(dbOc){
             dbOc.updateAttributes({activa: 0, ot_id: e.id})
           })
-        }     
-      }      
+        }
+      }
       //req.body.reservado == 0? req.body.reservado = !1:req.body.reservado = !0
       e.updateAttributes(req.body).success(function() {
         res.send(true);
@@ -594,13 +598,13 @@ Ot.reprogramar = function(req, res, next){
 			    DB.Empleado.find({where: {id: req.session.empleado_id}}).on('success', function(empleado){
 			      DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){
 			        var com;
-			        switch(ot.comunicacion_id) { 
-			         case 1:	com="Teléfono"; break; 
+			        switch(ot.comunicacion_id) {
+			         case 1:	com="Teléfono"; break;
 			         case 2:	com="Celular"; break;
-			         case 3:	com="Radio"; break; 
-			         case 4:	com="E-Mail"; break; 
-			         case 5:	com="Personal"; break;    
-			         default:		com="Indefinido"; 
+			         case 3:	com="Radio"; break;
+			         case 4:	com="E-Mail"; break;
+			         case 5:	com="Personal"; break;
+			         default:		com="Indefinido";
 			        }
 			        var honorarios
 			        ot.honorarios==1?honorarios="NO":honorarios="SI";
@@ -617,7 +621,7 @@ Ot.reprogramar = function(req, res, next){
 			        };
 			        transport.sendMail(mailOptions, function(error, response) {
 			          console.log("MAIL ENVIADO A:"+mailOptions.to+" CON COPIA A: "+mailOptions.bcc)
-			          transport.close();  
+			          transport.close();
 			        });
 			      })
 			    })
