@@ -1,8 +1,8 @@
-var DB, Everyone, 
+var DB, Everyone,
     moment= require('moment'),
     nodemailer = require('nodemailer'),
-    util = require('util');   
-  
+    util = require('util');
+
 var OtTarea = function(db, everyone) {
   DB = db;
   Everyone = everyone;
@@ -66,7 +66,7 @@ OtTarea.all = function(req, res, next){
         observacion: o.observacion || "Sin Observación",
         tiempoEstimado: o.tiempoEstimado || "Sin T/Estimado",
         tiempoInsumido: o.tiempoInsumido || "Sin T/Insumido",
-        conclusion: o.conclusion || "Sin Conclusión",
+        conclusion: o.ot.conclusion/*o.conclusion*/ || "Sin Conclusión",
         empleado: o.empleado? o.empleado.nombre+' '+o.empleado.apellido : "Sin Empleado",
       })
     })
@@ -98,11 +98,11 @@ OtTarea.add = function(req, res, next) {
 OtTarea.complete = function(req, res, next){
   DB.OtTareaResource.create({
     ot_tarea_id:	req.params.id,
-    empleado_id: req.session.empleado_id,		
+    empleado_id: req.session.empleado_id,
 	  empleado_horas:	req.body.tiempo.split(":")[0],
   	empleado_minutos:req.body.tiempo.split(":")[1],
   }).on('success', function(){
-    DB.OtTarea.find({where:{id: req.params.id}, include:[{model: DB.Ot}]}).on('success',function(otTarea){  
+    DB.OtTarea.find({where:{id: req.params.id}, include:[{model: DB.Ot}]}).on('success',function(otTarea){
       if(otTarea.tiempoInsumido){
         var b=req.body.tiempo.split(":")
         a=otTarea.tiempoInsumido.split(":")
@@ -143,11 +143,11 @@ OtTarea.complete = function(req, res, next){
                   empleado_id: otT.empleado_id,
                   area_id: otT.area_id
                 })
-              }  
+              }
             })
           }else{
             if(otTarea.ot.coordinador == 1){
-            //Creo novedad para el coordinador          
+            //Creo novedad para el coordinador
               DB.Usuario.findAll({where: {area_id: 4, rol_id: 3}}).on('success',function(users){
                 if(users){
                   users.forEach(function(user){
@@ -173,10 +173,10 @@ OtTarea.complete = function(req, res, next){
                     })
                   })
                 }
-              })          
+              })
             }
           }
-        })      
+        })
       ///
       })
       //SI LA TAREA ES LA DE COORDINACION ENVIO MAIL INICIAL
@@ -190,13 +190,13 @@ OtTarea.complete = function(req, res, next){
             }
           });
           var com;
-          switch(otTarea.ot.comunicacion_id) { 
-           case 1:	com="Teléfono"; break; 
+          switch(otTarea.ot.comunicacion_id) {
+           case 1:	com="Teléfono"; break;
            case 2:	com="Celular"; break;
-           case 3:	com="Radio"; break; 
-           case 4:	com="E-Mail"; break; 
-           case 5:	com="Personal"; break;    
-           default:		com="Indefinido"; 
+           case 3:	com="Radio"; break;
+           case 4:	com="E-Mail"; break;
+           case 5:	com="Personal"; break;
+           default:		com="Indefinido";
           }
           DB.Usuario.find({where: {id: otTarea.ot.usuario_id}, include: [{model: DB.Empleado}]}).on('success', function(user){
             var honorarios, fechaV;
@@ -215,10 +215,10 @@ OtTarea.complete = function(req, res, next){
                 replyTo:  "edu0221@hotmail.com",
                 html: htmlText,
                 forceEmbeddedImages: true
-              };  
+              };
               transport.sendMail(mailOptions, function(error, response) {
                 console.log("MAIL INICIAL ENVIADO A: "+mailOptions.to+" CON COPIA A: "+mailOptions.bcc);
-			          transport.close();              
+			          transport.close();
               })
             })
           })
@@ -231,16 +231,16 @@ OtTarea.complete = function(req, res, next){
               user: "edu0221@hotmail.com",
               pass: "Edu#1766Outlook"
             }
-          });      
+          });
           moment.lang("es");
           var com;
-          switch(otTarea.ot.comunicacion_id) { 
-           case 1:	com="Teléfono"; break; 
+          switch(otTarea.ot.comunicacion_id) {
+           case 1:	com="Teléfono"; break;
            case 2:	com="Celular"; break;
-           case 3:	com="Radio"; break; 
-           case 4:	com="E-Mail"; break; 
-           case 5:	com="Personal"; break;    
-           default:		com="Indefinido"; 
+           case 3:	com="Radio"; break;
+           case 4:	com="E-Mail"; break;
+           case 5:	com="Personal"; break;
+           default:		com="Indefinido";
           }
           DB.Usuario.find({where: {id: otTarea.ot.usuario_id}, include: [{model: DB.Empleado}]}).on('success', function(user){
             DB.Cliente.find({where: {id: otTarea.ot.cliente_id}}).on('success', function(cliente){
@@ -259,11 +259,11 @@ OtTarea.complete = function(req, res, next){
                 replyTo:  "edu0221@hotmail.com",
                 html: htmlText,
                 forceEmbeddedImages: true
-              };            
+              };
               transport.sendMail(mailOptions, function(error, response) {
                 console.log("MAIL ENVIADO A: "+mailOptions.to+" CON COPIA A: "+mailOptions.bcc)
-                transport.close();  
-              });          
+                transport.close();
+              });
             })
           })
         }
@@ -274,12 +274,12 @@ OtTarea.complete = function(req, res, next){
 
 OtTarea.continuar = function(req, res, next){
   DB.OtTareaResource.create({
-    empleado_id: req.session.empleado_id,		
+    empleado_id: req.session.empleado_id,
 	  empleado_horas:	req.body.tiempo.split(":")[0],
   	empleado_minutos:req.body.tiempo.split(":")[1],
 	  ot_tarea_id:	req.params.id,
   }).on('success', function(){
-    DB.OtTarea.find({where:{id: req.params.id}, include:[{model: DB.Ot}]}).on('success',function(otTarea){  
+    DB.OtTarea.find({where:{id: req.params.id}, include:[{model: DB.Ot}]}).on('success',function(otTarea){
       if(otTarea.tiempoInsumido){
         var b=req.body.tiempo.split(":")
         a=otTarea.tiempoInsumido.split(":")
@@ -319,7 +319,7 @@ if(util.isArray(otr)){
         id: otr.id,
         horas: otr.empleado_horas+":"+otr.empleado_minutos,
         empleado: otr.empleado.nombre+" "+ otr.empleado.apellido
-      })    
+      })
     }
     res.send({ result: true, resources: msg })
   }).on('error',function(){
