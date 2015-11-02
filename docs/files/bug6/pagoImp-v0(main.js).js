@@ -86,7 +86,7 @@
                 label: "Total De Impuestos",
                 type: "text",
                 attrs: {
-                  //disabled: "disabled"
+                  disabled: "disabled"
                 }
               },
               banco_id: {

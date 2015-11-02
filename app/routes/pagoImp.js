@@ -1,9 +1,9 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
 var PagoImp = function(db, everyone) {
   DB = db;
   Everyone = everyone;
-  return PagoImp;    
+  return PagoImp;
 };
 
 PagoImp.get = function(req, res, next) {
@@ -17,7 +17,7 @@ PagoImp.get = function(req, res, next) {
           if(ven.impuesto.impuestoBancoes){
             ven.impuesto.impuestoBancoes.forEach(function(v){
               impuestoBanco+=v.banco.nombre+" ";//'"'+v.banco.nombre+'-'+v.banco.direccion+'"'+' '
-            })  
+            })
           }else{
               impuestoBanco=' ';
           }
@@ -29,7 +29,7 @@ PagoImp.get = function(req, res, next) {
               ven.cronograma.mes="1"
               ven.cronograma.año= parseInt(ven.cronograma.año)+1
             }
-          }   
+          }
           if(ven.anticipo<12 && 0<ven.anticipo)
             ven.impuesto.nombre+=" - Anticipo "+ven.anticipo;
           var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4);
@@ -120,7 +120,7 @@ PagoImp.post = function(req, res, next) {
                 if(a.cliente.nombre < b.cliente.nombre) return -1;
                 if(a.cliente.nombre > b.cliente.nombre) return 1;
                 return 0;
-              })              
+              })
               var total = 0;
               b.forEach(function(vi){
                 var importe= parseFloat(vi.monto0)+ parseFloat(vi.monto1)+parseFloat(vi.monto2)+parseFloat(vi.monto3)+parseFloat(vi.monto4)
