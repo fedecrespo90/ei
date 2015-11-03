@@ -440,7 +440,7 @@ Ot.conclude = function(req, res, next) {
 				          DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){
 				            var mailOptions = {
 				              from: "edu0221@hotmail.com",
-				              to: "fedecrespo90@gmail.com",//"edu0221@hotmail.com",
+				              to: "edu0221@hotmail.com",,
 				              bcc: "edu0221@hotmail.com",
 				              subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
 				              replyTo:  "edu0221@hotmail.com",
