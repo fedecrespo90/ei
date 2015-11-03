@@ -293,7 +293,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             var n = new Date(e), r = "";
             return n.setHours(n.getHours() + 3), r += (n.getDate() < 10 ? "0" : "") + n.getDate(), r += "/", r += (n.getMonth() + 1 < 10 ? "0" : "") + (n.getMonth() + 1), r += "/", r += n.getFullYear(), t === undefined && t === !0 && (r += " ", r += (n.getHours() < 10 ? "0" : "") + n.getHours(), r += ":", r += (n.getMinutes() < 10 ? "0" : "") + n.getMinutes(), r += ":", r += (n.getSeconds() < 10 ? "0" : "") + n.getSeconds()), r;
         }, F.capitalize = function(e) {
-            return e.charAt(0).toUpperCase() + e.substr(1);
+            return e/*.charAt(0).toUpperCase()*/ + e.substr(1);
         }, $.fn.serializeObject = function() {
             var e = {}, t = this.serializeArray();
             return $.each(t, function() {
@@ -1507,13 +1507,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   cronogramaFecha: null,
                   cliente_id: null,
                   clienteNombre: null,
-                  /* AGREGO */
+                  // AGREGO
                   monto0: null,
                   monto1: null,
                   monto2: null,
                   monto3: null,
                   monto4: null,
-                  /* FIN AGREGO */
+                  // FIN AGREGO
                 };
             },
             initialize: function() {
@@ -8380,7 +8380,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
         });
     }),
-    //PAGARIMP MIO
+    //PAGARIMP 0v
         e.define("/views/pagarImp/PagoImp.js", function(e, t, n, r, i, s) {
             C.View.PagoImp = Backbone.View.extend({
                 el: $("body"),
@@ -8420,66 +8420,28 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     var me = this;
                     var arreglo=null;
                     arreglo=[];
-                    //var total=0;
-
-                    // AGREGO
-                    var m0 = 0;
-                    var m1 = 0;
-                    var m2 = 0;
-                    var m3 = 0;
-                    var m4 = 0;
-                    // FIN AGREGO
-
+                    var total=0;
                     this.collection.models.forEach(function(e){
                       e.attributes.check=($('<input>', { type: 'checkbox', id: e.attributes.id}).on('click', function(u) {
-                         //total=0;
-                         // AGREGO
-                         m0 = 0;
-                         m1 = 0;
-                         m2 = 0;
-                         m3 = 0;
-                         m4 = 0;
-                         // FIN AGREGO
-
+                         total=0;
                         if(this.checked){
                           arreglo.push(e);
                           $('.pagoImp_form [name="arreglo"]')[0].value=null
                           arreglo.forEach(function(a){
                             console.log(a.attributes)
-                            //total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total) //ES ESTE TMB!
-                            // AGREGO
-                            m0=parseFloat(a.attributes.monto0)+parseFloat(m0) //ES ESTE TMB!
-                            m1=parseFloat(a.attributes.monto1)+parseFloat(m1) //ES ESTE TMB!
-                            m2=parseFloat(a.attributes.monto2)+parseFloat(m2) //ES ESTE TMB!
-                            m3=parseFloat(a.attributes.monto3)+parseFloat(m3) //ES ESTE TMB!
-                            //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) //ES ESTE TMB!
-                            // FIN AGREGO
+                            total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
                             $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
                           })
-                          //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ES ESTE
-                          // AGREGO
-                          $(".pagoImp_form input:text[name:monto0]")[0].value=m0.toFixed(2)//ES ESTE
-                          $(".pagoImp_form input:text[name:monto1]")[1].value=m1.toFixed(2)//ES ESTE
-                          $(".pagoImp_form input:text[name:monto2]")[2].value=m2.toFixed(2)//ES ESTE
-                          $(".pagoImp_form input:text[name:monto3]")[3].value=m3.toFixed(2)//ES ESTE
-                          //$(".pagoImp_form input:text[name:monto4]")[4].value=m4.toFixed(2)//ES ESTE
-                          // FIN AGREGO
+                          $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
                         }else{
                           var indice= arreglo.indexOf(e)
                           arreglo.splice(indice,1)
                           $('.pagoImp_form [name="arreglo"]')[0].value=null
                           arreglo.forEach(function(a){
-                            //total=parseFloat(a.attributes.monto3)+parseFloat(total) // ESTE 0
-                            // AGREGO
-                            m0=parseFloat(a.attributes.monto0)+parseFloat(m0) // ESTE 0
-                            m1=parseFloat(a.attributes.monto1)+parseFloat(m1) // ESTE 0
-                            m2=parseFloat(a.attributes.monto2)+parseFloat(m2) // ESTE 0
-                            m3=parseFloat(a.attributes.monto3)+parseFloat(m3) // ESTE 0
-                            //m4=parseFloat(a.attributes.monto4)+parseFloat(m4) // ESTE 0
-                            // FIN AGREGO
+                            total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
                             $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
                           })
-                          //$(".pagoImp_form input:text[name:totalImp]")[2].value=total.toFixed(2)//ESTE NOSE
+                          $(".pagoImp_form input:text[name:totalImp]")[0].value=total.toFixed(2)
                         }
                       }))
                     })
@@ -8502,31 +8464,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type:"hidden",
                     name: "arreglo",
                   },
-                  /*montoImp: {
+                  montoImp: {
                     label: "Total De Impuestos",
                     type: "text",
                     attrs: {
-                      disabled: "disabled"
-                    },
-                  },*/
-                // AGREGO
-                  monto0: {
-                    label: "Monto 1",
-                    type: "text",
+                      //disabled: "disabled"
+                    }
                   },
-                  monto1: {
-                    label: "Monto 2",
-                    type: "text",
-                  },
-                  monto2: {
-                    label: "Monto 3",
-                    type: "text",
-                  },
-                  monto3: {
-                    label: "Monto 4",
-                    type: "text",
-                  },
-                // FIN AGREGO
                   banco_id: {
                     label:"Banco",
                     type: "select"
@@ -8573,19 +8517,18 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     return parseInt($(".selection_id").val());
                 },
                 getSelectionRow: function() {
+
                     return this.getTable().selected_row;
                 },
+
                 selectBanco: function() {
-                var bancId = $('.pagoImp_form').serializeObject().banco_id
-                    if(bancId != 0){
-                      $.ajax({
-                        type: "GET",
-                        url: '/banco/byIdNombre/'+bancId,
-                        success: function(e){
-                          $('.dataTables_filter input').val(e).keyup();
-                        }
-                      })
+                  $.ajax({
+                    type: "GET",
+                    url: '/banco/byIdNombre/'+$('.pagoImp_form').serializeObject().banco_id,
+                    success: function(e){
+                      $('.dataTables_filter input').val(e).keyup();
                     }
+                  })
                 },
                 addPagoImp: function() {
                   var sup = this
@@ -8595,12 +8538,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     if(id!="")
                       arreglo.push(id)
                   })
-                  //Saqué esto: $(".pagoImp_form input:text[name:totalImp]")[0].value!=0
-                  if(($(".pagoImp_form input:text[name:monto0]")[0].value!= 0.00 || $(".pagoImp_form input:text[name:monto1]")[1].value!= 0.00
-                  || $(".pagoImp_form input:text[name:monto2]")[2].value!= 0.00 || $(".pagoImp_form input:text[name:monto3]")[3].value!= 0.00 )
+                  if(($(".pagoImp_form input:text[name:totalImp]")[0].value!=0)
                   && ($('.pagoImp_form').serializeObject().empleado_id !='')
                   && ($('.pagoImp_form').serializeObject().banco_id !='')
-                  && ($('.pagoImp_form').serializeObject().diaDePago !='')){
+                  && ($('.pagoImp_form').serializeObject().diaDePago !='')
+                  ){
                     F.getOneFromModel("pagoImp/multiple", arreglo, function(vi){
                         var vencimientosImp=''
                         var vencimientosConfirm=''
@@ -8614,27 +8556,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             F.getReciboMaxf("recibo", function(t){
                               F.getOneFromModel("banco/byId", $('.pagoImp_form').serializeObject().banco_id , function(b) {
                                 F.getOneFromModel("empleado/byId", $('.pagoImp_form').serializeObject().empleado_id, function(empleado){
-
-
-                                  var mm0 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[0].value);
-                                  var mm1 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[1].value);
-                                  var mm2 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[2].value);
-                                  var mm3 = parseFloat($(".pagoImp_form input:text[name:totalImp]")[3].value);
-
-                                  var tott = mm0+mm1+mm2+mm3;
                                   var query = {
                                     vi: vi,
                                     diaDePago: $('.pagoImp_form').serializeObject().diaDePago,
                                     banco_id: $('.pagoImp_form').serializeObject().banco_id,
                                     empleado_id: $('.pagoImp_form').serializeObject().empleado_id,
-                                    total: tott,// CONSULTA totalImp
-                                    mm0: mm0,
-                                    mm1: mm1,
-                                    mm2: mm2,
-                                    mm3: mm3
-
+                                    total: $(".pagoImp_form input:text[name:totalImp]")[0].value
                                   };
-
                                   $.ajax({
                                     type: "POST",
                                     url: "/pagoImp",
@@ -8721,7 +8649,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         )
                     })
                   }else{
-                    F.msgError('Todos los campos son OBLIGATORIOS'); //campos obligatorios de pagoImp
+                    F.msgError('Todos los campos son OBLIGATORIOS');
                   }
                 }
           })
@@ -8778,30 +8706,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail grupo_id_' + i + '" style="display:none;">';
                 return this.getRecepImp(i, function(e) {
                     var t, r, s;
-                    //Agrego:
-                    var flag = [0,0,0,0];
                     e.length ? (n.appendRowDetailsHeaders(i), _.each(e, function(e) {
-                      //var monto = e.monto0+e.monto1+e.monto2+e.monto3;
-
-                        // AGREGO
-                        var monn = [e.monto0,e.monto1,e.monto2,e.monto3];
-                        var monto;
-                        if(monn[3] != 0 && flag[3] != 1){
-                          monto = monn[3];
-                          flag[3]=1;
-                        }else if(monn[2] != 0 && flag[2] != 1){
-                          monto = monn[2];
-                          flag[2]=1;
-                        }else if(monn[1] != 0 && flag[1] != 1){
-                          monto = monn[1];
-                          flag[1]=1;
-                        }else if(monn[0] != 0 && flag[0] != 1){
-                          monto = monn[0];
-                          flag[0]=1;
-                        }
-                        // FIN AGREGO
-
-
+                        var monto = e.monto0+e.monto1+e.monto2+e.monto3
                         t = $("<p>"), s = e.cliente.nombre + " - <span>" + e.impuesto.nombre + '</span><span class="movimiento_valor">$'+monto.toMoney()+'</span>', $(t).append(s),
                         $(".grupo_id_" + i).append(t).fadeIn(), n.bindRenderRecepImpForm(t, e, !1)
                     })) : $(".grupo_id_" + i).append("<p>Este Grupo de impuestos No Tiene Impuestos</p>").fadeIn();
