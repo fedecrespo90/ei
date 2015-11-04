@@ -475,7 +475,7 @@ Ot.conclude = function(req, res, next) {
 };
 
 Ot.put = function(req, res, next) {
-  DB.Ot.find({ where: {id: req.params.id} }).on('success', function(e) {
+  DB.Ot.find({ where: {id: req.params.id} }).on('success', function(e) { 
     if (e) {
       var ot = e;
           if(req.body.oc_id){
