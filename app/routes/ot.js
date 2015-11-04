@@ -365,8 +365,8 @@ Ot.conclude = function(req, res, next) {
 				    //ACA ENVIARÍA EL MAIL
 				      var transport = nodemailer.createTransport("SMTP", {
 				        auth: {
-				          user: "edu0221@hotmail.com",
-				          pass: "Edu#1766Outlook"
+				          user: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+				          pass: "Edu#1766Outlook"//"EeCc&689Gmail"
 				        }
 				      });
 				      if(!ot.reservado){  //si no es "RESERVADO"
@@ -439,11 +439,11 @@ Ot.conclude = function(req, res, next) {
 </body>';
 				          DB.Cliente.find({where: {id: ot.cliente_id}}).on('success', function(cliente){
 				            var mailOptions = {
-				              from: "edu0221@hotmail.com",
-				              to: "edu0221@hotmail.com",,
-				              bcc: "edu0221@hotmail.com",
+				              from: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+				              to: "edu0221@hotmail.com",//cliente.email,
+				              bcc: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
 				              subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
-				              replyTo:  "edu0221@hotmail.com",
+				              replyTo:  "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
 				              html: htmlText,
 				              forceEmbeddedImages: true
 /*											attachments: [
@@ -589,8 +589,8 @@ Ot.reprogramar = function(req, res, next){
 			  //preparo todo para enviar un mail
 			  var transport = nodemailer.createTransport("SMTP", {
 			    auth: {
-			      user: "edu0221@hotmail.com",
-			      pass: "Edu#1766Outlook"
+			      user: "estudiopressacco@gmail.com",//"edu0221@hotmail.com",
+			      pass: "EeCc&689Gmail"//"Edu#1766Outlook"
 			    }
 			  });
 			  if(!ot.reservado){
@@ -611,11 +611,11 @@ Ot.reprogramar = function(req, res, next){
 			        var htmlText= '\
 			      <style>body{background-color:gray; color: white;}</style><body><table style="background-color:gray; color: white; width: 750 px; height: 1px; margin: 0px; padding: 0px; border-collapse: collapse;" cellpadding="0"><tr><td rowspan="2"><img src="/srv/pressacco/public/images/logo_estudio.png" height="90" width="90" /><td><td colspan="5"><h4 style= "color: #8A2908">Estudio Integral Pressacco & Asoc.</h4><td></tr><tr><td colspan="5"><h2>REPROGRAMACIÓN ORDEN DE TRABAJO N&ordm;:</h2></td><td colspan="2" bgcolor="#343434"><h2 align="center">'+req.params.id+'</h2></td></tr><tr style="margin: 0px; border: 1px solid #000000; padding: 0px;"></tr><tr><td>&nbsp;</td><td>Cliente:</td><td colspan= "2">'+cliente.nombre+'</td></tr><tr><td>&nbsp;</td><td>Fecha:</td><td colspan= "2">'+moment().format("ll")+'</td><td> &nbsp; </td><td  align="right" > Reprogramado por: </td><td>'+empleado.nombre+" "+empleado.apellido+'</td></tr><tr><td> &nbsp; </td><td> Hora: </td><td colspan= "2">'+moment().format("HH:mm")+'</td><td> &nbsp; </td><td  align="right"> Canal de comunicaci&oacute;n: </td><td>'+com+'</td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "2"><h5><ins> TÍTULO:</ins> <h5></td><td colspan= "5"><h5>'+ot.titulo+'<h5></td></tr><tr><td colspan= "2"><h6><ins> MOTIVO REPROGRAMACION:</ins><h6></td><td colspan= "5"><h6>'+req.body.observation+'<h6></td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "4"><h6><ins>*FECHA ESTIMADA DE CONCLUSIÓN:</ins></h6></td><td colspan= "3"><h6>'+moment(ot.fechaVencimiento).format("ll")+'</h6></td></tr><tr><td colspan= "4"><h6><ins>¿Tarea incluida en abono mensual?:</ins></h6></td><td colspan= "3"><h6>'+honorarios+'</h6></td></tr><tr><td colspan= "7"><font size=1>(*) condicionada a situaciones ajenas al Estudio </font></td></table></body>';
 			        var mailOptions = {
-			          from: "edu0221@hotmail.com",
-			          to: "edu0221@hotmail.com",
-			          bcc: "edu0221@hotmail.com",
+			          from: "estudiopressacco@gmail.com",//"edu0221@hotmail.com",
+			          to: cliente.email,//"edu0221@hotmail.com",
+			          bcc: "estudiopressacco@gmail.com",//"edu0221@hotmail.com",
 			          subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
-			          replyTo:  "edu0221@hotmail.com",
+			          replyTo:  "estudiopressacco@gmail.com",//"edu0221@hotmail.com",
 			          html: htmlText,
 			          forceEmbeddedImages: true
 			        };
