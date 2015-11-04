@@ -293,7 +293,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             var n = new Date(e), r = "";
             return n.setHours(n.getHours() + 3), r += (n.getDate() < 10 ? "0" : "") + n.getDate(), r += "/", r += (n.getMonth() + 1 < 10 ? "0" : "") + (n.getMonth() + 1), r += "/", r += n.getFullYear(), t === undefined && t === !0 && (r += " ", r += (n.getHours() < 10 ? "0" : "") + n.getHours(), r += ":", r += (n.getMinutes() < 10 ? "0" : "") + n.getMinutes(), r += ":", r += (n.getSeconds() < 10 ? "0" : "") + n.getSeconds()), r;
         }, F.capitalize = function(e) {
-            return e/*.charAt(0).toUpperCase()*/ + e.substr(1);
+            return e/*.charAt(0).toUpperCase()+e.substr(1)*/;
         }, $.fn.serializeObject = function() {
             var e = {}, t = this.serializeArray();
             return $.each(t, function() {

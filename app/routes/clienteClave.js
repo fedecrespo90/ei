@@ -1,4 +1,4 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
 
 var ClienteClave = function(db, everyone) {
@@ -10,8 +10,8 @@ var ClienteClave = function(db, everyone) {
 ClienteClave.get = function(req, res, next) {
  DB.ClienteCuentaCorriente.findAll({
     where: {id: {ne: 200}},
-    include:[{model: DB.Cliente, as: 'cliente', 
-            include: 
+    include:[{model: DB.Cliente, as: 'cliente',
+            include:
               [
                {model: DB.Comunicacion, as: 'comunicacion'}
               ]
@@ -21,14 +21,14 @@ ClienteClave.get = function(req, res, next) {
       var msg=[];
 	    cuentas.forEach(function(cuenta){
 		      var com;
-		      switch (cuenta.cliente.comunicacion.nombre) { 
-		           case "Teléfono":	com= "Teléfono: " + cuenta.cliente.telefono; break; 
+		      switch (cuenta.cliente.comunicacion.nombre) {
+		           case "Teléfono":	com= "Teléfono: " + cuenta.cliente.telefono; break;
 		           case "Celular":	com= "Celular: "  + cuenta.cliente.celular; break;
-		           case "Radio":	  com= "Radio: "    + cuenta.cliente.radio; break; 
-		           case "Email":	  com= "E-Mail: "   + cuenta.cliente.email; break;    
-		           default:		      com= "Indefinido" ; 
+		           case "Radio":	  com= "Radio: "    + cuenta.cliente.radio; break;
+		           case "Email":	  com= "E-Mail: "   + cuenta.cliente.email; break;
+		           default:		      com= "Indefinido" ;
 		      }
-		      msg.push({ 
+		      msg.push({
 		       id: cuenta.cliente.id,
 		       comunicacion: com,
 		       catedral: cuenta.cliente.catedral,
@@ -59,7 +59,7 @@ ClienteClave.byCliente = function(req, res, next) {
             idClienteClave: clienteClaveID,
             idCliente: req.params.cliente_id,
             idClave: clave.id,
-            nombre: clave.nombre,
+            nombre: clave.nombre, ////
             pass: pass,
             cuit: cliente.cuit,
           })
