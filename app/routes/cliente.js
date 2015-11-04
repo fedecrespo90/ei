@@ -16,11 +16,11 @@ Cliente.get = function(req, res, next) {
       include:
         [{model: DB.CuentaCorriente, as: 'cuentaCorriente'},
          {model: DB.Cliente, as: 'cliente', where: {baja: 0},
-           include:   
+           include:
              [{model: DB.ClienteRubro},
-              {model: DB.Clasificacion, as: 'clasificacion'}, 
-              {model: DB.Comunicacion, as: 'comunicacion'}, 
-              {model: DB.Actividad, as: 'actividad'}]  
+              {model: DB.Clasificacion, as: 'clasificacion'},
+              {model: DB.Comunicacion, as: 'comunicacion'},
+              {model: DB.Actividad, as: 'actividad'}]
         }]
     }).on('success', function(cuentas){
       var consultas=[];
@@ -33,14 +33,14 @@ Cliente.get = function(req, res, next) {
             	  cliRu+=d.rubro_id+','
           	  })
   		      }
-	          switch(cuenta.cliente.comunicacion.nombre) { 
-	               case "Teléfono":	com="Teléfono: "+cuenta.cliente.telefono; break; 
+	          switch(cuenta.cliente.comunicacion.nombre) {
+	               case "Teléfono":	com="Teléfono: "+cuenta.cliente.telefono; break;
 	               case "Celular":	com="Celular: "+cuenta.cliente.celular; break;
-	               case "Radio":	  com="Radio: "+cuenta.cliente.radio; break; 
-	               case "Email":	  com="E-Mail: "+cuenta.cliente.email; break; 
-	               default:		      com="Indefinido"; 
+	               case "Radio":	  com="Radio: "+cuenta.cliente.radio; break;
+	               case "Email":	  com="E-Mail: "+cuenta.cliente.email; break;
+	               default:		      com="Indefinido";
 	          }
-	           fn(null, { 
+	           fn(null, {
 	             id: cuenta.cliente.id,
 	             clienteCuentaCorriente_id: cuenta.id,
 	             cuentaCorriente_id: cuenta.cuentaCorriente.id,
@@ -60,7 +60,7 @@ Cliente.get = function(req, res, next) {
 	             email: cuenta.cliente.email,
 	             radio: cuenta.cliente.radio,
 	             empleado: cuenta.cliente.empleado,
-	             negocio: cuenta.cliente.negocio,		       
+	             negocio: cuenta.cliente.negocio,
 	             contacto: cuenta.cliente.contacto,
 	             observaciones: cuenta.cliente.observaciones,
 	             monto: cuenta.cuentaCorriente.monto.toMoney(),
@@ -72,7 +72,7 @@ Cliente.get = function(req, res, next) {
 	      })
       })
       async.series(consultas, function(err, results){
-        res.send(results);      
+        res.send(results);
       })
     })
   }else{
@@ -81,12 +81,12 @@ Cliente.get = function(req, res, next) {
     include:
       [{model: DB.CuentaCorriente, as: 'cuentaCorriente'},
        {model: DB.Cliente, as: 'cliente', where: {baja: 0},
-         include: 
+         include:
            [{model: DB.ClienteRubro},
-            {model: DB.Clasificacion, as: 'clasificacion'}, 
-            {model: DB.Comunicacion, as: 'comunicacion'}, 
+            {model: DB.Clasificacion, as: 'clasificacion'},
+            {model: DB.Comunicacion, as: 'comunicacion'},
             {model: DB.Actividad, as: 'actividad'}]
-       } 
+       }
       ]
     }).on('success', function(cuentas){
         var consultas=[];
@@ -99,12 +99,12 @@ Cliente.get = function(req, res, next) {
 	            	  cliRu+=d.rubro_id+','
 	          	  })
     		      }
-		          switch(cuenta.cliente.comunicacion.nombre) { 
-		               case "Teléfono":	com="Teléfono: "+cuenta.cliente.telefono; break; 
+		          switch(cuenta.cliente.comunicacion.nombre) {
+		               case "Teléfono":	com="Teléfono: "+cuenta.cliente.telefono; break;
 		               case "Celular":	com="Celular: "+cuenta.cliente.celular; break;
-		               case "Radio":	  com="Radio: "+cuenta.cliente.radio; break; 
-		               case "Email":	  com="E-Mail: "+cuenta.cliente.email; break; 
-		               default:		      com="Indefinido"; 
+		               case "Radio":	  com="Radio: "+cuenta.cliente.radio; break;
+		               case "Email":	  com="E-Mail: "+cuenta.cliente.email; break;
+		               default:		      com="Indefinido";
 		          }
 		          fn(null, {
 		           id: cuenta.cliente.id,
@@ -126,7 +126,7 @@ Cliente.get = function(req, res, next) {
 		           email: cuenta.cliente.email,
 		           radio: cuenta.cliente.radio,
 		           empleado: cuenta.cliente.empleado,
-		           negocio: cuenta.cliente.negocio,		       
+		           negocio: cuenta.cliente.negocio,
 		           contacto: cuenta.cliente.contacto,
 		           observaciones: cuenta.cliente.observaciones,
 		           monto: cuenta.cuentaCorriente.monto.toMoney(),
@@ -138,7 +138,7 @@ Cliente.get = function(req, res, next) {
 		      })
         })
         async.series(consultas, function(err, results){
-          res.send(results);      
+          res.send(results);
         })
     })
   }
@@ -151,11 +151,11 @@ Cliente.getAll = function(req, res, next) {
       include:
         [{model: DB.CuentaCorriente, as: 'cuentaCorriente'},
          {model: DB.Cliente, as: 'cliente', where: {baja: 0},
-           include:   
+           include:
              [{model: DB.ClienteRubro},
-              {model: DB.Clasificacion, as: 'clasificacion'}, 
-              {model: DB.Comunicacion, as: 'comunicacion'}, 
-              {model: DB.Actividad, as: 'actividad'}]  
+              {model: DB.Clasificacion, as: 'clasificacion'},
+              {model: DB.Comunicacion, as: 'comunicacion'},
+              {model: DB.Actividad, as: 'actividad'}]
         }]
     }).on('success', function(cuentas){
       var consultas=[];
@@ -168,14 +168,14 @@ Cliente.getAll = function(req, res, next) {
                 cliRu+=d.rubro_id+','
               })
             }
-            switch(cuenta.cliente.comunicacion.nombre) { 
-                 case "Teléfono": com="Teléfono: "+cuenta.cliente.telefono; break; 
+            switch(cuenta.cliente.comunicacion.nombre) {
+                 case "Teléfono": com="Teléfono: "+cuenta.cliente.telefono; break;
                  case "Celular":  com="Celular: "+cuenta.cliente.celular; break;
-                 case "Radio":    com="Radio: "+cuenta.cliente.radio; break; 
-                 case "Email":    com="E-Mail: "+cuenta.cliente.email; break; 
-                 default:         com="Indefinido"; 
+                 case "Radio":    com="Radio: "+cuenta.cliente.radio; break;
+                 case "Email":    com="E-Mail: "+cuenta.cliente.email; break;
+                 default:         com="Indefinido";
             }
-             fn(null, { 
+             fn(null, {
                id: cuenta.cliente.id,
                clienteCuentaCorriente_id: cuenta.id,
                cuentaCorriente_id: cuenta.cuentaCorriente.id,
@@ -195,7 +195,7 @@ Cliente.getAll = function(req, res, next) {
                email: cuenta.cliente.email,
                radio: cuenta.cliente.radio,
                empleado: cuenta.cliente.empleado,
-               negocio: cuenta.cliente.negocio,          
+               negocio: cuenta.cliente.negocio,
                contacto: cuenta.cliente.contacto,
                observaciones: cuenta.cliente.observaciones,
                monto: cuenta.cuentaCorriente.monto.toMoney(),
@@ -207,7 +207,7 @@ Cliente.getAll = function(req, res, next) {
         })
       })
       async.series(consultas, function(err, results){
-        res.send(results);      
+        res.send(results);
       })
     })
   }else{
@@ -216,12 +216,12 @@ Cliente.getAll = function(req, res, next) {
     include:
       [{model: DB.CuentaCorriente, as: 'cuentaCorriente'},
        {model: DB.Cliente, as: 'cliente', where: {baja: 0},
-         include: 
+         include:
            [{model: DB.ClienteRubro},
-            {model: DB.Clasificacion, as: 'clasificacion'}, 
-            {model: DB.Comunicacion, as: 'comunicacion'}, 
+            {model: DB.Clasificacion, as: 'clasificacion'},
+            {model: DB.Comunicacion, as: 'comunicacion'},
             {model: DB.Actividad, as: 'actividad'}]
-       } 
+       }
       ]
     }).on('success', function(cuentas){
         var consultas=[];
@@ -234,12 +234,12 @@ Cliente.getAll = function(req, res, next) {
                   cliRu+=d.rubro_id+','
                 })
               }
-              switch(cuenta.cliente.comunicacion.nombre) { 
-                   case "Teléfono": com="Teléfono: "+cuenta.cliente.telefono; break; 
+              switch(cuenta.cliente.comunicacion.nombre) {
+                   case "Teléfono": com="Teléfono: "+cuenta.cliente.telefono; break;
                    case "Celular":  com="Celular: "+cuenta.cliente.celular; break;
-                   case "Radio":    com="Radio: "+cuenta.cliente.radio; break; 
-                   case "Email":    com="E-Mail: "+cuenta.cliente.email; break; 
-                   default:         com="Indefinido"; 
+                   case "Radio":    com="Radio: "+cuenta.cliente.radio; break;
+                   case "Email":    com="E-Mail: "+cuenta.cliente.email; break;
+                   default:         com="Indefinido";
               }
               fn(null, {
                id: cuenta.cliente.id,
@@ -261,7 +261,7 @@ Cliente.getAll = function(req, res, next) {
                email: cuenta.cliente.email,
                radio: cuenta.cliente.radio,
                empleado: cuenta.cliente.empleado,
-               negocio: cuenta.cliente.negocio,          
+               negocio: cuenta.cliente.negocio,
                contacto: cuenta.cliente.contacto,
                observaciones: cuenta.cliente.observaciones,
                monto: cuenta.cuentaCorriente.monto.toMoney(),
@@ -273,7 +273,7 @@ Cliente.getAll = function(req, res, next) {
           })
         })
         async.series(consultas, function(err, results){
-          res.send(results);      
+          res.send(results);
         })
     })
   }
@@ -302,7 +302,7 @@ Cliente.conCuenta = function(req, res, next){
     var msg=[];
     cuentas.forEach(function(cuenta){
       var com;
-      msg.push({ 
+      msg.push({
        id: cuenta.cliente.id,
        nombre: cuenta.cliente.nombre,
      })
@@ -340,7 +340,7 @@ Cliente.post = function(req, res, next) {
           empleado: r.empleado,
           contacto: r.contacto,
           observaciones: r.observaciones
-        }).on('success', function(cliente){ 
+        }).on('success', function(cliente){
           DB.CuentaCorriente.create({
             monto: req.body.monto || 0,
             montoTramite: req.body.montoTramite || 0
@@ -351,7 +351,7 @@ Cliente.post = function(req, res, next) {
                 cliente_id:cliente.id
              }).on('success', function(){
                if(req.body.rubro_id){
-                if (util.isArray(req.body.rubro_id)) {      
+                if (util.isArray(req.body.rubro_id)) {
                  req.body.rubro_id.forEach(function(rr){
                    if(rr!=''){
                     DB.ClienteRubro.find({where:{cliente_id: req.params.id, rubro_id: rr}}).on('success',function(r){
@@ -374,8 +374,8 @@ Cliente.post = function(req, res, next) {
                           rubro_id: rr
                         })
                       }
-                    })   
-                   }             
+                    })
+                   }
                 }
                }
                res.send(true)
@@ -399,7 +399,7 @@ Cliente.post = function(req, res, next) {
           empleado: r.empleado,
           contacto: r.contacto,
           observaciones: r.observaciones
-        }).on('success', function(cliente){ 
+        }).on('success', function(cliente){
           DB.ClienteCuentaCorriente.find({
             where: {cliente_id: r.cliente_id,
                     principal: 1
@@ -412,7 +412,7 @@ Cliente.post = function(req, res, next) {
             }).on('success', function(){
               if(req.body.rubro_id){
                 req.body.rubro_id.forEach(function(rr){
-                  if(rr!=''){  
+                  if(rr!=''){
                     DB.ClienteRubro.find({where:{cliente_id: req.parmas.id, rubro_id: rr}}).on('success',function(r){
                       if(!r){
                         DB.ClienteRubro.create({
@@ -430,7 +430,7 @@ Cliente.post = function(req, res, next) {
         })
       }
     }
-  })  
+  })
 };
 
 Cliente.put = function(req, res, next) {
@@ -440,7 +440,7 @@ Cliente.put = function(req, res, next) {
         var q = "DELETE FROM clienteRubro \
                 WHERE cliente_id="+req.params.id;
         DB._.query(q, function(err, data) {
-	        if(req.body.rubro_id!=''){                
+	        if(req.body.rubro_id!=''){
             req.body.rubro_id.forEach(function(rr){
               if(rr!=''){
                 DB.ClienteRubro.find({where:{cliente_id: req.params.id, rubro_id: rr}}).on('success',function(r){
@@ -469,11 +469,11 @@ Cliente.delete = function(req, res, next){
     var detalle =  "Baja el "+moment().format("YYYY/MM/DD");
     cliente.updateAttributes({email: "2014estudiocontable@gmail.com", contacto: cliente.contacto+"-"+detalle})
     var q = "DELETE FROM clienteImpuesto where cliente_id = "+req.params.id;
-    DB._.query(q, function(err, data){ 
+    DB._.query(q, function(err, data){
       var qu = "DELETE FROM clienteRubro where cliente_id = "+req.params.id;
-      DB._.query(qu, function(err, data){ 
+      DB._.query(qu, function(err, data){
         res.send(true)
-      })        
+      })
     })
   })
 };

@@ -19,7 +19,7 @@ Clave.post = function(req, res, next) {
           descripcion: req.body.descripcion
           }
   }).on('success', function(e) {
-    if(!e){ 
+    if(!e){
       DB.Clave.create(req.body)
       res.send(true);
     }
