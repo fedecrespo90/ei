@@ -185,8 +185,8 @@ OtTarea.complete = function(req, res, next){
           moment.lang("es");
           var transport = nodemailer.createTransport("SMTP", {
             auth: {
-              user: "edu0221@hotmail.com",
-              pass: "Edu#1766Outlook"
+              user: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+              pass: "Edu#1766Outlook"//"EeCc&689Gmail"
             }
           });
           var com;
@@ -208,11 +208,11 @@ OtTarea.complete = function(req, res, next){
             '<img src="/srv/pressacco/public/images/logo_estudio.png" height="90" width="90" />'+
             '<td><td colspan="5"><h4 style= "color: #8A2908">Estudio Integral Pressacco & Asoc.</h4><td></tr><tr><td colspan="5"><h2>SOLICITUD ORDEN DE TRABAJO N&ordm;:</h2></td><td colspan="2" bgcolor="#343434"><h2 align="center">'+otTarea.ot.numero+'</h2></td></tr><tr style="margin: 0px; border: 1px solid #000000; padding: 0px;"></tr><tr><td>&nbsp;</td><td>Cliente:</td><td colspan= "2">'+cliente.nombre+'</td></tr><tr><td>&nbsp;</td><td>Fecha:</td><td colspan= "2">'+moment(otTarea.ot.created_at).format("ll")+'</td><td> &nbsp; </td><td  align="right" > Atendido por: </td><td>'+user.empleado.nombre+" "+user.empleado.apellido+'</td></tr><tr><td> &nbsp; </td><td> Hora: </td><td colspan= "2">'+moment(otTarea.ot.created_at).format("HH:mm")+'</td><td> &nbsp; </td><td  align="right"> Canal de comunicaci&oacute;n: </td><td>'+com+'</td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "2"><h5><ins> TITULO:</ins> <h5></td><td colspan= "5"><h5>'+otTarea.ot.titulo+'<h5></td></tr><tr><td colspan= "2"><h6><ins> OBSERVACIONES:</ins><h6></td><td colspan= "5"><h6>'+otTarea.ot.descripcion+'<h6></td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "4"><h6><ins>*FECHA ESTIMADA DE CONCLUSION:</ins></h6></td><td colspan= "3"><h6>'+fechaV+'</h6></td></tr><tr><td colspan= "4"><h6><ins>¿Tarea incluida en abono mensual?:</ins></h6></td><td colspan= "3"><h6>'+honorarios+'</h6></td></tr><tr><td colspan= "7"><font size=1>(*) condicionada a situaciones ajenas al Estudio </font></td></table></body>';
               var mailOptions = {
-                from: "edu0221@hotmail.com",
-                to:"edu0221@hotmail.com",
-                bcc: "edu0221@hotmail.com",
+                from: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+                to: "edu0221@hotmail.com",//cliente.email,
+                bcc: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
                 subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
-                replyTo:  "edu0221@hotmail.com",
+                replyTo:  "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
                 html: htmlText,
                 forceEmbeddedImages: true
               };
@@ -228,8 +228,8 @@ OtTarea.complete = function(req, res, next){
          if(otTarea.ot.notificarCliente == 1){//Envio Mail
           var transport = nodemailer.createTransport("SMTP", {
             auth: {
-              user: "edu0221@hotmail.com",
-              pass: "Edu#1766Outlook"
+              user: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+              pass: "Edu#1766Outlook"//"EeCc&689Gmail"
             }
           });
           moment.lang("es");
@@ -252,11 +252,11 @@ OtTarea.complete = function(req, res, next){
             var htmlText= '\
                 <style>body{background-color:gray; color: white;}</style><body><table style="background-color:gray; color: white; width: 750 px; height: 1px; margin: 0px; padding: 0px; border-collapse: collapse;" cellpadding="0"><tr><td rowspan="2"><img src="/srv/pressacco/public/images/logo_estudio.png" height="90" width="90" /><td><td colspan="5"><h4 style= "color: #8A2908">Estudio Integral Pressacco & Asoc.</h4><td></tr><tr><td colspan="5"><h2>NOTIFICACION ORDEN DE TRABAJO N&ordm;:</h2></td><td colspan="2" bgcolor="#343434"><h2 align="center">'+otTarea.ot.numero+'</h2></td></tr><tr style="margin: 0px; border: 1px solid #000000; padding: 0px;"></tr><tr><td>&nbsp;</td><td>Cliente:</td><td colspan= "2">'+cliente.nombre+'</td></tr><tr><td>&nbsp;</td><td>Fecha:</td><td colspan= "2">'+moment().format("ll")+'</td><td> &nbsp; </td><td  align="right" > Atendido por: </td><td>'+user.empleado.nombre+" "+user.empleado.apellido+'</td></tr><tr><td> &nbsp; </td><td> Hora: </td><td colspan= "2">'+moment().format("HH:mm")+'</td><td> &nbsp; </td><td  align="right"> Canal de comunicaci&oacute;n: </td><td>'+com+'</td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "2"><h5><ins> TITULO:</ins> <h5></td><td colspan= "5"><h5>'+otTarea.ot.titulo+'<h5></td></tr><tr><td colspan= "2"><h6><ins> OBSERVACIONES:</ins><h6></td><td colspan= "5"><h6>'+conclusion+" "+req.body.obs+'<h6></td></tr><tr style="margin: 0px;  border: 1px solid #000000; padding: 0px;"></tr><tr><td colspan= "4"><h6><ins>*FECHA ESTIMADA DE CONCLUSION:</ins></h6></td><td colspan= "3"><h6>'+moment(otTarea.ot.fechaVencimiento).format("ll")+'</h6></td></tr><tr><td colspan= "4"><h6><ins>¿Tarea incluida en abono mensual?:</ins></h6></td><td colspan= "3"><h6>'+honorarios+'</h6></td></tr><tr><td colspan= "7"><font size=1>(*) condicionada a situaciones ajenas al Estudio </font></td></table></body>';
               var mailOptions = {
-                from: "edu0221@hotmail.com",
-                to: "edu0221@hotmail.com",
-                bcc: "edu0221@hotmail.com",
+                from: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
+                to: "edu0221@hotmail.com",//cliente.email,
+                bcc: "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
                 subject: "Estudio Integral Pressacco y Asoc. - Orden de Trabajo",
-                replyTo:  "edu0221@hotmail.com",
+                replyTo:  "edu0221@hotmail.com",//"estudiopressacco@gmail.com",
                 html: htmlText,
                 forceEmbeddedImages: true
               };
