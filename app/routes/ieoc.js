@@ -13,7 +13,7 @@ var Oc = function(db, everyone) {
 Oc.get = function(req, res, next) {
   DB.Oc.findAll({order:'fechaVencimiento DESC' , include:[{model: DB.Cliente}]}).on('success', function(a) {
     var msg = []
-    a.forEach(function(b){
+    a.forEach(function(b){ 
       msg.push({
         id: b.id,
         numero: b.numero,
