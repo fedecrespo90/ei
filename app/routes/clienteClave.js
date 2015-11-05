@@ -79,29 +79,30 @@ ClienteClave.post = function(req, res, next) {
   for (var p in o ) {
     var clienteClave_id = p.split("::")[0]
     var clave_id = p.split("::")[1]
-    var pass = o[p]
+    var pass = o[p]//req.params.pass
     a(clienteClave_id, clave_id,pass, req.params.id)
   }
 res.send(true)
 };
 
+//SACO ESTA COND PARA EL BUG 8
 function a (clienteClave_id, clave_id, pass, id){
-  if((clienteClave_id == -1)&&(pass != '')){
+  //if((clienteClave_id == -1)&&(pass != '')){
     DB.ClienteClave.create({
       cliente_id: id,
       clave_id: clave_id,
-      pass: pass
+      pass: pass //1616
     })
-  }else{
-    if(clienteClave_id !=-1 ){
+  //}else{
+    /*if(clienteClave_id !=-1 ){
       DB.ClienteClave.find({where: " id = "+clienteClave_id+' AND pass <>  "'+pass+'"  ' }).on('success',function(cc){
         console.log(cc)
-        var as= pass;
+        var as = pass;
         if(cc){
-          cc.updateAttributes({pass: as})
+          cc.updateAttributes({pass: as})//1717
         }
       })
     }
-  }
+  //}*/
 }
 module.exports = ClienteClave;

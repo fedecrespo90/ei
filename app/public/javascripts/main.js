@@ -293,7 +293,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             var n = new Date(e), r = "";
             return n.setHours(n.getHours() + 3), r += (n.getDate() < 10 ? "0" : "") + n.getDate(), r += "/", r += (n.getMonth() + 1 < 10 ? "0" : "") + (n.getMonth() + 1), r += "/", r += n.getFullYear(), t === undefined && t === !0 && (r += " ", r += (n.getHours() < 10 ? "0" : "") + n.getHours(), r += ":", r += (n.getMinutes() < 10 ? "0" : "") + n.getMinutes(), r += ":", r += (n.getSeconds() < 10 ? "0" : "") + n.getSeconds()), r;
         }, F.capitalize = function(e) {
-            return e/*.charAt(0).toUpperCase()+e.substr(1)*/;
+            return e.charAt(0).toUpperCase()+e.substr(1);
         }, $.fn.serializeObject = function() {
             var e = {}, t = this.serializeArray();
             return $.each(t, function() {
@@ -3585,7 +3585,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 $.ajax({
                     url: "/clienteClave/byCliente/"+e.id,
                     success: function(e) {
-                        $(".clienteClave_form").empty(), t.renderDetails(e);
+                        $('.clienteClave_form').empty(), t.renderDetails(e);
                     }
                 });
             },
@@ -3598,18 +3598,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             _.each(el, function(e) {
               console.log(e)
               cliente_id = e.idCliente
-              $('.clienteClave_form').append('<span class="hidden" id="id" value='+e.idClienteClave+'::'+e.idClave+' data-id="' + e.id + '"></span><span class="element_name">'+ e.nombre + '</span><br /><input type="text" name="'+e.idClienteClave+'::'+e.idClave+'" value="'+ e.pass +'"></input><br />');
+              $('.clienteClave_form').append('<span class="hidden" id="id" value='+e.idClienteClave+'::'+e.idClave+' data-id="' + e.id + '"></span><span class="element_name">'+ e.nombre + '</span><br /><input type="text" name="'+e.idClienteClave+'::'+e.idClave+'" value="'+e.pass+'"></input><br />');
             });
             $('.clienteClave_form').append('<input type="button" id="cancelarClave" class="BUTTON_cancel lefty button" value="Cancelar" />'+'<input type="button" id="cargarClave" class="BUTTON_create righty button" value="Guardar" /><br /><br />');
-
             $('.clienteClave_form .BUTTON_cancel').on('click', function() {
               location.reload()
             })
             $('.clienteClave_form .BUTTON_create').on('click', function() {
+              //CLIENTE CLAVE AJAX
+              var pass = $('.clienteClave_form').serializeObject();
               $.ajax({
                   type: "POST",
                   url: "/clienteClave/"+cliente_id,
-                  data: $('.clienteClave_form ').serializeObject(),
+                  data: pass,
                   success: function(e) {
                     F.msgOK("Claves Agregadas")
                     setTimeout(function(){location.reload()},1e3)
