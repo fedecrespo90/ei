@@ -1,6 +1,6 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
-    
+
 var Carga = function(db, everyone) {
   DB = db;
   Everyone = everyone;
@@ -12,25 +12,25 @@ Carga.get = function(req, res, next) {
        include: [{model: DB.Impuesto, where:{fijo:0}}
               ,  {model: DB.Cliente}]
   }).on('success', function(imp) {
-      var msg=[]; 
+      var msg=[];
 	    imp.forEach(function(i){
 	      var com;
-		    switch (i.cliente.comunicacion_id) { 
-		      case 1:	com="Teléfono: "+i.cliente.telefono; break; 
+		    switch (i.cliente.comunicacion_id) {
+		      case 1:	com="Teléfono: "+i.cliente.telefono; break;
 		      case 2:	com="Celular: "+i.cliente.celular; break;
 		      case 3:	com="Radio: "+i.cliente.radio; break; afs
-		      case 4:	com="E-Mail: "+i.cliente.email; break; 
-		      default:com="Indefinido"; 
-		    }	    
+		      case 4:	com="E-Mail: "+i.cliente.email; break;
+		      default:com="Indefinido";
+		    }
         msg.push({
           all: i,
           id: i.id,
-          liquida: 1,          
+          liquida: 1,
           impId: i.impuesto.id,
           impNombre: i.impuesto.nombre,
           impObservacion: i.impuesto.observacion,
           impFijo: i.impuesto.fijo,
-          impMonto0: i.impuesto.monto0,          
+          impMonto0: i.impuesto.monto0,
           impMonto1: i.impuesto.monto1,
           impMonto2: i.impuesto.monto2,
           impMonto3: i.impuesto.monto3,
@@ -53,7 +53,7 @@ Carga.post = function(req, res, next) {
     if(!e){
       DB.Impuesto.create(req.body
       ).on('success', function(a){res.send(true)});
-    }  
+    }
   })
 };
 
@@ -66,26 +66,30 @@ Carga.repetirMesAnterior = function(req, res, next){
       DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
-          if(e){
+          if(e && cronoImp != 0 && cronoImp != -1){ //PRUEBO CAMBIANDO LA CONDICION
             e.forEach(function(vto){
               DB.Vencimiento.create({
                 cliente_id: vto.cliente_id,
                 cliente_impuesto_id: vto.cliente_impuesto_id,
                 impuesto_id: vto.impuesto_id,
-                liquida: vto.liquida,              
+                liquida: vto.liquida,
                 monto0: vto.monto0,
                 monto1: vto.monto1,
                 monto2: vto.monto2,
                 monto3: vto.monto3,
                 monto4: vto.monto4,
                 cronograma_id: Number(vto.cronograma_id) + 1,
-               // cronograma_impuesto_id: cronoImp.id,
+                //cronograma_impuesto_id: cronoImp.id,//1616,//cronoImp.id,
                 anticipo: vto.anticipo,
               })
             })
+          }else{
+            for (var i = 0; i < 100; i++) {
+              console.log("Datos erroneos");
+            }
           }
         })
-      }).on('success', function(){res.send(true)})    
+      }).on('success', function(){res.send(true)})
     })
   })
 };
@@ -106,7 +110,7 @@ Carga.put = function(req, res, next) {
             DB.Vencimiento.create({
               cliente_id: cliImp.cliente_id,
               impuesto_id: cliImp.impuesto_id,
-              liquida: req.body.liquida,              
+              liquida: req.body.liquida,
               monto0: req.body.impMonto0||0.00,
               monto1: req.body.impMonto1||0.00,
               monto2: req.body.impMonto2||0.00,
@@ -115,9 +119,9 @@ Carga.put = function(req, res, next) {
               cronograma_id: req.body.cronograma_id,
               cronograma_impuesto_id: cronoImp.id,
               anticipo: req.body.anticipo? req.body.anticipo : " "
-            }).on('success', function(){res.send(true)})      
+            }).on('success', function(){res.send(true)})
           }else{
-            res.send(false)        
+            res.send(false)
           }
         })
       }else{
@@ -128,7 +132,7 @@ Carga.put = function(req, res, next) {
 };
 
 Carga.delete = function(req, res, next) {
-  DB.Impuesto.destroy({ id: req.params.id 
+  DB.Impuesto.destroy({ id: req.params.id
   }).on('success',function(){res.send(true)});
 };
 
