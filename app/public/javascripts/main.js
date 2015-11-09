@@ -7661,7 +7661,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     label: "Anticipo",//Marcelito
                     type: "select_b11",
                 },
-                cronograma_id: {
+                cronograma_id: { // SELECCIONE CRONOGRAMA
                     label: "Cronograma",
                     type: "select"
                 },
@@ -7705,12 +7705,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editCarga: function() {
                 var e = this;
+
                 if( !isNaN($(".carga_form").serializeObject().impMonto1.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto2.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto0.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto3.replace(",","."))
                  && !isNaN($(".carga_form").serializeObject().impMonto4.replace(",","."))
-                 && ($(".carga_form").serializeObject().cronograma_id != '')
+                 && ($(".carga_form").serializeObject().cronograma_id != '') //ACA VALIDO EL CRONOGRAMA_ID
                 ){
                   if($(".carga_form").serializeObject().anticipo != '')
                     $(".carga_form").serializeObject().anticipo = " ";
@@ -7730,7 +7731,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                    }
                   })
                }else{
-                  F.msgError('Los Montos deben ser Números separando los decimales por "."(punto), además debe seleccionar un Cronograma');
+                  F.msgError('Los Montos deben ser Números separando los decimales por "."(punto), además debe seleccionar un Cronograma'); // CARGA DE IMPUESTOS VARIABLES
                }
             }
         });
