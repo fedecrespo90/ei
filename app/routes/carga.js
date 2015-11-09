@@ -66,7 +66,7 @@ Carga.repetirMesAnterior = function(req, res, next){
       DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
-          if(e && cronoImp != 0 && cronoImp != -1){ //PRUEBO CAMBIANDO LA CONDICION
+          if(e && cronoImp != 0 /*&& cronoImp != -1*/){ //PRUEBO CAMBIANDO LA CONDICION
             e.forEach(function(vto){
               DB.Vencimiento.create({
                 cliente_id: vto.cliente_id,
@@ -79,7 +79,7 @@ Carga.repetirMesAnterior = function(req, res, next){
                 monto3: vto.monto3,
                 monto4: vto.monto4,
                 cronograma_id: Number(vto.cronograma_id) + 1,
-                //cronograma_impuesto_id: cronoImp.id,//1616,//cronoImp.id,
+                cronograma_impuesto_id: cronoImp.id,//////////
                 anticipo: vto.anticipo,
               })
             })
