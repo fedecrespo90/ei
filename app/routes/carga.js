@@ -57,17 +57,73 @@ Carga.post = function(req, res, next) {
   })
 };
 
+// AGREGO
+// FUNCTION existeCronograma
+function existeCronograma(id,req)
+{
+  DB.Cronograma.find({ where:
+    {
+          id: id-1,
+    }
+  }).on('success', function(e)
+  {
+    if(e)
+    {
+      ms = e.mes+1;
+      an = e.año;
+      if(ms >12)
+      {
+        ms = 1;
+        an = an+1;
+      }
+      DB.Cronograma.create({
+        id: id,
+        año: an,
+        mes: ms
+      }).on('success', function(cronograma){
+        // AGREGO
+        DB.Impuesto.findAll().on('success', function(imp){
+          imp.forEach(function(i){
+            if(i.nombre != ''){
+              var t=i.nombre;
+              i.nombre=t[3]+t[4]+t[5]+t[0]+t[1]+t[2]+t[6]+t[7]+t[8]+t[9]+" 12:00:00";
+              DB.CronogramaImpuesto.create({
+                cronograma_id: cronograma.id,
+                impuesto_id: i.id,
+                vtoImpuesto: moment(i.nombre).format('YYYY-MM-DD HH:MM:SS')
+              })
+            }
+          })
+          //res.send(true);
+        })
+        // FIN AGREGO
+      })
+    }
+    else
+    {
+      //res.send(false);
+    }
+  });
+}
+// FIN FUNCTION existeCronograma
+// FIN AGREGO
+
 Carga.repetirMesAnterior = function(req, res, next){
   var impNombre= req.params.nombre.replace("%20"," ");
   DB.Impuesto.find({where: {nombre: impNombre}}).on('success',function(impuesto){
     console.log("IMP"+impuesto.id)
     DB.Vencimiento.max('cronograma_id',{where: {impuesto_id: impuesto.id}}).on('success', function(ven){
       console.log(ven)
+      //Acá tiene que estar el error!!!
       DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
-          if(e && cronoImp != 0 /*&& cronoImp != -1*/){ //PRUEBO CAMBIANDO LA CONDICION
+          if(e && cronoImp != 0 && cronoImp != -1 && cronoImp != null){ //PRUEBO CAMBIANDO LA CONDICION
+            var idCrono;
             e.forEach(function(vto){
+              // Agrego:
+              idCrono = Number(vto.cronograma_id)+1;
+
               DB.Vencimiento.create({
                 cliente_id: vto.cliente_id,
                 cliente_impuesto_id: vto.cliente_impuesto_id,
@@ -78,14 +134,17 @@ Carga.repetirMesAnterior = function(req, res, next){
                 monto2: vto.monto2,
                 monto3: vto.monto3,
                 monto4: vto.monto4,
-                cronograma_id: Number(vto.cronograma_id) + 1,
+                cronograma_id: idCrono,
                 cronograma_impuesto_id: cronoImp.id,//////////
                 anticipo: vto.anticipo,
               })
             })
+            // AGREGO la function existeCronograma
+            existeCronograma(idCrono,req); //TO TEST
+            // FIN AGREGO la function existeCronograma
           }else{
-            for (var i = 0; i < 100; i++) {
-              console.log("Datos erroneos");
+            for (var i = 0; i < 1000; i++) {
+              console.log("ERROR: cronoImp.id is null");
             }
           }
         })

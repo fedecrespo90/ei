@@ -7567,11 +7567,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             getSelectedRow: function() {
                 return this.options.carga_table.selected_row;
             },
+            //CARGAR IGUAL MES ANTERIOR
             asignarAnterior: function() {
               var t = this;
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
               }else{
+                /*if($(".carga_form").serializeObject().cronograma_id != '')//CAMBIAR LA CONDICION
+                {*/
                 F.msgConfirm("¿Esta seguro de realizar cargar todos los impuestos con los mismos montos que el mes anterior?", function(){
                   console.log(Backbone.history.fragment);
                    $.ajax({
@@ -7582,6 +7585,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                    })
                 });
+                /*}//CLOSE MY IF
+                else
+                {
+                  F.msgError("NO!");
+                }*/
               }
             }
         });
