@@ -7570,11 +7570,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             //CARGAR IGUAL MES ANTERIOR
             asignarAnterior: function() {
               var t = this;
+              console.log(t.options.carga_form[0]);
+              /*for (var i = 0; i < t.options.carga_form.length; i++) {
+                console.log(t.options.carga_form[i].cliCatedral);
+              }*/
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
               }else{
                 /*if($(".carga_form").serializeObject().cronograma_id != '')//CAMBIAR LA CONDICION
                 {*/
+
                 F.msgConfirm("¿Esta seguro de realizar cargar todos los impuestos con los mismos montos que el mes anterior?", function(){
                   console.log(Backbone.history.fragment);
                    $.ajax({
@@ -7588,7 +7593,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 /*}//CLOSE MY IF
                 else
                 {
-                  F.msgError("NO!");
+                  F.msgError("Seleccione el cronograma.");
                 }*/
               }
             }
