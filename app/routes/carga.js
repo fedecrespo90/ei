@@ -15,7 +15,6 @@ Carga.get = function(req, res, next) {
               ,  {model: DB.Cliente}]
   }).on('success', function(imp) {
       var msg=[];
-
 	    imp.forEach(function(i){
 	      var com;
 		    switch (i.cliente.comunicacion_id) {
@@ -41,7 +40,7 @@ Carga.get = function(req, res, next) {
           cliId: i.cliente.id,
           cliNombre: i.cliente.nombre,
           cliComunicacion: com,
-          cliCatedral: i.cliente.catedral
+          cliCatedral: i.cliente.catedral,
         })
       })
       res.send(msg);
@@ -65,15 +64,23 @@ Carga.repetirMesAnterior = function(req, res, next){
   DB.Impuesto.find({where: {nombre: impNombre}}).on('success',function(impuesto){
     console.log("IMP"+impuesto.id)
     DB.Vencimiento.max('cronograma_id',{where: {impuesto_id: impuesto.id}}).on('success', function(ven){
-      console.log(ven)
+      console.log(ven);
+      ///////////Agrego
+      DB.Cronograma.findAll({order: 'id DESC LIMIT 1 ', where: {auditado: false}
+      }).on('success', function(cronn) {
+        cronn.forEach(function(cc){
+          cronnId = cc.id;
+        })
+      ///////////
       DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
           if(e && cronoImp != 0 && cronoImp != -1 && cronoImp != null){ //PRUEBO CAMBIANDO LA CONDICION
-            var idCrono;
             e.forEach(function(vto){
-              // Agrego:
+              //
               idCrono = Number(vto.cronograma_id)+1;
+              if(idCrono == cronnId)
+              {
 
               DB.Vencimiento.create({
                 cliente_id: vto.cliente_id,
@@ -89,16 +96,34 @@ Carga.repetirMesAnterior = function(req, res, next){
                 cronograma_impuesto_id: cronoImp.id,//////////
                 anticipo: vto.anticipo,
               })
+
+              res.send(true);
+
+              }
+              else
+              {
+                //ACA MANDO MENSAJE AL CLIENTE
+                res.send(false); //
+                for (var i = 0; i < 1; i++) {
+                  console.log("NO SE PUDO!!!");
+                  console.log(idCrono+" es distinto de "+cronnId);
+                }
+              }
             })
           }else{
-            for (var i = 0; i < 1000; i++) {
+            /*for (var i = 0; i < 1000; i++) {
               console.log("ERROR: cronoImp.id is null");
-            }
+            }*/
           }
         })
-      }).on('success', function(){res.send(true)})//////////
+      }).on('success', function(){
+        //res.send(true);
+      })//////////
     })
   })
+  ///////////Cierro Agrego
+  });
+  ///////////
 };
 
 Carga.put = function(req, res, next) {

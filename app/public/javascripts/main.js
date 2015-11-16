@@ -2038,6 +2038,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   impTotal: null,
                   impId: null,
                   cliId: null,
+                  cronnId: null,
                 };
             },
             initialize: function() {
@@ -4168,6 +4169,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 	    j = (j = i.length) > 3 ? j % 3 : 0;
 	return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
 };
+//I/E->PAGOS / Pagos del cliente
     e.define("/views/ie/ClientePagoTable.js", function(e, t, n, r, i, s) {
         C.View.ClientePagoTable = Backbone.View.extend({
             name: "clientePago",
@@ -4227,6 +4229,39 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
 
                   });
+                  //Mis vars
+                  miVar = function (action)
+                  {
+                    var devuelve;
+
+                    switch (action) {
+                      case 'id':
+                        devuelve = e.id;
+                        break;
+                      case 'total':
+                        devuelve = (e.monto1 + e.monto2 + e.monto3 + e.monto4 + e.monto0).toFixed(2);
+                        break;
+                      case 'nombre':
+                        devuelve = e.impuesto.nombre;
+                        break;
+                      case 'idImp':
+                        devuelve = e.impuesto.id;
+                        break;
+                      case 'mes':
+                        devuelve = e.cronograma.mes;
+                        break;
+                      case 'anio':
+                        devuelve = e.cronograma.año;
+                        break;
+                      case 'cronoId':
+                        devuelve = e.cronograma_id;
+                        break;
+                    }
+
+                    return devuelve;
+                  }
+                  //Fin Mis vars
+                  //ACA TRAE LA DATA Y LA MUESTRA
                   p = $('<p>');
                   $(p).append('<span class="hidden" data-id="' + e.id + '"></span>');
                   $(p).append(checkbox);
@@ -7570,26 +7605,35 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             //CARGAR IGUAL MES ANTERIOR
             asignarAnterior: function() {
               var t = this;
-              console.log(t.options.carga_form[0]);
-              /*for (var i = 0; i < t.options.carga_form.length; i++) {
-                console.log(t.options.carga_form[i].cliCatedral);
-              }*/
+
+              //AGREGO /////
+              //console.log(t.options);
+              //FIN AGREGO /////
+
+
+              //console.log(miVar('total'));
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
               }else{
-                /*if($(".carga_form").serializeObject().cronograma_id != '')//CAMBIAR LA CONDICION
+                /*if($(".carga_form").serializeObject().cronograma_id != '')
                 {*/
-
-                F.msgConfirm("¿Esta seguro de realizar cargar todos los impuestos con los mismos montos que el mes anterior?", function(){
-                  console.log(Backbone.history.fragment);
-                   $.ajax({
-                      url: "/carga/repetirMesAnterior/"+Backbone.history.fragment.split("/")[Backbone.history.fragment.split("/").length-1],
-                      success: function() {
-                        F.msgOK("Todos los impuestos se cargaron Existosamente");
-                        setTimeout(function(){location.reload()},1e3)
-                      }
-                   })
-                });
+                  // LA CONDICION
+                  /*if(($(".carga_form").serializeObject().cronograma_id)
+                  {*/
+                    F.msgConfirm("Antes de continuar asegurese que el mes que se esta por asignar existe en Cronograma. Si ya lo hizo presione OK", function(){
+                       $.ajax({
+                          url: "/carga/repetirMesAnterior/"+Backbone.history.fragment.split("/")[Backbone.history.fragment.split("/").length-1],
+                          success: function(model,res,options) {
+                            F.msgOK("Todos los impuestos se cargaron Existosamente");
+                            setTimeout(function(){location.reload()},1e3)
+                          }
+                       })
+                    });
+                  /*}CLOSE OTHER IF
+                  else
+                  {
+                    F.msgError("El cronograma seleccionado no es el correspondiente.");
+                  }*/
                 /*}//CLOSE MY IF
                 else
                 {
@@ -7699,6 +7743,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e= this;
                 F.getAllCronogramasFromModel("cronograma", function(t) {
                   e.relations.cronogramas = t, F.createForm(e);
+                  //Agrego:
+                  idCronos = e.relations.cronogramas;
+
                 });
             },
             events: {
