@@ -2039,6 +2039,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   impId: null,
                   cliId: null,
                   cronnId: null,
+                  mensaje: false
                 };
             },
             initialize: function() {
@@ -7606,12 +7607,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             asignarAnterior: function() {
               var t = this;
 
-              //AGREGO /////
-              //console.log(t.options);
-              //FIN AGREGO /////
+              //console.log();
 
-
-              //console.log(miVar('total'));
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
               }else{
@@ -7620,12 +7617,19 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   // LA CONDICION
                   /*if(($(".carga_form").serializeObject().cronograma_id)
                   {*/
-                    F.msgConfirm("Antes de continuar asegurese que el mes que se esta por asignar existe en Cronograma. Si ya lo hizo presione OK", function(){
+                    F.msgConfirm("¿Seguro desea cargar igual al mes anterior?", function(){
                        $.ajax({
                           url: "/carga/repetirMesAnterior/"+Backbone.history.fragment.split("/")[Backbone.history.fragment.split("/").length-1],
                           success: function(model,res,options) {
-                            F.msgOK("Todos los impuestos se cargaron Existosamente");
-                            setTimeout(function(){location.reload()},1e3)
+                            if(model[0].mensaje)
+                            {
+                              F.msgOK("Todos los impuestos se cargaron Existosamente");
+                              setTimeout(function(){location.reload()},1e3)
+                            }
+                            else
+                            {
+                              F.msgError("El cronograma que quiere asignar NO existe!");                          
+                            }
                           }
                        })
                     });
@@ -7648,7 +7652,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "carga",
             headers: [ "ID", "IdCatedral", "Nombre", "Comunicación", "Impuesto", "Observacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
             attrs: [ "id", "cliCatedral", "cliNombre", "cliComunicacion", "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
-            hidden_columns: [ "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
+            hidden_columns: [ "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida","mensaje"],//Agrego mensaje
             data: null,
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null ],
@@ -7727,6 +7731,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 },
                 impuesto_id:{
                     type: "hidden"
+                },
+                mensaje: {
+                  type:"hidden"
                 },
             },
             isCRUD: !0,
