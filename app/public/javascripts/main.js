@@ -10083,6 +10083,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function(e) {
               var e = this;
+              //IMPRIMO
+              //console.log(moment(n[s]).format("YYYY"));//"DD/MM/YYYY"
+              //console.log(Number($(".asignacion_form").serializeObject().mes));
               F.getAllFromModel("impuesto", function(t) {
                 var objeto={};
                 var base={};
@@ -10112,28 +10115,45 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               location.reload();
             },
             addAsignacion: function() {
+              //////
+              /*F.msgConfirm("¿Está seguro?",
+              function(){
+              })*/
+              //////
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
-                  var objetos= $(".asignacion_form").serializeObject();
-                    $.ajax({
-                          type: "POST",
-                          url: "/asignacion",
-                          data: $(".asignacion_form").serialize(),
-                          success: function() {
-                              F.msgOK("Asignacion creado exitosamente")
-                                  this.asignacions = new C.Collection.Asignacions(null, {
-                                view: this
-                              }), this.asignacions.fetch({
-                               success: function(t, n) {
-                                 $("#asignacion_left").empty()
-                                 e.asignacion_table = new C.View.AsignacionTable({
-                                   el: $("#asignacion_left"),
-                                   collection: t
-                                 })
-                               }
-                             });
-                          }
-                   })
+                  //AGREGO MI CONDICION
+                    if((Number($(".asignacion_form").serializeObject().mes) == moment(n[s]).format("MM") ||
+                    Number($(".asignacion_form").serializeObject().mes) == (moment(n[s]).format("MM"))+1 &&
+                       Number($(".asignacion_form").serializeObject().año) == moment(n[s]).format("YYYY"))
+                       || (Number($(".asignacion_form").serializeObject().mes) == 1 &&
+                       Number($(".asignacion_form").serializeObject().año) == moment(n[s]).format("YYYY") + 1))
+                    {
+                    var objetos= $(".asignacion_form").serializeObject();
+                      $.ajax({
+                            type: "POST",
+                            url: "/asignacion",
+                            data: $(".asignacion_form").serialize(),
+                            success: function() {
+                                F.msgOK("Asignacion creado exitosamente")
+                                    this.asignacions = new C.Collection.Asignacions(null, {
+                                  view: this
+                                }), this.asignacions.fetch({
+                                 success: function(t, n) {
+                                   $("#asignacion_left").empty()
+                                   e.asignacion_table = new C.View.AsignacionTable({
+                                     el: $("#asignacion_left"),
+                                     collection: t
+                                   })
+                                 }
+                               });
+                            }
+                     })
+                  }
+                  else
+                  {
+                    F.msgError("No puede cargar. Revise el mes y año.");
+                  }
                }else{
                   F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
                }
