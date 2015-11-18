@@ -1,0 +1,97 @@
+var DB, Everyone 
+  , moment= require('moment');
+
+var Sindicato = function(db, everyone) {
+  DB = db;
+  Everyone = everyone;
+  return Sindicato;
+}; 
+
+Sindicato.get = function(req, res, next) {
+  DB.ClienteImpuesto.findAll({
+       include: [{model: DB.Impuesto, where:'nombre LIKE "%Sind%" AND fijo = 0'}
+              ,  {model: DB.Cliente}]
+  }).on('success', function(imp) {
+      var msg=[];
+	    imp.forEach(function(i){
+	      var com;
+		    switch (i.cliente.comunicacion_id) { 
+		      case 1:	com="Teléfono: "+i.cliente.telefono; break; 
+		      case 2:	com="Celular: "+i.cliente.celular; break;
+		      case 3:	com="Radio: "+i.cliente.radio; break; afs
+		      case 4:	com="E-Mail: "+i.cliente.email; break; 
+		      default:com="Indefinido"; 
+		    }	    
+        msg.push({
+          all: i,
+          id: i.id,
+          liquida: 1,
+          impId: i.impuesto.id,
+          impNombre: i.impuesto.nombre,
+          impObservacion: i.impuesto.observacion,
+          impFijo: i.impuesto.fijo,
+          impMonto0: i.impuesto.monto0,          
+          impMonto1: i.impuesto.monto1,
+          impMonto2: i.impuesto.monto2,
+          impMonto3: i.impuesto.monto3,
+          impTotal: i.impuesto.monto1 + i.impuesto.monto2 + i.impuesto.monto3 +i.impuesto.monto0 ,
+          cliId: i.cliente.id,
+          cliNombre: i.cliente.nombre,
+          cliComunicacion: com,
+          cliCatedral: i.cliente.catedral
+        })
+      })
+      res.send(msg);
+  });
+};
+
+Sindicato.post = function(req, res, next) {
+  DB.Impuesto.find({ where: {
+          nombre: req.body.nombre,
+          }
+  }).on('success', function(e) {
+    if(!e){
+      DB.Impuesto.create(req.body
+      ).on('success', function(a){res.send(true)});
+    }  
+  })
+};
+
+Sindicato.put = function(req, res, next) {
+  req.body.impMonto0= req.body.impMonto0 == ''? req.body.impMonto0=0:parseFloat(req.body.impMonto0.replace(",","."));
+  req.body.impMonto1= req.body.impMonto1 == ''? req.body.impMonto1=0:parseFloat(req.body.impMonto1.replace(",","."));
+  req.body.impMonto2= req.body.impMonto2 == ''? req.body.impMonto2=0:parseFloat(req.body.impMonto2.replace(",","."));
+  req.body.impMonto3= req.body.impMonto3 == ''? req.body.impMonto3=0:parseFloat(req.body.impMonto3.replace(",","."));
+  var suma = req.body.impMonto0 + req.body.impMonto1  + req.body.impMonto2 + req.body.impMonto3;
+  var monto2= req.body.impMonto4;
+  DB.ClienteImpuesto.find({where:{id:req.params.id}}).on('success', function(cliImp){
+    DB.CronogramaImpuesto.find({where:{impuesto_id: cliImp.impuesto_id, cronograma_id: req.body.cronograma_id}}).on(
+    'success', function(cronoImp){
+      if(cronoImp){
+        DB.Vencimiento.find({where:{cliente_id:cliImp.cliente_id, impuesto_id: cliImp.impuesto_id, cronograma_id: req.body.cronograma_id }}).on('success', function(e){
+          if(!e){
+            DB.Vencimiento.create({
+              cliente_id: cliImp.cliente_id,
+              impuesto_id: cliImp.impuesto_id,
+              liquida: req.body.liquida,
+              monto1: suma,
+              monto2: monto2,
+              cronograma_id: req.body.cronograma_id,
+              cronograma_impuesto_id: cronoImp.id,
+              anticipo: req.body.anticipo? req.body.anticipo : " "              
+            }).on('success', function(){res.send(true)})      
+          }else{
+            res.send(false)        
+          }
+        })
+      }else{res.send('No esta cargada la fecha de vencimiento')}
+    })
+  })
+};
+
+Sindicato.delete = function(req, res, next) {
+  DB.Impuesto.destroy({ id: req.params.id 
+  }).on('success',function(){res.send(true)});
+};
+
+module.exports = Sindicato;
