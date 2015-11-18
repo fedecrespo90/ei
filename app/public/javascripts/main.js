@@ -7628,7 +7628,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             }
                             else
                             {
-                              F.msgError("El cronograma que quiere asignar NO existe!");                          
+                              F.msgError("El cronograma que quiere asignar NO existe!");
                             }
                           }
                        })
@@ -11351,6 +11351,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             concludeOt: function() {
                 var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
+                //Agrego:
+                prueb = false;
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10]
                 if(C.Session.getUser().rol_id >= 3){
                   if(C.Session.getUser().rol_id == 4){
@@ -11772,7 +11774,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     value: "Ver Más",
                     style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
-                }))
+                }));
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
@@ -11832,12 +11834,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function() {
                 //location.reload();
                 this.render();
-                $("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val(""); //LIMPIO LOS FORMULARIOS
+                //ACA LIMPIABA FORM
+                //$("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val(""); //LIMPIO LOS FORMULARIOS
+                //$("#reprogramar_ot_form").serializeObject().empty();
+
 
             },
             render: function() {
                 return $(this.el).append(this.template()), this;
-
             },
             template: function() {
                 var e = $("<div>", {
@@ -11873,7 +11877,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             getInfoCard: function() {
                 return this.options.ot_infocard;
-
             },
             getSelectedRow: function() {
                 return this.options.ot_table.selected_row;
@@ -11887,6 +11890,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             concludeOt: function() {
                 var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
+                //Agrego:
+                prueb = false;
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10];
                 if($(".ot_table").dataTable().fnGetData(n)[9]!= " "){
                     if(C.Session.getUser().rol_id >= 3){
@@ -12336,6 +12341,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 consulta: "Consulta",
             },
             initialize: function() {
+
                 var e = this;
                 F.createInfoCard(e, $("#ot_right"));
                 $(".ot_infocard").append($("<input>", {
@@ -12344,7 +12350,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     value: "Ver Más",
                     style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
-                }))
+                }));
+
+                $("#reprogramar_ot_form").serializeObject().empty();// LIMPIO
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
@@ -12837,7 +12845,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   e.relations.empleados = t, F.getAllFromModel("area", function(t) {
                     e.relations.areas = t, F.createForm(e);
                   })
-                })
+                });
             },
             events: {
                 "click .tarea_form .BUTTON_create": "addTarea",
@@ -13057,7 +13065,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e= this;
                 F.getAllFromModel("tarea", function(t) {
                   e.relations.tareas = t, F.createForm(e);
-                })
+                });
             },
             events: {
                 "click .plan_form .BUTTON_create": "addPlan",
