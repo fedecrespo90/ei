@@ -11124,8 +11124,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             performConcludeOt: function() {
                 if($("#conclude_ot_form").serializeObject().observation != ''){
-                  //ACA LIMITA A 2000 CARACTERES
-                  if($("#conclude_ot_form").serializeObject().observation.length <= 2000){
+                  //ACA LIMITA A 6000 CARACTERES
+                  if($("#conclude_ot_form").serializeObject().observation.length <= 6000){
                     $.ajax({
                       type: "POST",
                       url: "/ot/conclude/" + this.options.ot_number,
@@ -11141,7 +11141,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                     });
                   }else{
-                    F.msgError('Demasiados caracteres (más de 2000) si cree que es necesario ampliar comuníquese con el administrador')
+                    F.msgError('Demasiados caracteres (más de 6000) si cree que es necesario ampliar comuníquese con el administrador')
                   }
                 }else{
                     F.msgError('El campo observación es obligatorio')
@@ -11315,8 +11315,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             editTableRow: function(e) {},
             addOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '')
-              && ($(".ot_form").serializeObject().fechaVencimiento != '')
+              if($(".ot_form").serializeObject().cliente_id != ''
+              && $(".ot_form").serializeObject().fechaVencimiento != ''
               //&& ($(".ot_form").serializeObject().plan_id != '')
               && ($(".ot_form").serializeObject().prioridad != '')
               && ($(".ot_form").serializeObject().comunicacion != '')
@@ -11336,8 +11336,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '')
-              && ($(".ot_form").serializeObject().fechaVencimiento != '')
+              if($(".ot_form").serializeObject().cliente_id != ''
+              && $(".ot_form").serializeObject().fechaVencimiento != ''
+              //&& ($(".ot_form").serializeObject().plan_id != '')
               && ($(".ot_form").serializeObject().prioridad != '')
               && ($(".ot_form").serializeObject().comunicacion != '')
               ){
