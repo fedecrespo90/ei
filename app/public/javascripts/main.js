@@ -10123,8 +10123,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
                   //AGREGO MI CONDICION
-                    //Mes
                     if(
+                    //Mes
                     (Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM")) ||
                     Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM"))+1) &&
                     //Año
@@ -10165,6 +10165,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             editAsignacion: function(){
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
+                  //MI CONDICION
+                  if(
+                     (Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY"))
+                   || Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY"))-1)
+                     || (Number($(".asignacion_form").serializeObject().mes) == 1 &&
+                     Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")) + 1
+                     && Number($(".asignacion_form").serializeObject().mes) == 12)
+                   )
+                   {
                   var objetos= $(".asignacion_form").serializeObject();
                     $.ajax({
                           type: "PUT",
@@ -10185,6 +10194,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                              });
                           }
                     })
+                  }
+                  else
+                  {
+                    F.msgError("No puede cargar. Revise el mes y año.");
+                  }
                 }else{
                    F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
                 }
