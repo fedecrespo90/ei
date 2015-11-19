@@ -1,0 +1,9 @@
+{
+    "type": "ftp",
+    "host": "192.168.0.13",
+    "username": "chicho",
+    "password": "chicho1",
+    "port": 21,
+    "remotePath": "/home/chicho/ei",
+    "uploadOnSave": true
+}
