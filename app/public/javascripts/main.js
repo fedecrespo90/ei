@@ -11390,8 +11390,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             concludeOt: function() {
                 var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
-                //Agrego:
-                prueb = false;
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10]
                 if(C.Session.getUser().rol_id >= 3){
                   if(C.Session.getUser().rol_id == 4){
@@ -11929,8 +11927,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             concludeOt: function() {
                 var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], r = $(t).dataTable().fnGetData(n)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
-                //Agrego:
-                prueb = false;
                 var coordinador = $(".ot_table").dataTable().fnGetData(n)[10];
                 if($(".ot_table").dataTable().fnGetData(n)[9]!= " "){
                     if(C.Session.getUser().rol_id >= 3){
@@ -12462,7 +12458,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             getResources: function() {
                 var e = this;
-                console.log(e.options)
+                console.log(e.options);
                 $.ajax({
                     url: "/otTarea/resources/" + e.options.tarea.id,
                     success: function(t) {
@@ -12688,30 +12684,41 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 var e = this;
-                var n =
-                F.getAllFromModel("area", function(t) {
-                 e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
-                    e.relations.empleados = t, F.createForm(e),
-                    $(".tarea_form input:hidden.selection_id").remove();
-                    var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
-                    $(r).append($("<input>", {
-                        type: "hidden",
-                        value: n.id,
-                        "class": "selection_ottarea_id"
-                    })), $(i).each(function() {
-                        s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
-                    }),
-                    $(".tarea_form input:hidden.selection_id").remove();
-                    var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
-                    $(r).append($("<input>", {
-                        type: "hidden",
-                        value: n.id,
-                        "class": "selection_ottarea_id"
-                    })), $(i).each(function() {
-                        s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
-                    });
+                //Imprimo si la tarea esta completa
+                //console.log(e.options.tarea.completa);
+
+                //CONDICION PARA NO EDITAR TAREAS COMPLETAS
+                if(Number(e.options.tarea.completa) == 1)
+                {
+                  //DISABLED
+                }
+                else
+                {
+                  var n =
+                  F.getAllFromModel("area", function(t) {
+                   e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
+                      e.relations.empleados = t, F.createForm(e),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
+                      }),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
+                      });
+                   });
                  });
-                });
+                }
             },
             events: {
                 "click .tarea_form .BUTTON_save": "editTarea",
@@ -12748,7 +12755,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }else{
                 		$.ajax({
                         type: "PUT",
-                        url: "/ottarea/" + e.getSelectionID(),
+                        url: "/ottarea/" + e.$(".tarea_form")(),
                         data: $(".tarea_form").serializeObject(),
                         success: function(t) {
                         	if(t)
