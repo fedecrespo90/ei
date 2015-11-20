@@ -11522,7 +11522,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             empleados: null,
             areas: null,
             initialize: function() {
-              var e = this
+              var e = this;
+              console.log(e.options);
               $(document).bind("empleados_loaded", function(t) {
                 $(document).bind("areas_loaded", function() {
                   e.render();
@@ -11575,6 +11576,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           $("#add_tarea_ot_form1").append(this.buildEmpleadosList("empleado_id")[0], this.buildAreasList("area_id")[0], this.buildHeader()),
                           $(".button").button();
               //Imprimo
+              //console.log($("#ot_right"));
               //console.log(String($("#add_tarea_ot_form1")[0].vto.value));
               //console.log($("#add_tarea_ot_form1").serializeObject().vto[0]);
               //console.log("Ahora: "+moment(n[s]).format("YYYY-MM-DD"));
@@ -11635,6 +11637,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }, 1e3);
             },
             performAddTarea: function() {
+              //Agrego-imprimo
+              var fech =  F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4];//
+              var aanio = Number(fech[0]+fech[1]+fech[2]+fech[3]);
+              var mmes = Number(fech[5]+fech[6]);
+              var ddia = Number(fech[8]+fech[9]);
+              /*console.log("Dia: "+ddia);
+              console.log("Mes: "+mmes);
+              console.log("Año: "+aanio);*/
+              //FIn agrego
               var ann = Number($("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
               var mess = Number($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
               var diaa = Number($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
@@ -11645,9 +11656,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
                 ){
                   //MI CONDICION
-                  if(
-                    (ann >= Number(moment(n[s]).format("YYYY")))
-                    && ((mess >= Number(moment(n[s]).format("MM")) && diaa >= Number(moment(n[s]).format("DD"))) || (mess == 1 && ann == Number(moment(n[s]).format("YYYY"))+1 ))
+                  if( (ann == aanio) && (mess <= mmes) && (diaa <= ddia)
+
                   ){
                     this.options.addNewTarea({
                         data: $("#add_tarea_ot_form1").serializeObject(),
@@ -11655,7 +11665,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }
                   else
                   {
-                    F.msgError('La fecha de vencimiento tiene que ser posterior, o igual, a la actual.');
+                    F.msgError('La fecha que ingresó es posterior a la fecha de vencimiento.');
                   }
                 }else{
                  F.msgError('El campo "Nombre", el empleado responsable y el tiempo estimado (HH:MM)son OBLIGATORIOS')
