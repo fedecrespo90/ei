@@ -11574,6 +11574,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           $("#add_tarea_ot_form1").append('Vencimiento:<br /><input type="date" name="vto">'),
                           $("#add_tarea_ot_form1").append(this.buildEmpleadosList("empleado_id")[0], this.buildAreasList("area_id")[0], this.buildHeader()),
                           $(".button").button();
+              //Imprimo
+              //console.log(String($("#add_tarea_ot_form1")[0].vto.value));
+              //console.log($("#add_tarea_ot_form1").serializeObject().vto[0]);
+              //console.log("Ahora: "+moment(n[s]).format("YYYY-MM-DD"));
+
             },
             buildEmpleadosList: function(e) {
                 var t = $("<select>", {
@@ -11630,12 +11635,28 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }, 1e3);
             },
             performAddTarea: function() {
-                if(($("#add_tarea_ot_form1").serializeObject().nombre!='')
+              var ann = Number($("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
+              var mess = Number($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
+              var diaa = Number($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
+              //CONDICION AGREGAR TAREA
+                if(
+                ($("#add_tarea_ot_form1").serializeObject().nombre!='')
                 && ($("#add_tarea_ot_form1").serializeObject().empleado_id!='0')
-                && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')){
-                  this.options.addNewTarea({
-                      data: $("#add_tarea_ot_form1").serializeObject(),
-                  }, this.cleanModals);
+                && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
+                ){
+                  //MI CONDICION
+                  if(
+                    (ann >= Number(moment(n[s]).format("YYYY")))
+                    && ((mess >= Number(moment(n[s]).format("MM")) && diaa >= Number(moment(n[s]).format("DD"))) || (mess == 1 && ann == Number(moment(n[s]).format("YYYY"))+1 ))
+                  ){
+                    this.options.addNewTarea({
+                        data: $("#add_tarea_ot_form1").serializeObject(),
+                    }, this.cleanModals);
+                  }
+                  else
+                  {
+                    F.msgError('La fecha de vencimiento tiene que ser posterior, o igual, a la actual.');
+                  }
                 }else{
                  F.msgError('El campo "Nombre", el empleado responsable y el tiempo estimado (HH:MM)son OBLIGATORIOS')
                 }
