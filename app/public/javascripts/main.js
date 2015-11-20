@@ -12786,7 +12786,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   }else{
                 		$.ajax({
                         type: "PUT",
-                        url: "/ottarea/" + e.$(".tarea_form")(),
+                        url: "/ottarea/" + e.getSelectionID(),
                         data: $(".tarea_form").serializeObject(),
                         success: function(t) {
                         	if(t)
