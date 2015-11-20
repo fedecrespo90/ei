@@ -11325,8 +11325,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "POST",
                   url: "/ot/",
                   data: $(".ot_form").serialize(),
-                  success: function() {
+                  success: function(model,res,options) {
                     F.msgOK("O/T creada exitosamente");
+                    console.log(model)
                     setTimeout(function(){location.reload()},1e3)
                   }
                })
@@ -11348,7 +11349,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   data: $(".ot_form").serialize(),
                   success: function() {
                     F.msgOK("O/T editada exitosamente");
-                    setTimeout(function(){location.reload()},1e3)
+                    //ESTOY ACA
+                    console.log(F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4]);
+                    //setTimeout(function(){location.reload()},1e3)
                   }
                 })
              }else{
