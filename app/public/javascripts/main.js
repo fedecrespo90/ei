@@ -12807,6 +12807,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }
                     });
                 })
+                // LIMPIO FORM PARA QUE NO APAREZCA MUCHAS VECES EL CARTEL DE CONFIRMACION
+                $("#reprogramar_ot_form").serializeObject().empty();
                }
             },
             cancelEditTarea: function() {
