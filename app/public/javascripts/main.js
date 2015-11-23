@@ -10899,12 +10899,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "otTareaAll",
             headers: [ "ID", "Número", "Buscar", "fechaCompleta", "fechaVencimiento", "Título", "Descripción", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido", "Empleado" , "Area" ],
             attrs: [ "id", "ot", "ot_numero", "fechaCompleta", "fechaVencimiento", "nombre", "descripcion", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido", "empleado", "area" ],
-            hidden_columns: [  "ot_numero", "fechaCompleta", "fechaVencimiento", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido" ],
+            hidden_columns: [  "ot_numero",/* "fechaCompleta", */"fechaVencimiento", "observacion", "conclusion", /*"tiempoEstimado", "tiempoInsumido"*/ ],
             data: null,
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [[ 1, "desc" ]],
-                iDisplayLength: 10,
+                iDisplayLength: 13, //antes: 10
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(e) {
