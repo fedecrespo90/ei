@@ -12439,6 +12439,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               "click .ot_ver_mas": "ver_mas",
             },
             //18
+            //19
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
@@ -12476,7 +12477,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  $("#ver_mas_form").append(
                                   '<p><h3>Titulo: '+nombre+'</h3></p>'+
                                   '<p><span style= "font-weight: bold">Descripcion: </span>'+ descripcion +'</p>'+
-                                  '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p><hr style="color: #0056b2;" />');
+                                  '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p>'
+                                  // AGREGO
+                                  +'<p><span style= "font-weight: bold">Empleado: </span>'+ ot.empleado +'</p>'+
+                                  '<p><span style= "font-weight: bold">Tiempo estimado: </span>'+ ot.tiempoEstimado +'</p>'+
+                                  '<p><span style= "font-weight: bold">Tiempo insumido: </span>'+ ot.tiempoInsumido +'</p>'+
+                                  '<p><span style= "font-weight: bold">Cliente: </span>'+ ot.clienteNombre +'</p>'+
+                                  // FIN AGREGO
+                                  '<hr style="color: #0056b2;" />');
                               })
                               $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')
                             }
