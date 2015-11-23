@@ -11339,7 +11339,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               var e = this;
               if($(".ot_form").serializeObject().cliente_id != ''
               && $(".ot_form").serializeObject().fechaVencimiento != ''
-              //&& ($(".ot_form").serializeObject().plan_id != '')
+              //&& ($(".ot_form").serializeObject().plan_id != '') //esto estaba comentado
               && ($(".ot_form").serializeObject().prioridad != '')
               && ($(".ot_form").serializeObject().comunicacion != '')
               ){
@@ -11347,11 +11347,22 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "PUT",
                   url: "/ot/"+e.getSelectionID(),
                   data: $(".ot_form").serialize(),
-                  success: function() {
-                    F.msgOK("O/T editada exitosamente");
-                    //ESTOY ACA
-                    console.log(F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4]);
-                    //setTimeout(function(){location.reload()},1e3)
+                  success: function(mensaje,res,options) {
+
+                    //Agrego condicion para que avise si tiene tareas la OT
+                    console.log(mensaje[0].mensaje);
+                    if(mensaje[0].mensaje)
+                    {
+                      F.msgOK("O/T editada exitosamente");
+                      setTimeout(function(){location.reload()},1e3);
+                    }
+                    else
+                    {
+                      F.msgConfirm("La OT que esta por editar tiene tareas asignadas. ¿Desea continuar?", function(){
+                        F.msgOK("O/T editada exitosamente");
+                        setTimeout(function(){location.reload()},1e3);
+                       });
+                    }
                   }
                 })
              }else{
@@ -11659,7 +11670,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
                 ){
                   //MI CONDICION
-                  if( (ann == aanio) && (mess <= mmes) && (diaa <= ddia)
+                  if(fech == "" || ((ann == aanio) && (mess <= mmes) && (diaa <= ddia))
 
                   ){
                     this.options.addNewTarea({

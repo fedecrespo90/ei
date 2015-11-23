@@ -475,6 +475,8 @@ Ot.conclude = function(req, res, next) {
 };
 
 Ot.put = function(req, res, next) {
+  var mensaje = [];
+  var flag = false;
   DB.Ot.find({ where: {id: req.params.id} }).on('success', function(e) { 
     if (e) {
       var ot = e;
@@ -539,7 +541,26 @@ Ot.put = function(req, res, next) {
       req.body.juridica == 0? req.body.juridica = !1:req.body.juridica = !0
      // req.body.reservado == 0? req.body.reservado = !1:req.body.reservado = !0
       e.updateAttributes(req.body).success(function(e) {
-        res.send(true);
+        //res.send(true);
+        //Agrego
+        DB.OtTarea.find({where:{ot_id: req.params.id  , completa: 0}, include: [{model: DB.Ot, order: 'id DESC LIMIT 1 ',}]}).on('success', function(otTarea){
+          if(otTarea)
+          {
+            flag = true;
+            //Imprimo
+              /*for (var i = 0; i < 100; i++) {
+                console.log(otTarea.ot_id);
+              };*/
+          }
+          else
+          {
+            flag = false;
+          }
+          mensaje.push({
+          mensaje: flag
+        })
+        res.send(mensaje);
+        })
       });
     }else{res.send(false)}
   });
