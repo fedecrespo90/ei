@@ -11864,7 +11864,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"),
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/Tfede1 Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -12432,15 +12432,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
                 }));
 
+                //$("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val("");
                 $("#reprogramar_ot_form").serializeObject().empty();// LIMPIO
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
             },
+            //18
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"),
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" /><input type="button" class="BUTTON_cancel righty button" onclick="window.print();" value="imprimir"/>'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
