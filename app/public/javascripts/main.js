@@ -3235,6 +3235,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
                 this.selected_row = $(e.currentTarget), $("#cliente_right .cliente_add_tarea");
             },
+            //21 - Cuentas corrientes
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail cliente_id_' + i + '" style="display:none;">';
                 return this.getCuentaMovimientos(i, function(e) {
@@ -5041,6 +5042,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     });
                 });
             },
+            //21 HISTORIAL DE PAGOS
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail historial_id_' + i + '" style="display:none;">';
                 return this.getHistorial(i, function(e) {

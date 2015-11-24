@@ -24,7 +24,7 @@ Historial.get = function(req, res, next) {
         if(d.grupoImpuesto.pagado!=null){
           if(d.descargado != null){//no esta archivado
             if(d.archivado!= null){
-              imp+=" (Archivado)";              
+              imp+=" (Archivado)";
             }else{
               imp+=" (A Archivar)";//Descargar
             }
@@ -32,7 +32,7 @@ Historial.get = function(req, res, next) {
             imp+=" (A Descargar)";//Archivar
           }
         }else{
-          imp+=" (En Tránsito)";          
+          imp+=" (En Tránsito)";
         }
       }else{
         imp+=" (A Pagar)";
@@ -42,9 +42,9 @@ Historial.get = function(req, res, next) {
         fecha: fecha,
         impuesto: imp,
         monto:total.toMoney(),
-      })                
+      })
     })
-    res.send(msg)  
+    res.send(msg)
   })
 };
 
