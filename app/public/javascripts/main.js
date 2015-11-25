@@ -1539,6 +1539,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   empleadoNombre: null,
                   total: null,
                   diaDePago: null,
+                  cronograma: null,
                   /* AGREGO
                   monto0: null,
                   monto1: null,
@@ -8760,7 +8761,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null,  ],
                 aaSorting: [ [ 1, "desc" ] ],
-                iDisplayLength: 500
+                iDisplayLength: 600
             },
             initialize: function() {
                 var e = this;
@@ -11665,14 +11666,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               var ann = Number($("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
               var mess = Number($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
               var diaa = Number($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
-              //CONDICION AGREGAR TAREA
+              //CONDICION AGREGAR TAREA OT
                 if(
                 ($("#add_tarea_ot_form1").serializeObject().nombre!='')
                 && ($("#add_tarea_ot_form1").serializeObject().empleado_id!='0')
                 && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
                 ){
                   //MI CONDICION
-                  if(fech == "" || ((ann == aanio) && (mess <= mmes) && (diaa <= ddia))
+                  if(
+                    fech == "" || ((ann == aanio) && (mess <= mmes))
+                    || (ann == aanio+1 && mess == 1)
 
                   ){
                     this.options.addNewTarea({
@@ -11866,7 +11869,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/Tfede1 Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"),
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel center button" onclick=location.reload() value="Salir" />'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -12747,7 +12750,32 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 //CONDICION PARA NO EDITAR TAREAS COMPLETAS
                 if(Number(e.options.tarea.completa) == 1)
                 {
-                  //DISABLED
+                  //ACA IBA DISABLED. AHORA LO MODIFICO PARA UQE PUEDAN VERLAS
+
+                  var n =
+                  F.getAllFromModel("area", function(t) {
+                   e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
+                      e.relations.empleados = t, F.createForm(e),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
+                      }),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
+                      });
+                   });
+                 });
                 }
                 else
                 {
