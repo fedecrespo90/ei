@@ -12745,13 +12745,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function() {
                 var e = this;
                 //Imprimo si la tarea esta completa
-                //console.log(e.options.tarea.completa);
+                //console.log(e.options.tarea);
 
                 //CONDICION PARA NO EDITAR TAREAS COMPLETAS
                 if(Number(e.options.tarea.completa) == 1)
                 {
-                  //ACA IBA DISABLED. AHORA LO MODIFICO PARA UQE PUEDAN VERLAS
-
+                  $("select").attr( "disabled", "disabled" );
+                  //DISABLED
                   var n =
                   F.getAllFromModel("area", function(t) {
                    e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
@@ -12764,6 +12764,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           "class": "selection_ottarea_id"
                       })), $(i).each(function() {
                           s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
+                          $("input").attr( "disabled", "disabled" );
+                          $("textarea").attr( "disabled", "disabled" );
+                          $("select").attr( "disabled", "disabled" );
                       }),
                       $(".tarea_form input:hidden.selection_id").remove();
                       var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
@@ -12773,9 +12776,16 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           "class": "selection_ottarea_id"
                       })), $(i).each(function() {
                           s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
+                          $("input").attr( "disabled", "disabled" );
+                          $("textarea").attr( "disabled", "disabled" );
+                          $("select").attr( "disabled", "disabled" );
                       });
+                      $("select").attr( "disabled", "disabled" );
                    });
+                   $("select").attr( "disabled", "disabled" );
                  });
+                 $("select").attr( "disabled", "disabled" );
+
                 }
                 else
                 {
