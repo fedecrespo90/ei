@@ -11354,7 +11354,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 
                     //Agrego condicion para que avise si tiene tareas la OT
                     console.log(mensaje[0].mensaje);
-                    if(mensaje[0].mensaje)
+                    if(mensaje[0].mensaje == false)
                     {
                       F.msgOK("O/T editada exitosamente");
                       setTimeout(function(){location.reload()},1e3);
@@ -11655,28 +11655,34 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             performAddTarea: function() {
               //Agrego-imprimo
-              var fech =  F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4];//
-              var aanio = Number(fech[0]+fech[1]+fech[2]+fech[3]);
-              var mmes = Number(fech[5]+fech[6]);
-              var ddia = Number(fech[8]+fech[9]);
-              /*console.log("Dia: "+ddia);
-              console.log("Mes: "+mmes);
-              console.log("Año: "+aanio);*/
+              var fech =  F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4];//VENCIMIENTO
+              var aanio = fech[0]+fech[1]+fech[2]+fech[3];
+              var mmes = fech[5]+fech[6];
+              var ddia = fech[8]+fech[9];
+              //Imprimo Fecha de vencimiento
+              /*console.log("Fecha ingresada: "+$("#add_tarea_ot_form1").serializeObject().vto);
+              console.log("Vencimiento: "+fech);*/
               //FIn agrego
-              var ann = Number($("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
-              var mess = Number($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
-              var diaa = Number($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
+              var ann = String( $("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
+              var mess = String($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
+              var diaa = String($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
               //CONDICION AGREGAR TAREA OT
                 if(
                 ($("#add_tarea_ot_form1").serializeObject().nombre!='')
                 && ($("#add_tarea_ot_form1").serializeObject().empleado_id!='0')
                 && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
                 ){
+                  //CONDICION Fechas
+                  var venci = new Date(aanio,String(Number(mmes)-1),ddia);
+                  var ingresada = new Date(ann,String(Number(mess)-1),diaa);
+
+                  //console.log(ingresada<=venci);
+                  //console.log("INGRESADA: "+ingresada);
+                  //console.log("VENCI: "+venci);
+
                   //MI CONDICION
                   if(
-                    fech == "" || ((ann == aanio) && (mess <= mmes))
-                    || (ann == aanio+1 && mess == 1)
-
+                    ingresada <= venci
                   ){
                     this.options.addNewTarea({
                         data: $("#add_tarea_ot_form1").serializeObject(),

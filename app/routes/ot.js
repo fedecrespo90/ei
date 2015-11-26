@@ -561,7 +561,8 @@ Ot.put = function(req, res, next) {
             flag = true;
             //Imprimo
               /*for (var i = 0; i < 100; i++) {
-                console.log(otTarea.ot_id);
+                //console.log(otTarea.ot_id);
+                console.log(otTarea.nombre);
               };*/
           }
           else
