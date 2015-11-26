@@ -8754,12 +8754,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/views/pagarImp/RecepImpTable.js", function(e, t, n, r, i, s) {
         C.View.RecepImpTable = Backbone.View.extend({
             name: "recepImp",
-            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id" ],
-            attrs: ["id", "numero", "diaDePago", "empleadoNombre", "bancoNombre", "total", "banco_id", "empleado_id"],
+            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id", "Cronograma"],
+            attrs: ["id", "numero", "diaDePago", "empleadoNombre", "bancoNombre", "total", "banco_id", "empleado_id", "cronograma"],
             hidden_columns: ["empleado_nombre", "banco_id", "empleado_id"],
             data: null,
             datatableOptions: {
-                aoColumns: [ null, null, null, null, null, null, null, null,  ],
+                aoColumns: [ null, null, null, null, null, null, null, null, null ],
                 aaSorting: [ [ 1, "desc" ] ],
                 iDisplayLength: 600
             },
@@ -8837,6 +8837,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               },
               diaDePago: {
                 label: "Dia De Pago",
+                type: "text",
+                attrs: {
+                  disabled: "disabled"
+                }
+              },
+              cronograma: {
+                label: "Cronograma",
                 type: "text",
                 attrs: {
                   disabled: "disabled"

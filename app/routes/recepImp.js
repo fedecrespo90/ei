@@ -7,6 +7,15 @@ var RecepImp = function(db, everyone) {
 };
 
 RecepImp.get = function(req, res, next) {
+  ////AGREGO DE DESCIMP
+  /*
+  DB.Vencimiento.findAll({include: [{model: DB.Cliente},{model: DB.Cronograma},{model: DB.Impuesto},{model: DB.GrupoImpuesto, include: [{model: DB.Banco}],where:{enviado: 1, pagado: 1}}], where:"vencimiento.pagado = 1 AND grupo_impuesto_id IS NOT NULL AND descargado IS NULL AND archivado IS NULL", order:"grupo_impuesto_id DESC"}).on('success', function(as) {
+    var msg=[]
+    as.forEach(function(a){});
+  });
+  */
+  ////FIN AGREGO
+
   DB.GrupoImpuesto.findAll({where:{enviado: 1, pagado: 0}, include:[{model: DB.Banco}, {model: DB.Empleado}]}).on('success', function(as) {
     var msg=[]
     as.forEach(function(a){
@@ -19,6 +28,8 @@ RecepImp.get = function(req, res, next) {
         empleadoNombre: a.empleado.nombre+" "+a.empleado.apellido,
         total: a.total.toMoney(),
         diaDePago: moment(a.diaDePago).format("DD/MM/YYYY"),
+        //Agrego:
+        //cronograma: a.cronograma.mes+"/"+a.cronograma.año,
       })
     })
     res.send(msg)
