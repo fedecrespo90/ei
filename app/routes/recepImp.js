@@ -6,19 +6,21 @@ var RecepImp = function(db, everyone) {
   return RecepImp;
 };
 
-RecepImp.get = function(req, res, next) {
-  ////AGREGO DE DESCIMP
-  /*
-  DB.Vencimiento.findAll({include: [{model: DB.Cliente},{model: DB.Cronograma},{model: DB.Impuesto},{model: DB.GrupoImpuesto, include: [{model: DB.Banco}],where:{enviado: 1, pagado: 1}}], where:"vencimiento.pagado = 1 AND grupo_impuesto_id IS NOT NULL AND descargado IS NULL AND archivado IS NULL", order:"grupo_impuesto_id DESC"}).on('success', function(as) {
-    var msg=[]
-    as.forEach(function(a){});
-  });
-  */
-  ////FIN AGREGO
 
+RecepImp.get = function(req, res, next) {
+  var miArray = [], indi = 0, otroIndi = 0;
   DB.GrupoImpuesto.findAll({where:{enviado: 1, pagado: 0}, include:[{model: DB.Banco}, {model: DB.Empleado}]}).on('success', function(as) {
-    var msg=[]
-    as.forEach(function(a){
+    var msg=[];
+
+        ////AGREGO CONSULTA PARA CRONOGRAM
+        DB.Vencimiento.findAll({order: 'grupo_impuesto_id DESC',where:{grupo_impuesto_id: as[0].id}, include:[{model: DB.Cronograma}] }).on('success', function(ss) {
+
+          ss.forEach(function(b){
+            miArray[indi]= b.cronograma.mes+"/"+b.cronograma.año;
+            indi++;
+          })
+as.forEach(function(a){
+
       msg.push({
         id: a.id,
         numero: "Grupo_"+a.id,
@@ -29,10 +31,15 @@ RecepImp.get = function(req, res, next) {
         total: a.total.toMoney(),
         diaDePago: moment(a.diaDePago).format("DD/MM/YYYY"),
         //Agrego:
-        //cronograma: a.cronograma.mes+"/"+a.cronograma.año,
+        cronograma: miArray[otroIndi]
+
       })
-    })
-    res.send(msg)
+      otroIndi++;
+
+}); // Cierra el as.forEach
+res.send(msg);
+});//Cierra function (ss)
+  ////FIN CONSULTA
   });
 };
 

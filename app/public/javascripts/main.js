@@ -12777,7 +12777,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           "class": "selection_ottarea_id"
                       })), $(i).each(function() {
                           s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
-                          $("input").attr( "disabled", "disabled" );
+                          $("input[type=text]").attr( "disabled", "disabled" );
                           $("textarea").attr( "disabled", "disabled" );
                           $("select").attr( "disabled", "disabled" );
                       }),
@@ -12789,7 +12789,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           "class": "selection_ottarea_id"
                       })), $(i).each(function() {
                           s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
-                          $("input").attr( "disabled", "disabled" );
+                          $("input[type=text]").attr( "disabled", "disabled" );
                           $("textarea").attr( "disabled", "disabled" );
                           $("select").attr( "disabled", "disabled" );
                       });
