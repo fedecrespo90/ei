@@ -36,10 +36,13 @@ RecepImp.editMonto = function(req, res, next){
       }else{
         maximo=maximo+1
       }
+      DB.GrupoImpuesto.find({ where: {id: vto.grupo_impuesto_id} }).on('success', function(grup){
       vto.updateAttributes({monto0: req.body.monto0, monto1: req.body.monto1, monto2 : req.body.monto2, monto3: req.body.monto3});
+      grup.updateAttributes({total: bodyMontos});
       //generarRecibo(maximo, vto, baseMontos, bodyMontos, req, res);
       actualizarCuenta(maximo, vto, baseMontos, bodyMontos);
       res.send(true);
+      })//function(grup)
     })
   })
   setTimeout(limpiarDb(), 300)
