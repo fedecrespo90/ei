@@ -127,11 +127,29 @@ PagoImp.post = function(req, res, next) {
                 total += importe;
                 //aca deberia poner lo del impuesto anticipo
                 //console.log(vi)
+
+
+                var mess = Number(vi.cronograma.mes);
+                var anioo = Number(vi.cronograma.año);
+                var im = vi.impuesto.nombre;
+                if(im.indexOf("Monotributo") > -1 || im.indexOf("MONOTRIBUTO") > -1 || im.indexOf("monotributo") > -1)
+                {
+                  switch (mess)
+                  {
+                    case 12:
+                    mess = 1;
+                    anioo = Number(vi.cronograma.año)+1
+                      break;
+                    default:
+                    mess = Number(vi.cronograma.mes)+1;
+                  }
+                }
+
                 arrayImpuesto.push({
                   cliente: vi.cliente.nombre,
                   importe: importe.toMoney(), //param.total, //CAMBIE PARA QUE IMPRIMA BIEN EL IMPORTE EN EL RECIBO
                   impuesto: vi.impuesto.nombre,
-                  periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
+                  periodo: mess+"/"+anioo,
                 })
               })
               res.send({

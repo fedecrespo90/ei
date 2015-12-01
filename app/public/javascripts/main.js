@@ -1539,7 +1539,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   empleadoNombre: null,
                   total: null,
                   diaDePago: null,
-                  cronograma: null,
                   /* AGREGO
                   monto0: null,
                   monto1: null,
@@ -8754,14 +8753,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/views/pagarImp/RecepImpTable.js", function(e, t, n, r, i, s) {
         C.View.RecepImpTable = Backbone.View.extend({
             name: "recepImp",
-            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id", "Cronograma"],
-            attrs: ["id", "numero", "diaDePago", "empleadoNombre", "bancoNombre", "total", "banco_id", "empleado_id", "cronograma"],
+            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id"],
+            attrs: ["id", "numero", "diaDePago", "empleadoNombre", "bancoNombre", "total", "banco_id", "empleado_id"],
             hidden_columns: ["empleado_nombre", "banco_id", "empleado_id"],
             data: null,
             datatableOptions: {
-                aoColumns: [ null, null, null, null, null, null, null, null, null ],
+                aoColumns: [ null, null, null, null, null, null, null, null],
                 aaSorting: [ [ 1, "desc" ] ],
-                iDisplayLength: 600
+                iDisplayLength: 500
             },
             initialize: function() {
                 var e = this;
@@ -8837,13 +8836,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               },
               diaDePago: {
                 label: "Dia De Pago",
-                type: "text",
-                attrs: {
-                  disabled: "disabled"
-                }
-              },
-              cronograma: {
-                label: "Cronograma",
                 type: "text",
                 attrs: {
                   disabled: "disabled"

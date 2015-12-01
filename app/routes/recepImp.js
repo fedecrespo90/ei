@@ -8,19 +8,9 @@ var RecepImp = function(db, everyone) {
 
 
 RecepImp.get = function(req, res, next) {
-  var miArray = [], indi = 0, otroIndi = 0;
   DB.GrupoImpuesto.findAll({where:{enviado: 1, pagado: 0}, include:[{model: DB.Banco}, {model: DB.Empleado}]}).on('success', function(as) {
-    var msg=[];
-
-        ////AGREGO CONSULTA PARA CRONOGRAM
-        DB.Vencimiento.findAll({order: 'grupo_impuesto_id DESC',where:{grupo_impuesto_id: as[0].id}, include:[{model: DB.Cronograma}] }).on('success', function(ss) {
-
-          ss.forEach(function(b){
-            miArray[indi]= b.cronograma.mes+"/"+b.cronograma.año;
-            indi++;
-          })
-as.forEach(function(a){
-
+    var msg=[]
+    as.forEach(function(a){
       msg.push({
         id: a.id,
         numero: "Grupo_"+a.id,
@@ -30,16 +20,9 @@ as.forEach(function(a){
         empleadoNombre: a.empleado.nombre+" "+a.empleado.apellido,
         total: a.total.toMoney(),
         diaDePago: moment(a.diaDePago).format("DD/MM/YYYY"),
-        //Agrego:
-        cronograma: miArray[otroIndi]
-
       })
-      otroIndi++;
-
-}); // Cierra el as.forEach
-res.send(msg);
-});//Cierra function (ss)
-  ////FIN CONSULTA
+    })
+    res.send(msg)
   });
 };
 

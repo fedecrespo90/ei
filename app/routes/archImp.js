@@ -11,13 +11,30 @@ ArchImp.get = function(req, res, next) {
   //  //descargado IS NOT NULL AND archivado IS NULL
     var msg=[]
     as.forEach(function(a){
-      var impMonto=parseFloat(a.monto0)+parseFloat(a.monto1)+parseFloat(a.monto2)+parseFloat(a.monto3)+parseFloat(a.monto4)
+      var impMonto=parseFloat(a.monto0)+parseFloat(a.monto1)+parseFloat(a.monto2)+parseFloat(a.monto3)+parseFloat(a.monto4);
+
+      var mess = Number(a.cronograma.mes);
+      var anioo = Number(a.cronograma.año);
+      var im = a.impuesto.nombre;
+      if(im.indexOf("Monotributo") > -1 || im.indexOf("MONOTRIBUTO") > -1 || im.indexOf("monotributo") > -1)
+      {
+        switch (mess)
+        {
+          case 12:
+          mess = 1;
+          anioo = Number(a.cronograma.año)+1;
+            break;
+          default:
+          mess = Number(a.cronograma.mes)+1;
+        }
+      }
+
       if(impMonto != 0.00)
         msg.push({
           id: a.id,
           grupoNumero: "Grupo_"+a.grupo_impuesto_id,
           clienteNombre: a.cliente.nombre,
-          cronograma: a.cronograma.mes+"/"+a.cronograma.año,
+          cronograma: mess+"/"+anioo,
           impuestoNombre: a.impuesto.nombre,
           bancoNombre: a.grupoImpuesto.banco.nombre,
           diaDePago: moment(a.grupoImpuesto.diaDePago).format("DD/MM/YYYY"),
@@ -28,7 +45,7 @@ ArchImp.get = function(req, res, next) {
       }
     })
     res.send(msg)
-  });  
+  });
 };
 
 ArchImp.err = function(req, res, next) {
