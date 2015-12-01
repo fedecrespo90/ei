@@ -53,6 +53,7 @@ ClienteImpuesto.get = function(req, res, next) {
 		       observaciones: cuenta.cliente.observaciones,
 		       monto: cuenta.cuentaCorriente.monto,
 		       montoTramite: cuenta.cuentaCorriente.montoTramite
+           
 
 		     })
       })

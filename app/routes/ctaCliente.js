@@ -1,4 +1,4 @@
-var DB, Everyone  
+var DB, Everyone
   , moment = require('moment');
 
 var CtaCliente = function(db, everyone) {
@@ -16,17 +16,17 @@ CtaCliente.get = function(req, res, next) {
           id: m.id,
           ie: m.ingreso==1?"Ingreso":"Egreso",
           creado: moment(m.created_at).format("YYYY-MM-DD"),
-          recibido: moment(m.recibido).format("YYYY-MM-DD"),        
+          recibido: moment(m.recibido).format("YYYY-MM-DD"),
           montoTotal: m.caja.monto,
           observacion: m.observacion,
           concepto: m.concepto,
           subConcepto: m.subConcepto,
           rSubConcepto: m.rSubConcepto,
-          monto: m.monto.toMoney(),          
+          monto: m.monto.toMoney(),
         })
       }
     })
-    res.send(msg) 
+    res.send(msg)
   })
 };
 module.exports = CtaCliente;

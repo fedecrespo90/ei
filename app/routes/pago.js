@@ -5,7 +5,7 @@ var DB, Everyone
  , cuentaAbogado = 131;
 var Pago = function(db, everyone) {
   DB = db;
-  Everyone = everyone;   
+  Everyone = everyone;
   return Pago;
 };
 
@@ -18,13 +18,13 @@ Pago.put = function(req, res, next) {
       efMonto= Number(param.efectivoMonto)
       chMonto= Number(param.chequeMonto)
       concepto="Recepción para Pago de Impuestos(Efectivo:$"+efMonto.toFixed(2)+" y Cheque: $"+ chMonto.toFixed(2)+" del Banco:"+param.chequeBanco+" Titular:"+param.chequeTitular+" Nº:"+param.chequeNumero+" Fecha de Emisión: "+param.fechaEmision+" Fecha de Cobro: "+param.fechaCobro+")";
-      }else{  
-        chMonto= Number(param.chequeMonto)      
+      }else{
+        chMonto= Number(param.chequeMonto)
         concepto="Recepción para Pago de Impuestos(Cheque: $"+ chMonto.toFixed(2)+" del Banco:"+param.chequeBanco+" Titular:"+param.chequeTitular+" Nº:"+param.chequeNumero+" Fecha de Emisión: "+param.fechaEmision+" Fecha de Cobro: "+param.fechaCobro+")";
       }
   }else{
     if(param.efectivoMonto!='0'){
-      efMonto= Number(param.efectivoMonto)    
+      efMonto= Number(param.efectivoMonto)
       concepto="Recepción para Pago de Impuestos(Efectivo:$"+ efMonto.toFixed(2)+")";
     }else{
       concepto="Recepción para Pago de Impuestos( A través de la Cuenta Corriente )"
@@ -35,7 +35,7 @@ Pago.put = function(req, res, next) {
     DB.Autorizacion.create({
       empleado_id: req.session.usuario_id,
       descubierto: descubierto,
-      cliente_id: param.cliente_id  
+      cliente_id: param.cliente_id
     }).on('success',function(){
       DB.Recibo.max('e').on('success',function(maximo){
         if(isNaN(maximo)){
@@ -53,7 +53,7 @@ Pago.put = function(req, res, next) {
             var totalIngresado= parseFloat(param.totalPago) +parseFloat(cuenta.monto)-parseFloat(param.sumImp) ;
             cuenta.updateAttributes({monto:totalIngresado});
             var movimientoMonto = Number((Number(efMonto)+Number(chMonto))-Number(param.sumImp)||0);
-           //   faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto))); 
+           //   faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto)));
             crearMovimientoMonto(recibo.id, totalIngresado, maximo, cli, (efMonto+chMonto))
             DB.ClienteCuentaCorriente.find({where:{cliente_id: param.cliente_id}}).on('success',function(ccc){
               var arrayImpuesto=["Giro en descubierto por un total de $"+Math.abs(Number(descubierto)).toFixed(2)]
@@ -64,8 +64,8 @@ Pago.put = function(req, res, next) {
                 }).on('success',function(base){
                   var btotal = parseFloat(base.monto0)+parseFloat(base.monto1)+parseFloat(base.monto2)+parseFloat(base.monto3)+parseFloat(base.monto4)
                   if(btotal<=imp.monto){
-                    base.vtoImpuesto=base.cronogramaImpuesto.cronograma.mes+ "/"+ base.cronogramaImpuesto.cronograma.año; 
-                    if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){  
+                    base.vtoImpuesto=base.cronogramaImpuesto.cronograma.mes+ "/"+ base.cronogramaImpuesto.cronograma.año;
+                    if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){
                       var edit= base.vtoImpuesto.split("/")
                       if(edit[0]!="12")
                         edit[0]=parseInt(edit[0])+1
@@ -81,7 +81,7 @@ Pago.put = function(req, res, next) {
                       base.updateAttributes({monto0: 0})
                   }else{
                     base.vtoImpuesto=base.cronogramaImpuesto.cronograma.mes+ "/"+base.cronogramaImpuesto.cronograma.año;
-                    if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){  
+                    if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){
                       var edit= base.vtoImpuesto.split("/")
                       if(edit[0]!="12")
                         edit[0]=parseInt(edit[0])+1
@@ -91,7 +91,7 @@ Pago.put = function(req, res, next) {
                       }
                       base.vtoImpuesto=edit.join("/")
                     }
-                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Parcial $"+Number(imp.monto).toMoney()/*Number(btotal).toMoney()*/+" de un total de $"+Number(btotal).toMoney()/*Number(imp.monto).toMoney()*/+")")                                     
+                    arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Parcial $"+Number(imp.monto).toMoney()/*Number(btotal).toMoney()*/+" de un total de $"+Number(btotal).toMoney()/*Number(imp.monto).toMoney()*/+")")
                     var arreglo=[]
                     arreglo.push(base.monto4,base.monto3,base.monto2,base.monto1,base.monto0)
                     arreglo.forEach(function(monto, indice){
@@ -131,7 +131,7 @@ Pago.put = function(req, res, next) {
                         DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
                           res.send({
                             saldo: cuenta.monto.toMoney(),
-                            total: total.toMoney(),                         
+                            total: total.toMoney(),
                             impuestos: arrayImpuesto,
                             recibo: recibo,
                             reciboFecha: moment(recibo.updated_at).format("DD/MM/YYYY  HH:mm"),
@@ -141,7 +141,7 @@ Pago.put = function(req, res, next) {
                         })
                       })
                     })
-                  })  
+                  })
                 })
               })
             })
@@ -149,10 +149,10 @@ Pago.put = function(req, res, next) {
         })
       })
     })
-  })    
+  })
 };
 
-Pago.post = function(req, res, next) { 
+Pago.post = function(req, res, next) {
   var param = req.body;
   var concepto;
   var efMonto=0, chMonto=0;
@@ -161,8 +161,8 @@ Pago.post = function(req, res, next) {
       efMonto= Number(param.efectivoMonto)
       chMonto= Number(param.chequeMonto)
       concepto="Recepción para Pago de Impuestos(Efectivo:$"+efMonto.toFixed(2)+" y Cheque: $"+ chMonto.toFixed(2)+" del Banco:"+param.chequeBanco+" Titular:"+param.chequeTitular+" Nº:"+param.chequeNumero+" Fecha de Emisión: "+param.fechaEmision+" Fecha de Cobro: "+param.fechaCobro+")";
-      }else{  
-        chMonto= Number(param.chequeMonto)      
+      }else{
+        chMonto= Number(param.chequeMonto)
         concepto="Recepción para Pago de Impuestos(Cheque: $"+ chMonto.toFixed(2)+" del Banco:"+param.chequeBanco+" Titular:"+param.chequeTitular+" Nº:"+param.chequeNumero+" Fecha de Emisión: "+param.fechaEmision+" Fecha de Cobro: "+param.fechaCobro+")";
       }
   }else{
@@ -189,8 +189,8 @@ Pago.post = function(req, res, next) {
         DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
           var totalIngresado= parseFloat(param.totalPago) +parseFloat(cuenta.monto)-parseFloat(param.sumImp) ;
           cuenta.updateAttributes({monto:totalIngresado});
-          var movimientoMonto = Number((Number(efMonto)+Number(chMonto))-Number(param.sumImp)||0);	
-             // faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto))); 
+          var movimientoMonto = Number((Number(efMonto)+Number(chMonto))-Number(param.sumImp)||0);
+             // faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto)));
           crearMovimientoMonto(recibo.id, movimientoMonto, maximo,  cli, (efMonto+chMonto));
           DB.ClienteCuentaCorriente.find({where:{cliente_id: param.cliente_id}}).on('success',function(ccc){
            var arrayImpuesto=[];
@@ -200,7 +200,7 @@ Pago.post = function(req, res, next) {
                 var btotal = parseFloat(base.monto0)+parseFloat(base.monto1)+parseFloat(base.monto2)+parseFloat(base.monto3)+parseFloat(base.monto4)
                 if(parseFloat(btotal)<=parseFloat(imp.monto)){
                   base.vtoImpuesto=base.cronogramaImpuesto.cronograma.mes+ "/"+base.cronogramaImpuesto.cronograma.año;//moment(base.vtoImpuesto).format("MM/YY");
-                  if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){  
+                  if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){
                     var edit= base.vtoImpuesto.split("/")
                     if(edit[0]!="12")
                       edit[0]=parseInt(edit[0])+1
@@ -220,7 +220,7 @@ Pago.post = function(req, res, next) {
                 }
               }else{
                   base.vtoImpuesto=base.cronogramaImpuesto.cronograma.mes+ "/"+base.cronogramaImpuesto.cronograma.año;//moment(base.vtoImpuesto).format("MM/YY");
-                  if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){  
+                  if(/Monotributo/.test(base.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(base.impuesto.nombre) || /Plan de Pagos ARBA/.test(base.impuesto.nombre) ){
                     var edit= base.vtoImpuesto.split("/")
                     if(edit[0]!="12")
                       edit[0]=parseInt(edit[0])+1
@@ -254,7 +254,7 @@ Pago.post = function(req, res, next) {
                 monto: imp.monto,
                 ingreso: 1,
                 cliente_cuenta_corriente_id: ccc.id,
-                observacion: base.impuesto.nombre+" Recibo: E-"+maximo,                      
+                observacion: base.impuesto.nombre+" Recibo: E-"+maximo,
               }).on('success',function(){
                 DB.Movimiento.create({
                   vencimiento_id:base.id,
@@ -262,7 +262,7 @@ Pago.post = function(req, res, next) {
                   ingreso: 0,
                   cliente_cuenta_corriente_id: ccc.id,
                   observacion: base.impuesto.nombre+" Recibo: E-"+maximo,
-                  }).on('success',function(){
+                }).on('success',function(){
                     var total = 0;
                     if(efMonto)
                       total += efMonto
@@ -270,15 +270,25 @@ Pago.post = function(req, res, next) {
                       total += chMonto
                     DB.Usuario.find({where: {id: req.session.usuario_id}, include:[{model: DB.Empleado}]}).on('success', function(u){
                       DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
+                        //Agrego consulta:
+                        DB.ClienteCuentaCorriente.find({where: {cuenta_corriente_id: param.cuentaCorriente_id}}).on('success',function(mv){
+                        DB.Vencimiento.find({where:{cliente_id: mv.cliente_id, anticipo:1}}).on('success', function(ven){
+                          for (var i = 0; i < 1000; i++) {
+                            console.log(mv.cliente_id)
+                          }
                         res.send({
-                          saldo: cuenta.monto.toMoney(),
-                          total: total.toMoney(),  
+                          saldo: cuenta.monto.toMoney(),//ESTE
+                          total: total.toMoney(),
                           impuestos: arrayImpuesto,
                           recibo: recibo,
                           reciboFecha: moment(recibo.updated_at).format("DD/MM/YYYY  HH:mm"),
                           receptor: cli.nombre,
                           operador: u.empleado.nombre+" "+u.empleado.apellido,
+                          //Agrego
+                          anticipo: ven.anticipo
                         })
+                      });//Cierra function(ven)
+                    });//Cierra function(mv)
                       })
                     })
                   })
@@ -305,7 +315,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
       if(totalImpuesto <= imp.monto){//SI PAGA Todo
         //Hay qe saber si hay faltante o sobrante de la ctaCte
         if(vencimiento.impuesto.deleted_at){
-          //Imp.Otros 0-Caja 1-noseutiliza 2-CajaBanco 3-noseutiliza 
+          //Imp.Otros 0-Caja 1-noseutiliza 2-CajaBanco 3-noseutiliza
           caja+= monto0;
           banco+= monto2;
         }else{
@@ -332,7 +342,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         }
       }else{//Si hace un pago parcial
         if(vencimiento.impuesto.deleted_at){
-          //Imp.Otros 0-Caja 1-noseutiliza 2-CajaBanco 3-noseutiliza 
+          //Imp.Otros 0-Caja 1-noseutiliza 2-CajaBanco 3-noseutiliza
           if(imp.monto>monto0){
             caja+= monto0;
             banco+= imp.monto-monto0;
@@ -371,7 +381,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
               banco+=imp.monto;
             }
           }
-        }      
+        }
       }
     })
   })
@@ -389,7 +399,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
-      })    
+      })
     }
     if(banco > 0){
       DB.MovimientoCaja.create({
@@ -401,7 +411,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
-      })    
+      })
     }
     if(ctaCliente > 0){
       DB.MovimientoCaja.create({
@@ -413,7 +423,7 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
-      })    
+      })
     }
   }, 500)
 };

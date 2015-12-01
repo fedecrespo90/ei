@@ -1,4 +1,4 @@
-var DB, Everyone  
+var DB, Everyone
   , moment= require('moment')
   , util = require('util')
   , async = require('async');
@@ -26,17 +26,17 @@ Impuesto.get = function(req, res, next) {
             nombreInterno: p.nombreInterno,
             observacion: p.observacion,
             monto0: p.monto0,
-            monto1: p.monto1, 
+            monto1: p.monto1,
             monto2: p.monto2,
             monto3: p.monto3,
             banco_id: b.toString(),
-          })      
+          })
         })
       })
-    })  
+    })
     async.series(consultas, function(err, results) {
       res.send(results);
-    });  
+    });
   });
 };
 
@@ -55,7 +55,7 @@ Impuesto.filtrando = function(req, res, next) {
 
 Impuesto.post = function(req, res, next) {
   var p=req.body
-  p.monto0= p.monto0 == ''? p.monto0=0.00:parseFloat(p.monto0.replace(",","."))  
+  p.monto0= p.monto0 == ''? p.monto0=0.00:parseFloat(p.monto0.replace(",","."))
   p.monto1= p.monto1 == ''? p.monto1=0.00:parseFloat(p.monto1.replace(",","."))
   p.monto2= p.monto2 == ''? p.monto2=0.00:parseFloat(p.monto2.replace(",","."))
   p.monto3= p.monto3 == ''? p.monto3=0.00:parseFloat(p.monto3.replace(",","."))
@@ -66,35 +66,35 @@ Impuesto.post = function(req, res, next) {
         nombre: p.nombre,
         nombreInterno: p.nombreInterno,
         observacion: p.observacion,
-        monto0: p.monto0, 
-        monto1: p.monto1, 
+        monto0: p.monto0,
+        monto1: p.monto1,
         monto2: p.monto2,
         monto3: p.monto3
       }).on('success', function(a){
-        if (util.isArray(p.banco_id)) {      
+        if (util.isArray(p.banco_id)) {
           p.banco_id.forEach(function(id){
             DB.ImpuestoBanco.create({
               impuesto_id: a.id,
               banco_id: id
-            })   
+            })
           })
         }else{
           DB.ImpuestoBanco.create({
             impuesto_id: a.id,
             banco_id: p.banco_id
-          })          
+          })
         }
         res.send(true)
       });
     }else{
       res.send(false);
-    }  
+    }
   })
 };
 
 Impuesto.put = function(req, res, next) {
   var p=req.body
-  p.monto0= p.monto0 == ''? p.monto0=0:parseFloat(p.monto0.replace(",","."))  
+  p.monto0= p.monto0 == ''? p.monto0=0:parseFloat(p.monto0.replace(",","."))
   p.monto1= p.monto1 == ''? p.monto1=0:parseFloat(p.monto1.replace(",","."))
   p.monto2= p.monto2 == ''? p.monto2=0:parseFloat(p.monto2.replace(",","."));
   p.monto3= p.monto3 == ''? p.monto3=0:parseFloat(p.monto3.replace(",","."));
@@ -105,38 +105,38 @@ Impuesto.put = function(req, res, next) {
         nombre: p.nombre,
         nombreInterno: p.nombreInterno,
         observacion: p.observacion,
-        monto0: p.monto0,         
-        monto1: p.monto1, 
+        monto0: p.monto0,
+        monto1: p.monto1,
         monto2: p.monto2,
         monto3: p.monto3
       }).success(function(a) {
         DB.ImpuestoBanco.findAll({where:{impuesto_id: a.id}}).on('success',function(bancos){
             bancos.forEach(function(b){b.destroy()})
         })
-        if (util.isArray(p.banco_id)) {      
+        if (util.isArray(p.banco_id)) {
           p.banco_id.forEach(function(id){
             DB.ImpuestoBanco.create({
               impuesto_id: a.id,
               banco_id: id
-            })   
+            })
           })
         }else{
           DB.ImpuestoBanco.create({
             impuesto_id: a.id,
             banco_id: p.banco_id
-          })          
-        }        
+          })
+        }
         res.send(true);
       });
     }else{
       res.send(false);
     }
-    
+
   });
 };
 
 Impuesto.delete = function(req, res, next) {
-  DB.Impuesto.destroy({ id: req.params.id 
+  DB.Impuesto.destroy({ id: req.params.id
   }).on('success',function(){res.send(true)});
 };
 
@@ -155,11 +155,11 @@ Impuesto.variable = function(req, res, next) {
          monto0: d.monto0,
          monto1: d.monto1,
          monto2: d.monto2,
-         monto3: d.monto3 
+         monto3: d.monto3
         })
       }
     })
-    res.send(msg)    
+    res.send(msg)
 //    res.send(data)
   });
 };
