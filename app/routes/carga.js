@@ -73,14 +73,14 @@ Carga.repetirMesAnterior = function(req, res, next){
           cronnId = cc.id;
         })
       ///////////
-      DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
+      DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: cronnId/*ven*/}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
           if(e && cronoImp != 0 && cronoImp != -1 && cronoImp != null){ //PRUEBO CAMBIANDO LA CONDICION
             e.forEach(function(vto){
               //Asigno valor a idCrono
               idCrono = Number(vto.cronograma_id)+1;
-            }) // Estos cierran el forEach
+            }) 
 
               if(idCrono == cronnId)
               {
