@@ -10125,8 +10125,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
                   //AGREGO MI CONDICION
-                    if(1==1
-                      /*
+                    if(
                     //Mes
                     (Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM")) ||
                     Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM"))+1) &&
@@ -10134,7 +10133,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                        (Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")))
                        || (Number($(".asignacion_form").serializeObject().mes) == 1 &&
                        Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")) + 1)
-                       */
                      )
                     {
                     var objetos= $(".asignacion_form").serializeObject();
