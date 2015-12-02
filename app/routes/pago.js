@@ -210,7 +210,19 @@ Pago.post = function(req, res, next) {
                     }
                     base.vtoImpuesto=edit.join("/")
                   }
-                arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+" (Pago Total $"+Number(imp.monto).toMoney()/*1616 1717 aca esta el Pago Total del recibo en I/E /*Number(btotal).toMoney()*/+")")
+                var anti = base.anticipo;
+                for (var i = 0; i < 1000; i++) {
+                  console.log(base.anticipo)
+                }
+                if(base.anticipo != null && base.anticipo != undefined && base.anticipo != 0 && base.anticipo != false && base.anticipo != '')
+                {
+                  anti = "(Anticipo N°: "+base.anticipo+")";
+                }
+                else
+                {
+                  anti = " ";
+                }
+                arrayImpuesto.push(base.vtoImpuesto+" - "+base.impuesto.nombre+anti+" (Pago Total $"+Number(imp.monto).toMoney()/*1616 1717 aca esta el Pago Total del recibo en I/E /*Number(btotal).toMoney()*/+")")
                 if(base.impuesto.id == 34 || base.impuesto.id == 63 || base.impuesto.id == 66){
                   base.updateAttributes({pagado: 1, adeudado: 0, grupo_impuesto_id: 1})
                 }else{
@@ -270,25 +282,15 @@ Pago.post = function(req, res, next) {
                       total += chMonto
                     DB.Usuario.find({where: {id: req.session.usuario_id}, include:[{model: DB.Empleado}]}).on('success', function(u){
                       DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
-                        //Agrego consulta:
-                        DB.ClienteCuentaCorriente.find({where: {cuenta_corriente_id: param.cuentaCorriente_id}}).on('success',function(mv){
-                        DB.Vencimiento.find({where:{cliente_id: mv.cliente_id, anticipo:1}}).on('success', function(ven){
-                          for (var i = 0; i < 1000; i++) {
-                            console.log(mv.cliente_id)
-                          }
-                        res.send({
-                          saldo: cuenta.monto.toMoney(),//ESTE
-                          total: total.toMoney(),
-                          impuestos: arrayImpuesto,
-                          recibo: recibo,
-                          reciboFecha: moment(recibo.updated_at).format("DD/MM/YYYY  HH:mm"),
-                          receptor: cli.nombre,
-                          operador: u.empleado.nombre+" "+u.empleado.apellido,
-                          //Agrego
-                          anticipo: ven.anticipo
-                        })
-                      });//Cierra function(ven)
-                    });//Cierra function(mv)
+                            res.send({
+                              saldo: cuenta.monto.toMoney(),
+                              total: total.toMoney(),
+                              impuestos: arrayImpuesto,
+                              recibo: recibo,
+                              reciboFecha: moment(recibo.updated_at).format("DD/MM/YYYY  HH:mm"),
+                              receptor: cli.nombre,
+                              operador: u.empleado.nombre+" "+u.empleado.apellido,
+                            })
                       })
                     })
                   })

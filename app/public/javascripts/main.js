@@ -4380,7 +4380,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                           '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
                                           '</div>'+
-                                          '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+"ANTICIPO: "+e.anticipo+
+                                          '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
                                               '<br  /><br  />'+
                                               '-------------------------------------------<br />'+
                                               'Firma del operador'+
