@@ -8499,6 +8499,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           arreglo.push(e);
                           $('.pagoImp_form [name="arreglo"]')[0].value=null
                           arreglo.forEach(function(a){
+                            //Imprime
                             console.log(a.attributes)
                             total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
                             $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
@@ -11350,21 +11351,29 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   url: "/ot/"+e.getSelectionID(),
                   data: $(".ot_form").serialize(),
                   success: function(mensaje,res,options) {
-
-                    //Agrego condicion para que avise si tiene tareas la OT
-                    console.log(mensaje[0].mensaje);
-                    if(mensaje[0].mensaje == false)
+                    //AGREGO CONDICION PERMISOS PARA ADMINISTRAR OT
+                    if(C.Session.getUser().rol_id >= 3)
                     {
-                      F.msgOK("O/T editada exitosamente");
-                      setTimeout(function(){location.reload()},1e3);
+                      //Agrego condicion para que avise si tiene tareas la OT
+                      console.log(mensaje[0].mensaje);
+                      if(mensaje[0].mensaje == false)
+                      {
+                        F.msgOK("O/T editada exitosamente");
+                        setTimeout(function(){location.reload()},1e3);
+                      }
+                      else
+                      {
+                        F.msgConfirm("La OT que esta por editar tiene tareas asignadas. ¿Desea continuar?", function(){
+                          F.msgOK("O/T editada exitosamente");
+                          setTimeout(function(){location.reload()},1e3);
+                         });
+                      }
                     }
                     else
                     {
-                      F.msgConfirm("La OT que esta por editar tiene tareas asignadas. ¿Desea continuar?", function(){
-                        F.msgOK("O/T editada exitosamente");
-                        setTimeout(function(){location.reload()},1e3);
-                       });
+                      F.msgError("No tiene los permisos necesarios")
                     }
+
                   }
                 })
              }else{
