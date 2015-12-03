@@ -4349,6 +4349,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 e.impuestos.forEach(function(i){
                                   imp+=i+'<br />'
                                 })
+
                                 var reciboe =
                                   '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
                                       '<div style="width: 600px; padding: 6px">'+
@@ -4421,8 +4422,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                               'Firma del operador'+
                                         '</div>'+
                                       '</div>'+
-                                  '</div>'
-  ;
+                                  '</div>';
+
                                 $('body').append(reciboe)
                                 $.ajax({
                                     type:  "POST",
@@ -4459,7 +4460,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 })
                                 var reciboee =
                                   '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
-                                    '<div style="width: 600px; padding: 6px">'+
+                                  //600PX
+                                    '<div style="width: 650px; padding: 6px">'+
                                        '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
                                             '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
                                         '</div>'+
@@ -4489,13 +4491,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
                                           '</div>'+
                                           '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
-                                              '<br  /><br  /><br  />'+
+                                              '<br  /><br  />'+
                                               '-------------------------------------------<br />'+
                                               'Firma del operador'+
                                               '<br  />'+
                                           '</div>'+
-                                  '<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
-                                    '<div style="width: 600px; padding: 6px">'+
+                                  '<br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
+                                    '<div style="width: 650px; padding: 6px">'+
                                        '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
                                             '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
                                         '</div>'+
@@ -4534,11 +4536,89 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   '</div>'
                                   ;
 
+                                  var reciboeePDF =
+                                    '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
+                                    //600PX
+                                      '<div style="width: 700px; padding: 6px">'+
+                                         '<div style="border:solid 3px; height:95px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
+                                              '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
+                                          '</div>'+
+                                          '<div style="border:solid thin; height:95px; border-radius: 7px; width:36%; float:right; padding: 6px">'+
+                                              '<span style="font-weight:bold"><br />Recibo Nº E-'+e.recibo.e+'</span><br />'+
+                                              '<span style="font-weight:bold">Movimiento:</span> Pago de obligaciones por cuenta y orden de terceros <br  />'+
+                                              '<span style="font-weight:bold">Fecha:</span> '+e.reciboFecha+
+                                            '</div> <br /><br /><br  /><br  /><br  /><br  />'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:100%">'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold"> Razón social del cliente:</span> '+e.receptor+'<br  />'+
+                                                    '<span style="font-weight:bold"> Domicilio:  </span>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold">Descripción del movimiento: </span>Recepción para pagos por parte del Cliente'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 60px;">'+
+                                                    e.recibo.concepto+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
+                                                    '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
+                                                    imp+
+                                                    '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                            '<span style="font-weight:bold">Operador: </span>'+ e.operador+
+                                            '</div>'+
+                                            '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
+                                                '<br  /><br  /><br  />'+
+                                                '-------------------------------------------<br />'+
+                                                'Firma del operador'+
+                                                '<br  />'+
+                                            '</div>'+
+                                    '<br /><br /><br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
+                                      '<div style="width: 700px; padding: 6px">'+
+                                         '<div style="border:solid 3px; height:95px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
+                                              '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
+                                          '</div>'+
+                                          '<div style="border:solid thin; height:95px; border-radius: 7px; width:36%; float:right; padding: 6px">'+
+                                              '<span style="font-weight:bold"><br />Recibo Nº E-'+e.recibo.e+'</span><br />'+
+                                              '<span style="font-weight:bold">Movimiento:</span> Pago de obligaciones por cuenta y orden de terceros <br  />'+
+                                              '<span style="font-weight:bold">Fecha:</span> '+e.reciboFecha+
+                                            '</div> <br /><br /><br  /><br  /><br  /><br  />'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:100%">'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold"> Razón social del cliente:</span> '+e.receptor+'<br  />'+
+                                                    '<span style="font-weight:bold"> Domicilio:  </span>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold">Descripción del movimiento: </span>Recepción para pagos por parte del Cliente'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 60px;">'+
+                                                    e.recibo.concepto+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
+                                                    '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
+                                                    imp+
+                                                    '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                            '<span style="font-weight:bold">Operador: </span>'+ e.operador+
+                                            '</div>'+
+                                            '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
+                                                '<br  /><br  /><br  />'+
+                                                '-------------------------------------------<br />'+
+                                                'Firma del operador'+
+                                                '<br  />'+
+                                            '</div>'+
+                                       '</div>'+
+                                    '</div>'
+                                    ;
+
                                 $('body').append(reciboee)
                                 $.ajax({
                                     type:  "POST",
                                     url: "/imprimir/E-"+e.recibo.e,
-                                    data: {recibo: reciboee}
+                                    data: {recibo: reciboeePDF}
                                 });
                                 $.blockUI({
                                   message: $('#imprimirRecibo'),
