@@ -1,4 +1,4 @@
-var DB, Everyone  
+var DB, Everyone
   , moment = require('moment')
   , util = require('util')
   ;
@@ -9,7 +9,7 @@ var Revision = function(db, everyone) {
 
   return Revision;
 };
- 
+
 
 Revision.get = function(req, res, next) {
   DB.MovimientoCaja.findAll({where: {chequeado: 0}, include:[{model: DB.Caja},{model: DB.Recibo}]}).on('success',function(mov){
@@ -31,20 +31,20 @@ Revision.get = function(req, res, next) {
         var monto_total= Math.abs(m.monto_total).toMoney();
         msg.push({
           id: m.id,
-          ie: m.ingreso==1 ? "Ingreso" : "Egreso", 
+          ie: m.ingreso==1 ? "Ingreso" : "Egreso",
           creado: moment(m.created_at).format("YYYY-MM-DD"),
           caja: m.caja.nombre,
           observacion: m.observacion,
           concepto: m.concepto,
           subConcepto: m.subConcepto,
           rSubConcepto: m.rSubConcepto,
-          monto: m.ingreso==1 ?m.monto.toMoney(): "-"+m.monto.toMoney(),          
+          monto: m.ingreso==1 ?m.monto.toMoney(): "-"+m.monto.toMoney(),
           recibo: recibo || " " ,
           montoTotal: monto_total,
         })
       }
     })
-    res.send(msg) 
+    res.send(msg)
   })
 };
 
@@ -71,7 +71,7 @@ Revision.detalleRango = function(req, res, next) {
       diaMin: moment(diaMin).format('YYYY-MM-DD'),
       reciboMin: reciboMin,
       reciboMax: reciboMax
-    }) 
+    })
   })
 };
 
@@ -110,18 +110,19 @@ Revision.getAllRecibos = function(req, res, next){
   })
 };
 
-Revision.anularRecibo= function(req, res, next){
+Revision.anularRecibo = function(req, res, next){
   DB.Recibo.find({where: {id: req.params.id}}).on('success', function(recibo){//Recibo que tiene cliente y un "monto"
     if(recibo.e != 0 || recibo.g != 0){
       DB.Cliente.find({where: {nombre: recibo.receptor}}).on('success', function(cliente){
         DB.ClienteCuentaCorriente.find({where:{ cliente_id: cliente.id}}).on('success', function(ccc){
           DB.Movimiento.findAll({where: {cliente_cuenta_corriente_id: ccc.id}}).on('succes', function(movimientos){
             console.log(movimientos)
-          })
-        })
-      })
+          });
+        });
+      });
     }
-  })
+  });
+  res.send(true);
 };
 
 Revision.aceptarRango = function(req, res, next){
@@ -138,7 +139,7 @@ Revision.aceptarRango = function(req, res, next){
       })
       var ids="("+id.toString()+")";
       if(req.body.rangoDias){
-        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
           generarReciboRevision(movs, res, req.body.empleado_id);
         })
       }else{
@@ -148,9 +149,9 @@ Revision.aceptarRango = function(req, res, next){
       }
     })
   }else{
-    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
       generarReciboRevision(movs, res, req.body.empleado_id);
-    })  
+    })
   }
 };
 
@@ -178,21 +179,21 @@ generarReciboRevision = function(db, res, empleado){
                 	montoCaja=Number(montoCaja)+Number(m.monto);
                 }else{
                 	montoCaja=Number(montoCaja)-Number(m.monto);
-                }					
+                }
                 break;
               case 3:
                 if(m.ingreso==1){
                 	montoBanco=Number(montoBanco)+Number(m.monto);
                 }else{
                 	montoBanco=Number(montoBanco)-Number(m.monto);
-                }										
+                }
                 break;
               case 4:
                 if(m.ingreso==1){
                 	montoCtaCte=Number(montoCtaCte)+Number(m.monto);
                 }else{
                 	montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-                }					
+                }
                 break;
             }
             subConcepto=m.subConcepto? m.subConcepto : " ";
@@ -232,21 +233,21 @@ generarReciboRevision = function(db, res, empleado){
                 montoCaja=Number(montoCaja)+Number(m.monto);
               }else{
                 montoCaja=Number(montoCaja)-Number(m.monto);
-              }         
+              }
               break;
             case 3:
               if(m.ingreso==1){
                 montoBanco=Number(montoBanco)+Number(m.monto);
               }else{
                 montoBanco=Number(montoBanco)-Number(m.monto);
-              }                   
+              }
               break;
             case 4:
               if(m.ingreso==1){
                 montoCtaCte=Number(montoCtaCte)+Number(m.monto);
               }else{
                 montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-              }         
+              }
               break;
           }
           subConcepto=m.subConcepto? m.subConcepto : " ";
@@ -295,7 +296,7 @@ generarReciboRevision = function(db, res, empleado){
           ctaCte: montoCtaCte.toMoney(),
           empleado: emp.nombre+" "+emp.apellido,
           fechaActual: moment().format("DD/MM/YYYY HH:mm")
-        }) 
+        })
       }
     })
   })
@@ -316,7 +317,7 @@ Revision.realizarMovimientos = function(req, res, next){
       })
       var ids="("+id.toString()+")";
       if(req.body.rangoDias){
-        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
           generarReciboRevision(movs, res, req.body.empleado_id);
           guardarMovs(movs, res, req.body.empleado_id);
         })
@@ -328,10 +329,10 @@ Revision.realizarMovimientos = function(req, res, next){
       }
     })
   }else{
-    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
       generarReciboRevision(movs, res, req.body.empleado_id);
       guardarMovs(movs, res, req.body.empleado_id);
-    })  
+    })
   }
 };
 
@@ -348,21 +349,21 @@ guardarMovs = function(db, res, empleado){
           montoCaja=Number(montoCaja)+Number(m.monto);
         }else{
           montoCaja=Number(montoCaja)-Number(m.monto);
-        }         
+        }
         break;
       case 3:
         if(m.ingreso==1){
           montoBanco=Number(montoBanco)+Number(m.monto);
         }else{
           montoBanco=Number(montoBanco)-Number(m.monto);
-        }                   
+        }
         break;
       case 4:
         if(m.ingreso==1){
           montoCtaCte=Number(montoCtaCte)+Number(m.monto);
         }else{
           montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-        }         
+        }
         break;
     }
   });

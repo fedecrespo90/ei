@@ -3125,7 +3125,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null],
                 aaSorting: [ [ 1, "asc" ] ],
-                iDisplayLength: 500
+                iDisplayLength: 500,
             },
             initialize: function() {
                 var e = this;
@@ -4171,7 +4171,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 	    j = (j = i.length) > 3 ? j % 3 : 0;
 	return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
 };
-//I/E->PAGOS / Pagos del cliente
+//I/E->PAGOS / 	Pagos del cliente
     e.define("/views/ie/ClientePagoTable.js", function(e, t, n, r, i, s) {
         C.View.ClientePagoTable = Backbone.View.extend({
             name: "clientePago",
@@ -12532,7 +12532,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }));
 
                 //$("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val("");
-                $("#reprogramar_ot_form").serializeObject().empty();// LIMPIO
+                //$("#reprogramar_ot_form").serializeObject().empty();// LIMPIO
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
@@ -13554,13 +13554,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $("#caja_anular_window .BUTTON_proceed_mov").on("click", function() {
                       if($("#anular_form").serializeObject().recibo_id != 0){
                         F.msgConfirm("¿Esta seguro de Anular el recibo?", function(){
-                           console.log($("#anular_form").serializeObject().recibo_id);//ï
+                           var recId = $("#anular_form").serializeObject().recibo_id;
+                           console.log(recId);//ï
                            $.ajax({
-                              url: "/revision/anularRecibo/"+$("#anular_form").serializeObject().recibo_id,
+                              url: "revision/anularRecibo/"+recId,
                               success: function() {
                                 F.msgOK("El recibo ha sido anulado");
-                                setTimeout(function(){location.reload()},1e3)
-                              }
+                                setTimeout(function(){location.reload()},1e3);
+                              },
                            })
                         });
                        }else{
