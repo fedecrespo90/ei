@@ -33,7 +33,9 @@ PagoImp.get = function(req, res, next) {
           if(ven.anticipo<12 && 0<ven.anticipo)
             ven.impuesto.nombre+=" - Anticipo "+ven.anticipo;
           var impMonto=parseFloat(ven.monto0)+parseFloat(ven.monto1)+parseFloat(ven.monto2)+parseFloat(ven.monto3)+parseFloat(ven.monto4);
-          if(impMonto != 0.00){
+          
+          //Mi condicion
+          if(impMonto != 0.00 && ven.impuesto.id != 34 && ven.impuesto.id != 66 && ven.impuesto.id != 487 && ven.impuesto.id != 488){
             msg.push({//le manda la data en un array para que lo imprima en los value de los inputs
               id: ven.id,
               check: '-',
