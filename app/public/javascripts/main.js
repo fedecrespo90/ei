@@ -1023,7 +1023,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/Caja.js", function(e, t, n, r, i, s) {
         C.Widget.Caja = {
             initialize: function(e) {
-                $("#head #tabs").empty().append('<a href="/#/caja/revision">Revision</a><a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a><a href="/#/caja/ajusteCaja">Ajustes</a>'),
+              //Saqué desp de Movimientoes: <a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a>
+                $("#head #tabs").empty().append('<a href="/#/caja/revision">Movimientos</a><a href="/#/caja/ajusteCaja">Ajustes</a>'),
                 $("#left .inner").empty().append('<div id="'+ (e || "caja" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "caja") +'_right"></div>');
             }
@@ -13932,6 +13933,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
         });
     }),
+
 //Caja
     e.define("/views/caja/Caja.js", function(e, t, n, r, i, s) {
         C.View.Caja = Backbone.View.extend({
@@ -14142,6 +14144,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
+
     e.define("/views/caja/AjusteCajaOptions.js", function(e, t, n, r, i, s) {
         C.View.AjusteCajaOptions = Backbone.View.extend({
             initialize: function() {
