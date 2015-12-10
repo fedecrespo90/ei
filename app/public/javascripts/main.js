@@ -13612,7 +13612,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   '<tr align="center"><td></td><td></td><td>O bien</td><td></td>'+
 
                                   //ORIGINAL
-                                  '<tr align="center"><td></td><td>Recibo Minimo E</td><td></td><td>Recibo Maximo E</td>'+
+                                  '<tr align="center"><td></td><td>Recibo Minimo</td><td></td><td>Recibo Maximo</td>'+
                                   '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMin+'" '+recibos+'></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMax+'" '+recibos+'></td>'+
 
                                   /*
