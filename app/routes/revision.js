@@ -52,25 +52,70 @@ Revision.detalleRango = function(req, res, next) {
   DB.MovimientoCaja.findAll({where: {chequeado: 0}, include:[{model: DB.Recibo}]}).on('success',function(mc){
     var diaMin="01 January, 2070 UTC"
     ,   diaMax="01 January, 1970 UTC"
-    ,   reciboMin=999999
-    ,   reciboMax=-1
+    //ORIGINAL 1/3
+    ,   reciboMin
+    ,   reciboMax
     ,   recibo;
+    //Agrego 1/3
+    /*
+    ,   reciboMinE=999999
+    ,   reciboMaxE=-1
+    ,   reciboMinH=999999
+    ,   reciboMaxH=-1
+    ,   reciboE
+    ,   reciboH;
+    */
     mc.forEach(function(m){
+      //ORIGINAL +
       recibo=m.recibo.c!=0?m.recibo.c:(m.recibo.d!=0?m.recibo.d:(m.recibo.e!=0?m.recibo.e:(m.recibo.f!=0?m.recibo.f:(m.recibo.g!=0?m.recibo.g:(m.recibo.h!=0?m.recibo.h:-1)))));
+
+      //AGREGO +
+      /*
+      if(m.recibo.e != 0)
+      {
+        reciboE = m.recibo.e;
+      }
+      if(m.recibo.h != 0)
+      {
+        reciboH = m.recibo.h;
+      }
+      */
       if(Date.parse(m.created_at)>Date.parse(diaMax))
         diaMax=m.created_at;
       if(Date.parse(m.created_at)<Date.parse(diaMin))
         diaMin=m.created_at;
+      //ORIGINAL 2/3
       if(recibo>reciboMax)
         reciboMax=recibo;
       if(recibo<reciboMin)
         reciboMin=recibo;
+
+      //Agrego 2/3
+      /*
+      if(reciboE>reciboMaxE)
+        reciboMaxE=reciboE;
+      if(reciboE<reciboMinE)
+        reciboMinE=reciboE;
+      if(reciboH>reciboMaxH)
+        reciboMaxH=reciboH;
+      if(reciboH<reciboMinH)
+        reciboMinH=reciboH;
+        */
     })
+    //Aca manda la data a Movimientos
     res.send({
       diaMax: moment(diaMax).format('YYYY-MM-DD'),
       diaMin: moment(diaMin).format('YYYY-MM-DD'),
+      //ORIGINAL 3/3
       reciboMin: reciboMin,
-      reciboMax: reciboMax
+      reciboMax: reciboMax,
+      //Agrego 3/3
+      /*
+      reciboMinE: reciboMinE,
+      reciboMaxE: reciboMaxE,
+      reciboMinH: reciboMinH,
+      reciboMaxH: reciboMaxH
+      */
     })
   })
 };
