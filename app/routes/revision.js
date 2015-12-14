@@ -352,6 +352,12 @@ generarReciboRevision = function(db, res, empleado){
 
 
 Revision.realizarMovimientos = function(req, res, next){
+  for (var i = 0; i < 100; i++) {
+    console.log("realizarMovimientos");
+  };
+  //TMB USA LA FUNCTION: guardarMovs
+
+  /*
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -382,6 +388,7 @@ Revision.realizarMovimientos = function(req, res, next){
       guardarMovs(movs, res, req.body.empleado_id);
     })
   }
+  */
 };
 
 
