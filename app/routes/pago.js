@@ -48,13 +48,13 @@ Pago.put = function(req, res, next) {
           concepto: concepto,
           receptor: cli.nombre
         }).on('success', function(recibo){
-          cargarMovimientosCaja(recibo.id, param.impuestos, cli, maximo, efMonto+chMonto);
+          cargarMovimientosCaja(recibo.id, param.impuestos, cli, maximo, efMonto+chMonto,param.efectivoMonto,param.chequeMonto,param.chequeBanco,param.chequeNumero,param.chequeTitular,param.chequeFechaEmi,param.chequeFechaCobro);
           DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
             var totalIngresado= parseFloat(param.totalPago) +parseFloat(cuenta.monto)-parseFloat(param.sumImp) ;
             cuenta.updateAttributes({monto:totalIngresado});
             var movimientoMonto = Number((Number(efMonto)+Number(chMonto))-Number(param.sumImp)||0);
            //   faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto)));
-            crearMovimientoMonto(recibo.id, totalIngresado, maximo, cli, (efMonto+chMonto))
+            crearMovimientoMonto(recibo.id, totalIngresado, maximo, cli, (efMonto+chMonto),param.efectivoMonto,param.chequeMonto,param.chequeBanco,param.chequeNumero,param.chequeTitular,param.chequeFechaEmi,param.chequeFechaCobro)
             DB.ClienteCuentaCorriente.find({where:{cliente_id: param.cliente_id}}).on('success',function(ccc){
               var arrayImpuesto=["Giro en descubierto por un total de $"+Math.abs(Number(descubierto)).toFixed(2)]
               param.impuestos.forEach(function(imp){
@@ -185,13 +185,13 @@ Pago.post = function(req, res, next) {
         concepto: concepto,
         receptor: cli.nombre
       }).on('success', function(recibo){
-        cargarMovimientosCaja(recibo.id, param.impuestos, cli, maximo, efMonto||0+chMonto||0);
+        cargarMovimientosCaja(recibo.id, param.impuestos, cli, maximo, efMonto||0+chMonto||0,param.efectivoMonto,param.chequeMonto,param.chequeBanco,param.chequeNumero,param.chequeTitular,param.chequeFechaEmi,param.chequeFechaCobro);
         DB.CuentaCorriente.find({where:{id: param.cuentaCorriente_id}}).on('success', function(cuenta){
           var totalIngresado= parseFloat(param.totalPago) +parseFloat(cuenta.monto)-parseFloat(param.sumImp) ;
           cuenta.updateAttributes({monto:totalIngresado});
           var movimientoMonto = Number((Number(efMonto)+Number(chMonto))-Number(param.sumImp)||0);
              // faltante = Number(Number(param.sumImp)||0-(Number(efMonto)+Number(chMonto)));
-          crearMovimientoMonto(recibo.id, movimientoMonto, maximo,  cli, (efMonto+chMonto));
+          crearMovimientoMonto(recibo.id, movimientoMonto, maximo,  cli, (efMonto+chMonto),param.efectivoMonto,param.chequeMonto,param.chequeBanco,param.chequeNumero,param.chequeTitular,param.chequeFechaEmi,param.chequeFechaCobro);
           DB.ClienteCuentaCorriente.find({where:{cliente_id: param.cliente_id}}).on('success',function(ccc){
            var arrayImpuesto=[];
            param.impuestos.forEach(function(imp){
@@ -304,7 +304,7 @@ Pago.post = function(req, res, next) {
   })
 };
 
-cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto){//el cliente ya viene el objeto de la db
+cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto,efM,cheqM,nomB,cheqN,cheqT,fechE,fechC){//el cliente ya viene el objeto de la db
   var caja=0,banco=0,ctaCliente=0;
   impuestos.forEach(function(imp){
     DB.Vencimiento.find({where: {id: imp.id}, include:[{model: DB.Impuesto}]}).on('success', function(vencimiento){
@@ -401,6 +401,15 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
+        //Agregados:
+        cierreCaja_id: 0,
+        montoEfectivo: efM,
+        montoCheque: cheqM,
+        nombreBanco: nomB,
+        numeroCheque: cheqN,
+        titularCheque: cheqT,
+        fechaEmision: moment(fechE).format("YYYY-MM-DD"),
+        fechaCobro: moment(fechC).format("YYYY-MM-DD"),
       })
     }
     if(banco > 0){
@@ -413,6 +422,15 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
+        //Agregados:
+        cierreCaja_id: 0,
+        montoEfectivo: efM,
+        montoCheque: cheqM,
+        nombreBanco: nomB,
+        numeroCheque: cheqN,
+        titularCheque: cheqT,
+        fechaEmision: moment(fechE).format("YYYY-MM-DD"),
+        fechaCobro: moment(fechC).format("YYYY-MM-DD"),
       })
     }
     if(ctaCliente > 0){
@@ -425,6 +443,15 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
         concepto: cliente.nombre,
         ingreso: 1,
         chequedo: 0,
+        //Agregados:
+        cierreCaja_id: 0,
+        montoEfectivo: efM,
+        montoCheque: cheqM,
+        nombreBanco: nomB,
+        numeroCheque: cheqN,
+        titularCheque: cheqT,
+        fechaEmision: moment(fechE).format("YYYY-MM-DD"),
+        fechaCobro: moment(fechC).format("YYYY-MM-DD"),
       })
     }
   }, 500)
@@ -442,7 +469,7 @@ movimientoCta= function(ctaId, monto, cliId, obs){
   })
 }
 
-crearMovimientoMonto= function(recId, monto, nroRecibo, cliente, totalIngresado){
+crearMovimientoMonto= function(recId, monto, nroRecibo, cliente, totalIngresado,efM,cheqM,nomB,cheqN,cheqT,fechE,fechC){
   if(monto > 0){
     DB.MovimientoCaja.create({
       recibo_id: recId,
@@ -453,6 +480,15 @@ crearMovimientoMonto= function(recId, monto, nroRecibo, cliente, totalIngresado)
       concepto: cliente.nombre,
       ingreso: 1,
       chequedo: 0,
+      //Agregados:
+      cierreCaja_id: 0,
+      montoEfectivo: efM,
+      montoCheque: cheqM,
+      nombreBanco: nomB,
+      numeroCheque: cheqN,
+      titularCheque: cheqT,
+      fechaEmision: moment(fechE).format("YYYY-MM-DD"),
+      fechaCobro: moment(fechC).format("YYYY-MM-DD"),
     })
   }else{
     if(monto<0){
@@ -465,6 +501,15 @@ crearMovimientoMonto= function(recId, monto, nroRecibo, cliente, totalIngresado)
         concepto: cliente.nombre,
         ingreso: 0,
         chequedo: 0,
+        //Agregados:
+        cierreCaja_id: 0,
+        montoEfectivo: efM,
+        montoCheque: cheqM,
+        nombreBanco: nomB,
+        numeroCheque: cheqN,
+        titularCheque: cheqT,
+        fechaEmision: moment(fechE).format("YYYY-MM-DD"),
+        fechaCobro: moment(fechC).format("YYYY-MM-DD"),
       })
     }
   }

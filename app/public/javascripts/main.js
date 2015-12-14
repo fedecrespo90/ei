@@ -4326,8 +4326,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             chequeBanco: $("#pago_window input:text[name=banco]").val(),
                             chequeNumero: $("#pago_window input:text[name=ncheque]").val(),
                             chequeTitular: $("#pago_window input:text[name=titular]").val(),
-                            chequeFechaEmi: $("#pago_window input:text[name=fechaemision]").val(),
-                            chequeFechaCobro: $("#pago_window input:text[name=fechacobro]").val(),
+                            chequeFechaEmi: $("#pago_window input:[name=fechaemision]").val(),
+                            chequeFechaCobro: $("#pago_window input:[name=fechacobro]").val(),
                             cliente_id: cliente,
                             efectivoMonto: efectivo,
                             impuestos:diccion,
@@ -4449,7 +4449,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             })
                           }
                         }else{
-                          F.msgConfirm("Saldo Insuficiente, Cancele algunos Impuestos por favor. ¿Pagar de todas Formas??", function(){
+                          F.msgConfirm("Saldo Insuficiente, Cancele algunos Impuestos por favor. ¿Pagar de todas Formas?", function(){
                             $.ajax({
                               type: "PUT",
                               url: "/pago",
