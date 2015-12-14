@@ -13600,11 +13600,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             url: "/empleado",
                             success: function(h) {
                                 var dias= "max="+rango.diaMax+" min="+rango.diaMin;
-                                //var recibosE=  "max="+rango.reciboMaxE+" min="+rango.reciboMinE;
-                                //var recibosH=  "max="+rango.reciboMaxH+" min="+rango.reciboMinH;
 
                                 //ORIGINAL
-                                var recibos=  "max="+rango.reciboMax+" min="+rango.reciboMin;
+                                //var recibos=  "max="+rango.reciboMax+" min="+rango.reciboMin;
+
+                                //Agreg
+                                var recibosE=  "max="+rango.reciboMaxE+" min="+rango.reciboMinE;
+                                //var recibosH=  "max="+rango.reciboMaxH+" min="+rango.reciboMinH;
 
                                 var tabla= '<table > '+
                                   '<tr align="center"><td>Criterio</td><td>Fecha Desde </td><td></td> <td>Fecha Hasta</td></tr>'+
@@ -13612,14 +13614,17 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   '<tr align="center"><td></td><td></td><td>O bien</td><td></td>'+
 
                                   //ORIGINAL
+                                  /*
                                   '<tr align="center"><td></td><td>Recibo Minimo</td><td></td><td>Recibo Maximo</td>'+
                                   '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMin+'" '+recibos+'></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMax+'" '+recibos+'></td>'+
+                                  */
 
-                                  /*
+
                                   //ROW Recibo E
                                   '<tr align="center"><td></td><td>Recibo Minimo E</td><td></td><td>Recibo Maximo E</td>'+
                                   '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMinE+'" '+recibosE+' disabled="disabled"></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMaxE+'" '+recibosE+'></td>'+
                                   //ROW Recibo H
+                                  /*
                                   '<tr align="center"><td></td><td>Recibo Minimo H</td><td></td><td>Recibo Maximo H</td>'+
                                   '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMinH+'" '+recibosH+ ' disabled="disabled"></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMaxH+'" '+recibosH+'></td>'+
                                   */
