@@ -365,9 +365,9 @@ Revision.realizarMovimientos = function(req, res, next){
   for (var i = 0; i < 100; i++) {
     console.log("realizarMovimientos");
   };
-  //TMB USA LA FUNCTION: guardarMovs
+  //TMB USA LA FUNCTION: guardarMovs y generarReciboRevision
 
-  /*
+  
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -375,30 +375,38 @@ Revision.realizarMovimientos = function(req, res, next){
     , fh = moment(fhi).format("YYYY-MM-DD")
     , id = [];
   if(req.body.rangoRecibos){
-    DB.Recibo.findAll({where: ['(c>=? AND c<=? ) OR (d>=? AND d<=?) OR (e>=? AND e<=?)OR (f>=? AND f<=?) OR (g>=? AND g<=?) OR (h>=? AND h<=?)', rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax]}).on('success',function(rec){
-      rec.forEach(function(r){
-        id.push(r.id);
-      })
-      var ids="("+id.toString()+")";
-      if(req.body.rangoDias){
-        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-          generarReciboRevision(movs, res, req.body.empleado_id);
-          guardarMovs(movs, res, req.body.empleado_id);
-        })
-      }else{
-        DB.MovimientoCaja.findAll({where: 'chequeado=0 AND recibo_id IN'+ids, include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-          generarReciboRevision(movs, res, req.body.empleado_id);
-          guardarMovs(movs, res, req.body.empleado_id);
-        })
-      }
-    })
+    DB.CierresCaja.findAll({ order: 'id DESC LIMIT 1'}).on('success', function(cc){
+      cc.forEach(function(ccc){
+        DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(recc){
+          recc.forEach(function(reccc){
+            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, reccc.e]}).on('success',function(rec){
+              rec.forEach(function(r){
+                id.push(r.id);
+              })
+              var ids="("+id.toString()+")";
+              if(req.body.rangoDias){
+                DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+                  generarReciboRevision(movs, res, req.body.empleado_id);
+                  guardarMovs(movs, res, req.body.empleado_id);
+                })
+              }else{
+                DB.MovimientoCaja.findAll({where: 'chequeado=0 AND recibo_id IN'+ids, include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+                  generarReciboRevision(movs, res, req.body.empleado_id);
+                  guardarMovs(movs, res, req.body.empleado_id);
+                })
+              }
+            })
+          })//recc.forEach
+        })//recc
+      })//cc.forEach
+    })//cc
   }else{
     DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
       generarReciboRevision(movs, res, req.body.empleado_id);
       guardarMovs(movs, res, req.body.empleado_id);
     })
   }
-  */
+  
 };
 
 
