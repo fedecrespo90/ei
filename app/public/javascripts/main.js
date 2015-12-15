@@ -11245,6 +11245,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [ [ 1, "desc" ] ],
+		"iDisplayLength": 12
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(e) {
@@ -12203,7 +12204,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [],
-                iDisplayLength: 500
+                "iDisplayLength": 12
             },
             initialize: function() {
                 function e(e, n) {
@@ -12226,7 +12227,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createDataTable(this, function(e) {
                     F.assignValuesToInfoCard($(".ot_infocard"), e);
                 }, e);
-                (t.options.open_ot_number_on_start &&  $('.dataTables_filter input').val(t.options.open_ot_number_on_start).keyup())
+                (t.options.open_ot_number_on_start &&  $('.gdataTables_filter input').val(t.options.open_ot_number_on_start).keyup())
             },
             events: {
                 "click .ot_table tr": "selectRow"

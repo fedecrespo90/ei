@@ -50,6 +50,10 @@ Revision.get = function(req, res, next) {
 
 Revision.detalleRango = function(req, res, next) {
   DB.MovimientoCaja.findAll({where: {chequeado: 0}, include:[{model: DB.Recibo}]}).on('success',function(mc){
+    DB.CierresCaja.findAll({ order: 'id DESC LIMIT 1' }).on('success',function(cc){
+      DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(rec){
+      cc.forEach(function(ccc){
+        rec.forEach(function(recib){
     var diaMin="01 January, 2070 UTC"
     ,   diaMax="01 January, 1970 UTC"
     //ORIGINAL 1/3
@@ -90,7 +94,7 @@ Revision.detalleRango = function(req, res, next) {
       */
 
       //Agrego 2/3
-      
+
       if(reciboE>reciboMaxE)
         reciboMaxE=reciboE;
       if(reciboE<reciboMinE)
@@ -104,22 +108,26 @@ Revision.detalleRango = function(req, res, next) {
     })
     //Aca manda la data a Movimientos
     res.send({
-      diaMax: moment(diaMax).format('YYYY-MM-DD'),
-      diaMin: moment(diaMin).format('YYYY-MM-DD'),
+      diaMax: moment(diaMax).format('YYYY-MM-DD"'), 
+      diaMin: moment(diaMin).format('YYYY-MM-DD"'),
       //ORIGINAL 3/3
       /*
       reciboMin: reciboMin,
       reciboMax: reciboMax,
       */
       //Agrego 3/3
-      
-      reciboMinE: Number(reciboMaxE)+1,//reciboMinE,
-      reciboMaxE: 0,//reciboMaxE,
+
+      reciboMinE: Number(ccc.ultimoReciboE)+1,//reciboMinE,
+      reciboMaxE: recib.e,//reciboMaxE,
       /*
       reciboMinH: reciboMinH,
       reciboMaxH: reciboMaxH
       */
     })
+  })//rec.forEach
+  })//cc.forEach
+  })//rec
+  })//cc
   })
 };
 
@@ -174,6 +182,7 @@ Revision.anularRecibo = function(req, res, next){
 };
 
 Revision.aceptarRango = function(req, res, next){
+  /*
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -201,6 +210,7 @@ Revision.aceptarRango = function(req, res, next){
       generarReciboRevision(movs, res, req.body.empleado_id);
     })
   }
+  */
 };
 
 generarReciboRevision = function(db, res, empleado){
