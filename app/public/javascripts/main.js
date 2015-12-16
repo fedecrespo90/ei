@@ -13679,6 +13679,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                 row+
                                                 finalRows+
                                                 '</table>'
+                                            //RECIBO H
                                             var reciboh=
                                                 '<div id="imprimirCaja" style="display:none; text-align: left;">' +
                                                     '<div style="width: 670px; height: padding: 6px">'+

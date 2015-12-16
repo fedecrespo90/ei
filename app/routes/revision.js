@@ -108,7 +108,7 @@ Revision.detalleRango = function(req, res, next) {
     })
     //Aca manda la data a Movimientos
     res.send({
-      diaMax: moment(diaMax).format('YYYY-MM-DD"'), 
+      diaMax: moment(diaMax).format('YYYY-MM-DD"'),
       diaMin: moment(diaMin).format('YYYY-MM-DD"'),
       //ORIGINAL 3/3
       /*
@@ -345,6 +345,7 @@ generarReciboRevision = function(db, res, empleado){
           })
         }
         total= Number(montoCaja)+Number(montoBanco)+Number(montoCtaCte);
+        //Aca manda data al recibo H
         res.send({
           movs: movs,
           recibo: recibo,
@@ -355,6 +356,55 @@ generarReciboRevision = function(db, res, empleado){
           empleado: emp.nombre+" "+emp.apellido,
           fechaActual: moment().format("DD/MM/YYYY HH:mm")
         })
+        //Agrego
+        var m = db;
+        DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
+          var concepto = "Ajuste de caja al: "+moment().format('YYYY-MM-DD')+" por: "+emp.nombre+" "+emp.apellido;
+          DB.Recibo.create({
+            h: recibo,
+            concepto: concepto,
+            receptor: emp.nombre+" "+emp.apellido
+          })
+        })
+        DB.MovimientoCaja.findAll({order: 'id DESC LIMIT 1'}).on('success', function(movcaj){
+          movcaj.forEach(function(movcajj){
+            DB.Caja.findAll({where:{id: movcajj.caja_id}}).on('success',function(caj){
+              caj.forEach(function(cajj){
+                DB.Recibo.findAll({order: 'e DESC LIMIT 1'}).on('success', function(urec){
+                  DB.Recibo.findAll({order: 'e ASC LIMIT 1' }).on('success', function(prec){
+                    DB.Recibo.findAll({order: 'h DESC LIMIT 1'}).on('success',function(urech){
+                      DB.Recibo.findAll({order: 'h ASC LIMIT 1'}).on('success',function(prech){
+                        prech.forEach(function(primerRecH){
+                          urech.forEach(function(ultimoRecH){
+                            prec.forEach(function(primerRecE){
+                              urec.forEach(function(ultimoRecE){
+                                DB.CierresCaja.create({
+                                  fechaCierre:moment().format('YYYY-MM-DD hh:mm:ss'),
+                                  empleado_id: empleado,
+                                  montoCheques: movcajj.montoCheque,
+                                  montoEfectivo: movcajj.montoEfectivo,
+                                  montoCaja: movcajj.monto,
+                                  montoPagos:1111 ,////
+                                  montoCtaCliente: 1111,////
+                                  montoTotal: movcajj.monto,
+                                  primerReciboE: primerRecE.e,
+                                  ultimoReciboE: ultimoRecE.e,
+                                  primerReciboH: primerRecH.h,
+                                  ultimoReciboH: ultimoRecH.h,
+                                })
+                              })
+                            })
+                          })
+                        })
+                      })
+                    })
+                  })
+                })
+              })
+            })
+          })
+        })
+      //Fin Agrego
       }
     })
   })
@@ -367,7 +417,7 @@ Revision.realizarMovimientos = function(req, res, next){
   };
   //TMB USA LA FUNCTION: guardarMovs y generarReciboRevision
 
-  
+
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -379,7 +429,7 @@ Revision.realizarMovimientos = function(req, res, next){
       cc.forEach(function(ccc){
         DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(recc){
           recc.forEach(function(reccc){
-            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, reccc.e]}).on('success',function(rec){
+            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, rmax/*reccc.e*/]}).on('success',function(rec){
               rec.forEach(function(r){
                 id.push(r.id);
               })
@@ -406,7 +456,7 @@ Revision.realizarMovimientos = function(req, res, next){
       guardarMovs(movs, res, req.body.empleado_id);
     })
   }
-  
+
 };
 
 
