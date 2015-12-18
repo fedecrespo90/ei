@@ -19,14 +19,14 @@ ClienteDocumentacion.get = function(req, res, next) {
 	      c.forEach(function(c){
           var com;
           if(c.cliente.comunicacion){
-            switch (c.cliente.comunicacion.nombre) { 
-             case "Teléfono":	com="Teléfono: "+c.cliente.telefono; break; 
+            switch (c.cliente.comunicacion.nombre) {
+             case "Teléfono":	com="Teléfono: "+c.cliente.telefono; break;
              case "Celular":	com="Celular: "+c.cliente.celular; break;
-             case "Radio":	com="Radio: "+c.cliente.radio; break; 
-             case "Email":	com="E-Mail: "+c.cliente.email; break; 
-             default:		com="Indefinido"; 
+             case "Radio":	com="Radio: "+c.cliente.radio; break;
+             case "Email":	com="E-Mail: "+c.cliente.email; break;
+             default:		com="Indefinido";
             }
-            msg.push({    
+            msg.push({
              id: c.cliente.id,
              cliente_id: c.cliente.id,
              clasificacion_id: c.cliente.clasificacion_id,
@@ -44,12 +44,12 @@ ClienteDocumentacion.get = function(req, res, next) {
              email: c.cliente.email,
              radio: c.cliente.radio,
              empleado: c.cliente.empleado,
-             negocio: c.cliente.negocio,		       
+             negocio: c.cliente.negocio,
              contacto: c.cliente.contacto,
              observaciones: c.cliente.observaciones,
 		         monto: c.cuentaCorriente.monto.toMoney(),
 		       })
-          }  
+          }
         })
       res.send(msg);
     })
@@ -63,14 +63,14 @@ ClienteDocumentacion.get = function(req, res, next) {
 	      c.forEach(function(c){
           var com;
           if(c.cliente.comunicacion){
-            switch (c.cliente.comunicacion.nombre) { 
-             case "Teléfono":	com="Teléfono: "+c.cliente.telefono; break; 
+            switch (c.cliente.comunicacion.nombre) {
+             case "Teléfono":	com="Teléfono: "+c.cliente.telefono; break;
              case "Celular":	com="Celular: "+c.cliente.celular; break;
-             case "Radio":	com="Radio: "+c.cliente.radio; break; 
-             case "Email":	com="E-Mail: "+c.cliente.email; break; 
-             default:		com="Indefinido"; 
+             case "Radio":	com="Radio: "+c.cliente.radio; break;
+             case "Email":	com="E-Mail: "+c.cliente.email; break;
+             default:		com="Indefinido";
             }
-            msg.push({ 
+            msg.push({
              id: c.cliente.id,
              cliente_id: c.cliente.id,
              clasificacion_id: c.cliente.clasificacion_id,
@@ -88,12 +88,12 @@ ClienteDocumentacion.get = function(req, res, next) {
              email: c.cliente.email,
              radio: c.cliente.radio,
              empleado: c.cliente.empleado,
-             negocio: c.cliente.negocio,		       
+             negocio: c.cliente.negocio,
              contacto: c.cliente.contacto,
              observaciones: c.cliente.observaciones,
 		         monto: c.cuentaCorriente.monto.toMoney(),
 		       })
-          }  
+          }
         })
       res.send(msg);
     })

@@ -1,5 +1,5 @@
 var DB, Everyone;
-   
+
 var Vencimiento = function(db, everyone) {
   DB = db;
   Everyone = everyone;
@@ -16,17 +16,17 @@ Vencimiento.get = function(req, res, next) {
       if(b.anticipo<12 && 0<b.anticipo)
         b.impuesto.nombre+= " - Anticipo"+b.anticipo
       if(b.cronogramaImpuesto){
-        if(/Monotributo/.test(b.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(b.impuesto.nombre) || /Plan de Pagos ARBA/.test(b.impuesto.nombre) ){  
+        if(/Monotributo/.test(b.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(b.impuesto.nombre) || /Plan de Pagos ARBA/.test(b.impuesto.nombre) ){
           if(b.cronograma.mes!="12")
             b.cronograma.mes=parseInt(b.cronograma.mes)+1
           else{
             b.cronograma.mes="1"
             b.cronograma.año= parseInt(b.cronograma.año)+1
           }
-        }   
-        msg.push(b)
+        }
+        msg.push(b);
       }
-    })  
+    })
     res.send(msg)
     })
 };
@@ -36,7 +36,7 @@ Vencimiento.post = function(req, res, next) {
 };
 
 Vencimiento.put = function(req, res, next) {
-  
+
   DB.Vencimiento.find({where:{id: req.params.id}}).on('success', function(ven){
     if((ven.monto0 != req.body.monto0) || (ven.monto1 != req.body.monto1) || (ven.monto2 != req.body.monto2) || (ven.monto3 != req.body.monto3) || (ven.monto4 != req.body.monto4) || (ven.anticipo != req.body.anticipo) || (ven.liquida != req.body.liquida))
       {

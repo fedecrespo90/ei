@@ -6,6 +6,7 @@ var RecepImp = function(db, everyone) {
   return RecepImp;
 };
 
+
 RecepImp.get = function(req, res, next) {
   DB.GrupoImpuesto.findAll({where:{enviado: 1, pagado: 0}, include:[{model: DB.Banco}, {model: DB.Empleado}]}).on('success', function(as) {
     var msg=[]
@@ -17,12 +18,12 @@ RecepImp.get = function(req, res, next) {
         bancoNombre: a.banco.nombre,
         empleado_id: a.empleado_id,
         empleadoNombre: a.empleado.nombre+" "+a.empleado.apellido,
-        total: a.total.toMoney(), 
+        total: a.total.toMoney(),
         diaDePago: moment(a.diaDePago).format("DD/MM/YYYY"),
       })
     })
     res.send(msg)
-  });  
+  });
 };
 
 RecepImp.editMonto = function(req, res, next){
@@ -35,10 +36,13 @@ RecepImp.editMonto = function(req, res, next){
       }else{
         maximo=maximo+1
       }
+      DB.GrupoImpuesto.find({ where: {id: vto.grupo_impuesto_id} }).on('success', function(grup){
       vto.updateAttributes({monto0: req.body.monto0, monto1: req.body.monto1, monto2 : req.body.monto2, monto3: req.body.monto3});
+      grup.updateAttributes({total: bodyMontos});
       //generarRecibo(maximo, vto, baseMontos, bodyMontos, req, res);
       actualizarCuenta(maximo, vto, baseMontos, bodyMontos);
       res.send(true);
+      })//function(grup)
     })
   })
   setTimeout(limpiarDb(), 300)
@@ -67,7 +71,7 @@ actualizarCuenta = function(maximo, vto, baseMontos, bodyMontos){
   var q= "SELECT * FROM impuesto WHERE id="+imp;  // === DB.Impuesto.find({where: {id: imp}}).on('success', function(impu){
   DB._.query(q, function(err, impu) {// ===  DB.Impuesto.find({where: {id: imp}}).on('success', function(impu){
     if(impu){
-      if(baseMontos>bodyMontos){//Entra plata a la cuenta 
+      if(baseMontos>bodyMontos){//Entra plata a la cuenta
         DB.ClienteCuentaCorriente.find({where:{cliente_id: vto.cliente_id}}).on('success', function(ccuenta){
           DB.CuentaCorriente.find({where:{id: ccuenta.cuenta_corriente_id}}).on('success', function(cuenta){
             if(cuenta){
@@ -94,7 +98,7 @@ actualizarCuenta = function(maximo, vto, baseMontos, bodyMontos){
                       ingreso: 1,
                       chequedo: 0,
                     })
-                  })                
+                  })
                 }
               })
             }
@@ -116,7 +120,7 @@ actualizarCuenta = function(maximo, vto, baseMontos, bodyMontos){
                       ingreso: 0,
                       cliente_cuenta_corriente_id: ccuenta.id,
                       observacion: observacion,
-                    })  
+                    })
                     DB.Cliente.find({where: {id: vto.cliente_id}}).on('success', function(cliente){
                       DB.MovimientoCaja.create({
                         recibo_id: maximo,
@@ -129,15 +133,15 @@ actualizarCuenta = function(maximo, vto, baseMontos, bodyMontos){
                         chequedo: 0,
                       })
                     })
-                  }            
+                  }
                 })
               }
             })
-          })  
+          })
         }
       }
     }
-  });setTimeout(function(){limpiarCaja(); limpiarDb();}, 300) 
+  });setTimeout(function(){limpiarCaja(); limpiarDb();}, 300)
 };
 
 generarRecibo = function(maximo, vto, baseMontos, bodyMontos, req, res){
@@ -148,7 +152,7 @@ generarRecibo = function(maximo, vto, baseMontos, bodyMontos, req, res){
         f: maximo,
         concepto: concepto,
         receptor: "Jorge Pressaco"
-      }).on('success', function(recibo){              
+      }).on('success', function(recibo){
         var nTotal = Number(gi.total) - Number(baseMontos) + Number(bodyMontos)
         gi.updateAttributes({total: nTotal}).on('success',function(gi){
           DB.Vencimiento.findAll({where: {grupo_impuesto_id: gi.id}, include: [{model: DB.Cliente}, {model: DB.Impuesto}, {model: DB.Cronograma}]}).on('success', function(vtos){
@@ -162,7 +166,7 @@ generarRecibo = function(maximo, vto, baseMontos, bodyMontos, req, res){
                     impuesto: vi.impuesto.nombre,
                     periodo: vi.cronograma.mes+"/"+vi.cronograma.año,
                   })
-              }) 
+              })
             }
             res.send({
               pagoNumero: gi.id,
@@ -171,18 +175,18 @@ generarRecibo = function(maximo, vto, baseMontos, bodyMontos, req, res){
               impuestos: arrayImpuesto,
               creador: u.empleado.nombre+" "+u.empleado.apellido,
               receptor: "Jorge Pressacco",
-              reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm")    
+              reciboFecha: moment(recibo.update_at).format("DD/MM/YYYY  HH:mm")
             })
           })
         })
       })
-    })      
+    })
   })
 };
- 
+
 RecepImp.byGroup = function(req, res, next){
   DB.Vencimiento.findAll({where: {grupo_impuesto_id: req.params.id}, include: [{model: DB.Impuesto},{model: DB.Cliente}]}).on('success',function(vencimientos){
-    res.send(vencimientos); 
+    res.send(vencimientos);
   })
 };
 
@@ -206,7 +210,7 @@ limpiarDb = function(){
       var qd= "DELETE FROM movimiento WHERE id NOT IN ("+nt+")";
       DB._.query(qd);
     }
-  })  
+  })
 };
 
 limpiarCaja = function(){
@@ -222,7 +226,7 @@ limpiarCaja = function(){
       var qd= "DELETE FROM movimientoCaja WHERE id NOT IN ("+nt+")";
       DB._.query(qd);
     }
-  })  
+  })
 };
 
 module.exports = RecepImp;

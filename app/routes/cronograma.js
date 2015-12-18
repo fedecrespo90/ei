@@ -15,21 +15,21 @@ Cronograma.get = function(req, res, next) {
     crono.forEach(function(c){
 
       var mes
-      switch (c.mes)  { 
+      switch (c.mes)  {
          case 1 : mes= "Enero" ; break;
          case 2 : mes= "Febrero" ; break;
          case 3 : mes= "Marzo" ; break;
          case 4 : mes= "Abril" ; break;
-         case 5 : mes= "Mayo" ; break;         
-         case 6 : mes= "Junio" ; break;         
+         case 5 : mes= "Mayo" ; break;
+         case 6 : mes= "Junio" ; break;
          case 7 : mes= "Julio" ; break;
          case 8 : mes= "Agosto" ; break;
          case 9 : mes= "Septiembre" ; break;
          case 10 : mes= "Octubre" ; break;
          case 11 : mes= "Noviembre" ; break;
-         case 12 : mes= "Diciembre" ; break;         
+         case 12 : mes= "Diciembre" ; break;
          default : mes= "Indefinido" ;
-      } 
+      }
       msg.push({
         id: c.id,
         mes: c.mes,
@@ -46,27 +46,27 @@ Cronograma.queCumple = function(req, res, next) {
       var msg=[];
 	    e.forEach(function(crono){
 		      var mes;
-          switch (crono.mes)  { 
+          switch (crono.mes)  {
              case 1 : mes= "Enero" ; break;
              case 2 : mes= "Febrero" ; break;
              case 3 : mes= "Marzo" ; break;
              case 4 : mes= "Abril" ; break;
-             case 5 : mes= "Mayo" ; break;         
-             case 6 : mes= "Junio" ; break;         
+             case 5 : mes= "Mayo" ; break;
+             case 6 : mes= "Junio" ; break;
              case 7 : mes= "Julio" ; break;
              case 8 : mes= "Agosto" ; break;
              case 9 : mes= "Septiembre" ; break;
              case 10 : mes= "Octubre" ; break;
              case 11 : mes= "Noviembre" ; break;
-             case 12 : mes= "Diciembre" ; break;         
-             default : mes= "Indefinido" ;		      
+             case 12 : mes= "Diciembre" ; break;
+             default : mes= "Indefinido" ;
           }
-		      msg.push({ 
+		      msg.push({
 		       id: crono.id,
 		       nombre: mes + "-"+crono.año,
 		     })
       })
-      res.send(msg);  
+      res.send(msg);
   })
 };
 
@@ -86,7 +86,7 @@ Cronograma.post = function(req, res, next) {
               DB.CronogramaImpuesto.create({
                 cronograma_id: cronograma.id,
                 impuesto_id: i.id,
-                vtoImpuesto: moment(req.body[i.nombre]).format('YYYY-MM-DD HH:MM:SS') 
+                vtoImpuesto: moment(req.body[i.nombre]).format('YYYY-MM-DD HH:MM:SS')
               })
             }
           })
@@ -102,15 +102,15 @@ Cronograma.post = function(req, res, next) {
               req.body[i.nombre]=t[3]+t[4]+t[5]+t[0]+t[1]+t[2]+t[6]+t[7]+t[8]+t[9]+" 12:00:00";
               DB.CronogramaImpuesto.find({where:{impuesto_id:i.id, cronograma_id:crono.id}}).on('success', function(cronoImpuesto){
                 if(cronoImpuesto){
-                    cronoImpuesto.updateAttributes({vtoImpuesto: req.body[i.nombre]}).success(function(){res.send(true)})                  
+                    cronoImpuesto.updateAttributes({vtoImpuesto: req.body[i.nombre]}).success(function(){res.send(true)})
                 }else{
                   DB.CronogramaImpuesto.create({cronograma_id: crono.id, impuesto_id: i.id, vtoImpuesto: moment(req.body[i.nombre]).format('YYYY-MM-DD HH:MM:SS') }).on('success', function(){res.send(true)})
-                }              
-              })              
+                }
+              })
             }
           })
         })
-      })    
+      })
     }
   })
 };
@@ -127,17 +127,17 @@ Cronograma.put = function(req, res, next) {
               req.body[i.nombre]=t[3]+t[4]+t[5]+t[0]+t[1]+t[2]+t[6]+t[7]+t[8]+t[9]+" 12:00:00";
               DB.CronogramaImpuesto.find({where:{impuesto_id:i.id, cronograma_id:crono.id}}).on('success', function(cronoImpuesto){
                 if(cronoImpuesto){
-                    cronoImpuesto.updateAttributes({vtoImpuesto: req.body[i.nombre]}).success(function(){res.send(true)})                  
+                    cronoImpuesto.updateAttributes({vtoImpuesto: req.body[i.nombre]}).success(function(){res.send(true)})
                 }else{
                   DB.CronogramaImpuesto.create({cronograma_id: crono.id, impuesto_id: i.id, vtoImpuesto: moment(req.body[i.nombre]).format('YYYY-MM-DD HH:MM:SS') }).on('success', function(){res.send(true)})
-                }              
+                }
               })
             }
           })
         })
       })
     }
-  })  
+  })
 };
 
 Cronograma.delete = function(req, res, next) {

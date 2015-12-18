@@ -1,0 +1,1 @@
+SELECT * FROM `movimientoCaja` inner join caja on movimientoCaja.caja_id = caja.id where movimientoCaja.cierreCaja_id=0 and caja_id=4

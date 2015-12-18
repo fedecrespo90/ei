@@ -10,5 +10,14 @@ module.exports = function(sequelize, DataTypes) {
     rSubConcepto: DataTypes.STRING,
     chequeado: DataTypes.INTEGER,
     recibido: DataTypes.DATE,
+    //Agregados:
+    cierreCaja_id: DataTypes.INTEGER,
+    montoEfectivo: DataTypes.DECIMAL(10,2),
+    montoCheque: DataTypes.DECIMAL(10,2),
+    nombreBanco: DataTypes.STRING,
+    numeroCheque: DataTypes.INTEGER,
+    titularCheque: DataTypes.STRING,
+    fechaEmision: DataTypes.DATE,
+    fechaCobro: DataTypes.DATE,
   },{ tableName: 'movimientoCaja'});
 };

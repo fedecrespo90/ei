@@ -1,4 +1,4 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
 
 var ClienteImpuesto = function(db, everyone) {
@@ -11,8 +11,8 @@ ClienteImpuesto.get = function(req, res, next) {
  DB.ClienteCuentaCorriente.findAll({
     where: {id: {ne: 200}},
     include:[{model: DB.CuentaCorriente, as: 'cuentaCorriente'},
-            {model: DB.Cliente, as: 'cliente', 
-            include: 
+            {model: DB.Cliente, as: 'cliente',
+            include:
               [
                {model: DB.Clasificacion, as: 'clasificacion'}, {model: DB.Comunicacion, as: 'comunicacion'}, {model: DB.Actividad, as: 'actividad'}
               ]
@@ -22,12 +22,12 @@ ClienteImpuesto.get = function(req, res, next) {
       var msg=[];
 	    cuentas.forEach(function(cuenta){
 		      var com;
-		      switch (cuenta.cliente.comunicacion.nombre) { 
-		           case "Teléfono":	com= "Teléfono: " + cuenta.cliente.telefono; break; 
+		      switch (cuenta.cliente.comunicacion.nombre) {
+		           case "Teléfono":	com= "Teléfono: " + cuenta.cliente.telefono; break;
 		           case "Celular":	com= "Celular: "  + cuenta.cliente.celular; break;
-		           case "Radio":	  com= "Radio: "    + cuenta.cliente.radio; break; 
-		           case "Email":	  com= "E-Mail: "   + cuenta.cliente.email; break; 
-		           default:		      com= "Indefinido" ; 
+		           case "Radio":	  com= "Radio: "    + cuenta.cliente.radio; break;
+		           case "Email":	  com= "E-Mail: "   + cuenta.cliente.email; break;
+		           default:		      com= "Indefinido" ;
 		      }
 		      msg.push({ 
 		       id: cuenta.cliente.id,
@@ -48,11 +48,12 @@ ClienteImpuesto.get = function(req, res, next) {
 		       email: cuenta.cliente.email,
 		       radio: cuenta.cliente.radio,
 		       empleado: cuenta.cliente.empleado,
-		       negocio: cuenta.cliente.negocio,		       
+		       negocio: cuenta.cliente.negocio,
 		       contacto: cuenta.cliente.contacto,
 		       observaciones: cuenta.cliente.observaciones,
 		       monto: cuenta.cuentaCorriente.monto,
-		       montoTramite: cuenta.cuentaCorriente.montoTramite     
+		       montoTramite: cuenta.cuentaCorriente.montoTramite
+           
 
 		     })
       })
@@ -88,7 +89,7 @@ ClienteImpuesto.byCliente = function(req, res, next) {
 
 ClienteImpuesto.delete = function(req, res, next) {
   var q = "DELETE FROM clienteImpuesto where id = "+req.params.id;
-  DB._.query(q, function(err, data) { 
+  DB._.query(q, function(err, data) {
     res.send(true)
   })
   //DB.ClienteImpuesto.destroy({ id: req.params.id }).on('success',function(){res.send(true)});
@@ -100,14 +101,14 @@ ClienteImpuesto.post = function(req, res, next) {
   // Vent 0100 = 4
   // Sip 0010 = 2
   // Os   0001 = 1
-  // casos -> 11, 10, 9, 8 
-  //       -> 7, 6, 5, 4  
+  // casos -> 11, 10, 9, 8
+  //       -> 7, 6, 5, 4
   var parametro   = req.params.ids.split(":")
   var idCliente   = parametro[0];
   var idImpuesto  = parametro[1];
   var paga        = parametro[2];
   var adherentes  = parametro[3];
-  DB.ClienteImpuesto.find({ 
+  DB.ClienteImpuesto.find({
         where: {
           cliente_id: idCliente,
           impuesto_id: idImpuesto,
@@ -124,7 +125,7 @@ ClienteImpuesto.post = function(req, res, next) {
         adherentes: adherentes,//en la bd default1!!!!
       })
       res.send(true);
-    }  
+    }
   })
 };
 

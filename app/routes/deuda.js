@@ -1,4 +1,4 @@
-var DB, Everyone, 
+var DB, Everyone,
     moment= require('moment');
 
 var Deuda = function(db, everyone) {
@@ -19,12 +19,12 @@ Deuda.get = function(req, res, next) {
   	var msg= [];
   	a.forEach(function(cc){
   	  var com;
-	  switch (cc.cliente.comunicacion_id) { 
-	          case 1:	com="Teléfono: "+cc.cliente.telefono; break; 
+	  switch (cc.cliente.comunicacion_id) {
+	          case 1:	com="Teléfono: "+cc.cliente.telefono; break;
 	          case 2:	com="Celular: "+cc.cliente.celular; break;
-	          case 3:	com="Radio: "+cc.cliente.radio; break; 
-	          case 4:	com="E-Mail: "+cc.cliente.email; break; 
-	          default:com="Indefinido"; 
+	          case 3:	com="Radio: "+cc.cliente.radio; break;
+	          case 4:	com="E-Mail: "+cc.cliente.email; break;
+	          default:com="Indefinido";
 	  }
   	  msg.push({
   	    id: cc.id,
@@ -32,6 +32,7 @@ Deuda.get = function(req, res, next) {
   	    cliente_id: cc.cliente_id,
   	    clienteComunicacion: com,
   	    clienteActividad: cc.cliente.actividad.nombre
+        
   	  })
   	})
   res.send(msg);
@@ -48,11 +49,11 @@ Deuda.byCliente = function(req, res, next){
     ]
   }).on('success', function(a) {
     var msg= [];
-  	a.forEach(function(d){ 
+  	a.forEach(function(d){
     	var variable = "Sin Liquidar"
   	  if(d.cronogramaImpuesto){
     	  variable = moment(d.cronogramaImpuesto.vtoImpuesto).format("DD/MM/YYYY")
-        var v = d.cronograma.mes +"/"+d.cronograma.año    	
+        var v = d.cronograma.mes +"/"+d.cronograma.año
         if(/Monotributo/.test(d.impuesto.nombre) || /Plan Mis Facilidades AFIP/.test(d.impuesto.nombre) || /Plan de Pagos ARBA/.test(d.impuesto.nombre) ){
           var edit= v.split("/")
           if(edit[0]!="12")
@@ -62,7 +63,7 @@ Deuda.byCliente = function(req, res, next){
             edit[1]= parseInt(edit[1])+1
           }
           v=edit.join("/")
-        }   
+        }
         if(d.anticipo<12 && 0<d.anticipo)
           d.impuesto.nombre+=" - Anticipo "+d.anticipo;
         var tot = parseFloat(d.monto0) +parseFloat(d.monto1) +parseFloat(d.monto2)+parseFloat(d.monto3)+parseFloat(d.monto4)

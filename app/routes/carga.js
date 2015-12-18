@@ -7,6 +7,9 @@ var Carga = function(db, everyone) {
   return Carga;
 };
 
+var idCrono;
+var flag;
+
 Carga.get = function(req, res, next) {
   DB.ClienteImpuesto.findAll({
        include: [{model: DB.Impuesto, where:{fijo:0}}
@@ -62,36 +65,68 @@ Carga.repetirMesAnterior = function(req, res, next){
   DB.Impuesto.find({where: {nombre: impNombre}}).on('success',function(impuesto){
     console.log("IMP"+impuesto.id)
     DB.Vencimiento.max('cronograma_id',{where: {impuesto_id: impuesto.id}}).on('success', function(ven){
-      console.log(ven)
-      DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: ven}}).on('success', function(cronoImp){
+      //console.log(ven);
+      ///////////Agreg
+      DB.Cronograma.findAll({order: 'id DESC LIMIT 1 ', where: {auditado: false}
+      }).on('success', function(cronn) {
+        cronn.forEach(function(cc){
+          cronnId = cc.id;
+        })
+      ///////////
+      DB.CronogramaImpuesto.find({where:{impuesto_id: impuesto.id, cronograma_id: cronnId/*ven*/}}).on('success', function(cronoImp){
 //        console.log(cronoImp.id)
         DB.Vencimiento.findAll({where: {impuesto_id: impuesto.id, cronograma_id: ven }}).on('success', function(e){
-          if(e && cronoImp != 0 /*&& cronoImp != -1*/){ //PRUEBO CAMBIANDO LA CONDICION
+          if(e && cronoImp != 0 && cronoImp != -1 && cronoImp != null){ //PRUEBO CAMBIANDO LA CONDICION
             e.forEach(function(vto){
-              DB.Vencimiento.create({
-                cliente_id: vto.cliente_id,
-                cliente_impuesto_id: vto.cliente_impuesto_id,
-                impuesto_id: vto.impuesto_id,
-                liquida: vto.liquida,
-                monto0: vto.monto0,
-                monto1: vto.monto1,
-                monto2: vto.monto2,
-                monto3: vto.monto3,
-                monto4: vto.monto4,
-                cronograma_id: Number(vto.cronograma_id) + 1,
-                cronograma_impuesto_id: cronoImp.id,//////////
-                anticipo: vto.anticipo,
-              })
-            })
+              //Asigno valor a idCrono
+              idCrono = Number(vto.cronograma_id)+1;
+            }) 
+
+              if(idCrono == cronnId)
+              {
+                flag = true;
+                e.forEach(function(vto){
+                  DB.Vencimiento.create({
+                    cliente_id: vto.cliente_id,
+                    cliente_impuesto_id: vto.cliente_impuesto_id,
+                    impuesto_id: vto.impuesto_id,
+                    liquida: vto.liquida,
+                    monto0: vto.monto0,
+                    monto1: vto.monto1,
+                    monto2: vto.monto2,
+                    monto3: vto.monto3,
+                    monto4: vto.monto4,
+                    cronograma_id: idCrono,
+                    cronograma_impuesto_id: cronoImp.id,//////////
+                    anticipo: vto.anticipo,
+                  })
+                }) // Estos cierran el forEach
+              }
+              else
+              {
+                flag = false;
+                console.log("No pudimos asignar el cronograma: "+idCrono+" es != que "+cronnId);
+              }
+
           }else{
-            for (var i = 0; i < 100; i++) {
-              console.log("Datos erroneos");
-            }
+            /*for (var i = 0; i < 1000; i++) {
+              console.log("ERROR: cronoImp.id is null");
+            }*/
           }
+
+      }).on('success', function(){
+        mensaje = [];
+        mensaje.push({
+          mensaje: flag
         })
-      }).on('success', function(){res.send(true)})
-    })
+        res.send(mensaje);
+      })//////////
+    })//CONSULTA cronogramaImpuesto
+    })// CONSULTA CRONOGRAMA
   })
+  ///////////Cierro Agrego
+  });
+  ///////////
 };
 
 Carga.put = function(req, res, next) {

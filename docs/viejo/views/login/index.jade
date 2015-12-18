@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title Estudio&nbsp;Integral
+
+    link(rel='stylesheet', href='/stylesheets/login.min.css')
+
+    script(src='/javascripts/cookies.min.js')
+    script(src='/javascripts/jquery-1.7.1.min.js')
+
+  body
+    h3 Estudio&nbsp;Integral
+    div
+      form#login_form(method='post', action='/login')
+        label(for='usuario') Usuario
+        br
+        input(name='usuario', type='text', value='')
+        br
+        label(for='pass') Contrase&ntilde;a
+        br
+        input(name='pass', type='password', value='')
+        br
+        br
+        a Ingresar
+        br
+        br
+        a(href='http://192.168.99.1/sitios/pressaccoManual') Manual de Usuario        
+        p#msg Usuario o contrase&ntilde;a incorrectos
+  script
+        $(document).ready(function() {$('form a').on('click', function() { $('#login_form').submit(); });
+        $(document).on('keypress', function(e) { if (e.which == 13) { $('#login_form').submit(); } }); if(#{msg} == 1){$('#msg').fadeIn();}var usuario = Cookies.get('usuario'); if (usuario) { $('input[name=usuario]').val(usuario); }
+        });

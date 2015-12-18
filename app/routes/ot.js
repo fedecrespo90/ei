@@ -23,6 +23,10 @@ Ot.byNumero = function(req, res, next) {
 Ot.byOt = function(req, res, next) {
   DB.Ot.find({where: {id : req.params.numero}}).on('success',function(b){
     var conclusion = b.conclusion? b.conclusion : "Sin Conclusión";
+    //Agrego las consultas Usuario, Empleado y OtTarea
+    DB.OtTarea.find({where:{ot_id: b.id}}).on('success', function(otarea){
+    DB.Usuario.find({where:{id: b.usuario_id}}).on('success', function(us){
+    DB.Empleado.find({where:{id: us.empleado_id}}).on('success', function(emp){
     DB.Cliente.find({where:{id: b.cliente_id}}).on('success', function(cli){
       res.send({
           ingreso: moment(b.created_at).format("YYYY/MM/DD")+" "+moment(b.created_at).format("HH:mm"),
@@ -31,8 +35,16 @@ Ot.byOt = function(req, res, next) {
           titulo: b.titulo,
           descripcion: b.descripcion,
           conclusion: conclusion,
+          //Agrego mas cosas para mandar
+          empleado: emp.nombre,
+          tiempoEstimado: otarea.tiempoEstimado,
+          tiempoInsumido: otarea.tiempoInsumido
+
       })
     })
+  })
+  })
+  })
   });
 };
 
@@ -475,6 +487,8 @@ Ot.conclude = function(req, res, next) {
 };
 
 Ot.put = function(req, res, next) {
+  var mensaje = [];
+  var flag = false;
   DB.Ot.find({ where: {id: req.params.id} }).on('success', function(e) { 
     if (e) {
       var ot = e;
@@ -539,7 +553,27 @@ Ot.put = function(req, res, next) {
       req.body.juridica == 0? req.body.juridica = !1:req.body.juridica = !0
      // req.body.reservado == 0? req.body.reservado = !1:req.body.reservado = !0
       e.updateAttributes(req.body).success(function(e) {
-        res.send(true);
+        //res.send(true);
+        //Agrego
+        DB.OtTarea.find({where:{ot_id: req.params.id  , completa: 0}, include: [{model: DB.Ot, order: 'id DESC LIMIT 1 ',}]}).on('success', function(otTarea){
+          if(otTarea)
+          {
+            flag = true;
+            //Imprimo
+              /*for (var i = 0; i < 100; i++) {
+                //console.log(otTarea.ot_id);
+                console.log(otTarea.nombre);
+              };*/
+          }
+          else
+          {
+            flag = false;
+          }
+          mensaje.push({
+          mensaje: flag
+        })
+        res.send(mensaje);
+        })
       });
     }else{res.send(false)}
   });

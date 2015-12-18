@@ -1,8 +1,8 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
 
 var Cargado = function(db, everyone) {
-  DB = db;   
+  DB = db;
   Everyone = everyone;
   return Cargado;
 };
@@ -26,10 +26,10 @@ Cargado.get = function(req, res, next) {
             monto0: i.monto0.toFixed(2),
             monto1: i.monto1.toFixed(2),
             monto2: i.monto2.toFixed(2),
-            monto3: i.monto3.toFixed(2),  
+            monto3: i.monto3.toFixed(2),
             monto4: i.monto4.toFixed(2),
             monto: monto.toMoney(),
-            liquida: i.liquida? 1 : 0,            
+            liquida: i.liquida? 1 : 0,
           })
         })
         fijo.forEach(function(i){
@@ -41,7 +41,7 @@ Cargado.get = function(req, res, next) {
               binario ="0"+binario
             if(binario.length == 2)
               binario="00"+binario
-            if(binario.length == 1)                     
+            if(binario.length == 1)
               binario="000"+binario
           }
           if(binario[0]==1)
@@ -78,7 +78,7 @@ Cargado.get = function(req, res, next) {
             monto4: monto4 || 0.00,
             monto: monto.toMoney(),
           })
-        })        
+        })
         res.send(msg);
       })
   });

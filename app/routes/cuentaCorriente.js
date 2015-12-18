@@ -1,4 +1,4 @@
-var DB, Everyone, 
+var DB, Everyone,
     moment= require('moment');
 
 var CuentaCorriente = function(db, everyone) {
@@ -12,25 +12,25 @@ CuentaCorriente.get = function(req, res, next) {
     DB.CuentaCorriente.findAll({
         where: {'clienteCuentaCorriente.principal': 1},
         include: [{
-          model: DB.ClienteCuentaCorriente, 
-          include: [{ 
+          model: DB.ClienteCuentaCorriente,
+          include: [{
             model: DB.Cliente,
             include: [{
               model: DB.Actividad
             }]
-                                 
+
           }]
         }]
     }).on('success', function(a) {
     	var msg= [];
     	a.forEach(function(cc){
         var com;
-        switch (cc.clienteCuentaCorriente.cliente.comunicacion_id) { 
-                case 1:	com="Teléfono: "+cc.clienteCuentaCorriente.cliente.telefono; break; 
+        switch (cc.clienteCuentaCorriente.cliente.comunicacion_id) {
+                case 1:	com="Teléfono: "+cc.clienteCuentaCorriente.cliente.telefono; break;
                 case 2:	com="Celular: "+cc.clienteCuentaCorriente.cliente.celular; break;
-                case 3:	com="Radio: "+cc.clienteCuentaCorriente.cliente.radio; break; 
-                case 4:	com="E-Mail: "+cc.clienteCuentaCorriente.cliente.email; break; 
-                default:	com="Indefinido"; 
+                case 3:	com="Radio: "+cc.clienteCuentaCorriente.cliente.radio; break;
+                case 4:	com="E-Mail: "+cc.clienteCuentaCorriente.cliente.email; break;
+                default:	com="Indefinido";
         }
      	  msg.push({
       	    id: cc.id,
@@ -49,25 +49,25 @@ CuentaCorriente.get = function(req, res, next) {
     DB.CuentaCorriente.findAll({
         where: {'clienteCuentaCorriente.principal': 1, id: {ne: 200}},
         include: [{
-          model: DB.ClienteCuentaCorriente, 
-          include: [{ 
+          model: DB.ClienteCuentaCorriente,
+          include: [{
             model: DB.Cliente,
             include: [{
               model: DB.Actividad
             }]
-                                
+
           }]
         }]
     }).on('success', function(a) {
     	var msg= [];
     	a.forEach(function(cc){
         var com;
-        switch (cc.clienteCuentaCorriente.cliente.comunicacion_id) { 
-                case 1:	com="Teléfono: "+cc.clienteCuentaCorriente.cliente.telefono; break; 
+        switch (cc.clienteCuentaCorriente.cliente.comunicacion_id) {
+                case 1:	com="Teléfono: "+cc.clienteCuentaCorriente.cliente.telefono; break;
                 case 2:	com="Celular: "+cc.clienteCuentaCorriente.cliente.celular; break;
-                case 3:	com="Radio: "+cc.clienteCuentaCorriente.cliente.radio; break; 
-                case 4:	com="E-Mail: "+cc.clienteCuentaCorriente.cliente.email; break; 
-                default:	com="Indefinido"; 
+                case 3:	com="Radio: "+cc.clienteCuentaCorriente.cliente.radio; break;
+                case 4:	com="E-Mail: "+cc.clienteCuentaCorriente.cliente.email; break;
+                default:	com="Indefinido";
         }
      	  msg.push({
       	    id: cc.id,
@@ -82,7 +82,7 @@ CuentaCorriente.get = function(req, res, next) {
     	})
       res.send(msg);
     });
-  } 
+  }
 };
 
 CuentaCorriente.monto = function(req, res, next){
@@ -96,7 +96,7 @@ CuentaCorriente.monto = function(req, res, next){
 CuentaCorriente.byCliente = function(req, res, next){
   DB.Movimiento.findAll({
         where: {'clienteCuentaCorriente.cuenta_corriente_id': req.params.cuentaCorriente_id},
-	      include: [{model:DB.Vencimiento, include:[{model: DB.Cronograma}]},{model: DB.ClienteCuentaCorriente, 
+	      include: [{model:DB.Vencimiento, include:[{model: DB.Cronograma}]},{model: DB.ClienteCuentaCorriente,
 	               include:[{  model:DB.Cliente
 	               }]
 	      }],
@@ -109,7 +109,7 @@ CuentaCorriente.byCliente = function(req, res, next){
           if(mov.ingreso){
            tramite = "Ingreso "+mov.observacion
           }else{
-            tramite = "Egreso "+mov.observacion          
+            tramite = "Egreso "+mov.observacion
           }
         }else{
            if(mov.tramite){
@@ -118,7 +118,7 @@ CuentaCorriente.byCliente = function(req, res, next){
               var crono = " "
               if(mov.vencimiento)
                 if(mov.vencimiento.cronograma)
-                  crono=" - "+mov.vencimiento.cronograma.mes+"/"+mov.vencimiento.cronograma.año+" - ";        
+                  crono=" - "+mov.vencimiento.cronograma.mes+"/"+mov.vencimiento.cronograma.año+" - ";
               if(mov.ingreso){
                 tramite="Cliente pagó al Estudio/Ingreso " + mov.observacion + crono
                 if(mov.vencimiento){
@@ -145,8 +145,9 @@ CuentaCorriente.byCliente = function(req, res, next){
               }else{
                 tramite="El Estudio pagó/Egreso " + mov.observacion
               }
-            }        
+            }
         }
+        //MANDA LA DATA A Clientes -> Cuentas Corrientes
 	      msg.push({
 	         id: mov.id,
 	         clienteNombre: mov.clienteCuentaCorriente.cliente.nombre,

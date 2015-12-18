@@ -14,12 +14,11 @@ Imprimir.post = function(req, res, next) {
 	var pdfFileNameMaterial = "/mnt/winserver/Recibo"+req.params.id+".pdf";
 	fs.writeFile(htmlFileNameMaterial, imprimir, function(err) {
 	});
-	var child= exec('xvfb-run -s"-screen 0 1024x768x24" wkhtmltopdf '+htmlFileNameMaterial+" "+pdfFileNameMaterial, function(err, stdout, stderr) {
+	var child= exec('xvfb-run -s "-screen 0 1024x768x24" wkhtmltopdf '+htmlFileNameMaterial+" "+pdfFileNameMaterial, function(err, stdout, stderr) {
     console.log(stdout);
     var localPdfFileNameMaterial= "/tmp/Recibo"+req.params.id+".pdf";//hago copia local en tmp
-    var child= exec('xvfb-run -s"-screen 0 1024x768x24" wkhtmltopdf '+htmlFileNameMaterial+" " + localPdfFileNameMaterial);
+    var child= exec('xvfb-run -s "-screen 0 1024x768x24" wkhtmltopdf '+htmlFileNameMaterial+" " + localPdfFileNameMaterial);
 	});
 };
 
 module.exports = Imprimir;
-  

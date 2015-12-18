@@ -3,7 +3,7 @@ var DB, Everyone
 var CargoImp = function(db, everyone) {
   DB = db;
   Everyone = everyone;
-  return CargoImp;  
+  return CargoImp;
 };
 
 CargoImp.get = function(req, res, next) {
@@ -14,4 +14,3 @@ CargoImp.get = function(req, res, next) {
 };
 
 module.exports = CargoImp;
-  

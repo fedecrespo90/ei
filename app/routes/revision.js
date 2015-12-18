@@ -1,4 +1,4 @@
-var DB, Everyone  
+var DB, Everyone
   , moment = require('moment')
   , util = require('util')
   ;
@@ -9,7 +9,7 @@ var Revision = function(db, everyone) {
 
   return Revision;
 };
- 
+
 
 Revision.get = function(req, res, next) {
   DB.MovimientoCaja.findAll({where: {chequeado: 0}, include:[{model: DB.Caja},{model: DB.Recibo}]}).on('success',function(mov){
@@ -31,47 +31,103 @@ Revision.get = function(req, res, next) {
         var monto_total= Math.abs(m.monto_total).toMoney();
         msg.push({
           id: m.id,
-          ie: m.ingreso==1 ? "Ingreso" : "Egreso", 
+          ie: m.ingreso==1 ? "Ingreso" : "Egreso",
           creado: moment(m.created_at).format("YYYY-MM-DD"),
           caja: m.caja.nombre,
           observacion: m.observacion,
           concepto: m.concepto,
           subConcepto: m.subConcepto,
           rSubConcepto: m.rSubConcepto,
-          monto: m.ingreso==1 ?m.monto.toMoney(): "-"+m.monto.toMoney(),          
+          monto: m.ingreso==1 ?m.monto.toMoney(): "-"+m.monto.toMoney(),
           recibo: recibo || " " ,
           montoTotal: monto_total,
         })
       }
     })
-    res.send(msg) 
+    res.send(msg)
   })
 };
 
 Revision.detalleRango = function(req, res, next) {
   DB.MovimientoCaja.findAll({where: {chequeado: 0}, include:[{model: DB.Recibo}]}).on('success',function(mc){
+    DB.CierresCaja.findAll({ order: 'id DESC LIMIT 1' }).on('success',function(cc){
+      DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(rec){
+      cc.forEach(function(ccc){
+        rec.forEach(function(recib){
     var diaMin="01 January, 2070 UTC"
     ,   diaMax="01 January, 1970 UTC"
+    //ORIGINAL 1/3
+    /*
     ,   reciboMin=999999
     ,   reciboMax=-1
     ,   recibo;
+    */
+    //Agrego 1/3
+    ,   reciboMinE=999999
+    ,   reciboMaxE=-1
+    ,   reciboE
+    /*
+    ,   reciboMinH=999999
+    ,   reciboMaxH=-1
+    ,   reciboH;
+    */
     mc.forEach(function(m){
-      recibo=m.recibo.c!=0?m.recibo.c:(m.recibo.d!=0?m.recibo.d:(m.recibo.e!=0?m.recibo.e:(m.recibo.f!=0?m.recibo.f:(m.recibo.g!=0?m.recibo.g:(m.recibo.h!=0?m.recibo.h:-1)))));
+      //ORIGINAL +
+      //recibo=m.recibo.c!=0?m.recibo.c:(m.recibo.d!=0?m.recibo.d:(m.recibo.e!=0?m.recibo.e:(m.recibo.f!=0?m.recibo.f:(m.recibo.g!=0?m.recibo.g:(m.recibo.h!=0?m.recibo.h:-1)))));
+
+      //AGREGO +
+      if(m.recibo.e != 0)
+      {
+        reciboE = m.recibo.e;
+      }
+
       if(Date.parse(m.created_at)>Date.parse(diaMax))
         diaMax=m.created_at;
       if(Date.parse(m.created_at)<Date.parse(diaMin))
         diaMin=m.created_at;
+      //ORIGINAL 2/3
+      /*
       if(recibo>reciboMax)
         reciboMax=recibo;
       if(recibo<reciboMin)
         reciboMin=recibo;
+      */
+
+      //Agrego 2/3
+
+      if(reciboE>reciboMaxE)
+        reciboMaxE=reciboE;
+      if(reciboE<reciboMinE)
+        reciboMinE=reciboE;
+      /*
+      if(reciboH>reciboMaxH)
+        reciboMaxH=reciboH;
+      if(reciboH<reciboMinH)
+        reciboMinH=reciboH;
+        */
     })
+    //Aca manda la data a Movimientos
     res.send({
-      diaMax: moment(diaMax).format('YYYY-MM-DD'),
-      diaMin: moment(diaMin).format('YYYY-MM-DD'),
+      diaMax: moment(diaMax).format('YYYY-MM-DD"'),
+      diaMin: moment(diaMin).format('YYYY-MM-DD"'),
+      //ORIGINAL 3/3
+      /*
       reciboMin: reciboMin,
-      reciboMax: reciboMax
-    }) 
+      reciboMax: reciboMax,
+      */
+      //Agrego 3/3
+
+      reciboMinE: Number(ccc.ultimoReciboE)+1,//reciboMinE,
+      reciboMaxE: recib.e,//reciboMaxE,
+      /*
+      reciboMinH: reciboMinH,
+      reciboMaxH: reciboMaxH
+      */
+    })
+  })//rec.forEach
+  })//cc.forEach
+  })//rec
+  })//cc
   })
 };
 
@@ -110,21 +166,23 @@ Revision.getAllRecibos = function(req, res, next){
   })
 };
 
-Revision.anularRecibo= function(req, res, next){
+Revision.anularRecibo = function(req, res, next){
   DB.Recibo.find({where: {id: req.params.id}}).on('success', function(recibo){//Recibo que tiene cliente y un "monto"
     if(recibo.e != 0 || recibo.g != 0){
       DB.Cliente.find({where: {nombre: recibo.receptor}}).on('success', function(cliente){
         DB.ClienteCuentaCorriente.find({where:{ cliente_id: cliente.id}}).on('success', function(ccc){
           DB.Movimiento.findAll({where: {cliente_cuenta_corriente_id: ccc.id}}).on('succes', function(movimientos){
             console.log(movimientos)
-          })
-        })
-      })
+          });
+        });
+      });
     }
-  })
+  });
+  res.send(true);
 };
 
 Revision.aceptarRango = function(req, res, next){
+  /*
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -138,7 +196,7 @@ Revision.aceptarRango = function(req, res, next){
       })
       var ids="("+id.toString()+")";
       if(req.body.rangoDias){
-        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
           generarReciboRevision(movs, res, req.body.empleado_id);
         })
       }else{
@@ -148,13 +206,14 @@ Revision.aceptarRango = function(req, res, next){
       }
     })
   }else{
-    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
       generarReciboRevision(movs, res, req.body.empleado_id);
-    })  
+    })
   }
+  */
 };
 
-generarReciboRevision = function(db, res, empleado){
+generarReciboRevision = function(db, res, empleado,cccc_id){
   DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
     DB.Recibo.max('h').on('success',function(recibo){
       if(isNaN(recibo)){
@@ -178,21 +237,21 @@ generarReciboRevision = function(db, res, empleado){
                 	montoCaja=Number(montoCaja)+Number(m.monto);
                 }else{
                 	montoCaja=Number(montoCaja)-Number(m.monto);
-                }					
+                }
                 break;
               case 3:
                 if(m.ingreso==1){
                 	montoBanco=Number(montoBanco)+Number(m.monto);
                 }else{
                 	montoBanco=Number(montoBanco)-Number(m.monto);
-                }										
+                }
                 break;
               case 4:
                 if(m.ingreso==1){
                 	montoCtaCte=Number(montoCtaCte)+Number(m.monto);
                 }else{
                 	montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-                }					
+                }
                 break;
             }
             subConcepto=m.subConcepto? m.subConcepto : " ";
@@ -232,21 +291,21 @@ generarReciboRevision = function(db, res, empleado){
                 montoCaja=Number(montoCaja)+Number(m.monto);
               }else{
                 montoCaja=Number(montoCaja)-Number(m.monto);
-              }         
+              }
               break;
             case 3:
               if(m.ingreso==1){
                 montoBanco=Number(montoBanco)+Number(m.monto);
               }else{
                 montoBanco=Number(montoBanco)-Number(m.monto);
-              }                   
+              }
               break;
             case 4:
               if(m.ingreso==1){
                 montoCtaCte=Number(montoCtaCte)+Number(m.monto);
               }else{
                 montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-              }         
+              }
               break;
           }
           subConcepto=m.subConcepto? m.subConcepto : " ";
@@ -286,6 +345,7 @@ generarReciboRevision = function(db, res, empleado){
           })
         }
         total= Number(montoCaja)+Number(montoBanco)+Number(montoCtaCte);
+        //Aca manda data al recibo H
         res.send({
           movs: movs,
           recibo: recibo,
@@ -295,12 +355,75 @@ generarReciboRevision = function(db, res, empleado){
           ctaCte: montoCtaCte.toMoney(),
           empleado: emp.nombre+" "+emp.apellido,
           fechaActual: moment().format("DD/MM/YYYY HH:mm")
-        }) 
+        })
+        setTimeout(function(){cargarDB(db, empleado,cccc_id);},1000);
       }
     })
   })
 };
 
+
+// CargarDB
+cargarDB = function(db,empleado,cc_id)
+{
+  var arr = [];
+  var m = db;
+  DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
+    var concepto = "Ajuste de caja al: "+moment().format('YYYY-MM-DD')+" por: "+emp.nombre+" "+emp.apellido;
+    DB.Recibo.create({
+      h: recibo,
+      concepto: concepto,
+      receptor: emp.nombre+" "+emp.apellido
+    })
+  })
+  DB.MovimientoCaja.findAll({order: 'id DESC LIMIT 1'}).on('success', function(movcaj){
+    movcaj.forEach(function(movcajj){
+      DB.Caja.findAll({order: 'id ASC'}).on('success',function(caj){
+          DB.Recibo.findAll({order: 'e DESC LIMIT 1'}).on('success', function(urec){
+            DB.Recibo.findAll({order: 'e ASC LIMIT 1' }).on('success', function(prec){
+              DB.Recibo.findAll({order: 'h DESC LIMIT 1'}).on('success',function(urech){
+                DB.Recibo.findAll({order: 'h ASC LIMIT 1'}).on('success',function(prech){
+                  prech.forEach(function(primerRecH){
+                    urech.forEach(function(ultimoRecH){
+                      prec.forEach(function(primerRecE){
+                        urec.forEach(function(ultimoRecE){
+                          DB.Seq.query('SELECT DISTINCT recibo_id,montoEfectivo,montoCheque, montoEfectivo+montoCheque AS tot FROM movimientoCaja WHERE cierreCaja_id = '+cc_id, null, { raw: 'movimientoCaja' }).success(function(data){
+                            for (var i = 0; i < data.length; i++) {
+                              if(data[i+1] != undefined)
+                              {
+                                arr[0] = data[i].montoCheque+data[i+1].montoCheque;
+                                arr[1] = data[i].montoEfectivo+data[i+1].montoEfectivo;
+                                arr[2] = data[i].tot+data[i+1].tot;
+                              }
+                            }
+                              DB.CierresCaja.create({
+                                fechaCierre:moment().format('YYYY-MM-DD hh:mm:ss'),
+                                empleado_id: empleado,
+                                montoCheques: arr[0],
+                                montoEfectivo: arr[1],
+                                montoCaja: caj[0].monto,//movcajj.monto,
+                                montoPagos: caj[1].monto,
+                                montoCtaCliente: caj[2].monto,
+                                montoTotal: arr[2],
+                                primerReciboE: primerRecE.e,
+                                ultimoReciboE: ultimoRecE.e,
+                                primerReciboH: primerRecH.h,
+                                ultimoReciboH: ultimoRecH.h,
+                              })
+                          })
+                        })
+                      })
+                    })
+                  })
+                })
+              })
+            })
+          })
+      })
+    })
+  })
+};
+// Fin CargarDB
 
 Revision.realizarMovimientos = function(req, res, next){
   var rmin= req.body.rmin
@@ -310,59 +433,71 @@ Revision.realizarMovimientos = function(req, res, next){
     , fh = moment(fhi).format("YYYY-MM-DD")
     , id = [];
   if(req.body.rangoRecibos){
-    DB.Recibo.findAll({where: ['(c>=? AND c<=? ) OR (d>=? AND d<=?) OR (e>=? AND e<=?)OR (f>=? AND f<=?) OR (g>=? AND g<=?) OR (h>=? AND h<=?)', rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax, rmin, rmax]}).on('success',function(rec){
-      rec.forEach(function(r){
-        id.push(r.id);
-      })
-      var ids="("+id.toString()+")";
-      if(req.body.rangoDias){
-        DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-          generarReciboRevision(movs, res, req.body.empleado_id);
-          guardarMovs(movs, res, req.body.empleado_id);
-        })
-      }else{
-        DB.MovimientoCaja.findAll({where: 'chequeado=0 AND recibo_id IN'+ids, include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-          generarReciboRevision(movs, res, req.body.empleado_id);
-          guardarMovs(movs, res, req.body.empleado_id);
-        })
-      }
-    })
+    DB.CierresCaja.findAll({ order: 'id DESC LIMIT 1'}).on('success', function(cc){
+      cc.forEach(function(ccc){
+        DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(recc){
+          recc.forEach(function(reccc){
+            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, rmax]}).on('success',function(rec){
+              rec.forEach(function(r){
+                id.push(r.id);
+              })
+              var ids="("+id.toString()+")";
+              if(req.body.rangoDias){
+                DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+                  guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+                  generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
+                })
+              }else{
+                DB.MovimientoCaja.findAll({where: 'chequeado=0 AND recibo_id IN'+ids, include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+                  guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+                  generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
+                })
+              }
+            })
+          })//recc.forEach
+        })//recc
+      })//cc.forEach
+    })//cc
   }else{
-    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (created_at>=? AND created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-      generarReciboRevision(movs, res, req.body.empleado_id);
-      guardarMovs(movs, res, req.body.empleado_id);
-    })  
+    DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
+      guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+      generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
+    })
   }
+
 };
 
 
-guardarMovs = function(db, res, empleado){
+guardarMovs = function(db, res, empleado,ccc_id){
   var montoCaja= 0;
   var montoBanco= 0;
   var montoCtaCte=0;
   db.forEach(function(m){
-    m.updateAttributes({chequeado:1,recibido:moment().format('YYYY-MM-DD hh:mm:ss')});
+    m.updateAttributes({chequeado:1,recibido:moment().format('YYYY-MM-DD hh:mm:ss'),cierreCaja_id: ccc_id});
     switch (m.caja_id) {
       case 2:
         if(m.ingreso==1){
           montoCaja=Number(montoCaja)+Number(m.monto);
         }else{
           montoCaja=Number(montoCaja)-Number(m.monto);
-        }         
+        }
         break;
       case 3:
         if(m.ingreso==1){
           montoBanco=Number(montoBanco)+Number(m.monto);
         }else{
           montoBanco=Number(montoBanco)-Number(m.monto);
-        }                   
+        }
         break;
       case 4:
         if(m.ingreso==1){
           montoCtaCte=Number(montoCtaCte)+Number(m.monto);
         }else{
           montoCtaCte=Number(montoCtaCte)-Number(m.monto);
-        }         
+        }
         break;
     }
   });

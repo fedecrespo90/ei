@@ -1,8 +1,8 @@
-var DB, Everyone 
+var DB, Everyone
   , moment= require('moment');
 
 var CargaFijo = function(db, everyone) {
-  DB = db;   
+  DB = db;
   Everyone = everyone;
   return CargaFijo;
 };
@@ -25,9 +25,9 @@ CargaFijo.post = function(req, res, next) {
           }
   }).on('success', function(e) {
     if(!e){
-      DB.Impuesto.create(req.body  
+      DB.Impuesto.create(req.body
       ).on('success', function(a){res.send(true)});
-    }  
+    }
   })
 };
 
@@ -44,7 +44,7 @@ CargaFijo.put = function(req, res, next) {
 };
 
 CargaFijo.delete = function(req, res, next) {
-  DB.Impuesto.destroy({ id: req.params.id 
+  DB.Impuesto.destroy({ id: req.params.id
   }).on('success',function(){res.send(true)});
 };
 

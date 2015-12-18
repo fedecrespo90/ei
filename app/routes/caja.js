@@ -1,8 +1,8 @@
-var DB, Everyone  
+var DB, Everyone
   , moment = require('moment');
-   
+
 var Caja = function(db, everyone) {
-  DB = db;   
+  DB = db;
   Everyone = everyone;
   return Caja;
 };
@@ -22,14 +22,14 @@ Caja.getAll = function(req, res, next) {
             if(c.caja_id==2)
               caja+=c.monto;
             if(c.caja_id==3)
-              banco+=c.monto; 
+              banco+=c.monto;
             if(c.caja_id==4)
               ctaCliente+=c.monto;
           }else{
             if(c.caja_id==2)
               caja-=c.monto;
             if(c.caja_id==3)
-              banco-=c.monto; 
+              banco-=c.monto;
             if(c.caja_id==4)
               ctaCliente-=c.monto;
           }
@@ -38,14 +38,14 @@ Caja.getAll = function(req, res, next) {
             if(c.caja_id==2)
               cajaP+=c.monto;
             if(c.caja_id==3)
-              bancoP+=c.monto; 
+              bancoP+=c.monto;
             if(c.caja_id==4)
               ctaClienteP+=c.monto;
           }else{
             if(c.caja_id==2)
               cajaP-=c.monto;
             if(c.caja_id==3)
-              bancoP-=c.monto; 
+              bancoP-=c.monto;
             if(c.caja_id==4)
               ctaClienteP-=c.monto;
           }
@@ -82,7 +82,7 @@ Caja.get = function(req, res, next) {
       if(m.recibo.h != 0)
         recibo = "H "+m.recibo.h;
       if(m.monto != 0){
-        msg.push({  
+        msg.push({
           id: m.id,
           ie: m.ingreso==1?"Ingreso":"Egreso",
           creado: moment(m.created_at).format("YYYY-MM-DD"),
@@ -98,7 +98,7 @@ Caja.get = function(req, res, next) {
         })
       }
     })
-    res.send(msg) 
+    res.send(msg)
   })
 };
 

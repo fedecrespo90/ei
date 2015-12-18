@@ -1,0 +1,77 @@
+doctype html
+html
+  head
+    title Estudio&nbsp;Integral
+
+    meta(charset='UTF-8')
+
+    link(rel='stylesheet', href='/stylesheets/lib.min.css')
+    link(rel='stylesheet', href='/stylesheets/d3.css')
+    link(rel='stylesheet', href='/stylesheets/style.min.css')
+    link(rel='stylesheet', href='/stylesheets/print.css', media='print')
+
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/lib.min.js')
+    script(src='/javascripts/jquery.iframe-transport.js')
+    script(src='/javascripts/jquery.fileupload.js')
+    script(src='/javascripts/jquery.fileupload.locale.js')
+    script(src='/javascripts/d3/d3.v2.min.js')
+    script(src='/javascripts/d3/nv.d3.min.js')
+    script(src='/javascripts/d3/tooltip.js')
+    script(src='/javascripts/d3/utils.js')
+    script(src='/javascripts/d3/models/axis.js')
+    script(src='/javascripts/d3/models/legend.js')
+    script(src='/javascripts/d3/models/line.js')
+    script(src='/javascripts/d3/models/scatter.js')
+    script(src='/javascripts/d3/models/lineWithFocusChart.js')
+    script(src='/javascripts/main.min.js')
+  body
+
+    div#head
+      div#logo
+        h3 Estudio&nbsp;Integral
+
+      != body
+
+        div#menu
+          div#modules
+            a(href='/#/cliente') Clientes 
+            a(href='/#/ot') OT 
+            a(href='/#/ie') I/E 
+            a(href='/#/carga') Carga 
+            a(href='/#/cronograma') Cronograma 
+            a(href='/#/pagarImp') Gest.Pagos 
+            a(href='/#/gestCrono') Gest.Vtos 
+            a(id='scheduler' target='_blank') Calendario
+            
+        div#options
+          div#profile
+            a(href='http://linuxserver.eecc') Manual           
+            span.separator |          
+            h3.inline Conectado como
+            a.inline(href='/#/opciones/perfil') #{session.usuario}
+            div#session_user_id.hidden #{session.usuario_id}
+            div#session_username.hidden #{session.usuario}
+            div#session_role_id.hidden #{session.rol_id}
+            div#session_area_id.hidden #{session.area_id}
+            div#session_empleado_id.hidden #{session.empleado_id}            
+          div#submenu
+            a#ini_button(href='/#/inicio/novedades') Inicio
+            span.separator |
+            a(href='/#/crud') Panel de Control
+            span.separator |
+            a#logout_button Salir
+
+      div#tabs
+    
+    div#left
+      div.inner
+
+    div#right
+      div.inner
+
+    div#foot
+      div#date
+        #{date}
+      img#expandup(src='/images/expandup.gif')
+      img#expandright(src='/images/expandright.gif')

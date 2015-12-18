@@ -8,7 +8,7 @@ var Tarea = function(db, everyone) {
 };
 
 Tarea.get = function(req, res, next) {
-  DB.Tarea.findAll().on('success', function(a) {
+  DB.Tarea.findAll({ order: 'nombre ASC' }).on('success', function(a){
     res.send(a)
   });
 };

@@ -1023,7 +1023,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/widgets/Caja.js", function(e, t, n, r, i, s) {
         C.Widget.Caja = {
             initialize: function(e) {
-                $("#head #tabs").empty().append('<a href="/#/caja/revision">Revision</a><a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a><a href="/#/caja/ajusteCaja">Ajustes</a>'),
+              //Saqué desp de Movimientoes: <a href="/#/caja/caja">Caja</a><a href="/#/caja/cBanco">Banco</a><a href="/#/caja/ctaCliente">Cuentas Clientes</a>
+                $("#head #tabs").empty().append('<a href="/#/caja/revision">Movimientos</a><a href="/#/caja/ajusteCaja">Ajustes</a>'),
                 $("#left .inner").empty().append('<div id="'+ (e || "caja" ) +'_left"></div>'),
                 $("#right .inner").empty().append('<div id="'+ (e || "caja") +'_right"></div>');
             }
@@ -2038,6 +2039,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   impTotal: null,
                   impId: null,
                   cliId: null,
+                  cronnId: null,
+                  mensaje: false
                 };
             },
             initialize: function() {
@@ -3123,7 +3126,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null],
                 aaSorting: [ [ 1, "asc" ] ],
-                iDisplayLength: 500
+                iDisplayLength: 500,
             },
             initialize: function() {
                 var e = this;
@@ -3233,6 +3236,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             selectRow: function(e) {
                 this.selected_row = $(e.currentTarget), $("#cliente_right .cliente_add_tarea");
             },
+            //21 - Cuentas corrientes
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail cliente_id_' + i + '" style="display:none;">';
                 return this.getCuentaMovimientos(i, function(e) {
@@ -4168,6 +4172,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
 	    j = (j = i.length) > 3 ? j % 3 : 0;
 	return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
 };
+//I/E->PAGOS / 	Pagos del cliente
     e.define("/views/ie/ClientePagoTable.js", function(e, t, n, r, i, s) {
         C.View.ClientePagoTable = Backbone.View.extend({
             name: "clientePago",
@@ -4227,6 +4232,39 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     }
 
                   });
+                  //Mis vars
+                  miVar = function (action)
+                  {
+                    var devuelve;
+
+                    switch (action) {
+                      case 'id':
+                        devuelve = e.id;
+                        break;
+                      case 'total':
+                        devuelve = (e.monto1 + e.monto2 + e.monto3 + e.monto4 + e.monto0).toFixed(2);
+                        break;
+                      case 'nombre':
+                        devuelve = e.impuesto.nombre;
+                        break;
+                      case 'idImp':
+                        devuelve = e.impuesto.id;
+                        break;
+                      case 'mes':
+                        devuelve = e.cronograma.mes;
+                        break;
+                      case 'anio':
+                        devuelve = e.cronograma.año;
+                        break;
+                      case 'cronoId':
+                        devuelve = e.cronograma_id;
+                        break;
+                    }
+
+                    return devuelve;
+                  }
+                  //Fin Mis vars
+                  //ACA TRAE LA DATA Y LA MUESTRA
                   p = $('<p>');
                   $(p).append('<span class="hidden" data-id="' + e.id + '"></span>');
                   $(p).append(checkbox);
@@ -4288,8 +4326,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             chequeBanco: $("#pago_window input:text[name=banco]").val(),
                             chequeNumero: $("#pago_window input:text[name=ncheque]").val(),
                             chequeTitular: $("#pago_window input:text[name=titular]").val(),
-                            chequeFechaEmi: $("#pago_window input:text[name=fechaemision]").val(),
-                            chequeFechaCobro: $("#pago_window input:text[name=fechacobro]").val(),
+                            chequeFechaEmi: $("#pago_window input:[name=fechaemision]").val(),
+                            chequeFechaCobro: $("#pago_window input:[name=fechacobro]").val(),
                             cliente_id: cliente,
                             efectivoMonto: efectivo,
                             impuestos:diccion,
@@ -4312,6 +4350,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 e.impuestos.forEach(function(i){
                                   imp+=i+'<br />'
                                 })
+
                                 var reciboe =
                                   '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
                                       '<div style="width: 600px; padding: 6px">'+
@@ -4384,8 +4423,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                               'Firma del operador'+
                                         '</div>'+
                                       '</div>'+
-                                  '</div>'
-  ;
+                                  '</div>';
+
                                 $('body').append(reciboe)
                                 $.ajax({
                                     type:  "POST",
@@ -4410,7 +4449,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                             })
                           }
                         }else{
-                          F.msgConfirm("Saldo Insuficiente, Cancele algunos Impuestos por favor. ¿Pagar de todas Formas??", function(){
+                          F.msgConfirm("Saldo Insuficiente, Cancele algunos Impuestos por favor. ¿Pagar de todas Formas?", function(){
                             $.ajax({
                               type: "PUT",
                               url: "/pago",
@@ -4422,7 +4461,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                 })
                                 var reciboee =
                                   '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
-                                    '<div style="width: 600px; padding: 6px">'+
+                                  //600PX
+                                    '<div style="width: 650px; padding: 6px">'+
                                        '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
                                             '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
                                         '</div>'+
@@ -4452,13 +4492,13 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                           '<span style="font-weight:bold">Operador: </span>'+ e.operador+
                                           '</div>'+
                                           '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
-                                              '<br  /><br  /><br  />'+
+                                              '<br  /><br  />'+
                                               '-------------------------------------------<br />'+
                                               'Firma del operador'+
                                               '<br  />'+
                                           '</div>'+
-                                  '<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
-                                    '<div style="width: 600px; padding: 6px">'+
+                                  '<br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
+                                    '<div style="width: 650px; padding: 6px">'+
                                        '<div style="border:solid 3px; height:85px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
                                             '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
                                         '</div>'+
@@ -4497,11 +4537,89 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                   '</div>'
                                   ;
 
+                                  var reciboeePDF =
+                                    '<div id="imprimirRecibo" style="display:none; text-align: left;">' +
+                                    //600PX
+                                      '<div style="width: 700px; padding: 6px">'+
+                                         '<div style="border:solid 3px; height:95px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
+                                              '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
+                                          '</div>'+
+                                          '<div style="border:solid thin; height:95px; border-radius: 7px; width:36%; float:right; padding: 6px">'+
+                                              '<span style="font-weight:bold"><br />Recibo Nº E-'+e.recibo.e+'</span><br />'+
+                                              '<span style="font-weight:bold">Movimiento:</span> Pago de obligaciones por cuenta y orden de terceros <br  />'+
+                                              '<span style="font-weight:bold">Fecha:</span> '+e.reciboFecha+
+                                            '</div> <br /><br /><br  /><br  /><br  /><br  />'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:100%">'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold"> Razón social del cliente:</span> '+e.receptor+'<br  />'+
+                                                    '<span style="font-weight:bold"> Domicilio:  </span>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold">Descripción del movimiento: </span>Recepción para pagos por parte del Cliente'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 60px;">'+
+                                                    e.recibo.concepto+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
+                                                    '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
+                                                    imp+
+                                                    '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                            '<span style="font-weight:bold">Operador: </span>'+ e.operador+
+                                            '</div>'+
+                                            '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
+                                                '<br  /><br  /><br  />'+
+                                                '-------------------------------------------<br />'+
+                                                'Firma del operador'+
+                                                '<br  />'+
+                                            '</div>'+
+                                    '<br /><br /><br /><br /><br /><br /><br /><br />-----------✂---------------------✂------------✂---------------------✂------------✂---------------------✂-------<br />'+
+                                      '<div style="width: 700px; padding: 6px">'+
+                                         '<div style="border:solid 3px; height:95px; border-radius: 7px; width:56%; float:left; padding: 6px">'+
+                                              '<span style="font-size:20px; bold"><span style="font-weight:bold;"><center> ESTUDIO INTEGRAL <br />PRESSACCO & ASOC.</center></span></span>'+'<span style="font-size:4px;"><br /></span><span style="font-size:10px;"><center>Diag 75 Nº 689 e/20 Y 21 - La Plata - (0221) 452-2523<br /></center></span>'+
+                                          '</div>'+
+                                          '<div style="border:solid thin; height:95px; border-radius: 7px; width:36%; float:right; padding: 6px">'+
+                                              '<span style="font-weight:bold"><br />Recibo Nº E-'+e.recibo.e+'</span><br />'+
+                                              '<span style="font-weight:bold">Movimiento:</span> Pago de obligaciones por cuenta y orden de terceros <br  />'+
+                                              '<span style="font-weight:bold">Fecha:</span> '+e.reciboFecha+
+                                            '</div> <br /><br /><br  /><br  /><br  /><br  />'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:100%">'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold"> Razón social del cliente:</span> '+e.receptor+'<br  />'+
+                                                    '<span style="font-weight:bold"> Domicilio:  </span>'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                                    '<span style="font-weight:bold">Descripción del movimiento: </span>Recepción para pagos por parte del Cliente'+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: 60px;">'+
+                                                    e.recibo.concepto+
+                                                '</div>'+
+                                                '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px; height: auto;">'+
+                                                    '<span style="font-size: 16px; font-weight:bold">IMPUTACIONES:</span> <br />'+
+                                                    imp+
+                                                    '<span style="float:right; font-weight:bold; text"> Total Ingresado:'+e.total+'<br />Saldo en Cuenta Corriente:'+e.saldo+'</span><br /><br />'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div style="border:solid thin; border-radius: 7px; width:98%; padding: 6px">'+
+                                            '<span style="font-weight:bold">Operador: </span>'+ e.operador+
+                                            '</div>'+
+                                            '<div style="text-align:center; border:solid thin; border-radius: 7px; width:40%; float:right; padding: 6px;">'+
+                                                '<br  /><br  /><br  />'+
+                                                '-------------------------------------------<br />'+
+                                                'Firma del operador'+
+                                                '<br  />'+
+                                            '</div>'+
+                                       '</div>'+
+                                    '</div>'
+                                    ;
+
                                 $('body').append(reciboee)
                                 $.ajax({
                                     type:  "POST",
                                     url: "/imprimir/E-"+e.recibo.e,
-                                    data: {recibo: reciboee}
+                                    data: {recibo: reciboeePDF}
                                 });
                                 $.blockUI({
                                   message: $('#imprimirRecibo'),
@@ -5005,6 +5123,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     });
                 });
             },
+            //21 HISTORIAL DE PAGOS
             generateRowDetails: function(e, t) {
                 var n = this, r = e.fnGetData(t), i = r[0], s = '<div class="row_detail historial_id_' + i + '" style="display:none;">';
                 return this.getHistorial(i, function(e) {
@@ -7567,21 +7686,46 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             getSelectedRow: function() {
                 return this.options.carga_table.selected_row;
             },
+            //CARGAR IGUAL MES ANTERIOR
             asignarAnterior: function() {
               var t = this;
+
+              //console.log();
+
               if(C.Session.roleID() < 3){
                 F.msgError("No tiene los permisos necesarios")
               }else{
-                F.msgConfirm("¿Esta seguro de realizar cargar todos los impuestos con los mismos montos que el mes anterior?", function(){
-                  console.log(Backbone.history.fragment);
-                   $.ajax({
-                      url: "/carga/repetirMesAnterior/"+Backbone.history.fragment.split("/")[Backbone.history.fragment.split("/").length-1],
-                      success: function() {
-                        F.msgOK("Todos los impuestos se cargaron Existosamente");
-                        setTimeout(function(){location.reload()},1e3)
-                      }
-                   })
-                });
+                /*if($(".carga_form").serializeObject().cronograma_id != '')
+                {*/
+                  // LA CONDICION
+                  /*if(($(".carga_form").serializeObject().cronograma_id)
+                  {*/
+                    F.msgConfirm("¿Seguro desea cargar igual al mes anterior?", function(){
+                       $.ajax({
+                          url: "/carga/repetirMesAnterior/"+Backbone.history.fragment.split("/")[Backbone.history.fragment.split("/").length-1],
+                          success: function(model,res,options) {
+                            if(model[0].mensaje)
+                            {
+                              F.msgOK("Todos los impuestos se cargaron Existosamente");
+                              setTimeout(function(){location.reload()},1e3)
+                            }
+                            else
+                            {
+                              F.msgError("El cronograma que quiere asignar NO existe!");
+                            }
+                          }
+                       })
+                    });
+                  /*}CLOSE OTHER IF
+                  else
+                  {
+                    F.msgError("El cronograma seleccionado no es el correspondiente.");
+                  }*/
+                /*}//CLOSE MY IF
+                else
+                {
+                  F.msgError("Seleccione el cronograma.");
+                }*/
               }
             }
         });
@@ -7591,7 +7735,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "carga",
             headers: [ "ID", "IdCatedral", "Nombre", "Comunicación", "Impuesto", "Observacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
             attrs: [ "id", "cliCatedral", "cliNombre", "cliComunicacion", "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
-            hidden_columns: [ "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida"],
+            hidden_columns: [ "impNombre", "impObservacion", "impFijo", "impId", "cliId", "impMonto0", "impMonto1", "impMonto2", "impMonto3", "impTotal", "all", "liquida","mensaje"],//Agrego mensaje
             data: null,
             datatableOptions: {
                 aoColumns: [ null, null, null, null, null, null, null, null, null, null, null, null, null ],
@@ -7671,6 +7815,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 impuesto_id:{
                     type: "hidden"
                 },
+                mensaje: {
+                  type:"hidden"
+                },
             },
             isCRUD: !0,
             buttons: {
@@ -7686,6 +7833,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e= this;
                 F.getAllCronogramasFromModel("cronograma", function(t) {
                   e.relations.cronogramas = t, F.createForm(e);
+                  //Agrego:
+                  idCronos = e.relations.cronogramas;
+
                 });
             },
             events: {
@@ -8430,6 +8580,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           arreglo.push(e);
                           $('.pagoImp_form [name="arreglo"]')[0].value=null
                           arreglo.forEach(function(a){
+                            //Imprime
                             console.log(a.attributes)
                             total=parseFloat(a.attributes.impuestoMonto)+parseFloat(total)
                             $('.pagoImp_form [name="arreglo"]')[0].value+="id:"+a.attributes.id
@@ -8684,12 +8835,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
     e.define("/views/pagarImp/RecepImpTable.js", function(e, t, n, r, i, s) {
         C.View.RecepImpTable = Backbone.View.extend({
             name: "recepImp",
-            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id" ],
+            headers: ["ID", "Número", "Dia Pago", "Empleado", "Banco", "Total", "banco_id", "empleado_id"],
             attrs: ["id", "numero", "diaDePago", "empleadoNombre", "bancoNombre", "total", "banco_id", "empleado_id"],
             hidden_columns: ["empleado_nombre", "banco_id", "empleado_id"],
             data: null,
             datatableOptions: {
-                aoColumns: [ null, null, null, null, null, null, null, null,  ],
+                aoColumns: [ null, null, null, null, null, null, null, null],
                 aaSorting: [ [ 1, "desc" ] ],
                 iDisplayLength: 500
             },
@@ -10016,6 +10167,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function(e) {
               var e = this;
+              //IMPRIMO
+              //console.log(moment(n[s]).format("YYYY"));//"DD/MM/YYYY"
+              //console.log(Number($(".asignacion_form").serializeObject().mes));
               F.getAllFromModel("impuesto", function(t) {
                 var objeto={};
                 var base={};
@@ -10045,28 +10199,49 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
               location.reload();
             },
             addAsignacion: function() {
+              //////
+              /*F.msgConfirm("¿Está seguro?",
+              function(){
+              })*/
+              //////
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
-                  var objetos= $(".asignacion_form").serializeObject();
-                    $.ajax({
-                          type: "POST",
-                          url: "/asignacion",
-                          data: $(".asignacion_form").serialize(),
-                          success: function() {
-                              F.msgOK("Asignacion creado exitosamente")
-                                  this.asignacions = new C.Collection.Asignacions(null, {
-                                view: this
-                              }), this.asignacions.fetch({
-                               success: function(t, n) {
-                                 $("#asignacion_left").empty()
-                                 e.asignacion_table = new C.View.AsignacionTable({
-                                   el: $("#asignacion_left"),
-                                   collection: t
-                                 })
-                               }
-                             });
-                          }
-                   })
+                  //AGREGO MI CONDICION
+                    if(
+                    //Mes
+                    (Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM")) ||
+                    Number($(".asignacion_form").serializeObject().mes) == Number(moment(n[s]).format("MM"))+1) &&
+                    //Año
+                       (Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")))
+                       || (Number($(".asignacion_form").serializeObject().mes) == 1 &&
+                       Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")) + 1)
+                     )
+                    {
+                    var objetos= $(".asignacion_form").serializeObject();
+                      $.ajax({
+                            type: "POST",
+                            url: "/asignacion",
+                            data: $(".asignacion_form").serialize(),
+                            success: function() {
+                                F.msgOK("Asignacion creado exitosamente")
+                                    this.asignacions = new C.Collection.Asignacions(null, {
+                                  view: this
+                                }), this.asignacions.fetch({
+                                 success: function(t, n) {
+                                   $("#asignacion_left").empty()
+                                   e.asignacion_table = new C.View.AsignacionTable({
+                                     el: $("#asignacion_left"),
+                                     collection: t
+                                   })
+                                 }
+                               });
+                            }
+                     })
+                  }
+                  else
+                  {
+                    F.msgError("No puede cargar. Revise el mes y año.");
+                  }
                }else{
                   F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
                }
@@ -10074,6 +10249,15 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             editAsignacion: function(){
                 var e = this;
                 if(($(".asignacion_form").serializeObject().mes != '')&&($(".asignacion_form").serializeObject().año != '')){
+                  //MI CONDICION
+                  if(
+                     (Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY"))
+                   || Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY"))-1)
+                     || (Number($(".asignacion_form").serializeObject().mes) == 1 &&
+                     Number($(".asignacion_form").serializeObject().año) == Number(moment(n[s]).format("YYYY")) + 1
+                     && Number($(".asignacion_form").serializeObject().mes) == 12)
+                   )
+                   {
                   var objetos= $(".asignacion_form").serializeObject();
                     $.ajax({
                           type: "PUT",
@@ -10094,6 +10278,11 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                              });
                           }
                     })
+                  }
+                  else
+                  {
+                    F.msgError("No puede cargar. Revise el mes y año.");
+                  }
                 }else{
                    F.msgError("Los campos 'Año' y 'Mes' son OBLIGATORIOS");
                 }
@@ -10794,12 +10983,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             name: "otTareaAll",
             headers: [ "ID", "Número", "Buscar", "fechaCompleta", "fechaVencimiento", "Título", "Descripción", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido", "Empleado" , "Area" ],
             attrs: [ "id", "ot", "ot_numero", "fechaCompleta", "fechaVencimiento", "nombre", "descripcion", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido", "empleado", "area" ],
-            hidden_columns: [  "ot_numero", "fechaCompleta", "fechaVencimiento", "observacion", "conclusion", "tiempoEstimado", "tiempoInsumido" ],
+            hidden_columns: [  "ot_numero",/* "fechaCompleta", */"fechaVencimiento", "observacion", "conclusion", /*"tiempoEstimado", "tiempoInsumido"*/ ],
             data: null,
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [[ 1, "desc" ]],
-                iDisplayLength: 10,
+                iDisplayLength: 13, //antes: 10
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(e) {
@@ -11019,8 +11208,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             performConcludeOt: function() {
                 if($("#conclude_ot_form").serializeObject().observation != ''){
-                  //ACA LIMITA A 2000 CARACTERES
-                  if($("#conclude_ot_form").serializeObject().observation.length <= 2000){
+                  //ACA LIMITA A 6000 CARACTERES
+                  if($("#conclude_ot_form").serializeObject().observation.length <= 6000){
                     $.ajax({
                       type: "POST",
                       url: "/ot/conclude/" + this.options.ot_number,
@@ -11036,7 +11225,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                       }
                     });
                   }else{
-                    F.msgError('Demasiados caracteres (más de 2000) si cree que es necesario ampliar comuníquese con el administrador')
+                    F.msgError('Demasiados caracteres (más de 6000) si cree que es necesario ampliar comuníquese con el administrador')
                   }
                 }else{
                     F.msgError('El campo observación es obligatorio')
@@ -11056,6 +11245,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [ [ 1, "desc" ] ],
+		"iDisplayLength": 12
             },
             initialize: function() {
               this.data = this.options.collection, F.createDataTable(this, function(e) {
@@ -11210,8 +11400,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             editTableRow: function(e) {},
             addOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '')
-              && ($(".ot_form").serializeObject().fechaVencimiento != '')
+              if($(".ot_form").serializeObject().cliente_id != ''
+              && $(".ot_form").serializeObject().fechaVencimiento != ''
               //&& ($(".ot_form").serializeObject().plan_id != '')
               && ($(".ot_form").serializeObject().prioridad != '')
               && ($(".ot_form").serializeObject().comunicacion != '')
@@ -11220,8 +11410,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "POST",
                   url: "/ot/",
                   data: $(".ot_form").serialize(),
-                  success: function() {
+                  success: function(model,res,options) {
                     F.msgOK("O/T creada exitosamente");
+                    console.log(model)
                     setTimeout(function(){location.reload()},1e3)
                   }
                })
@@ -11231,8 +11422,9 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             editOt: function() {
               var e = this;
-              if(($(".ot_form").serializeObject().cliente_id != '')
-              && ($(".ot_form").serializeObject().fechaVencimiento != '')
+              if($(".ot_form").serializeObject().cliente_id != ''
+              && $(".ot_form").serializeObject().fechaVencimiento != ''
+              //&& ($(".ot_form").serializeObject().plan_id != '') //esto estaba comentado
               && ($(".ot_form").serializeObject().prioridad != '')
               && ($(".ot_form").serializeObject().comunicacion != '')
               ){
@@ -11240,9 +11432,30 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   type: "PUT",
                   url: "/ot/"+e.getSelectionID(),
                   data: $(".ot_form").serialize(),
-                  success: function() {
-                    F.msgOK("O/T editada exitosamente");
-                    setTimeout(function(){location.reload()},1e3)
+                  success: function(mensaje,res,options) {
+                    //AGREGO CONDICION PERMISOS PARA ADMINISTRAR OT
+                    if(C.Session.getUser().rol_id >= 3)
+                    {
+                      //Agrego condicion para que avise si tiene tareas la OT
+                      console.log(mensaje[0].mensaje);
+                      if(mensaje[0].mensaje == false)
+                      {
+                        F.msgOK("O/T editada exitosamente");
+                        setTimeout(function(){location.reload()},1e3);
+                      }
+                      else
+                      {
+                        F.msgConfirm("La OT que esta por editar tiene tareas asignadas. ¿Desea continuar?", function(){
+                          F.msgOK("O/T editada exitosamente");
+                          setTimeout(function(){location.reload()},1e3);
+                         });
+                      }
+                    }
+                    else
+                    {
+                      F.msgError("No tiene los permisos necesarios")
+                    }
+
                   }
                 })
              }else{
@@ -11416,7 +11629,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             empleados: null,
             areas: null,
             initialize: function() {
-              var e = this
+              var e = this;
+              console.log(e.options);
               $(document).bind("empleados_loaded", function(t) {
                 $(document).bind("areas_loaded", function() {
                   e.render();
@@ -11468,6 +11682,12 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                           $("#add_tarea_ot_form1").append('Vencimiento:<br /><input type="date" name="vto">'),
                           $("#add_tarea_ot_form1").append(this.buildEmpleadosList("empleado_id")[0], this.buildAreasList("area_id")[0], this.buildHeader()),
                           $(".button").button();
+              //Imprimo
+              //console.log($("#ot_right"));
+              //console.log(String($("#add_tarea_ot_form1")[0].vto.value));
+              //console.log($("#add_tarea_ot_form1").serializeObject().vto[0]);
+              //console.log("Ahora: "+moment(n[s]).format("YYYY-MM-DD"));
+
             },
             buildEmpleadosList: function(e) {
                 var t = $("<select>", {
@@ -11524,12 +11744,44 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 }, 1e3);
             },
             performAddTarea: function() {
-                if(($("#add_tarea_ot_form1").serializeObject().nombre!='')
+              //Agrego-imprimo
+              var fech =  F.getDataTableSelection($(".ot_table"))[0].innerText.split("	")[4];//VENCIMIENTO
+              var aanio = fech[0]+fech[1]+fech[2]+fech[3];
+              var mmes = fech[5]+fech[6];
+              var ddia = fech[8]+fech[9];
+              //Imprimo Fecha de vencimiento
+              /*console.log("Fecha ingresada: "+$("#add_tarea_ot_form1").serializeObject().vto);
+              console.log("Vencimiento: "+fech);*/
+              //FIn agrego
+              var ann = String( $("#add_tarea_ot_form1").serializeObject().vto[0]+$("#add_tarea_ot_form1").serializeObject().vto[1]+$("#add_tarea_ot_form1").serializeObject().vto[2]+$("#add_tarea_ot_form1").serializeObject().vto[3]);
+              var mess = String($("#add_tarea_ot_form1").serializeObject().vto[5]+$("#add_tarea_ot_form1").serializeObject().vto[6]);
+              var diaa = String($("#add_tarea_ot_form1").serializeObject().vto[8]+$("#add_tarea_ot_form1").serializeObject().vto[9]);
+              //CONDICION AGREGAR TAREA OT
+                if(
+                ($("#add_tarea_ot_form1").serializeObject().nombre!='')
                 && ($("#add_tarea_ot_form1").serializeObject().empleado_id!='0')
-                && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')){
-                  this.options.addNewTarea({
-                      data: $("#add_tarea_ot_form1").serializeObject(),
-                  }, this.cleanModals);
+                && ($("#add_tarea_ot_form1").serializeObject().tiempoEstimado[2]==':')
+                ){
+                  //CONDICION Fechas
+                  var venci = new Date(aanio,String(Number(mmes)-1),ddia);
+                  var ingresada = new Date(ann,String(Number(mess)-1),diaa);
+
+                  //console.log(ingresada<=venci);
+                  //console.log("INGRESADA: "+ingresada);
+                  //console.log("VENCI: "+venci);
+
+                  //MI CONDICION
+                  if(
+                    ingresada <= venci
+                  ){
+                    this.options.addNewTarea({
+                        data: $("#add_tarea_ot_form1").serializeObject(),
+                    }, this.cleanModals);
+                  }
+                  else
+                  {
+                    F.msgError('La fecha que ingresó es posterior a la fecha de vencimiento.');
+                  }
                 }else{
                  F.msgError('El campo "Nombre", el empleado responsable y el tiempo estimado (HH:MM)son OBLIGATORIOS')
                 }
@@ -11705,7 +11957,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     value: "Ver Más",
                     style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
-                }))
+                }));
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
@@ -11765,12 +12017,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             initialize: function() {
                 //location.reload();
                 this.render();
-                $("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val(""); //LIMPIO LOS FORMULARIOS
+                //ACA LIMPIABA FORM
+                //$("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val(""); //LIMPIO LOS FORMULARIOS
+                //$("#reprogramar_ot_form").serializeObject().empty();
+
 
             },
             render: function() {
                 return $(this.el).append(this.template()), this;
-
             },
             template: function() {
                 var e = $("<div>", {
@@ -11806,7 +12060,6 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             getInfoCard: function() {
                 return this.options.ot_infocard;
-
             },
             getSelectedRow: function() {
                 return this.options.ot_table.selected_row;
@@ -11951,7 +12204,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             datatableOptions: {
                 aoColumns: null,
                 aaSorting: [],
-                iDisplayLength: 500
+                "iDisplayLength": 12
             },
             initialize: function() {
                 function e(e, n) {
@@ -11974,7 +12227,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 F.createDataTable(this, function(e) {
                     F.assignValuesToInfoCard($(".ot_infocard"), e);
                 }, e);
-                (t.options.open_ot_number_on_start &&  $('.dataTables_filter input').val(t.options.open_ot_number_on_start).keyup())
+                (t.options.open_ot_number_on_start &&  $('.gdataTables_filter input').val(t.options.open_ot_number_on_start).keyup())
             },
             events: {
                 "click .ot_table tr": "selectRow"
@@ -12269,6 +12522,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 consulta: "Consulta",
             },
             initialize: function() {
+
                 var e = this;
                 F.createInfoCard(e, $("#ot_right"));
                 $(".ot_infocard").append($("<input>", {
@@ -12277,15 +12531,20 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     value: "Ver Más",
                     style: "background-color: #F8E4FF;",
                     title: "Muestra en detalle la Orden, junto con todas sus Tareas."
-                }))
+                }));
+
+                //$("#reprogramar_ot_form").serializeObject().closest('form').find("#reprogramar_ot_form").val("");
+                //$("#reprogramar_ot_form").serializeObject().empty();// LIMPIO
             },
             events: {
               "click .ot_ver_mas": "ver_mas",
             },
+            //18
+            //19
             ver_mas: function() {
               var e = this, t = $(".ot_table"), n = F.getDataTableSelection(t)[0], i = $(".ot_table").dataTable().fnGetData(n)[1];
               if(!isNaN(i)){
-                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" />'+ "</div>"),
+                $("body").append('<div id="ver_mas_window" style="display:none;"><h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Tareas de la O/T Nº'+i+'</h1>' + '<form id="ver_mas_form">' + "<br /><br />" + "</form>" + '<input type="button" class="BUTTON_cancel lefty button" onclick=location.reload() value="Salir" /><input type="button" class="BUTTON_cancel righty button" onclick="window.print();" value="imprimir"/>'+ "</div>"),
                 $.blockUI({
                   message: $("#ver_mas_window"),
                   css: {
@@ -12319,7 +12578,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                  $("#ver_mas_form").append(
                                   '<p><h3>Titulo: '+nombre+'</h3></p>'+
                                   '<p><span style= "font-weight: bold">Descripcion: </span>'+ descripcion +'</p>'+
-                                  '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p><hr style="color: #0056b2;" />');
+                                  '<p><span style= "font-weight: bold">Observacion: </span>'+ observacion +'</p>'
+                                  // AGREGO
+                                  +'<p><span style= "font-weight: bold">Empleado: </span>'+ ot.empleado +'</p>'+
+                                  '<p><span style= "font-weight: bold">Tiempo estimado: </span>'+ ot.tiempoEstimado +'</p>'+
+                                  '<p><span style= "font-weight: bold">Tiempo insumido: </span>'+ ot.tiempoInsumido +'</p>'+
+                                  '<p><span style= "font-weight: bold">Cliente: </span>'+ ot.clienteNombre +'</p>'+
+                                  // FIN AGREGO
+                                  '<hr style="color: #0056b2;" />');
                               })
                               $("#ver_mas_form").append('<p><span  style= "font-weight: bold" >Conclusión OT:</span>'+ot.conclusion+'</p>')
                             }
@@ -12348,7 +12614,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             getResources: function() {
                 var e = this;
-                console.log(e.options)
+                console.log(e.options);
                 $.ajax({
                     url: "/otTarea/resources/" + e.options.tarea.id,
                     success: function(t) {
@@ -12574,30 +12840,76 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
             initialize: function() {
                 var e = this;
-                var n =
-                F.getAllFromModel("area", function(t) {
-                 e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
-                    e.relations.empleados = t, F.createForm(e),
-                    $(".tarea_form input:hidden.selection_id").remove();
-                    var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
-                    $(r).append($("<input>", {
-                        type: "hidden",
-                        value: n.id,
-                        "class": "selection_ottarea_id"
-                    })), $(i).each(function() {
-                        s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
-                    }),
-                    $(".tarea_form input:hidden.selection_id").remove();
-                    var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
-                    $(r).append($("<input>", {
-                        type: "hidden",
-                        value: n.id,
-                        "class": "selection_ottarea_id"
-                    })), $(i).each(function() {
-                        s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
-                    });
+                //Imprimo si la tarea esta completa
+                //console.log(e.options.tarea);
+
+                //CONDICION PARA NO EDITAR TAREAS COMPLETAS
+                if(Number(e.options.tarea.completa) == 1)
+                {
+                  $("select").attr( "disabled", "disabled" );
+                  //DISABLED
+                  var n =
+                  F.getAllFromModel("area", function(t) {
+                   e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
+                      e.relations.empleados = t, F.createForm(e),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
+                          $("input[type=text]").attr( "disabled", "disabled" );
+                          $("textarea").attr( "disabled", "disabled" );
+                          $("select").attr( "disabled", "disabled" );
+                      }),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
+                          $("input[type=text]").attr( "disabled", "disabled" );
+                          $("textarea").attr( "disabled", "disabled" );
+                          $("select").attr( "disabled", "disabled" );
+                      });
+                      $("select").attr( "disabled", "disabled" );
+                   });
+                   $("select").attr( "disabled", "disabled" );
                  });
-                });
+                 $("select").attr( "disabled", "disabled" );
+
+                }
+                else
+                {
+                  var n =
+                  F.getAllFromModel("area", function(t) {
+                   e.relations.areas = t, F.getAllFromModel("empleado", function(t) {
+                      e.relations.empleados = t, F.createForm(e),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea , r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "area_id" && $(this).trigger("liszt:updated");
+                      }),
+                      $(".tarea_form input:hidden.selection_id").remove();
+                      var n = e.options.task || e.options.tarea, r = $(".tarea_form"), i = $(r).getFields(), s;
+                      $(r).append($("<input>", {
+                          type: "hidden",
+                          value: n.id,
+                          "class": "selection_ottarea_id"
+                      })), $(i).each(function() {
+                          s = $(this).attr("name"), $(this).val(n[s]), s === "fechaVencimiento" ? $(this).val(moment(n[s]).format("DD/MM/YYYY")) : s === "empleado_id" && $(this).trigger("liszt:updated");
+                      });
+                   });
+                 });
+                }
             },
             events: {
                 "click .tarea_form .BUTTON_save": "editTarea",
@@ -12665,6 +12977,8 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                         }
                     });
                 })
+                // LIMPIO FORM PARA QUE NO APAREZCA MUCHAS VECES EL CARTEL DE CONFIRMACION
+                $("#reprogramar_ot_form").serializeObject().empty();
                }
             },
             cancelEditTarea: function() {
@@ -12770,7 +13084,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                   e.relations.empleados = t, F.getAllFromModel("area", function(t) {
                     e.relations.areas = t, F.createForm(e);
                   })
-                })
+                });
             },
             events: {
                 "click .tarea_form .BUTTON_create": "addTarea",
@@ -12990,7 +13304,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                 var e= this;
                 F.getAllFromModel("tarea", function(t) {
                   e.relations.tareas = t, F.createForm(e);
-                })
+                });
             },
             events: {
                 "click .plan_form .BUTTON_create": "addPlan",
@@ -13242,13 +13556,14 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     $("#caja_anular_window .BUTTON_proceed_mov").on("click", function() {
                       if($("#anular_form").serializeObject().recibo_id != 0){
                         F.msgConfirm("¿Esta seguro de Anular el recibo?", function(){
-                           console.log($("#anular_form").serializeObject().recibo_id);//ï
+                           var recId = $("#anular_form").serializeObject().recibo_id;
+                           console.log(recId);//ï
                            $.ajax({
-                              url: "/revision/anularRecibo/"+$("#anular_form").serializeObject().recibo_id,
+                              url: "revision/anularRecibo/"+recId,
                               success: function() {
                                 F.msgOK("El recibo ha sido anulado");
-                                setTimeout(function(){location.reload()},1e3)
-                              }
+                                setTimeout(function(){location.reload()},1e3);
+                              },
                            })
                         });
                        }else{
@@ -13279,18 +13594,43 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                     type: "GET",
                     url: "/revision/detalleRango",
                     success: function(rango) {
+                        //Imprimo:
+                        console.log(rango);
                         $.ajax({
                             type: "GET",
                             url: "/empleado",
                             success: function(h) {
                                 var dias= "max="+rango.diaMax+" min="+rango.diaMin;
-                                var recibos=  "max="+rango.reciboMax+" min="+rango.reciboMin;
+
+                                //ORIGINAL
+                                //var recibos=  "max="+rango.reciboMax+" min="+rango.reciboMin;
+
+                                //Agreg
+                                var recibosE=  "max="+rango.reciboMaxE+" min="+rango.reciboMinE;
+                                //var recibosH=  "max="+rango.reciboMaxH+" min="+rango.reciboMinH;
+
                                 var tabla= '<table > '+
                                   '<tr align="center"><td>Criterio</td><td>Fecha Desde </td><td></td> <td>Fecha Hasta</td></tr>'+
                                   '<tr align="center"><td><input type="checkbox" name="rangoDias"/></td><td><input type="date" name="fd" value="'+rango.diaMin+'" '+dias+'></td><td> - </td> <td><input type="date" name="fh" value="'+rango.diaMax+'" '+dias+'></td></tr>'+
                                   '<tr align="center"><td></td><td></td><td>O bien</td><td></td>'+
+
+                                  //ORIGINAL
+                                  /*
                                   '<tr align="center"><td></td><td>Recibo Minimo</td><td></td><td>Recibo Maximo</td>'+
-                                  '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMin+'" '+recibos+'></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMax+'" '+recibos+'></td>'+ '</table>'
+                                  '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMin+'" '+recibos+'></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMax+'" '+recibos+'></td>'+
+                                  */
+
+
+                                  //ROW Recibo E
+                                  '<tr align="center"><td></td><td>Recibo Minimo E</td><td></td><td>Recibo Maximo E</td>'+
+                                  '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMinE+'" '+recibosE+' disabled="disabled"></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMaxE+'" '+recibosE+'></td>'+
+                                  //ROW Recibo H
+                                  /*
+                                  '<tr align="center"><td></td><td>Recibo Minimo H</td><td></td><td>Recibo Maximo H</td>'+
+                                  '<tr align="center"><td><input type="checkbox" name="rangoRecibos"/></td><td><input type="number" name="rmin" value="'+rango.reciboMinH+'" '+recibosH+ ' disabled="disabled"></td><td> - </td><td><input type="number" name="rmax" value="'+rango.reciboMaxH+'" '+recibosH+'></td>'+
+                                  */
+
+                                  '</table>'
                                 $("body").append(
                                   '<div id="caja_rango_window" style="display:none;">'+
                                   '<h1 class="bold"style="font-size:20px;color:#FF6666; text-align:center">Seleccione el rango a Guardar</h1>'+
@@ -13339,6 +13679,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
                                                 row+
                                                 finalRows+
                                                 '</table>'
+                                            //RECIBO H
                                             var reciboh=
                                                 '<div id="imprimirCaja" style="display:none; text-align: left;">' +
                                                     '<div style="width: 670px; height: padding: 6px">'+
@@ -13619,6 +13960,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             },
         });
     }),
+
 //Caja
     e.define("/views/caja/Caja.js", function(e, t, n, r, i, s) {
         C.View.Caja = Backbone.View.extend({
@@ -13829,6 +14171,7 @@ ____________________________________BARRA__&_&_&_&__SEPARADORA__________________
             }
         });
     }),
+
     e.define("/views/caja/AjusteCajaOptions.js", function(e, t, n, r, i, s) {
         C.View.AjusteCajaOptions = Backbone.View.extend({
             initialize: function() {

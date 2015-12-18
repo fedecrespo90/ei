@@ -59,14 +59,3 @@ Login.post = function(req, res, next) {
 };
 
 module.exports = Login;
-/*
-  USUARIO:estudiopressacco@gmail.com
-  PASS:EeCc&689Gmail
-
-  ssh roo@eecc.no-ip.info
-  pass &689$Linuxserver
-
-  windows\remmina 
-  eecc.no-ip.info
-  emc#362Admin
-*/
