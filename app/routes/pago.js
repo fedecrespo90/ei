@@ -336,9 +336,22 @@ cargarMovimientosCaja = function(recId, impuestos, cliente, nroRecibo, pagoMonto
               var montoMvto = Number(monto1)+Number(monto2)+Number(monto3);
               ctaCliente+=montoMvto;
               movimientoCta(cuentaAbogado, montoMvto, cuentaAbogado, "Por pago de Honorarios del cliente "+cliente.nombre+" Recibo Nº"+nroRecibo);
-            }else{
-              //Impuesto 0-CajaBanco 1-CajaBanco 2-CajaBanco 3-CajaBanco
-              banco+=totalImpuesto
+            }
+            else
+            {
+              if((vencimiento.impuesto.id == 487 || vencimiento.impuesto == 487) || (vencimiento.impuesto.id == 488 || vencimiento.impuesto == 488))
+             {
+               //Comision Bapro 0-Caja 1-Caja 2-CTACTEEstudio 3-Caja
+               var tmp = Number(monto0)+Number(monto1)+Number(monto3);
+               caja+= tmp;
+               ctaCliente+=monto2;
+               //ACA TMB TENGO QUE CREAR UN MOVIMIENTO A LA CUENTA DEL ESTUDIO, y ACTUALIZAR SU MONTO TOTAL
+               movimientoCta(cuentaEstudio, monto2, cuentaEstudio, "Por pago de Honorarios del cliente "+cliente.nombre+" Recibo Nº"+nroRecibo);
+             }
+             else{
+               //Impuesto 0-CajaBanco 1-CajaBanco 2-CajaBanco 3-CajaBanco
+               banco+=totalImpuesto
+             }
             }
           }
         }

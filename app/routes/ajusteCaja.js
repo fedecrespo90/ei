@@ -1,4 +1,4 @@
-var DB, Everyone, 
+var DB, Everyone,
     moment= require('moment');
 
 var AjusteCaja = function(db, everyone) {
@@ -18,7 +18,7 @@ AjusteCaja.get = function(req, res, next) {
         deleted_at: c.deleted_at,
         nombre: c.nombre,
         monto: c.monto.toMoney()
-      })   
+      })
     })
 		res.send(msg);
   });
@@ -58,7 +58,8 @@ AjusteCaja.put = function(req, res, next) {
           caja_id: req.body.caja_id,
           monto:req.body.monto,
           observacion: req.body.observacion,
-          chequeado: 0, ingreso: ingreso,
+          chequeado: 0,
+          ingreso: ingreso,
           concepto: req.body.concepto_id,
           subConcepto: req.body.subConcepto_id,
           rSubConcepto: req.body.rSubConcepto_id

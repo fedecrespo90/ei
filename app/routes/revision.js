@@ -213,7 +213,7 @@ Revision.aceptarRango = function(req, res, next){
   */
 };
 
-generarReciboRevision = function(db, res, empleado){
+generarReciboRevision = function(db, res, empleado,cccc_id){
   DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
     DB.Recibo.max('h').on('success',function(recibo){
       if(isNaN(recibo)){
@@ -356,44 +356,60 @@ generarReciboRevision = function(db, res, empleado){
           empleado: emp.nombre+" "+emp.apellido,
           fechaActual: moment().format("DD/MM/YYYY HH:mm")
         })
-        //Agrego
-        var m = db;
-        DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
-          var concepto = "Ajuste de caja al: "+moment().format('YYYY-MM-DD')+" por: "+emp.nombre+" "+emp.apellido;
-          DB.Recibo.create({
-            h: recibo,
-            concepto: concepto,
-            receptor: emp.nombre+" "+emp.apellido
-          })
-        })
-        DB.MovimientoCaja.findAll({order: 'id DESC LIMIT 1'}).on('success', function(movcaj){
-          movcaj.forEach(function(movcajj){
-            DB.Caja.findAll({where:{id: movcajj.caja_id}}).on('success',function(caj){
-              caj.forEach(function(cajj){
-                DB.Recibo.findAll({order: 'e DESC LIMIT 1'}).on('success', function(urec){
-                  DB.Recibo.findAll({order: 'e ASC LIMIT 1' }).on('success', function(prec){
-                    DB.Recibo.findAll({order: 'h DESC LIMIT 1'}).on('success',function(urech){
-                      DB.Recibo.findAll({order: 'h ASC LIMIT 1'}).on('success',function(prech){
-                        prech.forEach(function(primerRecH){
-                          urech.forEach(function(ultimoRecH){
-                            prec.forEach(function(primerRecE){
-                              urec.forEach(function(ultimoRecE){
-                                DB.CierresCaja.create({
-                                  fechaCierre:moment().format('YYYY-MM-DD hh:mm:ss'),
-                                  empleado_id: empleado,
-                                  montoCheques: movcajj.montoCheque,
-                                  montoEfectivo: movcajj.montoEfectivo,
-                                  montoCaja: movcajj.monto,
-                                  montoPagos:1111 ,////
-                                  montoCtaCliente: 1111,////
-                                  montoTotal: movcajj.monto,
-                                  primerReciboE: primerRecE.e,
-                                  ultimoReciboE: ultimoRecE.e,
-                                  primerReciboH: primerRecH.h,
-                                  ultimoReciboH: ultimoRecH.h,
-                                })
+        setTimeout(function(){cargarDB(db, empleado,cccc_id);},1000);
+      }
+    })
+  })
+};
+
+
+// CargarDB
+cargarDB = function(db,empleado,cc_id)
+{
+  var arr = [];
+  var m = db;
+  DB.Empleado.find({where: {id: empleado}}).on('success', function(emp){
+    var concepto = "Ajuste de caja al: "+moment().format('YYYY-MM-DD')+" por: "+emp.nombre+" "+emp.apellido;
+    DB.Recibo.create({
+      h: recibo,
+      concepto: concepto,
+      receptor: emp.nombre+" "+emp.apellido
+    })
+  })
+  DB.MovimientoCaja.findAll({order: 'id DESC LIMIT 1'}).on('success', function(movcaj){
+    movcaj.forEach(function(movcajj){
+      DB.Caja.findAll({order: 'id ASC'}).on('success',function(caj){
+          DB.Recibo.findAll({order: 'e DESC LIMIT 1'}).on('success', function(urec){
+            DB.Recibo.findAll({order: 'e ASC LIMIT 1' }).on('success', function(prec){
+              DB.Recibo.findAll({order: 'h DESC LIMIT 1'}).on('success',function(urech){
+                DB.Recibo.findAll({order: 'h ASC LIMIT 1'}).on('success',function(prech){
+                  prech.forEach(function(primerRecH){
+                    urech.forEach(function(ultimoRecH){
+                      prec.forEach(function(primerRecE){
+                        urec.forEach(function(ultimoRecE){
+                          DB.Seq.query('SELECT DISTINCT recibo_id,montoEfectivo,montoCheque, montoEfectivo+montoCheque AS tot FROM movimientoCaja WHERE cierreCaja_id = '+cc_id, null, { raw: 'movimientoCaja' }).success(function(data){
+                            for (var i = 0; i < data.length; i++) {
+                              if(data[i+1] != undefined)
+                              {
+                                arr[0] = data[i].montoCheque+data[i+1].montoCheque;
+                                arr[1] = data[i].montoEfectivo+data[i+1].montoEfectivo;
+                                arr[2] = data[i].tot+data[i+1].tot;
+                              }
+                            }
+                              DB.CierresCaja.create({
+                                fechaCierre:moment().format('YYYY-MM-DD hh:mm:ss'),
+                                empleado_id: empleado,
+                                montoCheques: arr[0],
+                                montoEfectivo: arr[1],
+                                montoCaja: caj[0].monto,//movcajj.monto,
+                                montoPagos: caj[1].monto,
+                                montoCtaCliente: caj[2].monto,
+                                montoTotal: arr[2],
+                                primerReciboE: primerRecE.e,
+                                ultimoReciboE: ultimoRecE.e,
+                                primerReciboH: primerRecH.h,
+                                ultimoReciboH: ultimoRecH.h,
                               })
-                            })
                           })
                         })
                       })
@@ -403,21 +419,13 @@ generarReciboRevision = function(db, res, empleado){
               })
             })
           })
-        })
-      //Fin Agrego
-      }
+      })
     })
   })
 };
-
+// Fin CargarDB
 
 Revision.realizarMovimientos = function(req, res, next){
-  for (var i = 0; i < 100; i++) {
-    console.log("realizarMovimientos");
-  };
-  //TMB USA LA FUNCTION: guardarMovs y generarReciboRevision
-
-
   var rmin= req.body.rmin
     , rmax= req.body.rmax
     , fd = req.body.fd
@@ -429,20 +437,22 @@ Revision.realizarMovimientos = function(req, res, next){
       cc.forEach(function(ccc){
         DB.Recibo.findAll({ order: 'e DESC LIMIT 1' }).on('success',function(recc){
           recc.forEach(function(reccc){
-            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, rmax/*reccc.e*/]}).on('success',function(rec){
+            DB.Recibo.findAll({ where: ['e >= ? AND e <= ?', Number(ccc.ultimoReciboE)+1, rmax]}).on('success',function(rec){
               rec.forEach(function(r){
                 id.push(r.id);
               })
               var ids="("+id.toString()+")";
               if(req.body.rangoDias){
                 DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?) AND recibo_id IN '+ids, fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-                  generarReciboRevision(movs, res, req.body.empleado_id);
-                  guardarMovs(movs, res, req.body.empleado_id);
+                  guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+                  generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
                 })
               }else{
                 DB.MovimientoCaja.findAll({where: 'chequeado=0 AND recibo_id IN'+ids, include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-                  generarReciboRevision(movs, res, req.body.empleado_id);
-                  guardarMovs(movs, res, req.body.empleado_id);
+                  guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+                  generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
                 })
               }
             })
@@ -452,20 +462,21 @@ Revision.realizarMovimientos = function(req, res, next){
     })//cc
   }else{
     DB.MovimientoCaja.findAll({where: ['chequeado=0 AND (movimientoCaja.created_at>=? AND movimientoCaja.created_at <=?)', fd, fh], include:[{model: DB.Recibo}, {model: DB.Caja}]}).on('success', function(movs){
-      generarReciboRevision(movs, res, req.body.empleado_id);
-      guardarMovs(movs, res, req.body.empleado_id);
+      guardarMovs(movs, res, req.body.empleado_id,Number(ccc.id)+1);
+      generarReciboRevision(movs, res, req.body.empleado_id, Number(ccc.id)+1);
+
     })
   }
 
 };
 
 
-guardarMovs = function(db, res, empleado){
+guardarMovs = function(db, res, empleado,ccc_id){
   var montoCaja= 0;
   var montoBanco= 0;
   var montoCtaCte=0;
   db.forEach(function(m){
-    m.updateAttributes({chequeado:1,recibido:moment().format('YYYY-MM-DD hh:mm:ss')});
+    m.updateAttributes({chequeado:1,recibido:moment().format('YYYY-MM-DD hh:mm:ss'),cierreCaja_id: ccc_id});
     switch (m.caja_id) {
       case 2:
         if(m.ingreso==1){
